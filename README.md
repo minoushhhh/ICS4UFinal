@@ -1,2 +1,2 @@
 # ICS4UFinal
-ICS4U Final 
+Website created using the MERN Stack for Maple Grove Detailing.
