@@ -21,6 +21,18 @@ app.get('/index', (req, res) => {
     res.render('index');
 });
 
+app.get('/booking', (req, res) => {
+    res.render('booking');
+});
+
+app.get('/estimate', (req, res) => {
+    res.render('estimate');
+});
+
+app.get('/contact', (req, res) => {
+    res.render('contact');
+});
+
 app.listen(3000, () => {
     console.log('Express server initialized');
   });
