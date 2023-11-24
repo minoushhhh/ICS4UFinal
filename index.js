@@ -33,9 +33,19 @@ app.get('/contact', (req, res) => {
     res.render('contact');
 });
 
+app.get('/sign-up', (req, res) => {
+    res.render('sign-up');
+})
+
+app.get('/log-in', (req, res) => {
+    res.render('log-in');
+})
+
+app.get('/profile', (req, res) => {
+    res.render('profile');
+})
+
 app.listen(3000, () => {
     console.log('Express server initialized');
   });
-
-//hi
-//owen is a nice human being
+  

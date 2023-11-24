@@ -1,11 +1,13 @@
 .title {
-    font-family: 'Futura';
+    font-family: 'Trebuchet MS';
+    text-align: center;
 }
 
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 li {
@@ -13,7 +15,23 @@ li {
     color: black;
     text-align: center;
     padding: 14px 16px;
+    font-family: 'Trebuchet MS';
+}
+
+a {
     text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+.leftAlign {
+    float: left;
+}
+
+.rightAlign {
+    float: right;
 }
 
 li:hover {
