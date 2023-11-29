@@ -62,3 +62,35 @@ li:hover {
 .home-button-grid-item {
     grid-column: 2
 }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+
+}
+
+.form-grid {
+    grid-column: 1;
+}
+
+.story-grid {
+    grid-column: 2;
+}
+
+.image-grid {
+    grid-column: 3;
+    padding: 5%;
+    overflow: hidden;
+}
+
+.grid-test-div { 
+    border:1px solid black;
+}
+
+.portrait {
+
+    max-width: 100%;
+    max-height: 40vh; 
+    height: auto;
+}
