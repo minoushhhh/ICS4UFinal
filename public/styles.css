@@ -37,3 +37,28 @@ a:visited {
 li:hover {
     background-color: #d83434;
 }
+
+.book-button {
+    font-family: 'Trebuchet MS';
+    width: 400px;
+    height: 150px;
+    font-size: 65px;
+    border-radius: 15px;
+}
+
+.homepage-grid {
+    padding-top: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 30px;
+}
+
+.home-text-grid-item {
+    grid-column: 1
+}
+
+.home-button-grid-item {
+    grid-column: 2
+}
