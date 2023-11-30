@@ -3,6 +3,10 @@
     text-align: center;
 }
 
+.font {
+    font-family: "Trebuchet MS";
+}
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -11,7 +15,7 @@ ul {
 }
 
 li {
-    display: inline; 
+    display: inline;
     color: black;
     text-align: center;
     padding: 14px 16px;
@@ -66,31 +70,49 @@ li:hover {
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
-
 }
 
 .form-grid {
     grid-column: 1;
+    padding: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.contact-form-submit-button {
+    width: 200px;
+    height: 50px;
+    font-family: "Trebuchet MS";
+    font-size: 20px;
 }
 
 .story-grid {
     grid-column: 2;
+    padding: 5%;
+}
+
+.story-grid-title {
+    text-align: center;
 }
 
 .image-grid {
     grid-column: 3;
     padding: 5%;
-    overflow: hidden;
 }
 
-.grid-test-div { 
-    border:1px solid black;
+.image-grid-title {
+    text-align: center;
+}
+
+.image-grid-content {
+    display: flex;
+    text-align: center;
 }
 
 .portrait {
-
     max-width: 100%;
-    max-height: 40vh; 
+    max-height: 40vh;
     height: auto;
 }

@@ -1,26 +1,35 @@
 <html>
-<head>
-    <link rel="stylesheet" href="styles.css">
-    <%- include('layouts/navbar'); -%>
-    <title>Homepage</title>
-</head>
-<body>
-    <h1 class = "title">Maple Glow Car Detailing</h1>
-    <div class = "homepage-grid">
-        <div class = "home-text-grid-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in augue et odio fermentum fermentum. Proin quis leo nisl. Curabitur elementum rutrum feugiat. Sed sit amet orci sagittis, viverra neque at, vestibulum tortor. Phasellus quis tempor dolor. Praesent elementum scelerisque mi, eu lacinia metus blandit eget. Nulla dapibus tellus laoreet porta dictum. Nam ut arcu erat. In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In eget velit congue velit sollicitudin imperdiet eget sit amet ante.
-            Nulla facilisi. Suspendisse sodales diam in mi hendrerit, nec finibus sapien tincidunt. Suspendisse potenti. Cras lacus nisl, sagittis in tempor sit amet, tincidunt eu est. Nulla auctor eget urna a tincidunt. Ut feugiat laoreet libero porta viverra. Etiam elit nibh, tincidunt vitae ipsum sodales, finibus commodo lacus. Morbi egestas nisi nisi, eu laoreet enim semper a. Donec rutrum libero ex, vitae auctor justo vehicula eget. Nulla suscipit, arcu et interdum posuere, nulla metus dapibus arcu, vel luctus ligula sapien id massa. Quisque vel pharetra metus, et accumsan quam.
-        </div>
-        <div class = "home-button-grid-item">
-            <button class = "book-button" type = "button" onclick = "redirect()">Book Now!</button>
-        </div>
-    </div>
-</body> 
 
-<script>
-    function redirect() {
-        console.log("Pressed");
-    }
-</script>
+<head>
+    <%- include('layouts/navbar'); -%>
+        <title>Homepage</title>
+</head>
+
+<body>
+    <h1 class="title">Maple Glow Car Detailing</h1>
+
+    <div class="homepage-grid">
+
+        <div id = "text" class="home-text-grid-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in augue et odio
+            fermentum fermentum. Proin quis leo nisl. Curabitur elementum rutrum feugiat. Sed sit amet orci sagittis,
+            viverra neque at, vestibulum tortor. Phasellus quis tempor dolor. Praesent elementum scelerisque mi, eu
+            lacinia metus blandit eget. Nulla dapibus tellus laoreet porta dictum. Nam ut arcu erat. In hac habitasse
+            platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+            In eget velit congue velit sollicitudin imperdiet eget sit amet ante.
+            Nulla facilisi. Suspendisse sodales diam in mi hendrerit, nec finibus sapien tincidunt. Suspendisse potenti.
+            Cras lacus nisl, sagittis in tempor sit amet, tincidunt eu est. Nulla auctor eget urna a tincidunt. Ut
+            feugiat laoreet libero porta viverra. Etiam elit nibh, tincidunt vitae ipsum sodales, finibus commodo lacus.
+            Morbi egestas nisi nisi, eu laoreet enim semper a. Donec rutrum libero ex, vitae auctor justo vehicula eget.
+            Nulla suscipit, arcu et interdum posuere, nulla metus dapibus arcu, vel luctus ligula sapien id massa.
+            Quisque vel pharetra metus, et accumsan quam.
+        </div>
+
+        <div class="home-button-grid-item">
+            <a href = "/booking"><button class="book-button" type="button">Book Now!</button></a>
+        </div>
+
+    </div>
+
+</body>
 
 </html>
-    

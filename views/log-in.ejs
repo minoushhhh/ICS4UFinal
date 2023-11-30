@@ -1,21 +1,23 @@
 <html>
+
 <head>
     <%- include('layouts/navbar'); -%>
+</head>
+
+<body>
 
     <form>
-        <label for = "username">Username: </label><br>
-        <input type = "text" id= "username" name="username"><br>
-        <label for = "password" >Password: </label><br>
-        <input type = "text" id= "password" name="password"><br><br>
-    
-    <input type="button" value="Sumbit"></input><br><br>
+        <label for="username">Username: </label><br>
+        <input type="text" id="username" name="username"><br>
+        <label for="password">Password: </label><br>
+        <input type="text" id="password" name="password"><br><br>
 
-    <text>Don't have an account? Sign up </text><a href="sing-up.ejs">here</a>
-    
+        <button value="Sumbit">Submit</button>
+        <br><br>
+        <div>Don't have an account? Sign up </div><a href="/sign-up">here</a>
+
     </form>
 
-</head>
-<body>
-    
 </body>
+
 </html>
