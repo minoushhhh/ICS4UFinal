@@ -38,21 +38,50 @@
 
     <script>
 
-        function getInfo() {
+function getInfo() {
 
-            let password = document.getElementById("password").value;
-            let confirmPassword = document.getElementById("confirmPassword").value;
+    
+    
+    let fieldNamesTest = ["firstName", "lastName", "email", "phoneNumber", "address", "postalCode", "username", "password", "confirmPassword"];
 
-            if (password != confirmPassword) {
-                document.getElementById("confirmPasswordAlert").innerHTML = "* Passwords do not match";
-                alert("Passwords do not match");
-            }
+    for (let i = 0; i < fieldNamesTest.length; i++) {
+        let fieldNameTest = fieldNamesTest[i];
+        let fieldDataTest = document.getElementById(fieldNameTest).value;
+        let alertFieldName = fieldNameTest + "Alert";
+        if (fieldDataTest == "") {
+            document.getElementById(alertFieldName).innerHTML = "* Required Field";
+        }
+        else{
+            document.getElementById(alertFieldName).innerHTML = "";
+        }
+
+    }
+
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (password != confirmPassword) {
+        document.getElementById("confirmPasswordAlert").innerHTML = "* Passwords do not match";
+        alert("Passwords do not match");
+    }
 
             let email = document.getElementById("email");
 
-            let formData = {};
 
-            let fieldNames = ["firstName", "lastName", "email", "phoneNumber", "address", "postalCode", "username", "password", "confirmPassword"];
+
+            if (isValidEmail(email) == false) {
+                document.getElementById("emailAlert").innerHTML = "* Please enter a valid email address";
+            }
+            if (isValidEmail(email)) {
+                document.getElementById("emailAlert").innerHTML = "";
+            }
+
+
+
+
+    let formData = {};
+
+    let fieldNames = ["firstName", "lastName", "email", "phoneNumber", "address", "postalCode", "username", "password", "confirmPassword"];
 
             for (let i = 0; i < fieldNames.length; i++) {
                 let fieldName = fieldNames[i];
@@ -62,45 +91,58 @@
                     document.getElementById(alertFieldName).innerHTML = "* Required Field";
                 }
                 formData[fieldName] = fieldData;
+
             }
 
-            function isValidEmail(email) {
-                // Regular expression for a more comprehensive email validation
-                const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                
-                // Basic checks for email format
-                if (!emailRegex.test(email)) {
-                    return false;
-                }
-                // Additional checks for common issues in email addresses
-                const parts = email.split('@');
-                if (parts.length !== 2) {
-                    return false;
-                }
-                const localPart = parts[0];
-                const domainPart = parts[1];
-                // Check if local part and domain part are not empty
-                if (localPart.length === 0 || domainPart.length === 0) {
-                    return false;
-                }
-                // Check for consecutive dots in domain part
-                if (domainPart.includes('..')) {
-                    return false;
-                }
-                // Check for consecutive dots in local part
-                if (localPart.includes('..')) {
-                    return false;
-                }
-                // Check for valid characters in local part and domain part
-                const validChars = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+$/;
-                if (!validChars.test(localPart) || !validChars.test(domainPart)) {
-                    return false;
-                }
-                return true;
-                
-            }
-            
+            console.log(formData);
         }
+
+
+        function isValidEmail(email) {
+            // Regular expression for a more comprehensive email validation
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            // Basic checks for email format
+            if (!emailRegex.test(email)) {
+                return false;
+            }
+
+            // Additional checks for common issues in email addresses
+            const parts = email.split('@');
+            if (parts.length !== 2) {
+                return false;
+            }
+
+            const localPart = parts[0];
+            const domainPart = parts[1];
+
+            // Check if local part and domain part are not empty
+            if (localPart.length === 0 || domainPart.length === 0) {
+                return false;
+            }
+
+            // Check for consecutive dots in domain part
+            if (domainPart.includes('..')) {
+                return false;
+            }
+
+            // Check for consecutive dots in local part
+            if (localPart.includes('..')) {
+                return false;
+            }
+
+            // Check for valid characters in local part and domain part
+            const validChars = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+$/;
+            if (!validChars.test(localPart) || !validChars.test(domainPart)) {
+                return false;
+            }
+
+            return true;
+        }
+
+
+
+
     </script>
 </body>
 
