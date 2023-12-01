@@ -3,6 +3,18 @@
     text-align: center;
 }
 
+.footer-img {
+    width: 35px;
+    height: 35px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.footer-display {
+    display: flex;
+    align-items: center;
+}
+
 .font {
     font-family: "Trebuchet MS";
 }
