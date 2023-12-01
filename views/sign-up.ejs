@@ -1,37 +1,132 @@
-<html>
+<!DOCTYPE html>
 
-<head>
-    <%- include('layouts/navbar'); -%>
-</head>
+<html>
+<h1>
+    Sign-Up
+</h1>
 
 <body>
-    <form>
+
+    <form id="signupForm">
 
         <label for="firstName">First name: </label><br>
-        <input type="text" id="firstName" name="firstName"><br>
+        <input type="text" id="firstName" name="firstName"> <text id="firstNameAlert" class="alertText">*</text><br>
         <label for="lastName">Last name: </label><br>
-        <input type="text" id="lastName" name="lastName"><br>
+        <input type="text" id="lastName" name="lastName"> <text id="lastNameAlert" class="alertText">*</text><br>
         <label for="email">Email: </label><br>
-        <input type="text" id="email" name="email"><br>
+        <input type="text" id="email" name="email"> <text id="emailAlert" class="alertText">*</text><br>
         <label for="phoneNumber">Phone Number: </label><br>
-        <input type="text" id="phoneNumber" name="phoneNumber"><br>
+        <input type="text" id="phoneNumber" name="phoneNumber"> <text id="phoneNumberAlert"
+            class="alertText">*</text><br>
         <label for="address">Address: </label><br>
-        <input type="text" id="address" name="address"><br>
+        <input type="text" id="address" name="address"> <text id="addressAlert" class="alertText">*</text><br>
         <label for="postalCode">Postal Code: </label><br>
-        <input type="text" id="postalCode" name="postalCode"><br>
+        <input type="text" id="postalCode" name="postalCode"> <text id="postalCodeAlert" class="alertText">*</text><br>
         <label for="username">Username: </label><br>
-        <input type="text" id="username" name="username"><br>
+        <input type="text" id="username" name="username"> <text id="usernameAlert" class="alertText">*</text><br>
         <label for="password">Password: </label><br>
-        <input type="text" id="password" name="password"><br>
+        <input type="text" id="password" name="password"> <text id="passwordAlert" class="alertText">*</text><br>
         <label for="confirmPassword">Confim Password: </label><br>
-        <input type="text" id="confirmPassword" name="confirmPassword"><br><br>
+        <input type="text" id="confirmPassword" name="confirmPassword"> <text id="confirmPasswordAlert"
+            class="alertText"></text><br><br>
 
-        <button value="sumbit">Submit</button>
-        <br><br>
-        <div>Already have an account? Login </div><a href="/log-in">here</a>
+        <input type="button" value="Sumbit" onclick="getInfo()"></input><br><br>
+
+        <text>Already have an account? Login </text><a href="log-in.ejs">here</a>
 
     </form>
 
+    <script>
+
+        function getInfo() {
+
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password != confirmPassword) {
+                document.getElementById("confirmPasswordAlert").innerHTML = "* Passwords do not match";
+                alert("Passwords do not match");
+            }
+
+            let email = document.getElementById("email");
+
+
+
+            if (isValidEmail(email) == false) {
+                document.getElementById("emailAlert").innerHTML = "* Please enter a valid email address";
+            }
+            if (isValidEmail(email)) {
+                document.getElementById("emailAlert").innerHTML = "";
+            }
+
+
+
+
+            let formData = {};
+
+            let fieldNames = ["firstName", "lastName", "email", "phoneNumber", "address", "postalCode", "username", "password", "confirmPassword"];
+
+            for (let i = 0; i < fieldNames.length; i++) {
+                let fieldName = fieldNames[i];
+                let fieldData = document.getElementById(fieldName).value;
+                let alertFieldName = fieldName + "Alert";
+                if (fieldData == "") {
+                    document.getElementById(alertFieldName).innerHTML = "* Required Field";
+                }
+                formData[fieldName] = fieldData;
+
+            }
+
+            console.log(formData);
+        }
+
+
+        function isValidEmail(email) {
+            // Regular expression for a more comprehensive email validation
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            // Basic checks for email format
+            if (!emailRegex.test(email)) {
+                return false;
+            }
+
+            // Additional checks for common issues in email addresses
+            const parts = email.split('@');
+            if (parts.length !== 2) {
+                return false;
+            }
+
+            const localPart = parts[0];
+            const domainPart = parts[1];
+
+            // Check if local part and domain part are not empty
+            if (localPart.length === 0 || domainPart.length === 0) {
+                return false;
+            }
+
+            // Check for consecutive dots in domain part
+            if (domainPart.includes('..')) {
+                return false;
+            }
+
+            // Check for consecutive dots in local part
+            if (localPart.includes('..')) {
+                return false;
+            }
+
+            // Check for valid characters in local part and domain part
+            const validChars = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+$/;
+            if (!validChars.test(localPart) || !validChars.test(domainPart)) {
+                return false;
+            }
+
+            return true;
+        }
+
+
+
+
+    </script>
 </body>
 
 </html>
