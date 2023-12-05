@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 
 <html>
+
+<head>
+    <%- include('layouts/navbar'); -%>
+</head>
+
 <h1>
     Sign-Up
 </h1>
@@ -40,8 +45,6 @@
 
 function getInfo() {
 
-    
-    
     let fieldNamesTest = ["firstName", "lastName", "email", "phoneNumber", "address", "postalCode", "username", "password", "confirmPassword"];
 
     for (let i = 0; i < fieldNamesTest.length; i++) {
