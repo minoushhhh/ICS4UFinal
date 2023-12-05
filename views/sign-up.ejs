@@ -41,6 +41,10 @@
 
     </form>
 
+    <footer>
+        <%- include('layouts/footer'); -%>
+    </footer>
+
     <script>
 
 function getInfo() {
@@ -68,16 +72,17 @@ function getInfo() {
         alert("Passwords do not match");
     }
 
-            let email = document.getElementById("email");
 
+    /*
+    let email = document.getElementById("email");
 
-
-            if (isValidEmail(email) == false) {
-                document.getElementById("emailAlert").innerHTML = "* Please enter a valid email address";
-            }
-            if (isValidEmail(email)) {
-                document.getElementById("emailAlert").innerHTML = "";
-            }
+    if (isValidEmail(email) == false) {
+        document.getElementById("emailAlert").innerHTML = "* Please enter a valid email address";
+    }
+    if (isValidEmail(email)) {
+        document.getElementById("emailAlert").innerHTML = "";
+    } 
+    */
 
 
 
@@ -86,62 +91,15 @@ function getInfo() {
 
     let fieldNames = ["firstName", "lastName", "email", "phoneNumber", "address", "postalCode", "username", "password", "confirmPassword"];
 
-            for (let i = 0; i < fieldNames.length; i++) {
-                let fieldName = fieldNames[i];
-                let fieldData = document.getElementById(fieldName).value;
-                let alertFieldName = fieldName + "Alert";
-                if (fieldData == "") {
-                    document.getElementById(alertFieldName).innerHTML = "* Required Field";
-                }
-                formData[fieldName] = fieldData;
+    for (let i = 0; i < fieldNames.length; i++) {
+        let fieldName = fieldNames[i];
+        let fieldData = document.getElementById(fieldName).value;
+        formData[fieldName] = fieldData;
 
-            }
+    }
 
-            console.log(formData);
-        }
-
-
-        function isValidEmail(email) {
-            // Regular expression for a more comprehensive email validation
-            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-            // Basic checks for email format
-            if (!emailRegex.test(email)) {
-                return false;
-            }
-
-            // Additional checks for common issues in email addresses
-            const parts = email.split('@');
-            if (parts.length !== 2) {
-                return false;
-            }
-
-            const localPart = parts[0];
-            const domainPart = parts[1];
-
-            // Check if local part and domain part are not empty
-            if (localPart.length === 0 || domainPart.length === 0) {
-                return false;
-            }
-
-            // Check for consecutive dots in domain part
-            if (domainPart.includes('..')) {
-                return false;
-            }
-
-            // Check for consecutive dots in local part
-            if (localPart.includes('..')) {
-                return false;
-            }
-
-            // Check for valid characters in local part and domain part
-            const validChars = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+$/;
-            if (!validChars.test(localPart) || !validChars.test(domainPart)) {
-                return false;
-            }
-
-            return true;
-        }
+    console.log(formData);
+}
 
 
 
