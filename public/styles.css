@@ -47,6 +47,7 @@ a:visited {
 }
 
 .rightAlign {
+    margin-left: auto;
     float: right;
 }
 
