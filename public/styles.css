@@ -1,6 +1,11 @@
 .title {
     font-family: 'Trebuchet MS';
     text-align: center;
+    color: whitesmoke;
+}
+
+.navbar {
+    background-color: gray;
 }
 
 .footer-img {
@@ -10,13 +15,17 @@
     padding-right: 15px;
 }
 
-.footer-display {
+.footer {
     display: flex;
     align-items: center;
+    background-color: gray;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .font {
     font-family: "Trebuchet MS";
+    color: whitesmoke;
 }
 
 ul {
@@ -40,6 +49,7 @@ a {
 
 a:visited {
     text-decoration: none;
+    color: black;
 }
 
 .leftAlign {
@@ -63,11 +73,16 @@ li:hover {
     border-radius: 15px;
 }
 
+.homepage-background-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.pixground.com/porsche-911-st-4k-wallpaper/?download-img=2k");    padding: 25px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 50%;
+}
+
 .homepage-grid {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.pixground.com/porsche-911-st-4k-wallpaper/?download-img=2k");
-    padding-top: 25px;
-    padding-left: 25px;
-    padding-right: 25px;
     display: grid;
     grid-template-columns: auto auto;
     gap: 30px;
@@ -144,11 +159,6 @@ li:hover {
 
 /* Image Slider on Homepage*/
 
-.homepage-slider {
-    padding-left: 32vw;
-    padding-right: 32vw;
-}
-
 .slider-title {
     display: flex;
     justify-content: center;
@@ -157,6 +167,8 @@ li:hover {
 .img-comp-container {
     position: relative;
     height: 300px;
+    width: 500px;
+    border: 5px solid black;
 }
 
 .img-comp-img {
@@ -209,3 +221,4 @@ li:hover {
 input[type="file"] {
     display: none;
 }
+
