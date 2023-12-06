@@ -7,21 +7,23 @@
 <body>
     <h1>Get an Estimate</h1>
 
-    <div class="imgUpload">
+    <div class="imgUploadDiv">
         <img id="output"/>
         <form action="/action_page.php">
-            <label for="img" class="custom-file-upload" >Upload</label>
+            <label for="img" class="custom-file-upload" id="uploadbtn">Upload</label>
             <input type="file" id="img" name="img" accept="image/*" onchange="loadFile(event)">
+        </form>
     </div>
-        <input type="submit">
-    </form>
-    
-    
-    
+        
     <script>
         var loadFile = function(event) {
+            const element = document.getElementById("uploadbtn"); 
+            element.style.display = "none";
             var image = document.getElementById('output');
             image.src = URL.createObjectURL(event.target.files[0]);
+            image.classList.add("uploadImg");
+            
+
         };
     </script>
 </body>

@@ -208,14 +208,13 @@ li:hover {
     border-color: black;
 }
 
-.imgUpload {
+.imgUploadDiv {
     width: 500px;
     height: 300px;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     text-align: center;
 }
 
@@ -234,5 +233,10 @@ li:hover {
 
 input[type="file"] {
     display: none;
+}
+
+.uploadImg{
+    width: 500px;
+    height: 300px;
 }
 
