@@ -181,3 +181,31 @@ li:hover {
     border-radius: 50%;
     border-color: black;
 }
+
+.imgUpload {
+    width: 500px;
+    height: 300px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.custom-file-upload:hover {
+    background-color: #0000FF; 
+}
+
+input[type="file"] {
+    display: none;
+}
