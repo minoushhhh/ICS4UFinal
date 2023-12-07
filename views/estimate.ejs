@@ -7,9 +7,11 @@
 <body>
     <h1 class="font" style="color:black;">Get an Estimate</h1>
 
-    <div class="imgUploadDiv">
+    <div class="imgUploadDiv" style="position: relative;">
         <label id="imgLabel" for="img" class="font custom-file-upload">Upload</label>
 
+        <!-- Invisible button inside the imgUploadDiv -->
+        <button id="invisibleButton" onclick="handleButtonClick()">New Button</button>
     </div>
 
     <form action="/action_page.php">
@@ -25,6 +27,12 @@
             var label = document.getElementById("imgLabel");
             label.parentNode.replaceChild(image, label);
         };
+
+        var handleButtonClick = function () {
+            alert("Invisible button clicked!");
+            // Add your functionality here
+        };
+
     </script>
 </body>
 
