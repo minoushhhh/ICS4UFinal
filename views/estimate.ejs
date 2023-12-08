@@ -7,32 +7,38 @@
 <body>
     <h1 class="font" style="color:black;">Get an Estimate</h1>
 
-    <div class="imgUploadDiv" style="position: relative;">
+    <div id="containerDiv"class="imgUploadDiv" style="position: relative;">
+        <button id="invisibleButton" onclick="handleButtonClick()" disabled></button>
         <label id="imgLabel" for="img" class="font custom-file-upload">Upload</label>
-
-        <!-- Invisible button inside the imgUploadDiv -->
-        <button id="invisibleButton" onclick="handleButtonClick()">New Button</button>
+        <img id="uploadedImage" class="uploadImg" src="" alt="Uploaded Image" style="width: 500px; height: 300px; display: none;">
     </div>
 
     <form action="/action_page.php">
-        <input type="file" id="img" name="img" accept="image/*" onchange="loadFile(event)">
+        <input type="file" id="img" name="img" accept="image/*" onchange="loadFile(event)" style="display: none;">
     </form>
 
     <script>
         var loadFile = function (event) {
-            var image = document.createElement("img");
+            var image = document.getElementById("uploadedImage");
+            document.getElementById("invisibleButton").style.cursor = "pointer";
+
+            if (!image) {
+                // If no existing image, create a new one
+                image = document.createElement("img");
+                image.id = "uploadedImage";
+                image.className = "uploadImg";
+                document.querySelector('.imgUploadDiv').appendChild(image);
+            }
+
             image.src = URL.createObjectURL(event.target.files[0]);
-            image.width = 500;
-            image.height = 300;
-            var label = document.getElementById("imgLabel");
-            label.parentNode.replaceChild(image, label);
+            image.style.display = "block"; // Show the uploaded image
+            document.getElementById("invisibleButton").disabled = false;
+            document.getElementById("imgLabel").style.display = "none"; // Hide the "Choose File" button
         };
 
         var handleButtonClick = function () {
-            alert("Invisible button clicked!");
-            // Add your functionality here
+            document.getElementById("img").click();
         };
-
     </script>
 </body>
 
