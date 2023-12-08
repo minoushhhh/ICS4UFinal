@@ -12,7 +12,7 @@
 
 <body>
 
-    <form id="signupForm">
+    <form id="signupForm" action="/submit-form" method="post">
 
         <label for="firstName">First name: </label><br>
         <input type="text" id="firstName" name="firstName"> <text id="firstNameAlert" class="alertText">*</text><br>
@@ -35,7 +35,7 @@
         <input type="text" id="confirmPassword" name="confirmPassword"> <text id="confirmPasswordAlert"
             class="alertText"></text><br><br>
 
-        <button onclick="getInfo()" value="sumbit">Submit</button><br><br>
+        <button onclick="getInfo()" type="sumbit">Submit</button><br><br>
 
         <text>Already have an account? Login </text><a href="/log-in">here</a>
 
