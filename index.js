@@ -41,12 +41,29 @@ app.get('/sign-up', (req, res) => {
     res.render('sign-up');
 });
 
-app.get('/log-in', (req, res) => {
-    res.render('log-in');
+app.get('/login', (req, res) => {
+    res.render('login');
 });
 
 app.get('/profile', (req, res) => {
     res.render('profile');
+});
+
+app.post('/login-form', async (req, res) => {
+  try {
+    const username = req.body.username + "";
+    const password = req.body.password + "";
+    console.log(username + " " + password); 
+
+    await checkLogin(username, password);
+
+    console.log("Sucessfully logged in!")
+    res.redirect("/");
+  }
+  catch (error) {
+    console.error(error);
+    res.send('Error logging in, try again.');
+  }
 });
 
 app.post('/submit-form', async (req, res) => {
@@ -85,6 +102,42 @@ async function saveDetails(formData) {
     console.log("User details sumbitted");
 
   } finally {
+    await client.close();
+  }
+}
+
+async function checkLogin(user, pass) {
+  try {
+    await client.connect();
+
+    const database = client.db("user-details");
+    const details = database.collection("details");
+
+    let query;
+
+    if (user.includes("@")) {
+      const email = {email: user};
+      query = await details.findOne(email);
+    }
+    else {
+      const username = {username: user};
+      query = await details.findOne(username);
+    }
+
+    const document = await details.findOne(query)
+
+    if (document) {
+      const password = document.password;
+      if (password == pass) {
+        console.log("Correct password")
+      }
+      else {
+        console.log("Incorrect password");
+      }
+    }
+
+  }
+  finally {
     await client.close();
   }
 }
