@@ -45,6 +45,10 @@ app.get('/profile', (req, res) => {
     res.render('profile');
 })
 
+app.get('/test', (req, res) => {
+    res.render('test');
+})
+
 app.listen(3000, () => {
     console.log('Express server initialized');
 });
