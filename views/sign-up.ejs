@@ -12,7 +12,7 @@
 
 <body>
 
-    <form id="signupForm">
+    <form id="signupForm" action="/submit-form" method="post">
 
         <label for="firstName">First name: </label><br>
         <input type="text" id="firstName" name="firstName"> <text id="firstNameAlert" class="alertText">*</text><br>
@@ -36,6 +36,7 @@
             class="alertText"></text><br><br>
 
         <input type="button" id="Submit"onclick="getInfo()" ></input><br><br>
+       
 
         <text>Already have an account? Login </text><a href="/log-in">here</a>
 
