@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('layouts/navbar'); -%>
     <title>Teachable Machine Image Model</title>
+
 </head>
 <body>
 
-    <div>Teachable Machine Image Model</div>
-    <button type="button" onclick="init()">Start</button>
+    <div class = "title">Teachable Machine Image Model</div><br><br>
+    
     <!-- Displayed image element -->
-    <img id="carImage" src="images/v10.jpeg" alt="Description of the image" class="imgTest">
-    <!-- Button to trigger prediction for the displayed image -->
-    <button type="button" onclick="predictFromImage()">Predict from Image</button>
+    <img id="carImage" src="images\carTruck.jpeg" alt="Description of the image" class="imgTest"><br><br>
+    <button type="button" onclick="init()">Start</button><br><br>
     <div id="label-container"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -22,6 +20,7 @@
         let model, labelContainer, maxPredictions;
 
         async function init() {
+            
             const modelURL = URL + "model.json";
             const metadataURL = URL + "metadata.json";
 
@@ -32,6 +31,7 @@
             for (let i = 0; i < maxPredictions; i++) {
                 labelContainer.appendChild(document.createElement("div"));
             }
+            console.log("function ran");
             predictFromImage();
         }
 
@@ -58,8 +58,8 @@
 <style>
 
     .imgTest{
-        height: 400px;
-        width: 400px;
+        display: block;
+        max-height: 300px;
     }
 
 </style>

@@ -1,13 +1,17 @@
 .title {
     font-family: 'Trebuchet MS';
     text-align: center;
-    color: whitesmoke;
+    color: black;
 }
 
 .navbar {
+    display: flex;
+    align-items: center;
     background-color: gray;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin: auto;
+    height: 100px;
 }
 
 .footer-img {
@@ -28,7 +32,7 @@
 
 .font {
     font-family: "Trebuchet MS";
-    color: whitesmoke;
+    color: black;
 }
 
 ul {
@@ -38,21 +42,24 @@ ul {
     overflow: hidden;
 }
 
-li {
+.navbar-element {
+    text-decoration: none;
     display: inline;
+    transition: font-size 0.3s ease;
     text-align: center;
-    padding: 14px 16px;
+    padding-left: 16px;
+    padding-right: 16px;
     font-family: 'Trebuchet MS';
     color: whitesmoke;
 }
 
-a {
-    text-decoration: none;
+.navbar-element:hover {
+    color: #d83434;
+    font-size: 22px;
 }
 
-a:visited {
-    text-decoration: none;
-    color: whitesmoke;
+.hyperlink {
+    color: blue;
 }
 
 .leftAlign {
@@ -62,10 +69,6 @@ a:visited {
 .rightAlign {
     margin-left: auto;
     float: right;
-}
-
-li:hover {
-    background-color: #d83434;
 }
 
 .book-button {
@@ -206,19 +209,18 @@ li:hover {
     background-color: black;
 }
 
-.imgUploadDiv {
+.img-upload-div {
+    display: flex;
+    justify-content: center;
+    margin: auto;
     width: 500px;
     height: 300px;
     border: 5px solid black;
     border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
 }
 
-.imgUploadDiv:hover{
-    border: 10px solid green;
+.img-upload-div:hover{
+    border: 5px solid blue;
 }
 
 .custom-file-upload {

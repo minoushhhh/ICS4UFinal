@@ -4,17 +4,19 @@
     <%- include('layouts/navbar'); -%>
 </head>
 
-<body>
+<h1 class = "title">Login</h1>
+
+<body class = "font">
 
     <form id="loginForm" action="/login-form" method="post">
-        <label for="username">Username: </label><br>
+        <label for="username">Username </label><br>
         <input type="text" id="username" name="username"><br>
-        <label for="password">Password: </label><br>
+        <label for="password">Password </label><br>
         <input id="password" name="password"><br><br>
 
-        <button type="sumbit">Submit</button>
+        <button type="sumbit" class = "font">Submit</button>
         <br><br>
-        <div>Don't have an account? Sign up </div><a href="/sign-up">here</a>
+        <div class = "font">Don't have an account? Sign up <a class = "hyperlink" href="/sign-up">here</a></div>
 
     </form>
 

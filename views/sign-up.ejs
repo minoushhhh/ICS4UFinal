@@ -6,11 +6,9 @@
     <%- include('layouts/navbar'); -%>
 </head>
 
-<h1>
-    Sign-Up
-</h1>
+<h1 class="title">Sign-Up</h1>
 
-<body>
+<body class = "font">
 
     <form id="signupForm" action="/submit-form" method="post">
 
@@ -35,77 +33,75 @@
         <input type="text" id="confirmPassword" name="confirmPassword"> <text id="confirmPasswordAlert"
             class="alertText"></text><br><br>
 
-        <input type="Submit" id="Submit" onclick="getInfo()" ></input><br><br>
-       
+        <input type="Submit" id="Submit" onclick="getInfo()"></input><br><br>
 
-        <text>Already have an account? Login </text><a href="/login">here</a>
+
+        <text>Already have an account? Login </text><a class="hyperlink" href="/login">here</a>
 
     </form>
-
-    <footer>
-        <%- include('layouts/footer'); -%>
-    </footer>
-
-    <script>
-
-function getInfo() {
-
-    let fieldNamesTest = ["firstName", "lastName", "email", "phoneNumber", "address", "postalCode", "username", "password", "confirmPassword"];
-
-    for (let i = 0; i < fieldNamesTest.length; i++) {
-        let fieldNameTest = fieldNamesTest[i];
-        let fieldDataTest = document.getElementById(fieldNameTest).value;
-        let alertFieldName = fieldNameTest + "Alert";
-        if (fieldDataTest == "") {
-            document.getElementById(alertFieldName).innerHTML = "* Required Field";
-        }
-        else{
-            document.getElementById(alertFieldName).innerHTML = "";
-        }
-
-    }
-
-    let password = document.getElementById("password").value;
-    let confirmPassword = document.getElementById("confirmPassword").value;
-
-    if (password != confirmPassword) {
-        document.getElementById("confirmPasswordAlert").innerHTML = "* Passwords do not match";
-        alert("Passwords do not match");
-    }
-
-
-    /*
-    let email = document.getElementById("email");
-
-    if (isValidEmail(email) == false) {
-        document.getElementById("emailAlert").innerHTML = "* Please enter a valid email address";
-    }
-    if (isValidEmail(email)) {
-        document.getElementById("emailAlert").innerHTML = "";
-    } 
-    */
-
-
-
-
-    let formData = {};
-
-    let fieldNames = ["firstName", "lastName", "email", "phoneNumber", "address", "postalCode", "username", "password", "confirmPassword"];
-
-    for (let i = 0; i < fieldNames.length; i++) {
-        let fieldName = fieldNames[i];
-        let fieldData = document.getElementById(fieldName).value;
-        formData[fieldName] = fieldData;
-
-    }
-
-    console.log(formData);
-}
-
-
-
-
-    </script>
+    <br><br>
 </body>
+
+<script>
+
+    function getInfo() {
+
+        let fieldNamesTest = ["firstName", "lastName", "email", "phoneNumber", "address", "postalCode", "username", "password", "confirmPassword"];
+
+        for (let i = 0; i < fieldNamesTest.length; i++) {
+            let fieldNameTest = fieldNamesTest[i];
+            let fieldDataTest = document.getElementById(fieldNameTest).value;
+            let alertFieldName = fieldNameTest + "Alert";
+            if (fieldDataTest == "") {
+                document.getElementById(alertFieldName).innerHTML = "* Required Field";
+            }
+            else {
+                document.getElementById(alertFieldName).innerHTML = "";
+            }
+
+        }
+
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (password != confirmPassword) {
+            document.getElementById("confirmPasswordAlert").innerHTML = "* Passwords do not match";
+            alert("Passwords do not match");
+        }
+
+
+        /*
+        let email = document.getElementById("email");
+    
+        if (isValidEmail(email) == false) {
+            document.getElementById("emailAlert").innerHTML = "* Please enter a valid email address";
+        }
+        if (isValidEmail(email)) {
+            document.getElementById("emailAlert").innerHTML = "";
+        } 
+        */
+
+
+
+
+        let formData = {};
+
+        let fieldNames = ["firstName", "lastName", "email", "phoneNumber", "address", "postalCode", "username", "password", "confirmPassword"];
+
+        for (let i = 0; i < fieldNames.length; i++) {
+            let fieldName = fieldNames[i];
+            let fieldData = document.getElementById(fieldName).value;
+            formData[fieldName] = fieldData;
+
+        }
+
+        console.log(formData);
+    }
+
+</script>
+
+<footer>
+    <%- include('layouts/footer'); -%>
+</footer>
 
 </html>
