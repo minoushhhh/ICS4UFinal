@@ -10,14 +10,19 @@
     <div id="containerDiv"class="img-upload-div" style="position: relative;">
         <button id="invisibleButton" onclick="handleButtonClick()" disabled></button>
         <label id="imgLabel" for="img" class="font custom-file-upload">Upload</label>
-        <img id="uploadedImage" class="uploadImg" src="" alt="Uploaded Image" style="width: 500px; height: 300px; display: none;">
+        <img id="uploadedImage" class="uploadImg" src="" alt="Uploaded Image" style="width: 500px; height: 300px; display: none;"> <br><br><br>
     </div>
+
+        <div id="label-container"></div>
+
 
     <form action="/action_page.php">
         <input type="file" id="img" name="img" accept="image/*" onchange="loadFile(event)" style="display: none;">
     </form>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script type="text/javascript">
 
-    <script>
         var loadFile = function (event) {
             var image = document.getElementById("uploadedImage");
             document.getElementById("invisibleButton").style.cursor = "pointer";
@@ -34,11 +39,48 @@
             image.style.display = "block"; // Show the uploaded image
             document.getElementById("invisibleButton").disabled = false;
             document.getElementById("imgLabel").style.display = "none"; // Hide the "Choose File" button
+            init();
         };
 
         var handleButtonClick = function () {
             document.getElementById("img").click();
         };
+        
+        const URLTeachable = "https://teachablemachine.withgoogle.com/models/dy0VvIqtW/";
+        
+        let model, labelContainer, maxPredictions;
+
+        async function init() {
+            
+            const modelURL = URLTeachable + "model.json";
+            const metadataURL = URLTeachable + "metadata.json";
+
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+
+            labelContainer = document.getElementById("label-container");
+            for (let i = 0; i < maxPredictions; i++) {
+                labelContainer.appendChild(document.createElement("div"));
+            }
+            console.log("function ran");
+            predictFromImage();
+        }
+
+        // Function to predict from the displayed image
+        async function predictFromImage() {
+            const imageElement = document.getElementById("uploadedImage");
+
+            if (imageElement) {
+                const prediction = await model.predict(imageElement);
+                for (let i = 0; i < maxPredictions; i++) {
+                    const classPrediction =
+                        prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                    labelContainer.childNodes[i].innerHTML = classPrediction;
+                }
+            } else {
+                alert("Image element not found.");
+            }
+        } 
     </script>
 </body>
 
