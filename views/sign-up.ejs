@@ -13,30 +13,30 @@
     <form id="signupForm" action="/submit-form" method="post">
 
         <label for="firstName">First name: </label><br>
-        <input type="text" id="firstName" name="firstName"> <text id="firstNameAlert" class="alertText">*</text><br>
+        <input type="text" id="firstName" name="firstName"> <span id="firstNameAlert" class="alertText">*</span><br>
         <label for="lastName">Last name: </label><br>
-        <input type="text" id="lastName" name="lastName"> <text id="lastNameAlert" class="alertText">*</text><br>
+        <input type="text" id="lastName" name="lastName"> <span id="lastNameAlert" class="alertText">*</span><br>
         <label for="email">Email: </label><br>
-        <input type="text" id="email" name="email"> <text id="emailAlert" class="alertText">*</text><br>
+        <input type="text" id="email" name="email"> <span id="emailAlert" class="alertText">*</span><br>
         <label for="phoneNumber">Phone Number: </label><br>
-        <input type="text" id="phoneNumber" name="phoneNumber"> <text id="phoneNumberAlert"
-            class="alertText">*</text><br>
+        <input type="text" id="phoneNumber" name="phoneNumber"> <span id="phoneNumberAlert"
+            class="alertText">*</span><br>
         <label for="address">Address: </label><br>
-        <input type="text" id="address" name="address"> <text id="addressAlert" class="alertText">*</text><br>
+        <input type="text" id="address" name="address"> <span id="addressAlert" class="alertText">*</span><br>
         <label for="postalCode">Postal Code: </label><br>
-        <input type="text" id="postalCode" name="postalCode"> <text id="postalCodeAlert" class="alertText">*</text><br>
+        <input type="text" id="postalCode" name="postalCode"> <span id="postalCodeAlert" class="alertText">*</span><br>
         <label for="username">Username: </label><br>
-        <input type="text" id="username" name="username"> <text id="usernameAlert" class="alertText">*</text><br>
+        <input type="text" id="username" name="username"> <span id="usernameAlert" class="alertText">*</span><br>
         <label for="password">Password: </label><br>
-        <input type="text" id="password" name="password"> <text id="passwordAlert" class="alertText">*</text><br>
+        <input type="text" id="password" name="password"> <span id="passwordAlert" class="alertText">*</span><br>
         <label for="confirmPassword">Confim Password: </label><br>
-        <input type="text" id="confirmPassword" name="confirmPassword"> <text id="confirmPasswordAlert"
-            class="alertText"></text><br><br>
+        <input type="text" id="confirmPassword" name="confirmPassword"> <span id="confirmPasswordAlert"
+            class="alertText"></span><br><br>
 
-        <input type="Submit" id="Submit" onclick="getInfo()"></input><br><br>
+        <input type="Submit" id="Submit" onclick="getInfo()"><br><br>
 
 
-        <text>Already have an account? Login </text><a class="hyperlink" href="/login">here</a>
+        <span>Already have an account? Login</span><a class="hyperlink" href="/login">here</a>
 
     </form>
     <br><br>
@@ -69,7 +69,6 @@
             alert("Passwords do not match");
         }
 
-
         /*
         let email = document.getElementById("email");
     
@@ -80,9 +79,6 @@
             document.getElementById("emailAlert").innerHTML = "";
         } 
         */
-
-
-
 
         let formData = {};
 
