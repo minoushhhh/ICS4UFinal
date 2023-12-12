@@ -212,7 +212,11 @@ ul {
 .img-upload-div {
     display: flex;
     justify-content: center;
+<<<<<<< HEAD
     align-items: center;
+=======
+    margin: auto;
+>>>>>>> parent of 2ebb1cd (Merge branch 'work' of https://github.com/minoushhhh/ICS4UFinal into work)
     width: 500px;
     height: 300px;
     border: 5px solid black;
@@ -263,6 +267,7 @@ input[type="file"] {
     cursor: default;
 }
 
+<<<<<<< HEAD
 .estimate-page-grid {
     display: grid;
     grid-template-columns: minmax(200px, auto) 1fr;
@@ -285,3 +290,5 @@ input[type="file"] {
 
 
 
+=======
+>>>>>>> parent of 2ebb1cd (Merge branch 'work' of https://github.com/minoushhhh/ICS4UFinal into work)
