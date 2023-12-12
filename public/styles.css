@@ -212,14 +212,11 @@ ul {
 .img-upload-div {
     display: flex;
     justify-content: center;
-    margin: auto;
     width: 500px;
     height: 300px;
     border: 5px solid black;
     border-radius: 5px;
-    position: relative;
 }
-
 
 .img-upload-div:hover{
     border: 5px solid blue;
@@ -253,6 +250,7 @@ input[type="file"] {
 }
 
 #invisibleButton {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -262,4 +260,7 @@ input[type="file"] {
     z-index: 1;
     cursor: default;
 }
+
+
+
 
