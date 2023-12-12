@@ -212,7 +212,6 @@ ul {
 .img-upload-div {
     display: flex;
     justify-content: center;
-    margin: auto;
     width: 500px;
     height: 300px;
     border: 5px solid black;
@@ -261,4 +260,20 @@ input[type="file"] {
     z-index: 1;
     cursor: default;
 }
+
+.estimate-page-grid {
+    display: grid;
+    grid-template-columns: minmax(200px, auto) 1fr;
+    grid-column-gap: 20px;
+}
+
+
+.options-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 1fr 1fr; 
+    border: 1px solid black;
+}
+
+
 

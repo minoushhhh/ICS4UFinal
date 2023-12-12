@@ -7,18 +7,60 @@
 <body>
     <h1 class="title" style="color:black;">Get an Estimate</h1>
 
-    <div id="containerDiv"class="img-upload-div" style="position: relative;">
-        <button id="invisibleButton" onclick="handleButtonClick()" disabled></button>
-        <label id="imgLabel" for="img" class="font custom-file-upload">Upload</label>
-        <img id="uploadedImage" class="uploadImg" src="" alt="Uploaded Image" style="width: 500px; height: 300px; display: none;"> <br><br><br>
+    <div class="estimate-page-grid">
+
+        <div>
+            <div id="containerDiv"class="img-upload-div">
+                <button id="invisibleButton" onclick="handleButtonClick()" disabled></button>
+                <label id="imgLabel" for="img" class="font custom-file-upload">Upload</label>
+                <img id="uploadedImage" class="uploadImg" src="" alt="Uploaded Image" style="width: 500px; height: 300px; display: none;"> <br><br><br>
+            </div>
+        
+                <div id="label-container"></div>
+        
+        
+            <form action="/action_page.php">
+                <input type="file" id="img" name="img" accept="image/*" onchange="loadFile(event)" style="display: none;">
+            </form>
+        </div>
+
+        <div>
+            <div class="options-grid-container">
+
+                <div class="options-grid">
+                    <h1>Interior</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+        
+                <div class="options-grid">
+                    <h1>Exterior</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                </div>
+        
+                <div class="options-grid">
+                    <h1>Full</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                </div>
+        
+                <div class="options-grid">
+                    <h1>Polished</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                </div>
+        
+            </div>
+        </div>
+
     </div>
 
-        <div id="label-container"></div>
+    
+
+    
 
 
-    <form action="/action_page.php">
-        <input type="file" id="img" name="img" accept="image/*" onchange="loadFile(event)" style="display: none;">
-    </form>
+
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
     <script type="text/javascript">
@@ -69,14 +111,17 @@
         // Function to predict from the displayed image
         async function predictFromImage() {
             const imageElement = document.getElementById("uploadedImage");
+            let highest = -1;
 
             if (imageElement) {
                 const prediction = await model.predict(imageElement);
                 for (let i = 0; i < maxPredictions; i++) {
-                    const classPrediction =
-                        prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-                    labelContainer.childNodes[i].innerHTML = classPrediction;
+                    if (prediction[i].probability.toFixed(2) > highest){
+                        highest = i;
+                    }
                 }
+                const classPrediction = prediction[highest].className;
+                labelContainer.innerHTML = classPrediction;
             } else {
                 alert("Image element not found.");
             }
