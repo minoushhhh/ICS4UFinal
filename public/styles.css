@@ -261,6 +261,26 @@ input[type="file"] {
     cursor: default;
 }
 
+.estimate-page-grid {
+    display: grid;
+    grid-template-columns: minmax(200px, auto) 1fr;
+    grid-column-gap: 20px;
+}
+
+
+.options-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 1fr 1fr; 
+}
+
+.options-grid{
+    padding: 50px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border: 1px solid black;
+}
+
 
 
 
