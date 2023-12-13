@@ -7,18 +7,59 @@
 <body>
     <h1 class="title" style="color:black;">Get an Estimate</h1>
 
-    <div id="containerDiv"class="img-upload-div" style="position: relative;">
-        <button id="invisibleButton" onclick="handleButtonClick()" disabled></button>
-        <label id="imgLabel" for="img" class="font custom-file-upload">Upload</label>
-        <img id="uploadedImage" class="uploadImg" src="" alt="Uploaded Image" style="width: 500px; height: 300px; display: none;"> <br><br><br>
+    <div class="estimate-page-grid">
+
+        <div>
+            <div id="containerDiv"class="img-upload-div" style="position: relative;">
+                <button id="invisibleButton" onclick="handleButtonClick()" disabled></button>
+                <label id="imgLabel" for="img" class="font custom-file-upload">Upload</label>
+                <img id="uploadedImage" class="uploadImg" src="" alt="Uploaded Image" style="width: 500px; height: 300px; display: none;"> <br><br><br>
+            </div>
+        
+                <div id="label-container"></div>
+        
+        
+            <form action="/action_page.php">
+                <input type="file" id="img" name="img" accept="image/*" onchange="loadFile(event)" style="display: none;">
+            </form>
+        </div>
+
+        <div>
+
+            <div class="options-grid-container">
+
+                <div class="options-grid">
+                    <h1>Interior</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Auctor eu augue ut lectus arcu bibendum at varius vel. Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Donec ac odio tempor orci dapibus ultrices in iaculis. Ante in nibh mauris cursus mattis molestie a. Congue eu consequat ac felis donec et. Porttitor eget dolor morbi non arcu risus quis varius quam. Tempor nec feugiat nisl pretium. Aliquam sem fringilla ut morbi tincidunt. Ipsum faucibus vitae aliquet nec ullamcorper sit amet. Eu feugiat pretium nibh ipsum. Amet nisl suscipit adipiscing bibendum est ultricies integer. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus.</p>
+                </div>
+
+                <div class="options-grid">
+                    <h1>Exterior</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Auctor eu augue ut lectus arcu bibendum at varius vel. Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Donec ac odio tempor orci dapibus ultrices in iaculis. Ante in nibh mauris cursus mattis molestie a. Congue eu consequat ac felis donec et. Porttitor eget dolor morbi non arcu risus quis varius quam. Tempor nec feugiat nisl pretium. Aliquam sem fringilla ut morbi tincidunt. Ipsum faucibus vitae aliquet nec ullamcorper sit amet. Eu feugiat pretium nibh ipsum. Amet nisl suscipit adipiscing bibendum est ultricies integer. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus.</p>
+                </div>
+
+                <div class="options-grid">
+                    <h1>Full Package</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Auctor eu augue ut lectus arcu bibendum at varius vel. Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Donec ac odio tempor orci dapibus ultrices in iaculis. Ante in nibh mauris cursus mattis molestie a. Congue eu consequat ac felis donec et. Porttitor eget dolor morbi non arcu risus quis varius quam. Tempor nec feugiat nisl pretium. Aliquam sem fringilla ut morbi tincidunt. Ipsum faucibus vitae aliquet nec ullamcorper sit amet. Eu feugiat pretium nibh ipsum. Amet nisl suscipit adipiscing bibendum est ultricies integer. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus.</p>
+
+                </div>
+
+                <div class="options-grid">
+                    <h1>Headlight Polish</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Auctor eu augue ut lectus arcu bibendum at varius vel. Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Donec ac odio tempor orci dapibus ultrices in iaculis. Ante in nibh mauris cursus mattis molestie a. Congue eu consequat ac felis donec et. Porttitor eget dolor morbi non arcu risus quis varius quam. Tempor nec feugiat nisl pretium. Aliquam sem fringilla ut morbi tincidunt. Ipsum faucibus vitae aliquet nec ullamcorper sit amet. Eu feugiat pretium nibh ipsum. Amet nisl suscipit adipiscing bibendum est ultricies integer. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus.</p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
     </div>
 
-        <div id="label-container"></div>
 
 
-    <form action="/action_page.php">
-        <input type="file" id="img" name="img" accept="image/*" onchange="loadFile(event)" style="display: none;">
-    </form>
+    
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
     <script type="text/javascript">
