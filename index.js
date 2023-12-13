@@ -59,7 +59,21 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-  res.render('profile');
+  console.log("Username in session:", req.session.username);
+  if (req.session.username) {
+    const name = req.session.username;
+    res.render('profile', { name }); 
+  }
+});
+
+app.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+    } else {
+      res.redirect('/login'); 
+    }
+  });
 });
 
 app.post('/login-form', async (req, res) => {
@@ -99,9 +113,10 @@ app.post('/login-form', async (req, res) => {
       if (detailsDoc) {
         const password = detailsDoc.password;
         if (password == pass) {
-          req.session.username = detailsDoc.username;
+          req.session.username = detailsDoc.firstName;
           console.log("Correct password");
-          res.redirect("/");
+          res.redirect('/');
+          return;
         }
         else {
           console.log("Incorrect password");
