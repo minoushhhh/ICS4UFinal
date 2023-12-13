@@ -22,6 +22,7 @@ app.use(session({
   resave: false
 }))
 app.use((req, res, next) => {
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
   res.locals.isLoggedIn = req.session.username !== undefined;
   next();
 });
@@ -71,6 +72,7 @@ app.get('/logout', (req, res) => {
     if (err) {
       console.error('Error destroying session:', err);
     } else {
+      res.locals.isLoggedIn = false;
       res.redirect('/login'); 
     }
   });
