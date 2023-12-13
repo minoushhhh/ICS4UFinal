@@ -3,6 +3,8 @@ import path from 'path';
 import ejs from 'ejs';
 import bodyParser from 'body-parser';
 import { MongoClient, ServerApiVersion } from 'mongodb';
+import session from 'express-session';
+import cookieParser from 'cookie-parser'; 
 
 const uri = "mongodb+srv://Admin:nR18eHCkif6yvno0@cluster0.ak6hid0.mongodb.net/?retryWrites=true&w=majority";
 
@@ -12,6 +14,17 @@ const app = express();
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(session({
+  secret: "thisisasecretkey",
+  saveUninitialized: true,
+  cookie: {maxAge: 86400000},
+  resave: false
+}))
+app.use((req, res, next) => {
+  res.locals.isLoggedIn = req.session.username !== undefined;
+  next();
+});
 
 app.set('view engine', 'ejs');
 
@@ -86,6 +99,7 @@ app.post('/login-form', async (req, res) => {
       if (detailsDoc) {
         const password = detailsDoc.password;
         if (password == pass) {
+          req.session.username = detailsDoc.username;
           console.log("Correct password");
           res.redirect("/");
         }
@@ -133,12 +147,12 @@ app.listen(3000, () => {
 //Saving the user details to the database by connecting to it and inserting the form details.
 async function saveDetails(formData) {
   try {
-
+    console.log("Connecting...");
     await client.connect();
     const database = client.db("user-details");
     const details = database.collection("details");
 
-    const result = await details.insertOne(formData);
+    await details.insertOne(formData);
 
     console.log("User details sumbitted");
 
