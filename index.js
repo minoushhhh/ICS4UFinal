@@ -4,7 +4,7 @@ import ejs from 'ejs';
 import bodyParser from 'body-parser';
 import { MongoClient, ServerApiVersion } from 'mongodb';
 import session from 'express-session';
-import cookieParser from 'cookie-parser'; 
+import cookieParser from 'cookie-parser';
 
 const uri = "mongodb+srv://Admin:nR18eHCkif6yvno0@cluster0.ak6hid0.mongodb.net/?retryWrites=true&w=majority";
 
@@ -18,11 +18,11 @@ app.use(cookieParser());
 app.use(session({
   secret: "thisisasecretkey",
   saveUninitialized: true,
-  cookie: {maxAge: 86400000},
+  cookie: { maxAge: 86400000 },
   resave: false
 }))
 app.use((req, res, next) => {
-  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate'); //So that user cannot logout and then still be logged in using the back button in their browser.
   res.locals.isLoggedIn = req.session.username !== undefined;
   next();
 });
@@ -63,7 +63,7 @@ app.get('/profile', (req, res) => {
   console.log("Username in session:", req.session.username);
   if (req.session.username) {
     const name = req.session.username;
-    res.render('profile', { name }); 
+    res.render('profile', { name });
   }
 });
 
@@ -73,7 +73,7 @@ app.get('/logout', (req, res) => {
       console.error('Error destroying session:', err);
     } else {
       res.locals.isLoggedIn = false;
-      res.redirect('/login'); 
+      res.redirect('/login');
     }
   });
 });
