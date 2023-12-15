@@ -139,9 +139,50 @@
     }
 </style>
 
+
+<script src="https://apis.google.com/js/api.js"></script>
+
 <script>
 
-    
+    // Load the Google Calendar API
+    gapi.load('client', initClient);
+
+    function initClient() {
+    gapi.client.init({
+        apiKey: 'AIzaSyDlUQY4EZ129VS6usWLUy6HIrGUJSzEgRc',
+        clientId: 'MapleGlow',
+        discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+        scope: 'https://www.googleapis.com/auth/calendar',
+    }).then(function () {
+        // Handle the sign-in status
+        // You can now use the Google Calendar API
+    });
+    }
+
+
+    function handleAuthClick() {
+        gapi.auth2.getAuthInstance().signIn();
+    }   
+
+    function listUpcomingEvents() {
+    gapi.client.calendar.events.list({
+    'calendarId': 'primary',
+    'timeMin': (new Date()).toISOString(),
+    'showDeleted': false,
+    'singleEvents': true,
+    'maxResults': 10,
+    'orderBy': 'startTime',
+    }).then(function(response) {
+    const events = response.result.items;
+    });
+    }
+
+    function handleSignoutClick() {
+        gapi.auth2.getAuthInstance().signOut();
+    }
+
+
+
 
 </script>
 
