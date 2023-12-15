@@ -24,7 +24,7 @@
             </form>
         </div>
 
-        <div>
+        <div id="big-grid" hidden>
 
             <div class="options-grid-container">
 
@@ -132,6 +132,7 @@
                     }
                 }
                 labelContainer.innerHTML = vtype;
+                document.getElementById("big-grid").hidden = false;
                 updatePrice(vtype);
             } else {
                 alert("Image element not found.");
