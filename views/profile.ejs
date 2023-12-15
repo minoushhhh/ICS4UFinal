@@ -6,11 +6,71 @@
 
 <body>
 
-    <h1>Welcome, <%= name %>!</h1>
+    <h1 class = "font">Welcome, <%= name %>!</h1>
+
+    <div class = "font">
+        <h2 class = "personal-information-title">Persoal Information</h2>
+        <label for="firstName">First name: </label><br>
+        <input type="text" id="firstName" name="firstName" value = <%= name %>><br>
+        <label for="lastName">Last name: </label><br>
+        <input type="text" id="lastName" name="lastName"><br>
+        <label for="email">Email: </label><br>
+        <input type="text" id="email" name="email"><br>
+        <label for="phoneNumber">Phone Number: </label><br>
+        <input type="text" id="phoneNumber" name="phoneNumber"><br>
+        <label for="address">Address: </label><br>
+        <input type="text" id="address" name="address"><br>
+        <label for="postalCode">Postal Code: </label><br>
+        <input type="text" id="postalCode" name="postalCode"><br>
+        <label for="username">Username: </label><br>
+        <input type="text" id="username" name="username"><br>
+        <label for="password">Password: </label><br>
+        <input type="text" id="password" name="password"><br>
+        <br>
+        <div>
+            <button class = "profile-page-buttons" onclick = "edit()">Edit</button>
+            <button class = "profile-page-buttons" onclick = "save()">Save</button>
+        </div>
+    </div>
+    
 
 </body>
 
+<style>
+    .profile-page-buttons {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #3498db;
+        color: #ffffff;
+        border: none;
+    }
+
+    .profile-page-buttons:hover {
+        animation: glow 1s ease-in-out infinite;
+      }
+
+    .personal-information-title {
+        font-weight: bold;
+    }
+  
+    @keyframes glow {
+        0%, 100% {
+        box-shadow: 0 0 10px #3498db;
+        }
+        50% {
+        box-shadow: 0 0 20px #3498db;
+        }
+    }
+  
+</style>
+
 <footer>
+    <br>
     <%- include('layouts/footer'); -%>
 </footer>
 

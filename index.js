@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
   secret: "thisisasecretkey",
-  saveUninitialized: true,
+  saveUninitialized: true,  
   cookie: { maxAge: 86400000 },
   resave: false
 }))
@@ -63,6 +63,7 @@ app.get('/profile', (req, res) => {
   console.log("Username in session:", req.session.username);
   if (req.session.username) {
     const name = req.session.username;
+    const last = req.session.
     res.render('profile', { name });
   }
 });
@@ -117,7 +118,7 @@ app.post('/login-form', async (req, res) => {
         if (password == pass) {
           req.session.username = detailsDoc.firstName;
           console.log("Correct password");
-          res.redirect('/');
+          res.redirect('/profile');
           return;
         }
         else {
@@ -145,17 +146,13 @@ app.post('/submit-form', async (req, res) => {
 
     await saveDetails(formData);
 
-    res.redirect('/');
+    res.redirect('/profile');
   }
   catch (error) {
     console.error(error);
     res.send('Error submitting details, try again.');
   }
 });
-
-app.get('/test', (req, res) => {
-  res.render('test');
-})
 
 app.listen(3000, () => {
   console.log('Express server initialized');
