@@ -60,11 +60,11 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
+  const userData = req.session.userData;
   console.log("Username in session:", req.session.username);
   if (req.session.username) {
     const name = req.session.username;
-    const last = req.session.
-    res.render('profile', { name });
+    res.render('profile', { userData, name });
   }
 });
 
@@ -117,6 +117,15 @@ app.post('/login-form', async (req, res) => {
         const password = detailsDoc.password;
         if (password == pass) {
           req.session.username = detailsDoc.firstName;
+          req.session.userData = {
+            lastName: detailsDoc.lastName,
+            email: detailsDoc.email,
+            phoneNum: detailsDoc.phoneNumber,
+            adr: detailsDoc.address,
+            pCode: detailsDoc.postalCode,
+            userName: detailsDoc.username,
+            passWord: detailsDoc.password,
+          };
           console.log("Correct password");
           res.redirect('/profile');
           return;
