@@ -91,7 +91,7 @@ ul {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    height: 50%;
+    height: auto;
 }
 
 .homepage-grid {
@@ -160,8 +160,7 @@ ul {
 
 .portrait {
     max-width: 100%;
-    max-height: 40vh;
-    height: auto;
+    max-height: 300px;
 }
 
 .form-input {
