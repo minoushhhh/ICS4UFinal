@@ -1,0 +1,174 @@
+<html>
+
+<head>
+    <%- include('layouts/navbar'); -%>
+</head>
+
+<body>
+    <h1 class="title" style="color:black;">Get an Estimate</h1>
+
+    <div class="estimate-page-grid">
+
+        <div>
+            <div id="containerDiv"class="img-upload-div" style="position: relative;">
+                <button id="invisibleButton" onclick="handleButtonClick()" disabled></button>
+                <label id="imgLabel" for="img" class="font custom-file-upload">Upload</label>
+                <img id="uploadedImage" class="uploadImg" src="" alt="Uploaded Image" style="width: 500px; height: 300px; display: none;"> <br><br><br>
+            </div>
+        
+                <div id="label-container"></div>
+        
+        
+            <form action="/action_page.php">
+                <input type="file" id="img" name="img" accept="image/*" onchange="loadFile(event)" style="display: none;">
+            </form>
+        </div>
+
+        <div id="big-grid" hidden>
+
+            <div class="options-grid-container">
+
+                <div class="options-grid">
+                    <div class="option">
+                        <h1>Interior</h1>
+                        <p>Elevate your ride's interior with our Detailing service. We'll clean, vacuum, and restore, keeping it straightforward and effective.</p>
+                        <h2 id="p1">Price: </h2>
+                    </div>
+                </div>
+
+                <div class="options-grid">
+                    <div class="option">
+                        <h1>Exterior</h1>
+                        <p>Boost your car's street appeal with our Exterior Detailing. A simple wash, wax, and buff to make it shine without unnecessary frills.</p>
+                        <h2 id="p2">Price: </h2>
+                    </div>
+                </div>
+
+                <div class="options-grid">
+                    <div class="option">
+                        <h1>Full Package</h1>
+                        <p>Give your vehicle an all-around refresh with our Full Detailing. No fluff, just a thorough inside-out clean for a sleek look.</p>
+                        <h2 id="p3">Price: </h2>
+                    </div>
+                </div>
+
+                <div class="options-grid">
+                    <div class="option">
+                        <h1>Headlight Polish</h1>
+                        <p>Enhance your night driving visibility with our Headlight Polishing. Clearing up headlights without the fuss, it's a simple and effective solution.</p>
+                        <h2 id="p4">Price: </h2>
+                    </div>
+                </div>
+                
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script type="text/javascript">
+
+        var loadFile = function (event) {
+            var image = document.getElementById("uploadedImage");
+            document.getElementById("invisibleButton").style.cursor = "pointer";
+
+            if (!image) {
+                // If no existing image, create a new one
+                image = document.createElement("img");
+                image.id = "uploadedImage";
+                image.className = "uploadImg";
+                document.querySelector('.imgUploadDiv').appendChild(image);
+            }
+
+            image.src = URL.createObjectURL(event.target.files[0]);
+            image.style.display = "block"; // Show the uploaded image
+            document.getElementById("invisibleButton").disabled = false;
+            document.getElementById("imgLabel").style.display = "none"; // Hide the "Choose File" button
+            init();
+        };
+
+        var handleButtonClick = function () {
+            document.getElementById("img").click();
+        };
+        
+        const URLTeachable = "https://teachablemachine.withgoogle.com/models/dy0VvIqtW/";
+        
+        let model, labelContainer, maxPredictions;
+
+        async function init() {
+            
+            const modelURL = URLTeachable + "model.json";
+            const metadataURL = URLTeachable + "metadata.json";
+
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+
+            labelContainer = document.getElementById("label-container");
+            for (let i = 0; i < maxPredictions; i++) {
+                labelContainer.appendChild(document.createElement("div"));
+            }
+            console.log("function ran");
+            predictFromImage();
+        }
+
+        // Function to predict from the displayed image
+        async function predictFromImage() {
+            const imageElement = document.getElementById("uploadedImage");
+
+            if (imageElement) {
+                let highest = -1;
+                let vtype = "";
+                const prediction = await model.predict(imageElement);
+                for (let i = 0; i < maxPredictions; i++) {
+                    if (prediction[i].probability.toFixed(2) > highest){
+                        highest = prediction[i].probability.toFixed(2);
+                        vtype = prediction[i].className;  
+                    }
+                }
+                labelContainer.innerHTML = vtype;
+                document.getElementById("big-grid").hidden = false;
+                updatePrice(vtype);
+            } else {
+                alert("Image element not found.");
+            }
+        } 
+
+        function updatePrice(vtype){
+            let factor = 0;
+            let p1 = document.getElementById("p1");
+            let p2 = document.getElementById("p2");
+            let p3 = document.getElementById("p3");
+            let p4 = document.getElementById("p4");
+
+            if (vtype == "Sedan"){
+                factor = 1;
+            }
+            else if (vtype == "Truck"){
+                factor = 2;
+            }
+            else if (vtype == "SUV"){
+                factor = 1.5;
+            }
+            else{
+                factor = 1.75;
+            }
+
+            p1.innerHTML = "Price: $" + factor * 100;
+            p2.innerHTML = "Price: $" + factor * 100;
+            p3.innerHTML = "Price: $" + factor * 200;
+            p4.innerHTML = "Price: $" + factor * 50;
+        }
+    </script>
+</body>
+
+<footer>
+    <%- include('layouts/footer'); -%>
+</footer>
+
+</html>

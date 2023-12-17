@@ -1,2 +1,2 @@
 # ICS4UFinal
-Website created using the MERN Stack for Maple Grove Detailing.
+Website for Maple Glow Car Detailing Services.

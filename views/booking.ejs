@@ -1,0 +1,190 @@
+<html>
+
+<head>
+    <%- include('layouts/navbar'); -%>
+</head>
+
+<body>
+    <div class="options">
+    <div class="colouredBox">
+        <input type="button" onclick="submit" id="option1" value="Select">
+
+    </div>
+
+    <div class="colouredBox">
+        <input type="button" onclick="submit" id="option2" value="Select">
+        
+    </div>
+
+    <div class="colouredBox">
+        <input type="button" onclick="submit" id="option3" value="Select">
+ 
+
+    </div>
+
+    <div class="colouredBox">
+        <input type="button" onclick="submit" id="option4" value="Select">
+ 
+
+    </div>
+
+    </div>
+
+
+<div class="calendar">
+    <div class="day">Sun</div>
+    <div class="day">Mon</div>
+    <div class="day">Tue</div>
+    <div class="day">Wed</div>
+    <div class="day">Thu</div>
+    <div class="day">Fri</div>
+    <div class="day">Sat</div>
+
+
+    <button class="day">1</button>
+    <button class="day">2</button>
+    <button class="day">3</button>
+    <button class="day">4</button>
+    <button class="day">5</button>
+    <button class="day">6</button>
+    <button class="day">7</button>
+    <button class="day">8</button>
+    <button class="day">9</button>
+    <button class="day">10</button>
+    <button class="day">11</button>
+    <button class="day">12</button>
+    <button class="day">13</button>
+    <button class="day">14</button>
+    <button class="day">15</button>
+    <button class="day">16</button>
+    <button class="day">17</button>
+    <button class="day">18</button>
+    <button class="day">19</button>
+    <button class="day">20</button>
+    <button class="day">21</button>
+    <button class="day">22</button>
+    <button class="day">23</button>
+    <button class="day">24</button>
+    <button class="day">25</button>
+    <button class="day">26</button>
+    <button class="day">27</button>
+    <button class="day">28</button>
+    <button class="day">29</button>
+    <button class="day">30</button>
+    <button class="day">31</button>
+    <button class="day">32</button>
+    <button class="day">33</button>
+    <button class="day">34</button>
+    <button class="day">35</button>
+</div>
+
+
+</body>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .day {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+    .options {
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0;
+        }
+
+    .colouredBox{
+        width: 200px;
+        height: 300px;
+        background-color: #3498db;
+        border-color: black;
+        border-radius: 1px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        margin: 20px;
+        padding: 20px;
+
+    }
+
+    .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 50px);
+            gap: 5px;
+        }
+
+    .day {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+    }
+</style>
+
+
+<script src="https://apis.google.com/js/api.js"></script>
+
+<script>
+
+    // Load the Google Calendar API
+    gapi.load('client', initClient);
+
+    function initClient() {
+    gapi.client.init({
+        apiKey: 'AIzaSyDlUQY4EZ129VS6usWLUy6HIrGUJSzEgRc',
+        clientId: 'MapleGlow',
+        discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+        scope: 'https://www.googleapis.com/auth/calendar',
+    }).then(function () {
+        // Handle the sign-in status
+        // You can now use the Google Calendar API
+    });
+    }
+
+
+    function handleAuthClick() {
+        gapi.auth2.getAuthInstance().signIn();
+    }   
+
+    function listUpcomingEvents() {
+    gapi.client.calendar.events.list({
+    'calendarId': 'primary',
+    'timeMin': (new Date()).toISOString(),
+    'showDeleted': false,
+    'singleEvents': true,
+    'maxResults': 10,
+    'orderBy': 'startTime',
+    }).then(function(response) {
+    const events = response.result.items;
+    });
+    }
+
+    function handleSignoutClick() {
+        gapi.auth2.getAuthInstance().signOut();
+    }
+
+</script>
+
+<footer>
+    <%- include('layouts/footer'); -%>
+</footer>
+
+</html>

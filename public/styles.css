@@ -1,0 +1,337 @@
+.title {
+    font-family: 'Trebuchet MS';
+    text-align: center;
+    color: black;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: gray;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin: auto;
+    height: 100px;
+}
+
+.footer-img {
+    width: 35px;
+    height: 35px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    background-color: gray;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin: auto;
+}
+
+.font {
+    font-family: "Trebuchet MS";
+    color: black;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.navbar-element {
+    text-decoration: none;
+    display: inline;
+    transition: font-size 0.3s ease;
+    text-align: center;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-family: 'Trebuchet MS';
+    color: whitesmoke;
+}
+
+.navbar-element:hover {
+    color: #d83434;
+    font-size: 22px;
+}
+
+.hyperlink {
+    color: blue;
+}
+
+.leftAlign {
+    float: left;
+}
+
+.rightAlign {
+    margin-left: auto;
+    float: right;
+}
+
+.book-button {
+    font-family: 'Trebuchet MS';
+    width: 400px;
+    height: 150px;
+    font-size: 65px;
+    border-radius: 15px;
+    color:whitesmoke;
+    background-color: gray;
+}
+
+.book-button:hover {
+    background-color:red;
+}
+
+.homepage-background-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.pixground.com/porsche-911-st-4k-wallpaper/?download-img=2k");    padding: 25px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: auto;
+}
+
+.homepage-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 30px;
+}
+
+.home-text-grid-item {
+    grid-column: 1
+}
+
+.home-button-grid-item {
+    grid-column: 2
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border: 1px solid black;
+    background-color: gray;
+}
+
+.form-grid {
+    grid-column: 1;
+    padding: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.contact-form-submit-button {
+    width: 200px;
+    height: 50px;
+    font-family: "Trebuchet MS";
+    font-size: 20px;
+}
+
+.story-grid {
+    grid-column: 2;
+    padding: 5%;
+    border: 1px solid black;
+}
+
+.story-grid-title {
+    text-align: center;
+    border: 1px solid black;
+}
+
+.image-grid {
+    grid-column: 3;
+    padding: 5%;
+    border: 1px solid black;
+}
+
+.image-grid-title {
+    text-align: center;
+}
+
+.image-grid-content {
+    display: flex;
+    text-align: center;
+}
+
+.portrait {
+    max-width: 100%;
+    max-height: 300px;
+}
+
+.form-input {
+    width: 200px;
+    height: 100px;
+    resize: none;
+}
+
+/* Image Slider on Homepage*/
+
+.slider-title {
+    display: flex;
+    justify-content: center;
+    background-color: gray;
+    padding: 25px;
+    margin: auto;
+}
+
+.img-comp-container {
+    margin: auto;
+    position: relative;
+    width: 500px;
+    height: 300px;
+    border: 5px solid black;
+    margin-top: 40px;
+}
+
+.img-comp-img {
+    width: 500px;
+    height: 300px;
+    overflow: hidden;
+    position: absolute;
+}
+
+.img-comp-img img {
+    display: block;
+}
+
+.img-comp-slider {
+    position: absolute;
+    z-index: 9;
+    cursor: ew-resize;
+    width: 3px;
+    height: 300px;
+    background-color: black;
+}
+
+.img-upload-div {
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    height: 300px;
+    border: 5px solid black;
+    border-radius: 5px;
+}
+
+.img-upload-div:hover{
+    border: 5px solid blue;
+}
+
+.custom-file-upload {
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 10px 15px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 5px;
+    width: 40px;
+}
+
+.custom-file-upload:hover {
+    background-color: #0000FF; 
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.uploadImg{
+    width: 500px;
+    height: 300px;
+}
+
+#invisibleButton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    z-index: 1;
+    cursor: default;
+}
+
+.estimate-page-grid {
+    display: grid;
+    grid-template-columns: minmax(200px, auto) 1fr;
+    grid-column-gap: 20px;
+    padding-top: 0;
+    padding-bottom: 0%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+
+.options-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 1fr 1fr; 
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+}
+
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; 
+    padding: 0;
+}
+
+.option {
+    border: 1px solid black;
+    text-align: center;
+    padding: 20px; 
+}
+
+.loader {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.75s, visibility 0.75s;
+  }
+  
+  .loader--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .loader::after {
+    content: "";
+    width: 75px;
+    height: 75px;
+    border: 15px solid #dddddd;
+    border-top-color: #009578;
+    border-radius: 50%;
+    animation: loading 0.75s ease infinite;
+  }
+  
+  @keyframes loading {
+    from {
+      transform: rotate(0turn);
+    }
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+
+
+
+
+
