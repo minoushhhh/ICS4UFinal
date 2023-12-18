@@ -127,7 +127,6 @@ app.post('/login-form', async (req, res) => {
             passWord: detailsDoc.password,
           };
           console.log("Correct password");
-          console.log(detailsDoc.address);
           res.redirect('/profile');
           return;
         }
@@ -152,11 +151,30 @@ app.post('/login-form', async (req, res) => {
 app.post('/submit-form', async (req, res) => {
   try {
     const formData = req.body;
-    console.log(formData);
 
-    await saveDetails(formData);
+    let usernameTaken = await checkValidUsername(req.body.username);
 
-    res.redirect('/profile');
+    if (usernameTaken === false) {
+      console.log(formData);
+
+      await saveDetails(formData);
+
+      req.session.username = formData.firstName;
+      req.session.userData = {
+        lastName: formData.lastName,
+        email: formData.email,
+        phoneNum: formData.phoneNumber,
+        adr: formData.address,
+        pCode: formData.postalCode,
+        userName: formData.username,
+        passWord: formData.password,
+      };
+  
+      res.redirect('/profile');
+    }
+    else {
+      res.send("Username Taken");
+    }
   }
   catch (error) {
     console.error(error);
@@ -171,16 +189,37 @@ app.listen(3000, () => {
 //Saving the user details to the database by connecting to it and inserting the form details.
 async function saveDetails(formData) {
   try {
-    console.log("Connecting...");
+    console.log("Connecting to Database");
+
     await client.connect();
     const database = client.db("user-details");
     const details = database.collection("details");
 
     await details.insertOne(formData);
 
-    console.log("User details sumbitted");
+    console.log("User details sumbitted to Database");
 
   } finally {
     await client.close();
+  }
+}
+
+//Checking for unique username so that there aren't duplicate users.
+async function checkValidUsername(user) {
+  console.log("Checking username...");
+
+  await client.connect();
+  const database = client.db("user-details");
+  const details = database.collection("details");
+
+  let query = await details.findOne({username: user});
+
+  if (query) {
+    //console.log("duplicate user found");
+    return true;
+  }
+  else {
+    //console.log("user valid!");
+    return false;
   }
 }
