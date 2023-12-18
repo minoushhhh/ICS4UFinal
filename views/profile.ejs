@@ -6,35 +6,61 @@
 
 <body>
 
-    <h1 class = "font">Welcome, <%= name %>!</h1>
+    <h1 class="font">Welcome, <%= name %>!</h1>
 
-    <div class = "font">
-        <h2 class = "personal-information-title">Persoal Information</h2>
+    <div class="font">
+        <h2 class="personal-information-title">Persoal Information</h2>
         <label for="firstName">First name: </label><br>
-        <input type="text" id="firstName" name="firstName" value = <%= name %>><br>
+        <input type="text" id="firstName" name="firstName"><br>
         <label for="lastName">Last name: </label><br>
-        <input type="text" id="lastName" name="lastName" value = <%= userData.lastName %>><br>
+        <input type="text" id="lastName" name="lastName"><br>
         <label for="email">Email: </label><br>
-        <input type="text" id="email" name="email" value = <%= userData.email %>><br>
+        <input type="text" id="email" name="email"><br>
         <label for="phoneNumber">Phone Number: </label><br>
-        <input type="text" id="phoneNumber" name="phoneNumber" value = <%= userData.phoneNum %>><br>
+        <input type="text" id="phoneNumber" name="phoneNumber"><br>
         <label for="address">Address: </label><br>
-        <input type="text" id="address" name="address" value = <%= userData.adr %>><br>
+        <input type="text" id="address" name="address"><br>
         <label for="postalCode">Postal Code: </label><br>
-        <input type="text" id="postalCode" name="postalCode" value = <%= userData.pCode %>><br>
+        <input type="text" id="postalCode" name="postalCode"><br>
         <label for="username">Username: </label><br>
-        <input type="text" id="username" name="username" value = <%= userData.userName %>><br>
+        <input type="text" id="username" name="username"><br>
         <label for="password">Password: </label><br>
-        <input type="text" id="password" name="password" value = <%= userData.passWord %>><br>
+        <div class="password-block">
+            <input type="password" id="password" name="password"><br>
+            <div class="password-vis-icon">
+                <button><img src="https://cdn-icons-png.flaticon.com/512/57/57122.png"></button>
+            </div>
+        </div>
         <br>
         <div>
-            <button class = "profile-page-buttons" onclick = "edit()">Edit</button>
-            <button class = "profile-page-buttons" onclick = "save()">Save</button>
+            <button class="profile-page-buttons" onclick="edit()">Edit</button>
+            <button class="profile-page-buttons" onclick="save()">Save</button>
         </div>
     </div>
-    
+
 
 </body>
+
+<script>
+    function togglePass() {
+
+    }
+    function edit() {
+
+    }
+
+    function save() {
+
+    }
+    document.getElementById("firstName").value = "<%= name %>";
+    document.getElementById("lastName").value = "<%= userData.lastName %>";
+    document.getElementById("email").value = "<%= userData.email %>";
+    document.getElementById("phoneNumber").value = "<%= userData.phoneNum %>";
+    document.getElementById("address").value = "<%= userData.adr %>";
+    document.getElementById("postalCode").value = "<%= userData.pCode %>";
+    document.getElementById("username").value = "<%= userData.userName %>";
+    document.getElementById("password").value = "<%= userData.passWord %>";
+</script>
 
 <style>
     .profile-page-buttons {
@@ -52,21 +78,23 @@
 
     .profile-page-buttons:hover {
         animation: glow 1s ease-in-out infinite;
-      }
+    }
 
     .personal-information-title {
         font-weight: bold;
     }
-  
+
     @keyframes glow {
-        0%, 100% {
-        box-shadow: 0 0 10px #3498db;
+
+        0%,
+        100% {
+            box-shadow: 0 0 10px #3498db;
         }
+
         50% {
-        box-shadow: 0 0 20px #3498db;
+            box-shadow: 0 0 20px #3498db;
         }
     }
-  
 </style>
 
 <footer>

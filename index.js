@@ -127,6 +127,7 @@ app.post('/login-form', async (req, res) => {
             passWord: detailsDoc.password,
           };
           console.log("Correct password");
+          console.log(detailsDoc.address);
           res.redirect('/profile');
           return;
         }
