@@ -86,60 +86,8 @@ app.post('/login-form', async (req, res) => {
 
     console.log(user + " " + pass);
 
-    try {
-      await client.connect();
+    await checkLogin(user, pass);   
 
-      const database = client.db("user-details");
-      const details = database.collection("details");
-
-      let query;
-
-      if (user.includes("@")) {
-        const email = { email: user };
-        query = await details.findOne(email);
-        if (query === null) {
-          res.send("User or Email not found");
-          return;
-        }
-      }
-      else {
-        const username = { username: user };
-        query = await details.findOne(username);
-        if (query === null) {
-          res.send("User or Email not found");
-          return;
-        }
-      }
-
-      const detailsDoc = await details.findOne(query)
-
-      if (detailsDoc) {
-        const password = detailsDoc.password;
-        if (password == pass) {
-          req.session.username = detailsDoc.firstName;
-          req.session.userData = {
-            lastName: detailsDoc.lastName,
-            email: detailsDoc.email,
-            phoneNum: detailsDoc.phoneNumber,
-            adr: detailsDoc.address,
-            pCode: detailsDoc.postalCode,
-            userName: detailsDoc.username,
-            passWord: detailsDoc.password,
-          };
-          console.log("Correct password");
-          res.redirect('/profile');
-          return;
-        }
-        else {
-          console.log("Incorrect password");
-          res.send("Incorrect password.");
-          return;
-        }
-      }
-    }
-    finally {
-      await client.close();
-    }
   }
   catch (error) {
     console.error(error);
@@ -185,6 +133,64 @@ app.post('/submit-form', async (req, res) => {
 app.listen(3000, () => {
   console.log('Express server initialized');
 });
+
+async function checkLogin(user, pass) {
+  console.log("Checking login info...");
+  try {
+    await client.connect();
+
+    const database = client.db("user-details");
+    const details = database.collection("details");
+
+    let query;
+
+    if (user.includes("@")) {
+      const email = { email: user };
+      query = await details.findOne(email);
+      if (query === null) {
+        res.send("User or Email not found");
+        return;
+      }
+    }
+    else {
+      const username = { username: user };
+      query = await details.findOne(username);
+      if (query === null) {
+        res.send("User or Email not found");
+        return;
+      }
+    }
+
+    const detailsDoc = await details.findOne(query)
+
+    if (detailsDoc) {
+      const password = detailsDoc.password;
+      if (password == pass) {
+        req.session.username = detailsDoc.firstName;
+        req.session.userData = {
+          lastName: detailsDoc.lastName,
+          email: detailsDoc.email,
+          phoneNum: detailsDoc.phoneNumber,
+          adr: detailsDoc.address,
+          pCode: detailsDoc.postalCode,
+          userName: detailsDoc.username,
+          passWord: detailsDoc.password,
+        };
+        console.log("Correct password");
+        res.redirect('/profile');
+        return;
+      }
+      else {
+        console.log("Incorrect password");
+        res.send("Incorrect password.");
+        return;
+      }
+    }
+  }
+  finally {
+    await client.close();
+  }
+}
 
 //Saving the user details to the database by connecting to it and inserting the form details.
 async function saveDetails(formData) {
