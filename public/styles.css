@@ -174,21 +174,23 @@ ul {
     align-items: center;
 }
 
-.password-vis-icon {
+.password-vis-icon img {
     display: flex;
     align-items: center;
+    width: 15px;
+    height: 15px;
 }
 
-.password-vis-icon button {
+.password-vis-icon {
+    border: none;
+    background: transparent;
     margin-left: 5px;
-    height: 20px;
-    width: 20px;
+    transition: border 0.1s ease;
 }
 
-.password-vis-icon img {
-    height: 100%;   
-    width: 100%;
-    vertical-align: middle;
+.password-vis-icon:hover {
+    border: 2px solid blue;
+    border-radius: 15px;
 }
 
 /* Image Slider on Homepage*/
@@ -292,7 +294,6 @@ input[type="file"] {
     padding-left: 5%;
     padding-right: 5%;
 }
-
 
 .options-grid-container {
     display: grid;

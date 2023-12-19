@@ -86,7 +86,7 @@ app.post('/login-form', async (req, res) => {
 
     console.log(user + " " + pass);
 
-    await checkLogin(user, pass);   
+    await checkLogin(user, pass, req, res);   
 
   }
   catch (error) {
@@ -134,7 +134,7 @@ app.listen(3000, () => {
   console.log('Express server initialized');
 });
 
-async function checkLogin(user, pass) {
+async function checkLogin(user, pass, req, res) {
   console.log("Checking login info...");
   try {
     await client.connect();
