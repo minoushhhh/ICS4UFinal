@@ -134,6 +134,7 @@ app.listen(3000, () => {
   console.log('Express server initialized');
 });
 
+//Check login information when logged in
 async function checkLogin(user, pass, req, res) {
   console.log("Checking login info...");
   try {
