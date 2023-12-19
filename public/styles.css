@@ -225,9 +225,10 @@ ul {
     position: absolute;
     z-index: 9;
     cursor: ew-resize;
-    width: 3px;
-    height: 300px;
-    background-color: black;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: red;
 }
 
 .img-upload-div {
