@@ -59,7 +59,6 @@ app.get('/login', (req, res) => {
   const passValid = req.session.passValid;
   const userValid = req.session.userValid;
   const emailValid = req.session.emailValid;
-  console.log(typeof passValid);
   console.log("Variables in session " + passValid, userValid, emailValid);
   res.render('login', { passValid, userValid, emailValid });
 });

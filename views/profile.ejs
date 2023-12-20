@@ -11,27 +11,27 @@
     <div class="font">
         <h2 class="personal-information-title">Persoal Information</h2>
         <label for="firstName">First name: </label><br>
-        <input type="text" id="firstName" name="firstName" readonly><br>
+        <input type="text" id="firstName" name="firstName" disabled><br>
         <label for="lastName">Last name: </label><br>
-        <input type="text" id="lastName" name="lastName" readonly><br>
+        <input type="text" id="lastName" name="lastName" disabled><br>
         <label for="email">Email: </label><br>
-        <input type="text" id="email" name="email" readonly><br>
+        <input type="text" id="email" name="email" disabled><br>
         <label for="phoneNumber">Phone Number: </label><br>
-        <input type="text" id="phoneNumber" name="phoneNumber" readonly><br>
+        <input type="text" id="phoneNumber" name="phoneNumber" disabled><br>
         <label for="address">Address: </label><br>
-        <input type="text" id="address" name="address" readonly><br>
+        <input type="text" id="address" name="address" disabled><br>
         <label for="postalCode">Postal Code: </label><br>
-        <input type="text" id="postalCode" name="postalCode" readonly><br>
+        <input type="text" id="postalCode" name="postalCode" disabled><br>
         <label for="username">Username: </label><br>
-        <input type="text" id="username" name="username" readonly><br>
+        <input type="text" id="username" name="username" disabled><br>
         <label for="password">Password: </label><br>
         <div class="password-block">
-            <input type="password" id="password" name="password" readonly><br>
+            <input type="password" id="password" name="password" disabled><br>
             <button class="password-vis-icon" onclick = "togglePass()"><img src="https://cdn-icons-png.flaticon.com/512/57/57122.png"></button>
         </div>
         <br>
         <div>
-            <button class="profile-page-buttons" onclick="edit()">Edit</button>
+            <button id = "editButton" class="profile-page-buttons" onclick="edit()">Edit</button>
             <button class="profile-page-buttons" onclick="save()">Save</button>
         </div>
     </div>
@@ -48,13 +48,44 @@
             pass.type = "password";
         }
     }
-    function edit() {
+  function edit() {
+    const editButton = document.getElementById("editButton");
 
+    if (document.getElementById("firstName").disabled) {
+        editButton.textContent = "Cancel";
+        enableInputs();
+    } else {
+        editButton.textContent = "Edit";
+        disableInputs();
     }
+}
+
+function enableInputs() {
+    document.getElementById("firstName").removeAttribute("disabled");
+    document.getElementById("lastName").removeAttribute("disabled");
+    document.getElementById("email").removeAttribute("disabled");
+    document.getElementById("phoneNumber").removeAttribute("disabled");
+    document.getElementById("address").removeAttribute("disabled");
+    document.getElementById("postalCode").removeAttribute("disabled");
+    document.getElementById("username").removeAttribute("disabled");
+    document.getElementById("password").removeAttribute("disabled");
+}
+
+function disableInputs() {
+    document.getElementById("firstName").setAttribute("disabled", true);
+    document.getElementById("lastName").setAttribute("disabled", true);
+    document.getElementById("email").setAttribute("disabled", true);
+    document.getElementById("phoneNumber").setAttribute("disabled", true);
+    document.getElementById("address").setAttribute("disabled", true);
+    document.getElementById("postalCode").setAttribute("disabled", true);
+    document.getElementById("username").setAttribute("disabled", true);
+    document.getElementById("password").setAttribute("disabled", true);
+}
 
     function save() {
 
     }
+
     document.getElementById("firstName").value = "<%= name %>";
     document.getElementById("lastName").value = "<%= userData.lastName %>";
     document.getElementById("email").value = "<%= userData.email %>";

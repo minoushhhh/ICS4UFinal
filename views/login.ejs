@@ -11,7 +11,7 @@
     <form id="loginForm" action="/login-form" method="post">
         <label for="username">Username </label><br>
         <div>
-            <input type="text" id="username" name="username">
+            <input type="text" id="username" name="username" placeholder = "Username/E-mail">
             <label id="userErrorLabel" style="color: red;"></label>
         </div>
         
@@ -43,6 +43,10 @@
     else if ("<%= emailValid %>" === "false" && "<%= userValid %>" === "true" && "<%= passValid %>" === "true") {
         userError.textContent = "E-mail not found";
         passError.textContent = ""; 
+    }
+    else {
+        passError.textContent = "";
+        userError.textConent = "";
     }
 </script>
 

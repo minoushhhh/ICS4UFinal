@@ -184,7 +184,7 @@ ul {
 .password-vis-icon {
     border: none;
     background: transparent;
-    margin-left: 5px;
+    margin-left: 3px;
     transition: border 0.1s ease;
 }
 
