@@ -4,23 +4,49 @@
     <%- include('layouts/navbar'); -%>
 </head>
 
-<h1 class = "title">Login</h1>
+<body class="font">
 
-<body class = "font">
+    <h1 class="title">Login</h1>
 
     <form id="loginForm" action="/login-form" method="post">
         <label for="username">Username </label><br>
-        <input type="text" id="username" name="username"><br>
+        <div>
+            <input type="text" id="username" name="username">
+            <label id="userErrorLabel" style="color: red;"></label>
+        </div>
+        
         <label for="password">Password </label><br>
-        <input id="password" name="password"><br><br>
-
-        <button type="sumbit" class = "font">Submit</button>
+        <div>
+            <input type="password" id="password" name="password">
+            <label id="passErrorLabel" style="color: red;"></label>
+        </div>
+        <br>
+        <button type="submit" class="font">Submit</button>
         <br><br>
-        <div class = "font">Don't have an account? Sign up <a class = "hyperlink" href="/sign-up">here</a></div>
+        <div class="font">Don't have an account? Sign up <a class="hyperlink" href="/sign-up">here</a></div>
 
     </form>
 
 </body>
+
+<script>
+    let passError = document.getElementById("passErrorLabel");
+    let userError = document.getElementById("userErrorLabel");
+    if ("<%= passValid %>" === "false" && "<%= userValid %>" === "true" && "<%= emailValid %>" === "true") {
+        passError.textContent = "Incorrect password";
+        userError.textContent = "";
+    }
+    else if ("<%= userValid %>" === "false" && "<%= passValid %>" === "true" && "<%= emailValid %>" === "true") {
+        userError.textContent = "Username not found";
+        passError.textContent = "";  
+    }
+    else if ("<%= emailValid %>" === "false" && "<%= userValid %>" === "true" && "<%= passValid %>" === "true") {
+        userError.textContent = "E-mail not found";
+        passError.textContent = ""; 
+    }
+</script>
+
+
 
 <footer>
     <%- include('layouts/footer'); -%>

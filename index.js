@@ -56,7 +56,12 @@ app.get('/sign-up', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  const passValid = req.session.passValid;
+  const userValid = req.session.userValid;
+  const emailValid = req.session.emailValid;
+  console.log(typeof passValid);
+  console.log("Variables in session " + passValid, userValid, emailValid);
+  res.render('login', { passValid, userValid, emailValid });
 });
 
 app.get('/profile', (req, res) => {
@@ -149,20 +154,27 @@ async function checkLogin(user, pass, req, res) {
       const email = { email: user };
       query = await details.findOne(email);
       if (query === null) {
-        res.send("User or Email not found");
+        console.log("email not found");
+        req.session.emailValid = false;
+        req.session.passValid = true;
+        req.session.userValid = true;
+        res.redirect("/login");
         return;
       }
-    }
-    else {
+    } else {
       const username = { username: user };
       query = await details.findOne(username);
       if (query === null) {
-        res.send("User or Email not found");
+        console.log("user not found");
+        req.session.userValid = false;
+        req.session.passValid = true;
+        req.session.emailValid = true;
+        res.redirect("/login");
         return;
       }
     }
 
-    const detailsDoc = await details.findOne(query)
+    const detailsDoc = await details.findOne(query);
 
     if (detailsDoc) {
       const password = detailsDoc.password;
@@ -180,15 +192,16 @@ async function checkLogin(user, pass, req, res) {
         console.log("Correct password");
         res.redirect('/profile');
         return;
-      }
-      else {
+      } else {
         console.log("Incorrect password");
-        res.send("Incorrect password.");
+        req.session.passValid = false;
+        req.session.emailValid = true;
+        req.session.userValid = true;
+        res.redirect("/login");
         return;
       }
     }
-  }
-  finally {
+  } finally {
     await client.close();
   }
 }
