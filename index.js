@@ -56,21 +56,27 @@ app.get('/sign-up', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  const passValid = req.session.passValid;
-  const userValid = req.session.userValid;
-  const emailValid = req.session.emailValid;
-  console.log("Variables in session " + passValid, userValid, emailValid);
-  res.render('login', { passValid, userValid, emailValid });
+  // Check if the user is already logged in
+  if (req.session.username) {
+    // Redirect to the home page if logged in
+    res.redirect('/');
+  } else {
+    // Continue rendering the login page for users not logged in
+    const passValid = req.session.passValid;
+    const userValid = req.session.userValid;
+    const emailValid = req.session.emailValid;
+    console.log("Variables in session " + passValid, userValid, emailValid);
+    res.render('login', { passValid, userValid, emailValid });
+  }
 });
 
+
 app.get('/profile', (req, res) => {
-  updateUserData(req.session.username, req);
-  const userData = req.session.userData;
-  console.log("Username in session:", req.session.username);
-  if (req.session.username) {
-    const name = req.session.username;
-    res.render('profile', { userData, name });
-  }
+    const userData = req.session.userData;
+    console.log("Username in session:", req.session.username);
+    if (req.session.username) {
+      res.render('profile', { userData });
+    }
 });
 
 app.get('/logout', (req, res) => {
@@ -106,14 +112,19 @@ app.post('/save-form', async (req, res) => {
     const updates = req.body;
     const username = req.body.username;
     console.log(username);
-    await updateDetails(updates, username);
-  }
-  finally {
+    await updateDetails(updates, username, req);
+
+    // Redirect to the profile page after successfully updating
+    res.redirect('/profile');
+  } catch (error) {
+    console.error("Error processing save-form:", error);
+    res.status(500).send("Internal Server Error");
+  } finally {
     await client.close();
   }
 });
 
-async function updateDetails(formData, user) {
+async function updateDetails(formData, user, req) {
   try {
     console.log("Connecting to update server...");
 
@@ -129,42 +140,27 @@ async function updateDetails(formData, user) {
 
     if (result.matchedCount === 1 && result.modifiedCount === 0) {
       console.warn("Update did not modify any fields.");
-    }
-    else {
-      console.log("Update completed successfully.")
-    }
+    } else {
+      console.log("Update completed successfully.");
 
+      // Update session data after successfully updating the database
+      req.session.userData = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phoneNum: formData.phoneNumber,
+        adr: formData.address,
+        pCode: formData.postalCode,
+        userName: formData.username,
+        passWord: formData.password,
+      };
+    }
+  } catch (error) {
+    console.error("Error updating details:", error);
+    throw error; // Rethrow the error to handle it in the calling function
   } finally {
     await client.close();
   }
-}
-
-async function updateUserData(user, req) {
-  try {
-    await client.connect();
-
-    const database = client.db("user-details");
-    const details = database.collection("details");
-
-    const detailsDoc = await details.findOne({username: user});
-
-    console.log(detailsDoc);
-
-    req.session.userData = {
-      lastName: detailsDoc.lastName,
-      email: detailsDoc.email,
-      phoneNum: detailsDoc.phoneNumber,
-      adr: detailsDoc.address,
-      pCode: detailsDoc.postalCode,
-      userName: detailsDoc.username,
-      passWord: detailsDoc.password,
-    };
-
-  }
-  finally {
-    await client.close();
-  }
-  
 }
 
 app.post('/submit-form', async (req, res) => {
@@ -180,6 +176,7 @@ app.post('/submit-form', async (req, res) => {
 
       req.session.username = formData.username; 
       req.session.userData = {
+        firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
         phoneNum: formData.phoneNumber,
@@ -245,8 +242,9 @@ async function checkLogin(user, pass, req, res) {
     if (detailsDoc) {
       const password = detailsDoc.password;
       if (password == pass) {
-        req.session.username = detailsDoc.firstName;
+        req.session.username = detailsDoc.username;
         req.session.userData = {
+          firstName: detailsDoc.firstName,
           lastName: detailsDoc.lastName,
           email: detailsDoc.email,
           phoneNum: detailsDoc.phoneNumber,
