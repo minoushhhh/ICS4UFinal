@@ -12,21 +12,21 @@
     <div class="grid-container grid-test-div">
 
       <div class="form-grid grid-test-div">
-        <form>
+        <form action="/contact-form" method="post">
           Have any questions? Submit this form:
           <br><br>
-          <span>Name</span>
-          <input>
+          <span>Subject</span>
+          <input name="subject" id="subject">
           <br><br>
           <span>E-mail</span>
-          <input>
+          <input name="email" id="email">
           <br><br>
           <span>Message</span>
           <br><br>
-          <textarea class="form-input"></textarea>
+          <textarea name="message" id="text" class="form-input"></textarea>
           <br><br>
-          <button class="contact-form-submit-button" type="Submit">Submit</button>
-        </form>
+          <button class="contact-form-submit-button" type="submit">Submit</button>
+        </form>        
       </div>
 
       <div class="story-grid grid-test-div">

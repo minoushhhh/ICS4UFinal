@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import { MongoClient, ServerApiVersion } from 'mongodb';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
+import nodemailer from 'nodemailer';
 
 const uri = "mongodb+srv://Admin:nR18eHCkif6yvno0@cluster0.ak6hid0.mongodb.net/?retryWrites=true&w=majority";
 
@@ -122,6 +123,44 @@ app.post('/save-form', async (req, res) => {
   } finally {
     await client.close();
   }
+});
+
+async function sendEmail(userEmail, subject, text) {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'shethmohnish@gmail.com',
+      pass: 'dnec wwtn rysh gmna'
+    }
+  });
+  
+  const mailOptions = {
+    from: 'shethmohnish@gmail.com',
+    to: userEmail,
+    subject: subject,
+    text: text
+  };
+  
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending email:', error);
+    } else {
+      console.log('Email sent:', info.response);
+    }
+  });
+}
+
+app.post('/contact-form', (req, res) => {
+  const subject = req.body.subject;
+  const email = req.body.email;
+  const message = req.body.message;
+
+  sendEmail(email, subject, message);
+
+  console.log("Sent e-mail sucessfully to: " + email);
+
+  res.redirect('/contact');
+  
 });
 
 async function updateDetails(formData, user, req) {
