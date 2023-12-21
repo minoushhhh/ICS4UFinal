@@ -64,6 +64,7 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
+  updateUserData(req.session.username, req);
   const userData = req.session.userData;
   console.log("Username in session:", req.session.username);
   if (req.session.username) {
@@ -103,13 +104,68 @@ app.post('/login-form', async (req, res) => {
 app.post('/save-form', async (req, res) => {
   try {
     const updates = req.body;
-    const user = req.body.username;
-    await updateDetails(updates, user)
+    const username = req.body.username;
+    console.log(username);
+    await updateDetails(updates, username);
   }
   finally {
     await client.close();
   }
 });
+
+async function updateDetails(formData, user) {
+  try {
+    console.log("Connecting to update server...");
+
+    await client.connect();
+    const database = client.db("user-details");
+    const details = database.collection("details");
+
+    const query = { username: user };
+
+    console.log("FORM DATA", formData);
+
+    const result = await details.updateOne(query, { $set: formData });
+
+    if (result.matchedCount === 1 && result.modifiedCount === 0) {
+      console.warn("Update did not modify any fields.");
+    }
+    else {
+      console.log("Update completed successfully.")
+    }
+
+  } finally {
+    await client.close();
+  }
+}
+
+async function updateUserData(user, req) {
+  try {
+    await client.connect();
+
+    const database = client.db("user-details");
+    const details = database.collection("details");
+
+    const detailsDoc = await details.findOne({username: user});
+
+    console.log(detailsDoc);
+
+    req.session.userData = {
+      lastName: detailsDoc.lastName,
+      email: detailsDoc.email,
+      phoneNum: detailsDoc.phoneNumber,
+      adr: detailsDoc.address,
+      pCode: detailsDoc.postalCode,
+      userName: detailsDoc.username,
+      passWord: detailsDoc.password,
+    };
+
+  }
+  finally {
+    await client.close();
+  }
+  
+}
 
 app.post('/submit-form', async (req, res) => {
   try {
@@ -122,7 +178,7 @@ app.post('/submit-form', async (req, res) => {
 
       await saveDetails(formData);
 
-      req.session.username = formData.firstName;
+      req.session.username = formData.username; 
       req.session.userData = {
         lastName: formData.lastName,
         email: formData.email,
@@ -212,28 +268,6 @@ async function checkLogin(user, pass, req, res) {
       }
     }
   } finally {
-    await client.close();
-  }
-}
-
-async function updateDetails(formData, username) {
-  try {
-    console.log("Connecting to update server...");
-
-    await client.connect();
-    const databse = client.db("user-details");
-    const details = databse.collection("details");
-
-    let query = await details.findOne({username: username});
-
-
-    const q1 = { _id: ObjectId(id) }
-
-    await details.updateOne(objId, formData);
-    
-    console.log("Update complete");  
-  }
-  finally {
     await client.close();
   }
 }

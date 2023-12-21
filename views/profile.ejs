@@ -32,6 +32,7 @@
         <br>
         <div>
             <button id = "editButton" class="profile-page-buttons" onclick="edit()">Edit</button>
+            <br><br>
             <form action = "/save-form" method = "post">
                 <button class="profile-page-buttons" onclick="save()">Save</button>
                 <input type="text" id="firstNameHidden" name="firstName" hidden><br>
@@ -41,7 +42,8 @@
                 <input type="text" id="addressHidden" name="address" hidden><br>
                 <input type="text" id="postalCodeHidden" name="postalCode" hidden><br>
                 <input type="text" id="usernameHidden" name="username" hidden><br>
-                <input type="password" id="passwordHidden" name="password" hidden><br>
+                <input type="text" id="passwordHidden" name="password" hidden><br>
+                <input type="text" id="confirmPasswordHidden" name = "confirmPassword" hidden><br>
             </form>
         </div>
     </div>
@@ -92,9 +94,50 @@ function disableInputs() {
     document.getElementById("password").setAttribute("disabled", true);
 }   
 
-    function save() {
+function save() {
+    // Update the displayed information in the box based on user input
+    updateDisplayedInfo();
 
-    }
+    // Copy values from public form to hidden form
+    document.getElementById("usernameHidden").value = document.getElementById("username").value;
+    document.getElementById("passwordHidden").value = document.getElementById("password").value;
+    document.getElementById("firstNameHidden").value = document.getElementById("firstName").value;
+    document.getElementById("lastNameHidden").value = document.getElementById("lastName").value;
+    document.getElementById("emailHidden").value = document.getElementById("email").value;
+    document.getElementById("phoneNumberHidden").value = document.getElementById("phoneNumber").value;
+    document.getElementById("addressHidden").value = document.getElementById("address").value;
+    document.getElementById("postalCodeHidden").value = document.getElementById("postalCode").value;
+    document.getElementById("confirmPasswordHidden").value = document.getElementById("password").value;
+
+    // Submit the form
+    document.forms["yourFormId"].submit();
+}
+
+
+function updateDisplayedInfo() {
+    // Get user input from the form fields
+    const newName = document.getElementById("firstName").value;
+    const newLastName = document.getElementById("lastName").value;
+    const newEmail = document.getElementById("email").value;
+    const newPhoneNumber = document.getElementById("phoneNumber").value;
+    const newAddress = document.getElementById("address").value;
+    const newPostalCode = document.getElementById("postalCode").value;
+    const newUsername = document.getElementById("username").value;
+    const newPassword = document.getElementById("password").value;
+
+    // Update the displayed information with the user input
+    document.getElementById("firstName").value = newName;
+    document.getElementById("lastName").value = newLastName;
+    document.getElementById("email").value = newEmail;
+    document.getElementById("phoneNumber").value = newPhoneNumber;
+    document.getElementById("address").value = newAddress;
+    document.getElementById("postalCode").value = newPostalCode;
+    document.getElementById("username").value = newUsername;
+    document.getElementById("password").value = newPassword;
+
+    disableInputs();
+}
+
     //Public form
     document.getElementById("firstName").value = "<%= name %>";
     document.getElementById("lastName").value = "<%= userData.lastName %>";
@@ -106,14 +149,15 @@ function disableInputs() {
     document.getElementById("password").value = "<%= userData.passWord %>";
     
     //Hidden form
-    document.getElementById("usernameHidden").value = "<%= userData.userName %>";
-    document.getElementById("passwordHidden").value = "<%= userData.passWord %>";
-    document.getElementById("firstNameHidden").value = "<%= name %>";
-    document.getElementById("lastNameHidden").value = "<%= userData.lastName %>";
-    document.getElementById("emailHidden").value = "<%= userData.email %>";
-    document.getElementById("phoneNumberHidden").value = "<%= userData.phoneNum %>";
-    document.getElementById("addressHidden").value = "<%= userData.adr %>";
-    document.getElementById("postalCodeHidden").value = "<%= userData.pCode %>";
+    document.getElementById("usernameHidden").value = document.getElementById("username").value;
+    document.getElementById("passwordHidden").value = document.getElementById("password").value;
+    document.getElementById("firstNameHidden").value = document.getElementById("firstName").value;
+    document.getElementById("lastNameHidden").value = document.getElementById("lastName").value;
+    document.getElementById("emailHidden").value = document.getElementById("email").value;
+    document.getElementById("phoneNumberHidden").value = document.getElementById("phoneNumber").value;
+    document.getElementById("addressHidden").value = document.getElementById("address").value;
+    document.getElementById("postalCodeHidden").value = document.getElementById("postalCode").value;
+    document.getElementById("confirmPasswordHidden").value = document.getElementById("password").value;
 </script>
 
 <style>
