@@ -32,7 +32,17 @@
         <br>
         <div>
             <button id = "editButton" class="profile-page-buttons" onclick="edit()">Edit</button>
-            <button class="profile-page-buttons" onclick="save()">Save</button>
+            <form action = "/save-form" method = "post">
+                <button class="profile-page-buttons" onclick="save()">Save</button>
+                <input type="text" id="firstNameHidden" name="firstName" hidden><br>
+                <input type="text" id="lastNameHidden" name="lastName" hidden><br>
+                <input type="text" id="emailHidden" name="email" hidden><br>
+                <input type="text" id="phoneNumberHidden" name="phoneNumber" hidden><br>
+                <input type="text" id="addressHidden" name="address" hidden><br>
+                <input type="text" id="postalCodeHidden" name="postalCode" hidden><br>
+                <input type="text" id="usernameHidden" name="username" hidden><br>
+                <input type="password" id="passwordHidden" name="password" hidden><br>
+            </form>
         </div>
     </div>
  
@@ -80,12 +90,12 @@ function disableInputs() {
     document.getElementById("postalCode").setAttribute("disabled", true);
     document.getElementById("username").setAttribute("disabled", true);
     document.getElementById("password").setAttribute("disabled", true);
-}
+}   
 
     function save() {
 
     }
-
+    //Public form
     document.getElementById("firstName").value = "<%= name %>";
     document.getElementById("lastName").value = "<%= userData.lastName %>";
     document.getElementById("email").value = "<%= userData.email %>";
@@ -94,6 +104,16 @@ function disableInputs() {
     document.getElementById("postalCode").value = "<%= userData.pCode %>";
     document.getElementById("username").value = "<%= userData.userName %>";
     document.getElementById("password").value = "<%= userData.passWord %>";
+    
+    //Hidden form
+    document.getElementById("usernameHidden").value = "<%= userData.userName %>";
+    document.getElementById("passwordHidden").value = "<%= userData.passWord %>";
+    document.getElementById("firstNameHidden").value = "<%= name %>";
+    document.getElementById("lastNameHidden").value = "<%= userData.lastName %>";
+    document.getElementById("emailHidden").value = "<%= userData.email %>";
+    document.getElementById("phoneNumberHidden").value = "<%= userData.phoneNum %>";
+    document.getElementById("addressHidden").value = "<%= userData.adr %>";
+    document.getElementById("postalCodeHidden").value = "<%= userData.pCode %>";
 </script>
 
 <style>

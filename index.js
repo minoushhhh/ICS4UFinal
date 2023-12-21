@@ -100,6 +100,17 @@ app.post('/login-form', async (req, res) => {
   }
 });
 
+app.post('/save-form', async (req, res) => {
+  try {
+    const updates = req.body;
+    const user = req.body.username;
+    await updateDetails(updates, user)
+  }
+  finally {
+    await client.close();
+  }
+});
+
 app.post('/submit-form', async (req, res) => {
   try {
     const formData = req.body;
@@ -201,6 +212,28 @@ async function checkLogin(user, pass, req, res) {
       }
     }
   } finally {
+    await client.close();
+  }
+}
+
+async function updateDetails(formData, username) {
+  try {
+    console.log("Connecting to update server...");
+
+    await client.connect();
+    const databse = client.db("user-details");
+    const details = databse.collection("details");
+
+    let query = await details.findOne({username: username});
+
+
+    const q1 = { _id: ObjectId(id) }
+
+    await details.updateOne(objId, formData);
+    
+    console.log("Update complete");  
+  }
+  finally {
     await client.close();
   }
 }
