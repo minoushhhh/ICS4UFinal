@@ -30,6 +30,11 @@
 
     </div>
 
+    <p id="test">hello</p>
+    <button onclick="updateArray()">submit</button>
+    <button onclick="testJSON()">submit after</button>
+    
+
 
 <div>
     <button onclick="updateCalendar(0)">Previous</button>
@@ -166,13 +171,102 @@
     updateNextInfo();
     updateCalendar(0);
 
+
+
+    let schedule = [];
+    let month1 = [];
+    let month2 = [];
+
+    function updateArray(){
+
+        for(let i = 1; i<daysInMonth+1; i++){
+            let times = ["time1", "time2", "time3"];
+            month1.push(times);
+        }
+
+        for(let i = 1; i<nextDaysInMonth+1; i++){
+            let times2 = ["time1", "time2", "time3"];
+            month2.push(times2);
+        }
+
+        schedule.push(month1);
+        schedule.push(month2);
+
+    }
+
+    function createJSONObject() {
+
+        let jsonObjectArray = [];
+
+        for (let i = 0; i < schedule.length; i++) {
+            let monthArray = schedule[i];
+            let monthObject = {};
+
+            for (let j = 0; j < monthArray.length; j++) {
+                let timesArray = monthArray[j];
+                let timesObject = {};
+
+                for (let k = 0; k < timesArray.length; k++) {
+                    timesObject[`time${k + 1}`] = timesArray[k];
+                }
+
+                monthObject[`day${j + 1}`] = timesObject;
+            }
+
+            jsonObjectArray.push(monthObject);
+        }
+
+        return jsonObjectArray;
+
+    }
+
+    function testJSON(){
+        let test = createJSONObject();
+
+        document.getElementById("test").innerHTML = test[0]["day20"];
+
+
+    }
+
+    
+/*
+    class day {
+
+
+        constructor(){
+            id
+            this.time1 = true;
+            this.time2 = true;
+            this.time3 = true;
+        }
+    }
+*/
+
+
+    const defaultTimesInstance = new defaultTimes();
+
+    function createDefaultJSON(){
+        for(let i = 0; i<37; i++){
+            if(i>firstDay){
+                new defaultTimes;
+            }
+        }
+    }
+
+    function updateJSON(){
+
+    }
+
     function updateCalendar(currentOrNext){
         clearCalendar();
         if (currentOrNext == 0){
             let counter = firstDay;
             for (let i = 0; i < daysInMonth; i++){
+                let day = i+1;
                 let tempDay = document.getElementById((firstDay + i).toString());
-                tempDay.textContent = i + 1;
+                tempDay.textContent = day;
+                let timeSlots = {} 
+
             }
         }
         else{
@@ -182,6 +276,7 @@
                 tempDay.textContent = i + 1;
             }
         }
+
         
     }
 
@@ -208,7 +303,7 @@
         }
         nextMonthDate.setDate(1);
         nextFirstDay = nextMonthDate.getDay();
-        nextDaysInMonth= getDaysInMonth(nextMonthDate.getFullYear(), nextMonthDate.getMonth());
+        nextDaysInMonth = getDaysInMonth(nextMonthDate.getFullYear(), nextMonthDate.getMonth());
 
     }
 
