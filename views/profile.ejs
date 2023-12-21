@@ -6,7 +6,7 @@
 
 <body>
 
-    <h1 class="font">Welcome, <%= name %>!</h1>
+    <h1 class="font">Welcome, <%= userData.firstName %>!</h1>
 
     <div class="font">
         <h2 class="personal-information-title">Persoal Information</h2>
@@ -139,7 +139,7 @@ function updateDisplayedInfo() {
 }
 
     //Public form
-    document.getElementById("firstName").value = "<%= name %>";
+    document.getElementById("firstName").value = "<%= userData.firstName %>";
     document.getElementById("lastName").value = "<%= userData.lastName %>";
     document.getElementById("email").value = "<%= userData.email %>";
     document.getElementById("phoneNumber").value = "<%= userData.phoneNum %>";
