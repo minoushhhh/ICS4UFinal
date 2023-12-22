@@ -8,10 +8,10 @@
     display: flex;
     align-items: center;
     background-color: white;
-    padding-left: 384px;
-    padding-right: 384px;
+    padding-left: 12vw;
+    padding-right: 12vw;
     margin: auto;
-    height: 100px;
+    height: 75px;
 }
 
 .footer-img {
@@ -24,8 +24,8 @@
     display: flex;
     align-items: center;
     background-color: white;
-    padding-left: 400px;
-    padding-right: 400px;
+    padding-left: 13vw;
+    padding-right: 13vw;
 }
 
 body {
@@ -41,6 +41,7 @@ ul {
 
 .navbar-element {
     text-decoration: none;
+    font-size: 18px;
     display: inline;
     transition: font-size 0.3s ease;
     text-align: center;
@@ -50,8 +51,8 @@ ul {
 }
 
 .navbar-element:hover {
-    color: #d83434;
-    font-size: 22px;
+    color: #CAF0F8;
+    font-size: 19px;
 }
 
 .hyperlink {
@@ -60,10 +61,17 @@ ul {
 }
 
 .leftAlign {
+    display: flex;
     float: left;
 }
 
+.right-align-footer {
+    float: right;
+    margin-left: auto;
+}
+
 .rightAlign {
+    display: flex;
     margin-left: auto;
     float: right;
 }

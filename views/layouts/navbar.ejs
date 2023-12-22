@@ -7,15 +7,13 @@
     <li class="leftAlign"><a class="navbar-element" href="/contact">Contact</a></li>
     <% if (isLoggedIn) { %>
         <div class="rightAlign">
-            <li><a class="navbar-element" href="/profile">PROFILE</a></li>
-            <br>
-            <li><a class="navbar-element" href="/logout">LOG OUT</a></li>
+            <li><a class="navbar-element" href="/profile">Profile</a></li>
+            <li><a class="navbar-element" href="/logout">Log out</a></li>
         </div>
     <% } else { %>
         <div class="rightAlign">
-            <li><a class="navbar-element" href="/sign-up">SIGN UP</a></li>
-            <br>
-            <li><a class="navbar-element" href="/login">LOG IN</a></li>
+            <li><a class="navbar-element" href="/sign-up">Sign up</a></li>
+            <li><a class="navbar-element" href="/login">Log in</a></li>
         </div>
     <% } %>
 </ul>
