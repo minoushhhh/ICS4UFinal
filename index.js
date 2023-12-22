@@ -18,10 +18,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
   secret: "thisisasecretkey",
-  saveUninitialized: true,  
+  saveUninitialized: true,
   cookie: { maxAge: 86400000 },
   resave: false
-}))
+}));
 app.use((req, res, next) => {
   res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate'); //So that user cannot logout and then still be logged in using the back button in their browser.
   res.locals.isLoggedIn = req.session.username !== undefined;
@@ -57,12 +57,9 @@ app.get('/sign-up', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  // Check if the user is already logged in
   if (req.session.username) {
-    // Redirect to the home page if logged in
     res.redirect('/');
   } else {
-    // Continue rendering the login page for users not logged in
     const passValid = req.session.passValid;
     const userValid = req.session.userValid;
     const emailValid = req.session.emailValid;
@@ -70,7 +67,6 @@ app.get('/login', (req, res) => {
     res.render('login', { passValid, userValid, emailValid });
   }
 });
-
 
 app.get('/profile', (req, res) => {
     const userData = req.session.userData;
@@ -96,10 +92,8 @@ app.post('/login-form', async (req, res) => {
     const user = req.body.username + "";
     const pass = req.body.password + "";
 
-    console.log(user + " " + pass);
-
     await checkLogin(user, pass, req, res);   
-
+    
   }
   catch (error) {
     console.error(error);
@@ -114,12 +108,7 @@ app.post('/save-form', async (req, res) => {
     const username = req.body.username;
     console.log(username);
     await updateDetails(updates, username, req);
-
-    // Redirect to the profile page after successfully updating
     res.redirect('/profile');
-  } catch (error) {
-    console.error("Error processing save-form:", error);
-    res.status(500).send("Internal Server Error");
   } finally {
     await client.close();
   }
@@ -129,23 +118,21 @@ async function sendEmail(userEmail, subject, text) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'shethmohnish@gmail.com',
-      pass: 'dnec wwtn rysh gmna'
+      user: 'mapleglowdetailing@gmail.com ',
+      pass: 'lfcp rjsv xbkn vfan' //App password for mapleglowdetailing@gmail.com account.
     }
   });
   
-  const mailOptions = {
-    from: 'shethmohnish@gmail.com',
+  const emailLayout = {
+    from: 'mapleglowdetailing@gmail.com',
     to: userEmail,
     subject: subject,
     text: text
   };
   
-  transporter.sendMail(mailOptions, (error, info) => {
+  transporter.sendMail(emailLayout, (error, info) => {
     if (error) {
       console.error('Error sending email:', error);
-    } else {
-      console.log('Email sent:', info.response);
     }
   });
 }
@@ -173,7 +160,7 @@ async function updateDetails(formData, user, req) {
 
     const query = { username: user };
 
-    console.log("FORM DATA", formData);
+    console.log("Updated details sent to DB:", formData);
 
     const result = await details.updateOne(query, { $set: formData });
 
@@ -182,7 +169,6 @@ async function updateDetails(formData, user, req) {
     } else {
       console.log("Update completed successfully.");
 
-      // Update session data after successfully updating the database
       req.session.userData = {
         firstName: formData.firstName,
         lastName: formData.lastName,
@@ -260,7 +246,7 @@ async function checkLogin(user, pass, req, res) {
         req.session.emailValid = false;
         req.session.passValid = true;
         req.session.userValid = true;
-        res.redirect("/login");
+        res.redirect('/login');
         return;
       }
     } else {

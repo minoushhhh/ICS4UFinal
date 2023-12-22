@@ -11,13 +11,13 @@
     <form id="loginForm" action="/login-form" method="post">
         <label for="username">Username </label><br>
         <div>
-            <input type="text" id="username" name="username" placeholder = "Username/E-mail">
+            <input type="text" id="username" name="username" placeholder = "Username/E-mail" required>
             <label id="userErrorLabel" style="color: red;"></label>
         </div>
         
         <label for="password">Password </label><br>
         <div>
-            <input type="password" id="password" name="password">
+            <input type="password" id="password" name="password" required>
             <label id="passErrorLabel" style="color: red;"></label>
         </div>
         <br>
@@ -49,8 +49,6 @@
         userError.textConent = "";
     }
 </script>
-
-
 
 <footer>
     <%- include('layouts/footer'); -%>
