@@ -6,28 +6,116 @@
 
 <body class="font">
 
-    <h1 class="title">Login</h1>
+    <h1 class="login-title font">Log in to see your previous details.</h1>
 
-    <form id="loginForm" action="/login-form" method="post">
-        <label for="username">Username </label><br>
-        <div>
-            <input type="text" id="username" name="username" placeholder = "Username/E-mail" required>
-            <label id="userErrorLabel" style="color: red;"></label>
-        </div>
-        
-        <label for="password">Password </label><br>
-        <div>
-            <input type="password" id="password" name="password" required>
-            <label id="passErrorLabel" style="color: red;"></label>
-        </div>
-        <br>
-        <button type="submit" class="font">Submit</button>
-        <br><br>
-        <div class="font">Don't have an account? Sign up <a class="hyperlink" href="/sign-up">here</a></div>
+    <h2 class="login-subtitle">Log into your account</h2>
 
-    </form>
+    <div class="login-form">
+        <form id="loginForm" action="/login-form" method="post">
+
+            <div>
+                <div class="input-container">
+                    <input class="font login-input-box" type="text" id="username" name="username" placeholder="Username or E-mail" required>
+                </div>
+            </div>
+
+            <br>
+
+            <div>
+                <div class="input-container">
+                    <input class="font login-input-box" type="password" id="password" name="password" placeholder="Password" required>
+                    <button type="submit" class="login-button font"><img src="https://i.ibb.co/DDndqQN/Untitled-design-1.png"></button>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="error-div">
+                <label id="userErrorLabel" style="color: red;"></label>
+                <label id="passErrorLabel" style="color: red;"></label>
+            </div>
+
+            <br>
+
+            <div class="login-hyperlink font">Don't have an account? <a class="hyperlink" href="/sign-up">Sign up here ↗</a></div>
+
+        </form>
+    </div>
 
 </body>
+
+<style>
+    .input-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .login-button {
+        position: absolute;
+        right: 15px;
+        top: 51%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border: 1px solid #bdbdbd;
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        background-color: transparent;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .login-button:hover {
+        background-color: #e0e0e0;
+        border-color: #999;
+    }
+    
+    .login-button img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+    }
+    
+    .error-div {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .login-hyperlink {
+        text-align: center;
+    }
+    .login-subtitle {
+        padding-top: 50px;
+        padding-bottom: 0px;
+        text-align: center;
+        color: #494949;
+        margin: 5px 130px 13px;
+    }
+    .login-title {
+        text-align: left;
+        padding-left: 400px;
+    }
+    .login-form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 35vh; 
+    }
+
+    .login-input-box {
+        border: 1px solid #86868b;
+        background-color: hsla(0,0%,100%,.8);
+        border-radius: 12px;
+        font-size: 18px;
+        padding: 16px;
+        width: 480px;
+        height: 56px;
+    }
+</style>
 
 <script>
     let passError = document.getElementById("passErrorLabel");

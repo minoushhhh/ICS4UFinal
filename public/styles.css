@@ -1,5 +1,5 @@
 .title {
-    font-family: 'Trebuchet MS';
+    font-family: 'Helvetica Neue';
     text-align: center;
     color: black;
 }
@@ -7,7 +7,7 @@
 .navbar {
     display: flex;
     align-items: center;
-    background-color: gray;
+    background-color: white;
     padding-left: 25px;
     padding-right: 25px;
     margin: auto;
@@ -24,10 +24,11 @@
 .footer {
     display: flex;
     align-items: center;
-    background-color: gray;
+    background-color: white;
     padding-left: 25px;
     padding-right: 25px;
-    margin: auto;
+    margin-top: 100px;
+
 }
 
 .font {
@@ -49,7 +50,7 @@ ul {
     padding-left: 16px;
     padding-right: 16px;
     font-family: 'Trebuchet MS';
-    color: whitesmoke;
+    color: rgba(0, 0, 0, 0.8);
 }
 
 .navbar-element:hover {
@@ -58,7 +59,8 @@ ul {
 }
 
 .hyperlink {
-    color: blue;
+    color: #0066CC;
+    text-decoration: none;
 }
 
 .leftAlign {
