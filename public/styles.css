@@ -4,6 +4,54 @@
     color: black;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Helvetica Neue';
+}
+
+.fade-in-container {
+    opacity: 0; 
+    animation: fadeIn 0.4s ease-in-out forwards; 
+}
+
+.fade-first {
+    opacity: 0;
+    animation: fadeIn 0.7s ease-in-out forwards;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.7s ease-in-out forwards;
+  }
+
+.fade-after {
+    opacity: 0;
+    animation: fadeIn 0.4s ease-in-out forwards;
+    animation-delay: 0.7s;
+}
+
+@keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-0.5%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; 
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .navbar {
     box-sizing: border-box;
     display: flex;
@@ -29,22 +77,30 @@
     font-size: 17px;
 }
 
+footer {
+    position: relative;
+    bottom: 2vh;
+}
+
+.footer {
+    margin: auto;
+    background-color: white;
+    padding-left: 13vw;
+    padding-right: 13vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
 .footer-img {
     width: 35px;
     height: 35px;
     padding-right: 15px;
 }
 
-.footer {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    padding-left: 13vw;
-    padding-right: 13vw;
-}
-
-body {
-    font-family: 'Helvetica Neue';
+.footer-right {
+    text-align: right;
 }
 
 ul {
@@ -52,6 +108,10 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
+}
+
+.image-slider-container {
+    padding-bottom: 50px;
 }
 
 .hyperlink {
@@ -62,11 +122,6 @@ ul {
 .leftAlign {
     display: flex;
     float: left;
-}
-
-.right-align-footer {
-    float: right;
-    margin-left: auto;
 }
 
 .rightAlign {
@@ -89,7 +144,8 @@ ul {
 }
 
 .homepage-background-image {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.pixground.com/porsche-911-st-4k-wallpaper/?download-img=2k");    padding: 25px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("");    
+    padding: 25px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

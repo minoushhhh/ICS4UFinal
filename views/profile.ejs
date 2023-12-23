@@ -5,9 +5,12 @@
 </head>
 
 <body>
-        <h1 class="font">Welcome, <%= userData.firstName %>!</h1>
 
-        <div class="font">
+    <h1 class = "slide-in-left fade-first">Welcome, <%= userData.firstName %>!</h1>
+    
+    <div class="fade-after">
+
+        <div>
             <h2 class="personal-information-title">Personal Information</h2>
             <label for="firstName">First name: </label><br>
             <input type="text" id="firstName" name="firstName" disabled><br>
@@ -46,9 +49,10 @@
                     <input type="text" id="confirmPasswordHidden" name="confirmPassword" hidden><br>
                 </form>
             </div>
+
         </div>
 
-   
+    </div>
 
 </body>
 
@@ -67,6 +71,7 @@
 
         if (document.getElementById("firstName").disabled) {
             editButton.textContent = "Cancel";
+
             enableInputs();
         } else {
             editButton.textContent = "Edit";
@@ -97,7 +102,6 @@
     }
 
     function save() {
-        // Update the displayed information in the box based on user input
         updateDisplayedInfo();
 
         // Copy values from public form to hidden form
@@ -111,13 +115,11 @@
         document.getElementById("postalCodeHidden").value = document.getElementById("postalCode").value;
         document.getElementById("confirmPasswordHidden").value = document.getElementById("password").value;
 
-        // Submit the form
-        document.forms["yourFormId"].submit();
+        document.forms.submit();
     }
 
 
     function updateDisplayedInfo() {
-        // Get user input from the form fields
         const newName = document.getElementById("firstName").value;
         const newLastName = document.getElementById("lastName").value;
         const newEmail = document.getElementById("email").value;
@@ -127,7 +129,6 @@
         const newUsername = document.getElementById("username").value;
         const newPassword = document.getElementById("password").value;
 
-        // Update the displayed information with the user input
         document.getElementById("firstName").value = newName;
         document.getElementById("lastName").value = newLastName;
         document.getElementById("email").value = newEmail;
@@ -199,7 +200,6 @@
 </style>
 
 <footer>
-    <br>
     <%- include('layouts/footer'); -%>
 </footer>
 
