@@ -1,38 +1,178 @@
 .title {
-    font-family: 'Trebuchet MS';
+    font-family: 'Helvetica Neue';
     text-align: center;
     color: black;
 }
 
-.navbar {
+.sign-up-form {
     display: flex;
     align-items: center;
-    background-color: gray;
-    padding-left: 25px;
-    padding-right: 25px;
-    margin: auto;
-    height: 100px;
+    justify-content: center;
+}
+
+.input-container {
+    position: relative;
+    display: inline-block;
+}
+
+.submit-button {
+    position: absolute;
+    right: 15px;
+    top: 51%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid #bdbdbd;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    background-color: transparent;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #e0e0e0;
+    border-color: #999;
+}
+
+.submit-button img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.input-box {
+    border: 1px solid #86868b;
+    background-color: hsla(0,0%,100%,.8);
+    border-radius: 12px;
+    font-size: 18px;
+    padding: 16px;
+    width: 480px;
+    height: 15px;
+    font-family: "Helvetica Neue";
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;                                                  
+    display: flex;
+    flex-direction: column;
+    font-family: 'Helvetica Neue';
+}
+
+.fade-in-container-a {
+    opacity: 0; 
+    animation: fadeIn 0.7s ease-in-out forwards; 
+}
+
+.fade-in-container {
+    opacity: 0; 
+    animation: fadeIn 0.4s ease-in-out forwards; 
+}
+
+.fade-first {
+    opacity: 0;
+    animation: fadeIn 0.7s ease-in-out forwards;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.7s ease-in-out forwards;
+  }
+
+.fade-after {
+    opacity: 0;
+    animation: fadeIn 0.4s ease-in-out forwards;
+    animation-delay: 0.7s;
+}
+
+@keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-0.5%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; 
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.navbar {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding-left: 12vw;
+    padding-right: 12vw;
+    height: 75px;
+    width: 100vw;
+}
+
+.navbar-element {
+    text-decoration: none;
+    display: inline;
+    text-align: center;
+    padding-left: 16px;
+    padding-right: 16px;
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 16px; 
+    transition: color 0.2s ease; 
+}
+
+.important-navbar-element {
+    text-decoration: none;
+    display: inline;
+    text-align: center;
+    padding-left: 16px;
+    padding-right: 16px;
+    color: #00B4D8;
+    font-size: 16px; 
+    transition: color 0.2s ease; 
+}
+
+.navbar-element:hover {
+    color: #CAF0F8;
+}
+
+.important-navbar-element:hover {
+    color: #CAF0F8;
+}
+
+footer {
+    margin-top: auto;
+    margin-bottom: 2vh; 
+}
+
+.footer {
+    background-color: white;
+    padding-left: 13vw;
+    padding-right: 13vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .footer-img {
     width: 35px;
     height: 35px;
-    padding-left: 15px;
     padding-right: 15px;
 }
 
-.footer {
-    display: flex;
-    align-items: center;
-    background-color: gray;
-    padding-left: 25px;
-    padding-right: 25px;
-    margin: auto;
-}
-
-.font {
-    font-family: "Trebuchet MS";
-    color: black;
+.footer-right {
+    text-align: right;
 }
 
 ul {
@@ -42,37 +182,27 @@ ul {
     overflow: hidden;
 }
 
-.navbar-element {
-    text-decoration: none;
-    display: inline;
-    transition: font-size 0.3s ease;
-    text-align: center;
-    padding-left: 16px;
-    padding-right: 16px;
-    font-family: 'Trebuchet MS';
-    color: whitesmoke;
-}
-
-.navbar-element:hover {
-    color: #d83434;
-    font-size: 22px;
+.image-slider-container {
+    padding-bottom: 50px;
 }
 
 .hyperlink {
-    color: blue;
+    color: #0066CC;
+    text-decoration: none;
 }
 
 .leftAlign {
+    display: flex;
     float: left;
 }
 
 .rightAlign {
+    display: flex;
     margin-left: auto;
     float: right;
 }
 
 .book-button {
-    font-family: 'Trebuchet MS';
     width: 400px;
     height: 150px;
     font-size: 65px;
@@ -86,7 +216,8 @@ ul {
 }
 
 .homepage-background-image {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.pixground.com/porsche-911-st-4k-wallpaper/?download-img=2k");    padding: 25px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("");    
+    padding: 25px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -111,7 +242,6 @@ ul {
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    border: 1px solid black;
     background-color: gray;
 }
 
@@ -122,31 +252,26 @@ ul {
     align-items: center;
     justify-content: center;
     text-align: center;
-    border: 1px solid black;
 }
 
 .contact-form-submit-button {
     width: 200px;
     height: 50px;
-    font-family: "Trebuchet MS";
     font-size: 20px;
 }
 
 .story-grid {
     grid-column: 2;
     padding: 5%;
-    border: 1px solid black;
 }
 
 .story-grid-title {
     text-align: center;
-    border: 1px solid black;
 }
 
 .image-grid {
     grid-column: 3;
     padding: 5%;
-    border: 1px solid black;
 }
 
 .image-grid-title {
@@ -354,7 +479,10 @@ input[type="file"] {
     }
   }
 
-
+  html {
+    visibility: visible;
+    opacity: 1;
+}
 
 
 

@@ -1,98 +1,101 @@
-<html>
+<!DOCTYPE html>
 
 <head>
     <%- include('layouts/navbar'); -%>
 </head>
 
 <body>
-    <div class="options">
-    <div class="colouredBox">
-        <input type="button" onclick="submit" id="option1" value="Select">
 
-    </div>
+    <div class = "fade-in-container">
 
-    <div class="colouredBox">
-        <input type="button" onclick="submit" id="option2" value="Select">
+        <div class="options">
+            <div class="colouredBox">
+                <input type="button" onclick="submit" id="option1" value="Select">
         
+            </div>
+        
+            <div class="colouredBox">
+                <input type="button" onclick="submit" id="option2" value="Select">
+                
+            </div>
+        
+            <div class="colouredBox">
+                <input type="button" onclick="submit" id="option3" value="Select">
+         
+        
+            </div>
+        
+            <div class="colouredBox">
+                <input type="button" onclick="submit" id="option4" value="Select">
+         
+        
+            </div>
+        
+            </div>
+        
+            <p id="test">hello</p>
+            <button onclick="updateArray()">submit</button>
+            <button onclick="testJSON()">submit after</button>
+            
+        
+        
+        <div>
+            <button onclick="updateCalendar(0)">Previous</button>
+            <button onclick="updateCalendar(1)">Next</button>
+        </div>
+        
+        
+        <div class="calendar">
+            <div class="day">Sun</div>
+            <div class="day">Mon</div>
+            <div class="day">Tue</div>
+            <div class="day">Wed</div>
+            <div class="day">Thu</div>
+            <div class="day">Fri</div>
+            <div class="day">Sat</div>
+        
+        
+            <button id="0" class="day"></button>
+            <button id="1" class="day"></button>
+            <button id="2" class="day"></button>
+            <button id="3" class="day"></button>
+            <button id="4" class="day"></button>
+            <button id="5" class="day"></button>
+            <button id="6" class="day"></button>
+            <button id="7" class="day"></button>
+            <button id="8" class="day"></button>
+            <button id="9" class="day"></button>
+            <button id="10" class="day"></button>
+            <button id="11" class="day"></button>
+            <button id="12" class="day"></button>
+            <button id="13" class="day"></button>
+            <button id="14" class="day"></button>
+            <button id="15" class="day"></button>
+            <button id="16" class="day"></button>
+            <button id="17" class="day"></button>
+            <button id="18" class="day"></button>
+            <button id="19" class="day"></button>
+            <button id="20" class="day"></button>
+            <button id="21" class="day"></button>
+            <button id="22" class="day"></button>
+            <button id="23" class="day"></button>
+            <button id="24" class="day"></button>
+            <button id="25" class="day"></button>
+            <button id="26" class="day"></button>
+            <button id="27" class="day"></button>
+            <button id="28" class="day"></button>
+            <button id="29" class="day"></button>
+            <button id="30" class="day"></button>
+            <button id="31" class="day"></button>
+            <button id="32" class="day"></button>
+            <button id="33" class="day"></button>
+            <button id="34" class="day"></button>
+            <button id="35" class="day"></button>
+            <button id="36" class="day"></button>
+        
+        </div>
+
     </div>
-
-    <div class="colouredBox">
-        <input type="button" onclick="submit" id="option3" value="Select">
- 
-
-    </div>
-
-    <div class="colouredBox">
-        <input type="button" onclick="submit" id="option4" value="Select">
- 
-
-    </div>
-
-    </div>
-
-    <p id="test">hello</p>
-    <p id="test1">hello1</p>
-    <button onclick="updateArray()">submit</button>
-    <button onclick="testJSON()">submit after</button>
-    
-
-
-<div>
-    <button onclick="updateCalendar(0)">Previous</button>
-    <button onclick="updateCalendar(1)">Next</button>
-</div>
-
-
-<div class="calendar">
-    <div class="day">Sun</div>
-    <div class="day">Mon</div>
-    <div class="day">Tue</div>
-    <div class="day">Wed</div>
-    <div class="day">Thu</div>
-    <div class="day">Fri</div>
-    <div class="day">Sat</div>
-
-
-    <button id="0" class="day"></button>
-    <button id="1" class="day"></button>
-    <button id="2" class="day"></button>
-    <button id="3" class="day"></button>
-    <button id="4" class="day"></button>
-    <button id="5" class="day"></button>
-    <button id="6" class="day"></button>
-    <button id="7" class="day"></button>
-    <button id="8" class="day"></button>
-    <button id="9" class="day"></button>
-    <button id="10" class="day"></button>
-    <button id="11" class="day"></button>
-    <button id="12" class="day"></button>
-    <button id="13" class="day"></button>
-    <button id="14" class="day"></button>
-    <button id="15" class="day"></button>
-    <button id="16" class="day"></button>
-    <button id="17" class="day"></button>
-    <button id="18" class="day"></button>
-    <button id="19" class="day"></button>
-    <button id="20" class="day"></button>
-    <button id="21" class="day"></button>
-    <button id="22" class="day"></button>
-    <button id="23" class="day"></button>
-    <button id="24" class="day"></button>
-    <button id="25" class="day"></button>
-    <button id="26" class="day"></button>
-    <button id="27" class="day"></button>
-    <button id="28" class="day"></button>
-    <button id="29" class="day"></button>
-    <button id="30" class="day"></button>
-    <button id="31" class="day"></button>
-    <button id="32" class="day"></button>
-    <button id="33" class="day"></button>
-    <button id="34" class="day"></button>
-    <button id="35" class="day"></button>
-    <button id="36" class="day"></button>
-
-</div>
-
 
 </body>
 
