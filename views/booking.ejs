@@ -196,9 +196,13 @@
         schedule.push(month1);
         schedule.push(month2);
 
+        document.getElementById("test1").innerHTML = schedule[1][28][0];
+
+        return schedule;
+
     }
 
-    function createJSONObject() {
+    /*function createJSONObject() {
 
         let jsonObjectArray = [];
 
@@ -220,16 +224,55 @@
             jsonObjectArray.push(monthObject);
         }
 
-        return jsonObjectArray;
+        document.getElementById("test").innerHTML = jsonObjectArray[0][2][0];
+
+        return jsonObjectArray; 
+
+    } */
+
+    function createJSONTest(){
+
+        let scheduleArr = updateArray();
+
+        let jsonObjectArrayTest = {};
+        let monthArr = {};
+        let daysArr = {};
+
+        for(let i = 0; i<scheduleArr.length; i++){
+            for(let j = 0; j<scheduleArr[i].length; j++){
+
+                for(let k = 0; k<schedule[i][j]; k++){
+
+                    daysArr.push(scheduleArr[i][j][k])
+
+                }
+            }
+            monthArr.push(scheduleArr[i][j]+daysArr)
+        }
+        jsonObjectArrayTest.push(schedule[i]+monthArr);
+
+        return jsonObjectArrayTest;
+
+    }
+
+    function turnToJSON(){
 
     }
 
     function testJSON(){
-        let test = createJSONObject();
 
-        document.getElementById("test").innerHTML = test[0]["day20"];
+       let testArr = turnArrJSON();
+
+        document.getElementById("test").innerHTML = testArr[1][0][2];
 
 
+    }
+
+    function turnArrJSON(){
+        let testArray = updateArray();
+        let JSONArray = JSON.parse(JSON.stringify(testArray));
+
+        return JSONArray;
     }
 
     
