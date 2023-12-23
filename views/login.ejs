@@ -5,44 +5,66 @@
 </head>
 
 <body>
+        <h1 class="login-title">Log in to see your information.</h1>
 
-    <h1 class="login-title">Log in to see your information.</h1>
+        <h2 class="login-subtitle">Log into your account</h2>
 
-    <h2 class="login-subtitle">Log into your account</h2>
+        <div class="login-form">
 
-    <div class="login-form">
-        <form id="loginForm" action="/login-form" method="post">
+            <form id="loginForm" action="/login-form" method="post">
 
-            <div>
-                <div class="input-container">
-                    <input class="login-input-box" type="text" id="username" name="username" placeholder="Username or E-mail" required>
+                <div>
+                    <div class="input-container">
+                        <input class="login-input-box" type="text" id="username" name="username" placeholder="Username or E-mail" required>
+                    </div>
                 </div>
-            </div>
 
-            <br>
+                <br>
 
-            <div>
-                <div class="input-container">
-                    <input class="login-input-box" type="password" id="password" name="password" placeholder="Password" required>
-                    <button type="submit" class="login-button"><img src="https://i.ibb.co/DDndqQN/Untitled-design-1.png"></button>
+                <div>
+                    <div class="input-container">
+                        <input class="login-input-box" type="password" id="password" name="password" placeholder="Password" required>
+                        <button type="submit" class="login-button"><img src="https://i.ibb.co/DDndqQN/Untitled-design-1.png"></button>
+                    </div>
                 </div>
-            </div>
 
-            <br>
+                <br>
 
-            <div class="error-div">
-                <label id="userErrorLabel"></label>
-                <label id="passErrorLabel"></label>
-            </div>
+                <div class="error-div">
+                    <label id="userErrorLabel"></label>
+                    <label id="passErrorLabel"></label>
+                </div>
 
-            <br>
+                <br>
 
-            <div class="login-hyperlink">Don't have an account? <a class="hyperlink" href="/sign-up">Sign up here ↗</a></div>
+                <div class="login-hyperlink">Don't have an account? <a class="hyperlink" href="/sign-up">Sign up here ↗</a></div>
+            </form>
 
-        </form>
-    </div>
-
+        </div>
 </body>
+
+<script>
+    //Eror Label Code
+    let passError = document.getElementById("passErrorLabel");
+    let userError = document.getElementById("userErrorLabel");
+    if ("<%= passValid %>" === "false" && "<%= userValid %>" === "true" && "<%= emailValid %>" === "true") {
+        passError.textContent = "Incorrect password";
+        userError.textContent = "";
+    }
+    else if ("<%= userValid %>" === "false" && "<%= passValid %>" === "true" && "<%= emailValid %>" === "true") {
+        userError.textContent = "Username not found";
+        passError.textContent = "";  
+    }
+    else if ("<%= emailValid %>" === "false" && "<%= userValid %>" === "true" && "<%= passValid %>" === "true") {
+        userError.textContent = "E-mail not found";
+        passError.textContent = ""; 
+    }
+    else {
+        passError.textContent = "";
+        userError.textConent = "";
+    }
+    
+</script>
 
 <style>
     .input-container {
@@ -117,28 +139,8 @@
         width: 480px;
         height: 56px;
     }
+    
 </style>
-
-<script>
-    let passError = document.getElementById("passErrorLabel");
-    let userError = document.getElementById("userErrorLabel");
-    if ("<%= passValid %>" === "false" && "<%= userValid %>" === "true" && "<%= emailValid %>" === "true") {
-        passError.textContent = "Incorrect password";
-        userError.textContent = "";
-    }
-    else if ("<%= userValid %>" === "false" && "<%= passValid %>" === "true" && "<%= emailValid %>" === "true") {
-        userError.textContent = "Username not found";
-        passError.textContent = "";  
-    }
-    else if ("<%= emailValid %>" === "false" && "<%= userValid %>" === "true" && "<%= passValid %>" === "true") {
-        userError.textContent = "E-mail not found";
-        passError.textContent = ""; 
-    }
-    else {
-        passError.textContent = "";
-        userError.textConent = "";
-    }
-</script>
 
 <footer>
     <%- include('layouts/footer'); -%>

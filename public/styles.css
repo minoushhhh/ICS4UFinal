@@ -5,13 +5,28 @@
 }
 
 .navbar {
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     background-color: white;
     padding-left: 12vw;
     padding-right: 12vw;
-    margin: auto;
     height: 75px;
+}
+
+.navbar-element {
+    text-decoration: none;
+    display: inline;
+    transition: font-size 0.3s ease;
+    text-align: center;
+    padding-left: 16px;
+    padding-right: 16px;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.navbar-element:hover {
+    color: #CAF0F8;
+    font-size: 17px;
 }
 
 .footer-img {
@@ -37,22 +52,6 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-}
-
-.navbar-element {
-    text-decoration: none;
-    font-size: 18px;
-    display: inline;
-    transition: font-size 0.3s ease;
-    text-align: center;
-    padding-left: 16px;
-    padding-right: 16px;
-    color: rgba(0, 0, 0, 0.8);
-}
-
-.navbar-element:hover {
-    color: #CAF0F8;
-    font-size: 19px;
 }
 
 .hyperlink {
@@ -352,7 +351,10 @@ input[type="file"] {
     }
   }
 
-
+  html {
+    visibility: visible;
+    opacity: 1;
+}
 
 
 
