@@ -7,6 +7,7 @@
 body {
     margin: 0;
     padding: 0;
+    min-height: 100vh;                                                  
     display: flex;
     flex-direction: column;
     font-family: 'Helvetica Neue';
@@ -78,19 +79,17 @@ body {
 }
 
 footer {
-    position: relative;
-    bottom: 2vh;
+    margin-top: auto;
+    margin-bottom: 2vh; 
 }
 
 .footer {
-    margin: auto;
     background-color: white;
     padding-left: 13vw;
     padding-right: 13vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
 }
 
 .footer-img {
