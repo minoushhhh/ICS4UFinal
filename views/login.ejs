@@ -32,14 +32,12 @@
 
                 <br>
 
-                <div class="error-div">
-                    <label id="userErrorLabel"></label>
-                    <label id="passErrorLabel"></label>
-                </div>
+                <label class = "error-label" id="errorLabel"></label>
 
                 <br>
 
                 <div class="form-hyperlink">Don't have an account? <a class="hyperlink" href="/sign-up">Sign up here ↗</a></div>
+
             </form>
 
         </div>
@@ -48,38 +46,29 @@
 </body>
 
 <script>
-    //Eror Label Code
-    let passError = document.getElementById("passErrorLabel");
-    let userError = document.getElementById("userErrorLabel");
-    if ("<%= passValid %>" === "false" && "<%= userValid %>" === "true" && "<%= emailValid %>" === "true") {
-        passError.textContent = "Incorrect password";
-        userError.textContent = "";
+    let errorLabel = document.getElementById("errorLabel");
+    let loginInvalid = "<%= loginInvalid %>"; 
+
+    if (loginInvalid) {
+        errorLabel.textContent = "Invalid Credentials";
     }
-    else if ("<%= userValid %>" === "false" && "<%= passValid %>" === "true" && "<%= emailValid %>" === "true") {
-        userError.textContent = "Username not found";
-        passError.textContent = "";  
+    if (performance.navigation.type === 0 && loginInvalid) {
+        errorLabel.textContent = "";
+        loginInvalid = false;
     }
-    else if ("<%= emailValid %>" === "false" && "<%= userValid %>" === "true" && "<%= passValid %>" === "true") {
-        userError.textContent = "E-mail not found";
-        passError.textContent = ""; 
-    }
-    else {
-        passError.textContent = "";
-        userError.textConent = "";
-    }
-    
 </script>
 
 <style>
     
-    .error-div {
+    .error-label {
+        display: flex;
         padding: 10px;
-        padding-bottom: 4vh;
+        padding-bottom: 2vh;
         color: red;
-        text-align: center;
+        justify-content: center;
+        align-items: center;
     }
 
-    
     .login-subtitle {
         padding-top: 25px;
         padding-bottom: 25px;

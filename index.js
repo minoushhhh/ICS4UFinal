@@ -58,22 +58,23 @@ app.get('/sign-up', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
+  let loginInvalid = req.session.loginInvalid;
   if (req.session.username) {
     res.redirect('/');
   } else {
-    const passValid = req.session.passValid;
-    const userValid = req.session.userValid;
-    const emailValid = req.session.emailValid;
-    console.log("Variables in session " + passValid, userValid, emailValid);
-    res.render('login', { passValid, userValid, emailValid });
+    console.log("Login invalid", loginInvalid);
+    res.render('login', { loginInvalid });
   }
 });
 
 app.get('/profile', (req, res) => {
-    const userData = req.session.userData;
     console.log("Username in session:", req.session.username);
     if (req.session.username) {
+      const userData = req.session.userData;
       res.render('profile', { userData });
+    }
+    else {
+      res.redirect('/login');
     }
 });
 
@@ -189,7 +190,7 @@ async function updateDetails(formData, user, req) {
   }
 }
 
-app.post('/sign-in-form', async (req, res) => {
+app.post('/sign-up-form', async (req, res) => {
   try {
     const formData = req.body;
 
@@ -247,9 +248,7 @@ async function checkLogin(user, pass, req, res) {
       query = await details.findOne(email);
       if (query === null) {
         console.log("email not found");
-        req.session.emailValid = false;
-        req.session.passValid = true;
-        req.session.userValid = true;
+        req.session.loginInvalid = true;
         res.redirect('/login');
         return;
       }
@@ -258,9 +257,7 @@ async function checkLogin(user, pass, req, res) {
       query = await details.findOne(username);
       if (query === null) {
         console.log("user not found");
-        req.session.userValid = false;
-        req.session.passValid = true;
-        req.session.emailValid = true;
+        req.session.loginInvalid = true;
         res.redirect("/login");
         return;
       }
@@ -287,9 +284,7 @@ async function checkLogin(user, pass, req, res) {
         return;
       } else {
         console.log("Incorrect password");
-        req.session.passValid = false;
-        req.session.emailValid = true;
-        req.session.userValid = true;
+        req.session.loginInvalid = true;
         res.redirect("/login");
         return;
       }

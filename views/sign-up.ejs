@@ -11,26 +11,25 @@
     <div class="fade-in-container">
         <h1 class="title">Sign-Up</h1>
         <div class="sign-up-form">
-            <form id="signupForm" action="/sign-in-form" method="post" onsubmit="return checkPassword()">
+            <form id="signupForm" action="/sign-up-form" method="post" onsubmit="return checkFields()">
                 
                 <input type="text" id="firstName" name="firstName" class="input-box" placeholder="First name" required>
-                <span id="firstNameAlert" class="alertText"></span><br><br>
+                <br><br>
 
                 <input type="text" id="lastName" name="lastName" class="input-box" placeholder="Last name" required>
-                <span id="lastNameAlert" class="alertText"></span><br><br>
+                <br><br>
 
-                <input type="text" id="email" name="email" class="input-box" placeholder="E-mail" required> <span
-                    id="emailAlert" class="alertText"></span><br><br>
+                <input type="text" id="email" name="email" class="input-box" placeholder="E-mail" required> 
+                <span id="emailAlert" class="alertText"></span><br><br>
 
-                <input type="text" id="phoneNumber" name="phoneNumber" class="input-box" placeholder="Phone number"
-                    required> <span id="phoneNumberAlert" class="alertText"></span><br><br>
+                <input type="text" id="phoneNumber" name="phoneNumber" class="input-box" placeholder="Phone number" required> 
+                <br><br>
 
-                <input type="text" id="address" name="address" class="input-box" placeholder="Address" required> <span
-                    id="addressAlert" class="alertText"></span><br><br>
+                <input type="text" id="address" name="address" class="input-box" placeholder="Address" required> 
+                <br><br>
 
-                <input type="text" id="postalCode" name="postalCode" class="input-box" placeholder="Postal Code"
-                    required>
-                <span id="postalCodeAlert" class="alertText"></span><br><br>
+                <input type="text" id="postalCode" name="postalCode" class="input-box" placeholder="Postal Code" required>
+                <br><br>
 
                 <input type="text" id="username" name="username" class="input-box" placeholder="Username" required>
                 <span id="usernameAlert" class="alertText"></span><br><br>
@@ -41,11 +40,11 @@
                 <div class="input-container">
                     <input type="text" id="confirmPassword" name="confirmPassword" class="input-box"
                         placeholder="Confirm password" required> 
-                    <button type="submit" onclick = "checkPassword()" class="submit-button"><img
+                    <button type="submit" onclick = "checkFields()" class="submit-button"><img
                             src="https://i.ibb.co/DDndqQN/Untitled-design-1.png"></button>
                     
                 </div>
-                <span id="confirmPasswordAlert" class="alertText">Hello</span>
+                <span id="confirmPasswordAlert" class="alertText"></span>
 
             </form>
         </div>
@@ -61,28 +60,41 @@
 </body>
 
 <script>
-    let usernameAlert = document.getElementById("usernameAlert");
-    let confirmPasswordAlert = document.getElementById("confirmPasswordAlert");
-    if("<%= usernameTaken %>") {
-        usernameAlert.textContent = "Username taken";
-        confirmPasswordAlert.textContent = "";
-    }
-    else {
-        
-        confirmPasswordAlert.textContent = "";
-        usernameAlert.textContent = "";
-    }
+    function checkFields() {
+        let passwordAlert = document.getElementById("confirmPasswordAlert");
+        let emailAlert = document.getElementById("emailAlert");
 
-    function checkPassword() {
+        passwordAlert.textContent = "";
+        emailAlert.textContent = "";
+
         let password = document.getElementById("password").value;
         let confirmPassword = document.getElementById("confirmPassword").value;
 
         if (password != confirmPassword) {
-            document.getElementById("confirmPasswordAlert").innerHTML = "Passwords do not match";
+            passwordAlert.textContent = "Passwords do not match";
             return false;
         }
+        
+        const email = document.getElementById('email').value;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+        if (!emailRegex.test(email)) {
+            emailAlert.textContent = "Invalid e-mail address";
+            return false;
+        } 
+        
         return true;
+    }
+
+    let usernameAlert = document.getElementById("usernameAlert");
+    var usernameTaken = "<%= usernameTaken %>";
+
+    if (usernameTaken) {
+        usernameAlert.textContent = "Username taken";
+    }
+    if (performance.navigation.type === 0 && usernameTaken) {
+        usernameAlert.textContent = "";
+        usernameTaken = false;
     }
 </script>
 
