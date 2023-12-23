@@ -4,6 +4,58 @@
     color: black;
 }
 
+.sign-up-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-container {
+    position: relative;
+    display: inline-block;
+}
+
+.submit-button {
+    position: absolute;
+    right: 15px;
+    top: 51%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid #bdbdbd;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    background-color: transparent;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #e0e0e0;
+    border-color: #999;
+}
+
+.submit-button img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.input-box {
+    border: 1px solid #86868b;
+    background-color: hsla(0,0%,100%,.8);
+    border-radius: 12px;
+    font-size: 18px;
+    padding: 16px;
+    width: 480px;
+    height: 15px;
+    font-family: "Helvetica Neue";
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -11,6 +63,11 @@ body {
     display: flex;
     flex-direction: column;
     font-family: 'Helvetica Neue';
+}
+
+.fade-in-container-a {
+    opacity: 0; 
+    animation: fadeIn 0.7s ease-in-out forwards; 
 }
 
 .fade-in-container {
@@ -61,21 +118,37 @@ body {
     padding-left: 12vw;
     padding-right: 12vw;
     height: 75px;
+    width: 100vw;
 }
 
 .navbar-element {
     text-decoration: none;
     display: inline;
-    transition: font-size 0.3s ease;
     text-align: center;
     padding-left: 16px;
     padding-right: 16px;
     color: rgba(0, 0, 0, 0.8);
+    font-size: 16px; 
+    transition: color 0.2s ease; 
+}
+
+.important-navbar-element {
+    text-decoration: none;
+    display: inline;
+    text-align: center;
+    padding-left: 16px;
+    padding-right: 16px;
+    color: #00B4D8;
+    font-size: 16px; 
+    transition: color 0.2s ease; 
 }
 
 .navbar-element:hover {
     color: #CAF0F8;
-    font-size: 17px;
+}
+
+.important-navbar-element:hover {
+    color: #CAF0F8;
 }
 
 footer {

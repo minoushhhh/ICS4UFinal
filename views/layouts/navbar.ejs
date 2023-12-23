@@ -1,19 +1,22 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Helvetica+Neue">
 <style>html{visibility: hidden;opacity:0;}</style>
-<ul class="navbar">
-    <li class="leftAlign"><a class="navbar-element" href="/index">Home</a></li>
-    <li class="leftAlign"><a class="navbar-element" href="/booking">Book</a></li>
-    <li class="leftAlign"><a class="navbar-element" href="/estimate">Estimate Pricing</a></li>
-    <li class="leftAlign"><a class="navbar-element" href="/contact">Contact</a></li>
-    <% if (isLoggedIn) { %>
-        <div class="rightAlign">
-            <li><a class="navbar-element" href="/profile">Profile</a></li>
-            <li><a class="navbar-element" href="/logout">Log out</a></li>
-        </div>
-    <% } else { %>
-        <div class="rightAlign">
-            <li><a class="navbar-element" href="/sign-up">Sign up</a></li>
-            <li><a class="navbar-element" href="/login">Log in</a></li>
-        </div>
-    <% } %>
-</ul>
+<div class = "fade-in-container-a">
+    <ul class="navbar">
+        <li class="leftAlign"><a class="navbar-element" href="/index">Home</a></li>
+        <li class="leftAlign"><a class="navbar-element" href="/booking">Book</a></li>
+        <li class="leftAlign"><a class="navbar-element" href="/estimate">Estimate Pricing</a></li>
+        <li class="leftAlign"><a class="navbar-element" href="/contact">Contact</a></li>
+        <% if (isLoggedIn) { %>
+            <div class="rightAlign">
+                <li><a class="navbar-element" href="/profile">Profile</a></li>
+                <li><a class="important-navbar-element" href="/logout">Log out</a></li>
+            </div>
+        <% } else { %>
+            <div class="rightAlign">
+                <li><a class="navbar-element" href="/sign-up">Sign up</a></li>
+                <li><a class="important-navbar-element" href="/login">Log in</a></li>
+            </div>
+        <% } %>
+    </ul>
+</div>
+

@@ -8,34 +8,40 @@
 
 <body>
 
-    <div class = "fade-in-container font">
+    <div class="fade-in-container">
         <h1 class="title">Sign-Up</h1>
-        <form id="signupForm" action="/submit-form" method="post">
+        <div class="sign-up-form">
+            <form id="signupForm" action="/submit-form" method="post">
+                <input type="text" id="firstName" name="firstName" class="input-box" placeholder="First name" required>
+                <span id="firstNameAlert" class="alertText"></span><br><br>
+                <input type="text" id="lastName" name="lastName" class="input-box" placeholder="Last name" required>
+                <span id="lastNameAlert" class="alertText"></span><br><br>
+                <input type="text" id="email" name="email" class="input-box" placeholder="E-mail" required> <span
+                    id="emailAlert" class="alertText"></span><br><br>
+                <input type="text" id="phoneNumber" name="phoneNumber" class="input-box" placeholder="Phone number"
+                    required> <span id="phoneNumberAlert" class="alertText"></span><br><br>
+                <input type="text" id="address" name="address" class="input-box" placeholder="Address" required> <span
+                    id="addressAlert" class="alertText"></span><br><br>
+                <input type="text" id="postalCode" name="postalCode" class="input-box" placeholder="Postal Code"
+                    required>
+                <span id="postalCodeAlert" class="alertText"></span><br><br>
+                <input type="text" id="username" name="username" class="input-box" placeholder="Username" required>
+                <span id="usernameAlert" class="alertText"></span><br><br>
+                <input type="text" id="password" name="password" class="input-box" placeholder="Password" required>
+                <span id="passwordAlert" class="alertText"></span><br><br>
+                <div class="input-container">
+                    <input type="text" id="confirmPassword" name="confirmPassword" class="input-box"
+                        placeholder="Confirm password" required> <span id="confirmPasswordAlert"
+                        class="alertText"></span>
+                    <button type="submit" class="submit-button"><img
+                            src="https://i.ibb.co/DDndqQN/Untitled-design-1.png"></button>
+                </div>
+                <br><br><br>
 
-            <label for="firstName">First name: </label><br>
-            <input type="text" id="firstName" name="firstName" required> <span id="firstNameAlert" class="alertText"></span><br>
-            <label for="lastName">Last name: </label><br>
-            <input type="text" id="lastName" name="lastName" required> <span id="lastNameAlert" class="alertText"></span><br>
-            <label for="email">Email: </label><br>
-            <input type="text" id="email" name="email" required> <span id="emailAlert" class="alertText"></span><br>
-            <label for="phoneNumber">Phone Number: </label><br>
-            <input type="text" id="phoneNumber" name="phoneNumber" required> <span id="phoneNumberAlert" class="alertText"></span><br>
-            <label for="address">Address: </label><br>
-            <input type="text" id="address" name="address" required> <span id="addressAlert" class="alertText"></span><br>
-            <label for="postalCode">Postal Code: </label><br>
-            <input type="text" id="postalCode" name="postalCode" required> <span id="postalCodeAlert" class="alertText"></span><br>
-            <label for="username">Username: </label><br>
-            <input type="text" id="username" name="username" required> <span id="usernameAlert" class="alertText"></span><br>
-            <label for="password">Password: </label><br>
-            <input type="text" id="password" name="password" required> <span id="passwordAlert" class="alertText"></span><br>
-            <label for="confirmPassword">Confim Password: </label><br>
-            <input type="text" id="confirmPassword" name="confirmPassword" required> <span id="confirmPasswordAlert" class="alertText"></span><br><br>
-    
-            <button type="Submit" id="Submit" onclick="getInfo()">Submit</button><br><br>
-    
-            <span>Already have an account? Login </span><a class="hyperlink" href="/login">here</a>
-    
-        </form>
+                <span>Already have an account? </span><a class="hyperlink" href="/login">Log in here ↗</a>
+
+            </form>
+        </div>
         <br><br>
     </div>
 
