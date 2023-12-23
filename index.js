@@ -53,7 +53,8 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/sign-up', (req, res) => {
-  res.render('sign-up');
+  const usernameTaken = req.session.usernameTaken;
+  res.render('sign-up', {usernameTaken});
 });
 
 app.get('/login', (req, res) => {
@@ -188,7 +189,7 @@ async function updateDetails(formData, user, req) {
   }
 }
 
-app.post('/submit-form', async (req, res) => {
+app.post('/sign-in-form', async (req, res) => {
   try {
     const formData = req.body;
 
@@ -214,7 +215,10 @@ app.post('/submit-form', async (req, res) => {
       res.redirect('/profile');
     }
     else {
-      res.send("Username Taken");
+      req.session.usernameTaken = true;
+      console.log("username taken.");
+      res.redirect('/sign-up');
+      return;
     }
   }
   catch (error) {

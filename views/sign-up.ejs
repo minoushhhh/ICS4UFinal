@@ -11,80 +11,79 @@
     <div class="fade-in-container">
         <h1 class="title">Sign-Up</h1>
         <div class="sign-up-form">
-            <form id="signupForm" action="/submit-form" method="post">
+            <form id="signupForm" action="/sign-in-form" method="post" onsubmit="return checkPassword()">
+                
                 <input type="text" id="firstName" name="firstName" class="input-box" placeholder="First name" required>
                 <span id="firstNameAlert" class="alertText"></span><br><br>
+
                 <input type="text" id="lastName" name="lastName" class="input-box" placeholder="Last name" required>
                 <span id="lastNameAlert" class="alertText"></span><br><br>
+
                 <input type="text" id="email" name="email" class="input-box" placeholder="E-mail" required> <span
                     id="emailAlert" class="alertText"></span><br><br>
+
                 <input type="text" id="phoneNumber" name="phoneNumber" class="input-box" placeholder="Phone number"
                     required> <span id="phoneNumberAlert" class="alertText"></span><br><br>
+
                 <input type="text" id="address" name="address" class="input-box" placeholder="Address" required> <span
                     id="addressAlert" class="alertText"></span><br><br>
+
                 <input type="text" id="postalCode" name="postalCode" class="input-box" placeholder="Postal Code"
                     required>
                 <span id="postalCodeAlert" class="alertText"></span><br><br>
+
                 <input type="text" id="username" name="username" class="input-box" placeholder="Username" required>
                 <span id="usernameAlert" class="alertText"></span><br><br>
+
                 <input type="text" id="password" name="password" class="input-box" placeholder="Password" required>
                 <span id="passwordAlert" class="alertText"></span><br><br>
+
                 <div class="input-container">
                     <input type="text" id="confirmPassword" name="confirmPassword" class="input-box"
-                        placeholder="Confirm password" required> <span id="confirmPasswordAlert"
-                        class="alertText"></span>
-                    <button type="submit" class="submit-button"><img
+                        placeholder="Confirm password" required> 
+                    <button type="submit" onclick = "checkPassword()" class="submit-button"><img
                             src="https://i.ibb.co/DDndqQN/Untitled-design-1.png"></button>
+                    
                 </div>
-                <br><br><br>
-
-                <span>Already have an account? </span><a class="hyperlink" href="/login">Log in here ↗</a>
+                <span id="confirmPasswordAlert" class="alertText">Hello</span>
 
             </form>
         </div>
+
         <br><br>
+
+        <div class = "form-hyperlink">Already have an account? <a class="hyperlink" href="/login">Log in here ↗</a></div>
+
+        <br><br>
+
     </div>
 
 </body>
 
 <script>
-    function getInfo() {
+    let usernameAlert = document.getElementById("usernameAlert");
+    let confirmPasswordAlert = document.getElementById("confirmPasswordAlert");
+    if("<%= usernameTaken %>") {
+        usernameAlert.textContent = "Username taken";
+        confirmPasswordAlert.textContent = "";
+    }
+    else {
+        
+        confirmPasswordAlert.textContent = "";
+        usernameAlert.textContent = "";
+    }
 
-        let fieldNamesTest = ["firstName", "lastName", "email", "phoneNumber", "address", "postalCode", "username", "password", "confirmPassword"];
-
+    function checkPassword() {
         let password = document.getElementById("password").value;
         let confirmPassword = document.getElementById("confirmPassword").value;
 
         if (password != confirmPassword) {
-            document.getElementById("confirmPasswordAlert").innerHTML = "* Passwords do not match";
-            alert("Passwords do not match");
+            document.getElementById("confirmPasswordAlert").innerHTML = "Passwords do not match";
+            return false;
         }
 
-        /*
-        let email = document.getElementById("email");
-    
-        if (isValidEmail(email) == false) {
-            document.getElementById("emailAlert").innerHTML = "* Please enter a valid email address";
-        }
-        if (isValidEmail(email)) {
-            document.getElementById("emailAlert").innerHTML = "";
-        } 
-        */
-
-        let formData = {};
-
-        let fieldNames = ["firstName", "lastName", "email", "phoneNumber", "address", "postalCode", "username", "password", "confirmPassword"];
-
-        for (let i = 0; i < fieldNames.length; i++) {
-            let fieldName = fieldNames[i];
-            let fieldData = document.getElementById(fieldName).value;
-            formData[fieldName] = fieldData;
-
-        }
-
-        console.log(formData);
+        return true;
     }
-
 </script>
 
 <footer>
