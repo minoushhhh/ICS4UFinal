@@ -2,10 +2,12 @@
 <style>html{visibility: hidden;opacity:0;}</style>
 <div class = "fade-in-container-a">
     <ul class="navbar">
-        <li class="leftAlign"><a class="navbar-element" href="/index">Home</a></li>
-        <li class="leftAlign"><a class="navbar-element" href="/booking">Book</a></li>
-        <li class="leftAlign"><a class="navbar-element" href="/estimate">Estimate Pricing</a></li>
-        <li class="leftAlign"><a class="navbar-element" href="/contact">Contact</a></li>
+        <div class="leftAlign">
+            <li><a class="navbar-element" href="/index">Home</a></li>
+            <li><a class="navbar-element" href="/booking">Book</a></li>
+            <li><a class="navbar-element" href="/estimate">Estimate Pricing</a></li>
+            <li><a class="navbar-element" href="/contact">Contact</a></li>
+        </div>
         <% if (isLoggedIn) { %>
             <div class="rightAlign">
                 <li><a class="navbar-element" href="/profile">Profile</a></li>

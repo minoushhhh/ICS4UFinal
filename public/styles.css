@@ -131,10 +131,19 @@ body {
     display: flex;
     align-items: center;
     background-color: white;
-    padding-left: 12vw;
-    padding-right: 12vw;
+    margin-left: 12vw;
+    margin-right: 12vw;
     height: 75px;
-    width: 100%;
+}
+
+.leftAlign {
+    display: flex;
+    margin-right: auto;
+}
+
+.rightAlign {
+    display: flex;
+    float: right;
 }
 
 .navbar-element {
@@ -205,17 +214,6 @@ ul {
 .hyperlink {
     color: #0066CC;
     text-decoration: none;
-}
-
-.leftAlign {
-    display: flex;
-    float: left;
-}
-
-.rightAlign {
-    display: flex;
-    margin-left: auto;
-    float: right;
 }
 
 .book-button {
