@@ -17,7 +17,7 @@
 
                 <div>
                     <div class="input-container">
-                        <input class="input-box" type="text" id="username" name="username" placeholder="Username or E-mail" required autocomplete="username">
+                        <input class="input-box" type="text" id="username" name="username" placeholder="Username or email" required autocomplete="username">
                     </div>
                 </div>
 
@@ -52,7 +52,7 @@
     if (loginInvalid) {
         errorLabel.textContent = "Invalid Credentials";
     }
-    if (performance.navigation.type === 0 && loginInvalid) {
+    if (performance.navigation.type === 1 && loginInvalid) {
         errorLabel.textContent = "";
         loginInvalid = false;
     }

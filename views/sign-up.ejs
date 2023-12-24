@@ -7,9 +7,8 @@
 </head>
 
 <body>
-
     <div class="fade-in-container">
-        <h1 class="title">Sign-Up</h1>
+        <h1 class="sign-up-title">Sign-Up</h1>
         <div class="sign-up-form">
             <form id="signupForm" action="/sign-up-form" method="post" onsubmit="return checkFields()">
                 
@@ -92,7 +91,7 @@
     if (usernameTaken) {
         usernameAlert.textContent = "Username taken";
     }
-    if (performance.navigation.type === 0 && usernameTaken) {
+    if (performance.navigation.type === 1 && usernameTaken) {
         usernameAlert.textContent = "";
         usernameTaken = false;
     }

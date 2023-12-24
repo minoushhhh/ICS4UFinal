@@ -17,7 +17,7 @@
                     <img id="uploadedImage" class="uploadImg" src="" alt="Uploaded Image"
                         style="width: 500px; height: 300px; display: none;"> <br><br><br>
                 </div>
-
+                <br><br>
                 <div id="label-container"></div>
 
 
@@ -139,7 +139,7 @@
                     vtype = prediction[i].className;
                 }
             }
-            labelContainer.innerHTML = vtype;
+            labelContainer.innerHTML = "Your vehicle is a " + vtype;
             document.getElementById("big-grid").hidden = false;
             updatePrice(vtype);
         } else {
