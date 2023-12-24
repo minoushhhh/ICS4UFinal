@@ -9,25 +9,8 @@
   <div class="fade-in-container">
 
     <h1 class="title">Contact Us</h1>
-    <div class="grid-container">
 
-      <div class="form-grid">
-        <form action="/contact-form" method="post">
-          Have any questions? Submit this form:
-          <br><br>
-          <span>Subject</span>
-          <input name="subject" id="subject">
-          <br><br>
-          <span>E-mail</span>
-          <input name="email" id="email">
-          <br><br>
-          <span>Message</span>
-          <br><br>
-          <textarea name="message" id="text" class="form-input"></textarea>
-          <br><br>
-          <button class="contact-form-submit-button" type="submit">Submit</button>
-        </form>        
-      </div>
+    <div class="grid-container">
 
       <div class="story-grid">
 
@@ -36,13 +19,45 @@
         </div>
 
         <div>
-          <p>Nulla facilisi. Suspendisse sodales diam in mi hendrerit, nec finibus sapien tincidunt. Suspendisse
-            potenti.
-            Cras lacus nisl, sagittis in tempor sit amet, tincidunt eu est. Nulla auctor eget urna a tincidunt. Ut
-            feugiat laoreet libero porta viverra. Etiam elit nibh, tincidunt vitae ipsum sodales, finibus commodo lacus.
-            Morbi egestas nisi nisi, eu laoreet enim semper a. Donec rutrum libero ex, vitae auctor justo vehicula eget.
-            Nulla suscipit, arcu et interdum posuere, nulla metus dapibus arcu, vel luctus ligula sapien id massa.
-            Quisque vel pharetra metus, et accumsan quam.</p>
+          <p>Owen and Liam, two university students, stumbled upon an idea during a gym session: a car cleaning service.
+            Armed with supplies from Canadian Tire, our first attempt left a mark on a friend's driveway. Undeterred, we
+            refined our technique.
+          </p>
+          <p>
+            From those early mishaps, our venture evolved. What started as a cleaning service expanded to include
+            interior detailing and mobile car cleaning. Our story is one of resilience, growth, and turning challenges
+            into opportunities. Welcome to the journey where innovation meets determination.
+          </p>
+          <p>
+            What began as a modest venture transcended into a full-fledged business. The duo's dedication expanded their
+            services, encompassing interior detailing and introducing the convenience of mobile car cleaning. The road
+            to success, marked by trial and error, became a testament to their resilience and unwavering spirit.
+          </p>
+
+          <p>
+            Encompassing interior detailing and introducing the convenience of mobile car cleaning. The road to success,
+            marked by trial and error, became a testament to their resilience and unwavering spirit.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="form-grid">
+
+        <div class="form-grid-title">
+          <h2>Have any questions? Submit this form</h2>
+        </div>
+
+        <div>
+          <form action="/contact-form" method="post">
+            <input class="input-box form-input-box" name="subject" id="subject" placeholder="Subject" required>
+            <br><br>
+            <input class="input-box form-input-box" name="email" id="email" placeholder="E-mail" required>
+            <br><br>
+            <textarea name="message" id="text" class="form-input input-box" placeholder="Message" required></textarea>
+            <br><br>
+            <button class="contact-form-submit-button" type="submit">Submit</button>
+          </form>
         </div>
 
       </div>
@@ -54,15 +69,32 @@
         </div>
 
         <div class="image-grid-content">
-          <p>Liam Zhan <img src="images/wiam.png" class="portrait"> </p>
-          <p>Owen Huang <img src="images/owen.png" class="portrait"> </p>
+          <div class="crew-member">
+            <img src="images/wiam.png" class="portrait">
+            <div class="crew-member-text">
+              <p>Meet <strong>Liam Zhan</strong>, a visionary entrepreneur turning challenges into opportunities. His
+                business journey with partner Owen Huang began as a simple idea during a gym session. Fueled by
+                determination and innovation. Liam transforms their car cleaning.</p>
+            </div>
+          </div>
+
+          <br>
+
+          <div class="crew-member">
+            <img src="images/owen.png" class="portrait">
+            <div class="crew-member-text">
+              <p>Introducing <strong>Owen Huang</strong>, a dynamic entrepreneur with a relentless pursuit of success.
+                Alongside partner Liam Zhan, Owen initiated a car detailing venture fueled by shared interests. His
+                strategic mindset and hands-on approach have been crucial.</p>
+            </div>
+          </div>
+
         </div>
 
       </div>
 
-    </div>
 
-  </div>
+    </div>
 
 </body>
 
