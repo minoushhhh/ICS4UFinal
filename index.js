@@ -54,7 +54,7 @@ app.get('/contact', (req, res) => {
 
 app.get('/sign-up', (req, res) => {
   const usernameTaken = req.session.usernameTaken;
-  res.render('sign-up', {usernameTaken});
+  res.render('sign-up', { usernameTaken });
 });
 
 app.get('/login', (req, res) => {
@@ -68,14 +68,14 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-    console.log("Username in session:", req.session.username);
-    if (req.session.username) {
-      const userData = req.session.userData;
-      res.render('profile', { userData });
-    }
-    else {
-      res.redirect('/login');
-    }
+  console.log("Username in session:", req.session.username);
+  if (req.session.username) {
+    const userData = req.session.userData;
+    res.render('profile', { userData });
+  }
+  else {
+    res.redirect('/login');
+  }
 });
 
 app.get('/logout', (req, res) => {
@@ -94,8 +94,8 @@ app.post('/login-form', async (req, res) => {
     const user = req.body.username + "";
     const pass = req.body.password + "";
 
-    await checkLogin(user, pass, req, res);   
-    
+    await checkLogin(user, pass, req, res);
+
   }
   catch (error) {
     console.error(error);
@@ -124,14 +124,14 @@ async function sendEmail(customerEmail, subject, text) {
       pass: 'lfcp rjsv xbkn vfan' //App password for mapleglowdetailing@gmail.com account.
     }
   });
-  
+
   const emailLayout = {
     from: 'mapleglowdetailing@gmail.com',
-    //to: ["owenhuang623@gmail.com", "liamzhan2006@gmail.com", "shethmohnish@gmail.com"],
+    to: ["owenhuang623@gmail.com", "liamzhan2006@gmail.com", "shethmohnish@gmail.com"],
     subject: subject,
     text: "Customer Inquiry from " + customerEmail + ": " + text
   };
-  
+
   transporter.sendMail(emailLayout, (error, info) => {
     if (error) {
       console.error('Error sending email:', error);
@@ -149,7 +149,7 @@ app.post('/contact-form', (req, res) => {
   console.log("Sent e-mail sucessfully");
 
   res.redirect("/contact");
-  
+
 });
 
 async function updateDetails(formData, user, req) {
@@ -201,7 +201,7 @@ app.post('/sign-up-form', async (req, res) => {
 
       await saveDetails(formData);
 
-      req.session.username = formData.username; 
+      req.session.username = formData.username;
       req.session.userData = {
         firstName: formData.firstName,
         lastName: formData.lastName,
@@ -212,7 +212,7 @@ app.post('/sign-up-form', async (req, res) => {
         userName: formData.username,
         passWord: formData.password,
       };
-  
+
       res.redirect('/profile');
     }
     else {
@@ -320,14 +320,12 @@ async function checkValidUsername(user) {
   const database = client.db("user-details");
   const details = database.collection("details");
 
-  let query = await details.findOne({username: user});
+  let query = await details.findOne({ username: user });
 
   if (query) {
-    //console.log("duplicate user found");
     return true;
   }
   else {
-    //console.log("user valid!");
     return false;
   }
 }
