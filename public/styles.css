@@ -55,6 +55,125 @@
     cursor: pointer;
 }
 
+.first-input-box-row {
+    display: flex;
+}
+
+.dropdown-conatiner:hover .dropdown-contents {
+    display: block;
+}
+
+.dropdown-contents {
+    margin-top: 5px;
+    display: none;
+    position: absolute;
+    margin-left: 40px;
+    background-color: #f9f9f9;
+    width: 280px;
+    padding: 10px;
+    text-align: center;
+    border: solid 1px #5aacff;
+    border-radius: 10px;
+    font-size: 18px;
+    line-height: 2;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-contents option {
+    border-bottom: solid 1px black;
+}
+.dropdown-contents > option:last-child {
+    border-bottom: none;
+}
+
+.dropdown-button:hover {
+    background-color: #5aacff;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-button {
+    text-decoration: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background-color: #0071E3;
+    color: white;
+    border: none;
+    margin-left: 40px;
+    font-size: 18px;
+    width: 300px;
+    height: 49px;
+    font-family: "Helvetica Neue";
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 1vh;
+}
+
+.password-block {
+    display: flex;
+    align-items: center;
+}
+
+.button-block {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    height: 50px;
+    width: 514px;
+    padding-bottom: 4vh;
+}
+
+.save-button-disabled {
+    width: 90px;
+    height: 40px;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 980px;
+    cursor: not-allowed;
+    background-color: #e7e7e7;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+    font-family: "Helvetica Neue";
+}
+
+.profile-page-buttons:hover {
+    background-color: #5aacff;
+}
+
+.profile-page-buttons {
+    width: 90px;
+    height: 40px;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 980px;
+    cursor: pointer;
+    background-color: #0071E3;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+    font-family: "Helvetica Neue";
+}
+
+.profile-page-buttons:hover {
+    cursor: pointer;
+}
+
+.personal-information-title {
+    font-weight: bold;
+}
+
 .submit-button:hover {
     background-color: #e0e0e0;
     border-color: #999;
@@ -64,6 +183,34 @@
     width: 40px;
     height: 40px;
     object-fit: contain;
+}
+
+.error-label {
+    display: flex;
+    padding: 10px;
+    padding-bottom: 2vh;
+    color: red;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-subtitle {
+    padding-top: 40px;
+    padding-bottom: 25px;
+    text-align: center;
+    color: #494949;
+    margin: 13px 130px 0px;
+}
+.login-title {
+    text-align: left;
+    padding-left: 13vw;
+    font-weight: bold;
+}
+.login-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35vh; 
 }
 
 .login-container {
@@ -173,9 +320,15 @@ body {
     text-align: center;
     padding-left: 16px;
     padding-right: 16px;
-    color: #00B4D8;
+    margin-left: 18px;
+    color: white;
     font-size: 18px; 
-    transition: color 0.2s ease; 
+    transition: background-color 0.2s ease; 
+    background-color: #0071E3;
+    border: none;
+    border-radius: 980px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .navbar-element:hover {
@@ -183,7 +336,7 @@ body {
 }
 
 .important-navbar-element:hover {
-    color: #CAF0F8;
+    background-color: #5aacff;
 }
 
 footer {
@@ -368,7 +521,9 @@ ul {
 }
 
 .crew-member {
+    display: flex;
     overflow: hidden;
+    align-items: center;
 }
 
 .crew-member-text {
@@ -450,6 +605,7 @@ box-shadow: none;
     border: 5px solid black;
     border-radius: 13px;
     transition: border-color 0.3s ease-in-out;
+    cursor: pointer;
 }
 
 .img-upload-div:hover{
@@ -496,7 +652,7 @@ input[type="file"] {
     background: transparent;
     border: none;
     z-index: 1;
-    cursor: default;
+    cursor: pointer;
 }
 
 .contact-form {
