@@ -10,16 +10,18 @@
 
         <div class="estimate-page-grid">
 
-            <div>
+            <div class="upload-image-container">
                 <div id="containerDiv" class="img-upload-div" style="position: relative;">
                     <button id="invisibleButton" onclick="handleButtonClick()" disabled></button>
-                    <label id="imgLabel" for="img" class="font custom-file-upload">Upload</label>
-                    <img id="uploadedImage" class="uploadImg" src="" alt="Uploaded Image"
-                        style="width: 500px; height: 300px; display: none;"> <br><br><br>
+                    <label id="imgLabel" for="img" class="custom-file-upload">Upload</label>
+                    <img id="uploadedImage" class="uploadImg" src="" alt="Uploaded Image"> <br><br><br>
                 </div>
                 <br><br>
-                <div id="label-container"></div>
-
+                <div id="label-container">Introducing our advanced custom-trained AI model! Imagine a world where your
+                    car gets the attention it deserves effortlessly. Our cutting-edge technology is designed to
+                    recognize your vehicle and provide you with a personalized estimate for detailing costs. Powered by
+                    state-of-the-art algorithms, our AI ensures accuracy and efficiency, giving you the peace of mind
+                    you deserve.</div>
 
                 <form action="/action_page.php">
                     <input type="file" id="img" name="img" accept="image/*" onchange="loadFile(event)"
@@ -32,39 +34,39 @@
                 <div class="options-grid-container">
 
                     <div class="options-grid">
-                        <div class="option">
+                        <button class="button-option">
                             <h1>Interior</h1>
-                            <p>Elevate your ride's interior with our Detailing service. We'll clean, vacuum, and
-                                restore, keeping it straightforward and effective.</p>
-                            <h2 id="p1">Price: </h2>
-                        </div>
+                            <p class="button-option-text">Elevate your ride's interior with our Detailing service. We'll
+                                clean, vacuum, and restore, keeping it straightforward and effective.</p>
+                            <h2 id="p1"></h2>
+                        </button>
                     </div>
 
                     <div class="options-grid">
-                        <div class="option">
+                        <button class="button-option">
                             <h1>Exterior</h1>
-                            <p>Boost your car's street appeal with our Exterior Detailing. A simple wash, wax, and buff
-                                to make it shine without unnecessary frills.</p>
-                            <h2 id="p2">Price: </h2>
-                        </div>
+                            <p class="button-option-text">Boost your car's street appeal with our Exterior Detailing. A
+                                simple wash, wax, and buff to make it shine without unnecessary frills.</p>
+                            <h2 id="p2"></h2>
+                        </button>
                     </div>
 
                     <div class="options-grid">
-                        <div class="option">
+                        <button class="button-option">
                             <h1>Full Package</h1>
-                            <p>Give your vehicle an all-around refresh with our Full Detailing. No fluff, just a
-                                thorough inside-out clean for a sleek look.</p>
-                            <h2 id="p3">Price: </h2>
-                        </div>
+                            <p class="button-option-text">Give your vehicle an all-around refresh with our Full
+                                Detailing. No fluff, just a thorough inside-out clean for a sleek look.</p>
+                            <h2 id="p3"></h2>
+                        </button>
                     </div>
 
                     <div class="options-grid">
-                        <div class="option">
+                        <button class="button-option">
                             <h1>Headlight Polish</h1>
-                            <p>Enhance your night driving visibility with our Headlight Polishing. Clearing up
-                                headlights without the fuss, it's a simple and effective solution.</p>
-                            <h2 id="p4">Price: </h2>
-                        </div>
+                            <p class="button-option-text">Enhance your night driving visibility with our Headlight
+                                Polishing. Clearing up headlights without the fuss.</p>
+                            <h2 id="p4"></h2>
+                        </button>
                     </div>
 
                 </div>
@@ -141,6 +143,7 @@
             }
             labelContainer.innerHTML = "Your vehicle is a " + vtype;
             document.getElementById("big-grid").hidden = false;
+
             updatePrice(vtype);
         } else {
             alert("Image element not found.");
@@ -167,10 +170,10 @@
             factor = 1.75;
         }
 
-        p1.innerHTML = "Price: $" + factor * 100;
-        p2.innerHTML = "Price: $" + factor * 100;
-        p3.innerHTML = "Price: $" + factor * 200;
-        p4.innerHTML = "Price: $" + factor * 50;
+        p1.innerHTML = "$" + factor * 100;
+        p2.innerHTML = "$" + factor * 100;
+        p3.innerHTML = "$" + factor * 200;
+        p4.innerHTML = "$" + factor * 50;
     }
 </script>
 
