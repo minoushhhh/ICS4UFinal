@@ -2,6 +2,7 @@
 
 <head>
   <%- include('layouts/navbar'); -%>
+  <title>Contact Us</title>
 </head>
 
 <body>
@@ -49,14 +50,14 @@
         </div>
 
         <div>
-          <form action="/contact-form" method="post">
+          <form id = "contact-form" action="/contact-form" method="post">
             <input class="input-box form-input-box" name="subject" id="subject" placeholder="Subject" required>
             <br><br>
             <input class="input-box form-input-box" name="email" id="email" placeholder="E-mail" required>
             <br><br>
             <textarea name="message" id="text" class="form-input input-box" placeholder="Message" required></textarea>
             <br><br>
-            <button class="contact-form-submit-button" type="submit">Submit</button>
+            <button class="contact-form-submit-button" type="submit" onclick = "popup()">Submit</button>
           </form>
         </div>
 
@@ -93,13 +94,25 @@
 
       </div>
 
-
     </div>
 
-</body>
+  </div>
 
-<footer>
-  <%- include('layouts/footer'); -%>
-</footer>
+  <script>
+    const subject = document.getElementById("subject");
+    const email = document.getElementById("email");
+    const text = document.getElementById("text");
+    function popup() {
+      if (subject.value !== "" && email.value !== "" && text.value !== "") {
+        alert("Form submitted successfully.");
+      }
+    }
+  </script>
+  
+  <footer>
+    <%- include('layouts/footer'); -%>
+  </footer>
+
+</body>
 
 </html>

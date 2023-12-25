@@ -4,128 +4,62 @@
     <%- include('layouts/navbar'); -%>
 </head>
 
+<!-- Image compairason slider from https://github.com/sneas/img-comparison-slider -->
+<script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" />
+
 <body>
 
-<div class = "fade-in-container">
+    <div class="fade-in-container">
 
-    <div class="homepage-background-image">
+        <h1 class="homepage-title">Maple Glow Car Detailing</h1>
 
-        <h1 class="title">Maple Glow Car Detailing</h1>
+        <div class="homepage-background-image">
 
-        <div class="homepage-grid">
-            <div id="text" class="font home-text-grid-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Cras in
-                augue et odio
-                fermentum fermentum. Proin quis leo nisl. Curabitur elementum rutrum feugiat. Sed sit amet orci
-                sagittis,
-                viverra neque at, vestibulum tortor. Phasellus quis tempor dolor. Praesent elementum scelerisque mi, eu
-                lacinia metus blandit eget. Nulla dapibus tellus laoreet porta dictum. Nam ut arcu erat. In hac
-                habitasse
-                platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-                himenaeos.
-                In eget velit congue velit sollicitudin imperdiet eget sit amet ante.
-                Nulla facilisi. Suspendisse sodales diam in mi hendrerit, nec finibus sapien tincidunt. Suspendisse
-                potenti.
-                Cras lacus nisl, sagittis in tempor sit amet, tincidunt eu est. Nulla auctor eget urna a tincidunt. Ut
-                feugiat laoreet libero porta viverra. Etiam elit nibh, tincidunt vitae ipsum sodales, finibus commodo
-                lacus.
-                Morbi egestas nisi nisi, eu laoreet enim semper a. Donec rutrum libero ex, vitae auctor justo vehicula
-                eget.
-                Nulla suscipit, arcu et interdum posuere, nulla metus dapibus arcu, vel luctus ligula sapien id massa.
-                Quisque vel pharetra metus, et accumsan quam.
-            </div>
+            <div class="homepage-grid">
+                <div id="text" class="home-text-grid-item">
+                    Welcome to Maple Glow Car Detailing, where your vehicle receives unparalleled care and attention.
+                    Our passion for perfection drives us to deliver exceptional car detailing services, transforming
+                    your ride into a masterpiece. From meticulous exterior cleaning to luxurious interior detailing,
+                    we offer a range of services tailored to meet the unique needs of your vehicle.
+                    Experience the difference of Maple Glow, where innovation meets determination.
+                </div>
 
-            <div class="home-button-grid-item">
-                <a href="/booking"><button class="book-button" type="button">Book Now!</button></a>
+                <div class="home-button-grid-item">
+                    <a href="/booking"><button class="book-button" type="button">Book Now!</button></a>
+                </div>
+
             </div>
 
         </div>
 
-    </div>
+        <h1 class="slider-title">Before and After Pictures</h1>
 
-    <div class = "image-slider-container">
+        <div class="homepage-comparison-slider">
 
-        <h2 class="slider-title font">Before and After Pictures</h2>
+            <img-comparison-slider class="slider-focus">
+                <img slot="first" class="slider-image" src="images/headlight_before.png">
+                <img slot="second" class="slider-image" src="images/headlight_after.png">
+                <svg slot="handle" xmlns="http://www.w3.org/2000/svg" width="100" viewBox="-8 -3 16 6">
+                    <path stroke="#fff" d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2"
+                        stroke-width="1" fill="#fff" vector-effect="non-scaling-stroke"></path>
+                </svg>
+            </img-comparison-slider>
 
-        <div class="img-comp-container">
-
-            <div class="img-comp-img">
-                <img src="https://i.ibb.co/ThnTJPD/image.png" width="500" height="300">
-            </div>
-
-            <div class="img-comp-img img-comp-overlay">
-                <img src="https://i.ibb.co/vDH5dM4/image.png" width="500" height="300">
-            </div>
+            <img-comparison-slider class="slider-focus">
+                <img slot="first" class="slider-image" src="images/wheel-before.png">
+                <img slot="second" class="slider-image" src="images/wheel-after.png">
+                <svg slot="handle" xmlns="http://www.w3.org/2000/svg" width="100" viewBox="-8 -3 16 6">
+                    <path stroke="#fff" d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2"
+                        stroke-width="1" fill="#fff" vector-effect="non-scaling-stroke"></path>
+                </svg>
+            </img-comparison-slider>
 
         </div>
 
     </div>
-
-</div>
 
 </body>
-
-<script>
-    function initComparisons() {
-        var x, i;
-        x = document.getElementsByClassName("img-comp-overlay");
-
-        for (i = 0; i < x.length; i++) {
-            compareImages(x[i]);
-        }
-
-        function compareImages(img) {
-            var slider, img, clicked = 0, w, h;
-            w = img.offsetWidth;
-            h = img.offsetHeight;
-            img.style.width = (w / 2) + "px";
-            slider = document.createElement("DIV");
-            slider.setAttribute("class", "img-comp-slider");
-            img.parentElement.insertBefore(slider, img);
-            slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
-            slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
-            slider.addEventListener("mousedown", slideReady);
-            window.addEventListener("mouseup", slideFinish);
-            slider.addEventListener("touchstart", slideReady);
-            window.addEventListener("touchend", slideFinish);
-
-            function slideReady(e) {
-                e.preventDefault();
-                clicked = 1;
-                window.addEventListener("mousemove", slideMove);
-                window.addEventListener("touchmove", slideMove);
-            }
-
-            function slideFinish() {
-                clicked = 0;
-            }
-
-            function slideMove(e) {
-                var pos;
-                if (clicked == 0) return false;
-                pos = getCursorPos(e)
-                if (pos < 0) pos = 0;
-                if (pos > w) pos = w;
-                slide(pos);
-            }
-
-            function getCursorPos(e) {
-                var a, x = 0;
-                e = (e.changedTouches) ? e.changedTouches[0] : e;
-                a = img.getBoundingClientRect();
-                x = e.pageX - a.left;
-                x = x - window.pageXOffset;
-                return x;
-            }
-
-            function slide(x) {
-                img.style.width = x + "px";
-                slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
-            }
-        }
-    }
-    initComparisons();
-</script>
 
 <footer>
     <%- include('layouts/footer'); -%>

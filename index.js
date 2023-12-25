@@ -116,7 +116,7 @@ app.post('/save-form', async (req, res) => {
   }
 });
 
-async function sendEmail(userEmail, subject, text) {
+async function sendEmail(customerEmail, subject, text) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -127,9 +127,9 @@ async function sendEmail(userEmail, subject, text) {
   
   const emailLayout = {
     from: 'mapleglowdetailing@gmail.com',
-    to: userEmail,
+    //to: ["owenhuang623@gmail.com", "liamzhan2006@gmail.com", "shethmohnish@gmail.com"],
     subject: subject,
-    text: text
+    text: "Customer Inquiry from " + customerEmail + ": " + text
   };
   
   transporter.sendMail(emailLayout, (error, info) => {
@@ -141,14 +141,14 @@ async function sendEmail(userEmail, subject, text) {
 
 app.post('/contact-form', (req, res) => {
   const subject = req.body.subject;
-  const email = req.body.email;
   const message = req.body.message;
+  const customerEmail = req.body.email;
 
-  sendEmail(email, subject, message);
+  sendEmail(customerEmail, subject, message);
 
-  console.log("Sent e-mail sucessfully to: " + email);
+  console.log("Sent e-mail sucessfully");
 
-  res.redirect('/contact');
+  res.redirect("/contact");
   
 });
 
@@ -184,7 +184,7 @@ async function updateDetails(formData, user, req) {
     }
   } catch (error) {
     console.error("Error updating details:", error);
-    throw error; // Rethrow the error to handle it in the calling function
+    throw error;
   } finally {
     await client.close();
   }
