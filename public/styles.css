@@ -4,6 +4,13 @@
     color: black;
 }
 
+.homepage-title {
+    font-family: 'Helvetica Neue';
+    text-align: center;
+    color: black;
+    padding-bottom: 2%;
+}
+
 .sign-up-title {
     text-align: center;
     padding-bottom: 2.5vh;
@@ -59,6 +66,10 @@
     object-fit: contain;
 }
 
+.login-container {
+    margin-top: 4vh;
+}
+
 .input-box {
     border: 1px solid #86868b;
     background-color: hsla(0,0%,100%,.8);
@@ -77,6 +88,7 @@ body {
     min-height: 100vh;                  
     min-width: 100vw;                                
     display: flex;
+    overflow-x: hidden;
     flex-direction: column;
     font-family: 'Helvetica Neue';
 }
@@ -87,8 +99,6 @@ body {
 }
 
 .fade-in-container {
-    padding-left: 12vw;
-    padding-right: 12vw;
     opacity: 0; 
     animation: fadeIn 0.4s ease-in-out forwards; 
 }
@@ -224,24 +234,33 @@ ul {
 .book-button {
     width: 400px;
     height: 150px;
-    font-size: 65px;
-    border-radius: 15px;
+    font-size: 55px;
+    border-radius: 980px;
     color:whitesmoke;
-    background-color: gray;
+    border: none;
+    background-color: #0071E3;
+    font-family: "Helvetica Neue";
+    transition: background-color 0.3s ease;
+    cursor: pointer;
 }
 
 .book-button:hover {
-    background-color:red;
+    background-color:#5aacff;
 }
 
 .homepage-background-image {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("");    
+    background-image: linear-gradient(rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 0.9)), url("https://www.hdcarwallpapers.com/walls/porsche_911_st_2023_4k-HD.jpg");    
     padding: 25px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    height: auto;
+    padding-left: 12vw;
+    padding-right: 12vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 300px;
 }
 
 .story-grid-title,
@@ -260,17 +279,31 @@ ul {
 }
 
 .home-text-grid-item {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.5;
+    align-items: center;
+    color: rgb(224, 224, 224);
+    text-align: center;
+    font-size: 25px;
     grid-column: 1
 }
 
 .home-button-grid-item {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     grid-column: 2
 }
 
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    background-color: white;
+    padding-left: 9vw;
+    padding-right: 9vw;
+    padding-bottom: 2vh;
 }
 
 .form-grid {
@@ -335,11 +368,11 @@ ul {
 }
 
 .crew-member {
-    overflow: hidden; /* Clear the float */
+    overflow: hidden;
 }
 
 .crew-member-text {
-    overflow: hidden; /* Clear the float */
+    overflow: hidden;
 }
 
 .portrait {
@@ -347,6 +380,7 @@ ul {
     width: 180px;
     border-radius: 20px;
     border: solid 4px #0071E3;
+    background-color:#5aacff;
     float: left;
     margin-right: 10px;
 }
@@ -386,44 +420,35 @@ ul {
     cursor: pointer;
 }
 
-/* Image Slider on Homepage*/
+img-comparison-slider {
+    --divider-width: 2px;
+    --divider-color: #fff;
+}
+
+.slider-image {
+    border-radius: 5px;
+    border: 3px solid #d8d8d8;
+    max-width: 700px;
+    max-height: 400px;
+    background-color:rgb(236, 236, 236);
+}
 
 .slider-title {
+    padding: 2%;
+    text-align: center;
+}
+
+.homepage-comparison-slider {
     display: flex;
+    gap: 80px;
     justify-content: center;
-    background-color: gray;
-    padding: 25px;
-    margin: auto;
+    padding-bottom: 4%;
+    padding-top: 1%;
 }
 
-.img-comp-container {
-    margin: auto;
-    position: relative;
-    width: 500px;
-    height: 300px;
-    border: 5px solid black;
-    margin-top: 40px;
-}
-
-.img-comp-img {
-    width: 500px;
-    height: 300px;
-    overflow: hidden;
-    position: absolute;
-}
-
-.img-comp-img img {
-    display: block;
-}
-
-.img-comp-slider {
-    position: absolute;
-    z-index: 9;
-    cursor: ew-resize;
-    width: 20px;
-    height: 20px;
-    border-radius: 10px;
-    background-color: red;
+.slider-focus:focus {
+outline: none;
+box-shadow: none;
 }
 
 .img-upload-div {
