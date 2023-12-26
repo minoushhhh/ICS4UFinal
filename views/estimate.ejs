@@ -10,7 +10,7 @@
 
         <div class="estimate-page-grid">
 
-            <div class="upload-image-container">
+            <div id = "upload-image-container" class="upload-image-container">
                 <div id="containerDiv" class="img-upload-div" style="position: relative;">
                     <button id="invisibleButton" onclick="handleButtonClick()" disabled></button>
                     <label id="imgLabel" for="img" class="custom-file-upload">Upload</label>
@@ -88,9 +88,14 @@
 </body>
 
 <style>
+    .move-image-upload {
+        transform: translateX(-30%);
+        position: absolute;
+        left: 30%;
+    }
     .hidden-label {
         opacity: 0;
-        transition: all 0.5s;
+        transition: opacity 1s;
     }
     .show-label {
         opacity: 1;
@@ -122,6 +127,10 @@
 
 <script>
     showLabel();
+    function moveUploadImage() {
+        const upload = document.getElementById("upload-image-container");
+        upload.classList.add("move-image-upload");
+    }
     function showLabel() {
         const label = document.getElementById("label-container");
         label.classList.add("show-label");
@@ -131,7 +140,10 @@
         label.classList.remove("show-label");
     }
     var loadFile = function (event) {
-        document.getElementById("big-grid").removeAttribute('hidden');
+        if (document.getElementById("big-grid").visibily !== 'hidden') {
+            moveUploadImage();
+            document.getElementById("big-grid").removeAttribute('hidden');
+        }
         hideLabel();
         var image = document.getElementById("uploadedImage");
         document.getElementById("invisibleButton").style.cursor = "pointer";
@@ -207,6 +219,8 @@
             updateOptions();
             showLabel();
             updatePrice(vtype);
+            labelContainer.style.fontSize = "40px";
+            labelContainer.style.fontWeight = "bold";
             labelContainer.innerHTML = "Your vehicle is a " + vtype;
             
         } else {
