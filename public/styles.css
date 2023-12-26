@@ -104,7 +104,7 @@
     font-size: 18px;
     width: 300px;
     height: 49px;
-    font-family: "Roboto";
+    font-family: "Roboto", "Helvetica Neue";
 }
 
 .profile-container {
@@ -143,7 +143,7 @@
     color: white;
     border: none;
     transition: background-color 0.3s ease;
-    font-family: "Roboto";
+    font-family: "Roboto", "Helvetica Neue";
 }
 
 .profile-page-buttons:hover {
@@ -164,7 +164,7 @@
     color: white;
     border: none;
     transition: background-color 0.3s ease;
-    font-family: "Roboto";
+    font-family: "Roboto", "Helvetica Neue";
 }
 
 .profile-page-buttons:hover {
@@ -229,7 +229,7 @@
     padding: 16px;
     width: 480px;
     height: 15px;
-    font-family: "Roboto";
+    font-family: "Roboto", "Helvetica Neue";
 }
 
 body {
@@ -397,7 +397,7 @@ ul {
     color: whitesmoke;
     border: none;
     background-color: #0071E3;
-    font-family: "Roboto";
+    font-family: "Roboto", "Helvetica Neue";
     transition: background-color 0.3s ease;
     cursor: pointer;
 }
@@ -492,7 +492,7 @@ ul {
     color: white;
     border: none;
     transition: background-color 0.3s ease;
-    font-family: "Roboto";
+    font-family: "Roboto", "Helvetica Neue";
 }
 
 .contact-form-submit-button:hover {
@@ -716,7 +716,7 @@ input[type="file"] {
     color: whitesmoke;
     border: none;
     background-color: #0071E3;
-    font-family: "Roboto";
+    font-family: "Roboto", "Helvetica Neue";
     transition: background-color 0.3s ease;
     cursor: pointer;
 }

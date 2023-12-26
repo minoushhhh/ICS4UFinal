@@ -17,7 +17,7 @@
                     <img id="uploadedImage" class="uploadImg" src="" alt="Uploaded Image"> <br><br><br>
                 </div>
                 <br><br>
-                <div id="label-container">Introducing our advanced custom-trained AI model! Imagine a world where your
+                <div class = "hidden-label" id="label-container">Introducing our advanced custom-trained AI model! Imagine a world where your
                     car gets the attention it deserves effortlessly. Our cutting-edge technology is designed to
                     recognize your vehicle and provide you with a personalized estimate for detailing costs. Powered by
                     state-of-the-art algorithms, our AI ensures accuracy and efficiency, giving you the peace of mind
@@ -33,7 +33,7 @@
 
                 <div class="options-grid-container">
 
-                    <div class="options-grid">
+                    <div class="options-grid hidden-option">
                         <a href="/booking">
                            <button class="button-option">
                             <h1>Interior</h1>
@@ -44,7 +44,7 @@
                         </a>
                     </div>
 
-                    <div class="options-grid">
+                    <div class="options-grid hidden-option">
                         <a href="/booking">
                             <button class="button-option">
                             <h1>Exterior</h1>
@@ -55,7 +55,7 @@
                         </a>
                     </div>
 
-                    <div class="options-grid">
+                    <div class="options-grid hidden-option">
                         <a href="/booking">
                             <button class="button-option">
                                 <h1>Full Package</h1>
@@ -66,7 +66,7 @@
                         </a>
                     </div>
 
-                    <div class="options-grid">
+                    <div class="options-grid hidden-option">
                         <a href="/booking">
                             <button class="button-option">
                             <h1>Headlight Polish</h1>
@@ -87,11 +87,52 @@
 
 </body>
 
+<style>
+    .hidden-label {
+        opacity: 0;
+        transition: all 0.5s;
+    }
+    .show-label {
+        opacity: 1;
+    }
+    .hidden-option {
+        opacity: 0;
+        filter: blur(5px);
+        transform: translateX(-20%);
+        transition: all 0.4s;
+    }
+    .show-option {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateX(0);
+    }
+    .options-grid:nth-child(2) {
+        transition-delay: 200ms;
+    }
+    .options-grid:nth-child(3) {
+        transition-delay: 400ms;
+    }
+    .options-grid:nth-child(4) {
+        transition-delay: 600ms;
+    }
+</style>
+
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
-<script type="text/javascript">
 
+<script>
+    showLabel();
+    function showLabel() {
+        const label = document.getElementById("label-container");
+        label.classList.add("show-label");
+    }
+    function hideLabel() {
+        const label = document.getElementById("label-container");
+        label.classList.remove("show-label");
+    }
     var loadFile = function (event) {
+        document.getElementById("big-grid").removeAttribute('hidden');
+        hideLabel();
         var image = document.getElementById("uploadedImage");
         document.getElementById("invisibleButton").style.cursor = "pointer";
 
@@ -112,6 +153,8 @@
 
     var handleButtonClick = function () {
         document.getElementById("img").click();
+        hideOptions();
+        hideLabel();
     };
 
     const URLTeachable = "https://teachablemachine.withgoogle.com/models/dy0VvIqtW/";
@@ -134,10 +177,23 @@
         predictFromImage();
     }
 
+    function hideOptions() {
+        const options = document.querySelectorAll(".options-grid");
+        options.forEach(option => {
+            option.classList.remove('show-option');
+        });
+    }
+
+    function updateOptions() {
+        const options = document.querySelectorAll(".options-grid");
+        options.forEach(option => {
+            option.classList.add('show-option');
+        });
+    }
+    
     // Function to predict from the displayed image
     async function predictFromImage() {
         const imageElement = document.getElementById("uploadedImage");
-
         if (imageElement) {
             let highest = -1;
             let vtype = "";
@@ -148,10 +204,11 @@
                     vtype = prediction[i].className;
                 }
             }
-            labelContainer.innerHTML = "Your vehicle is a " + vtype;
-            document.getElementById("big-grid").hidden = false;
-
+            updateOptions();
+            showLabel();
             updatePrice(vtype);
+            labelContainer.innerHTML = "Your vehicle is a " + vtype;
+            
         } else {
             alert("Image element not found.");
         }
