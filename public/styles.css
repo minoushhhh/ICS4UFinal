@@ -1,16 +1,11 @@
-@font-face {
-    font-family: Helvetica Neue;
-    src: url(public/font);
-}
-
 .title {
-    font-family: 'Helvetica Neue';
+    font-family: 'Roboto';
     text-align: center;
     color: black;
 }
 
 .homepage-title {
-    font-family: 'Helvetica Neue';
+    font-family: 'Roboto';
     text-align: center;
     color: black;
     padding-bottom: 2%;
@@ -109,7 +104,7 @@
     font-size: 18px;
     width: 300px;
     height: 49px;
-    font-family: "Helvetica Neue";
+    font-family: "Roboto";
 }
 
 .profile-container {
@@ -148,7 +143,7 @@
     color: white;
     border: none;
     transition: background-color 0.3s ease;
-    font-family: "Helvetica Neue";
+    font-family: "Roboto";
 }
 
 .profile-page-buttons:hover {
@@ -169,7 +164,7 @@
     color: white;
     border: none;
     transition: background-color 0.3s ease;
-    font-family: "Helvetica Neue";
+    font-family: "Roboto";
 }
 
 .profile-page-buttons:hover {
@@ -234,7 +229,7 @@
     padding: 16px;
     width: 480px;
     height: 15px;
-    font-family: "Helvetica Neue";
+    font-family: "Roboto";
 }
 
 body {
@@ -245,7 +240,7 @@ body {
     display: flex;
     overflow-x: hidden;
     flex-direction: column;
-    font-family: 'Helvetica Neue';
+    font-family: 'Roboto';
 }
 
 .fade-in-container-a {
@@ -402,7 +397,7 @@ ul {
     color: whitesmoke;
     border: none;
     background-color: #0071E3;
-    font-family: "Helvetica Neue";
+    font-family: "Roboto";
     transition: background-color 0.3s ease;
     cursor: pointer;
 }
@@ -497,7 +492,7 @@ ul {
     color: white;
     border: none;
     transition: background-color 0.3s ease;
-    font-family: "Helvetica Neue";
+    font-family: "Roboto";
 }
 
 .contact-form-submit-button:hover {
@@ -721,7 +716,7 @@ input[type="file"] {
     color: whitesmoke;
     border: none;
     background-color: #0071E3;
-    font-family: "Helvetica Neue";
+    font-family: "Roboto";
     transition: background-color 0.3s ease;
     cursor: pointer;
 }
