@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Helvetica Neue;
+    src: url(public/font);
+}
+
 .title {
     font-family: 'Helvetica Neue';
     text-align: center;
@@ -83,7 +88,8 @@
 .dropdown-contents option {
     border-bottom: solid 1px black;
 }
-.dropdown-contents > option:last-child {
+
+.dropdown-contents>option:last-child {
     border-bottom: none;
 }
 
@@ -201,16 +207,18 @@
     color: #494949;
     margin: 13px 130px 0px;
 }
+
 .login-title {
     text-align: left;
     padding-left: 13vw;
     font-weight: bold;
 }
+
 .login-form {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 35vh; 
+    height: 35vh;
 }
 
 .login-container {
@@ -219,7 +227,7 @@
 
 .input-box {
     border: 1px solid #86868b;
-    background-color: hsla(0,0%,100%,.8);
+    background-color: hsla(0, 0%, 100%, .8);
     transition: background-color 0.3s ease;
     border-radius: 12px;
     font-size: 18px;
@@ -232,8 +240,8 @@
 body {
     margin: 0;
     padding: 0;
-    min-height: 100vh;                  
-    min-width: 100vw;                                
+    min-height: 100vh;
+    min-width: 100vw;
     display: flex;
     overflow-x: hidden;
     flex-direction: column;
@@ -241,13 +249,13 @@ body {
 }
 
 .fade-in-container-a {
-    opacity: 0; 
-    animation: fadeIn 0.7s ease-in-out forwards; 
+    opacity: 0;
+    animation: fadeIn 0.7s ease-in-out forwards;
 }
 
 .fade-in-container {
-    opacity: 0; 
-    animation: fadeIn 0.4s ease-in-out forwards; 
+    opacity: 0;
+    animation: fadeIn 0.4s ease-in-out forwards;
 }
 
 .fade-first {
@@ -257,7 +265,7 @@ body {
 
 .slide-in-left {
     animation: slideInLeft 0.7s ease-in-out forwards;
-  }
+}
 
 .fade-after {
     opacity: 0;
@@ -267,19 +275,21 @@ body {
 
 @keyframes slideInLeft {
     from {
-      opacity: 0;
-      transform: translateX(-1%);
+        opacity: 0;
+        transform: translateX(-1%);
     }
+
     to {
-      opacity: 1;
-      transform: translateX(0);
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
 @keyframes fadeIn {
     from {
-        opacity: 0; 
+        opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -310,8 +320,8 @@ body {
     padding-left: 16px;
     padding-right: 16px;
     color: rgba(0, 0, 0, 0.8);
-    font-size: 18px; 
-    transition: color 0.2s ease; 
+    font-size: 18px;
+    transition: color 0.2s ease;
 }
 
 .important-navbar-element {
@@ -322,8 +332,8 @@ body {
     padding-right: 16px;
     margin-left: 18px;
     color: white;
-    font-size: 18px; 
-    transition: background-color 0.2s ease; 
+    font-size: 18px;
+    transition: background-color 0.2s ease;
     background-color: #0071E3;
     border: none;
     border-radius: 980px;
@@ -341,7 +351,7 @@ body {
 
 footer {
     margin-top: auto;
-    margin-bottom: 2vh; 
+    margin-bottom: 2vh;
 }
 
 .footer {
@@ -389,7 +399,7 @@ ul {
     height: 150px;
     font-size: 55px;
     border-radius: 980px;
-    color:whitesmoke;
+    color: whitesmoke;
     border: none;
     background-color: #0071E3;
     font-family: "Helvetica Neue";
@@ -398,11 +408,11 @@ ul {
 }
 
 .book-button:hover {
-    background-color:#5aacff;
+    background-color: #5aacff;
 }
 
 .homepage-background-image {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 0.9)), url("https://www.hdcarwallpapers.com/walls/porsche_911_st_2023_4k-HD.jpg");    
+    background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("https://www.hdcarwallpapers.com/walls/porsche_911_st_2023_4k-HD.jpg");
     padding: 25px;
     background-position: center;
     background-repeat: no-repeat;
@@ -419,10 +429,10 @@ ul {
 .story-grid-title,
 .form-grid-title,
 .image-grid-title {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .homepage-grid {
@@ -432,7 +442,7 @@ ul {
 }
 
 .home-text-grid-item {
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     line-height: 1.5;
@@ -445,7 +455,7 @@ ul {
 }
 
 .home-button-grid-item {
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -536,7 +546,7 @@ ul {
     width: 180px;
     border-radius: 20px;
     border: solid 4px #0071E3;
-    background-color:#5aacff;
+    background-color: #5aacff;
     float: left;
     margin-right: 10px;
 }
@@ -577,7 +587,7 @@ img-comparison-slider {
 .slider-image {
     border-radius: 20px;
     max-height: 400px;
-    background-color:rgb(236, 236, 236);
+    background-color: rgb(236, 236, 236);
 }
 
 .slider-title {
@@ -594,8 +604,8 @@ img-comparison-slider {
 }
 
 .slider-focus:focus {
-outline: none;
-box-shadow: none;
+    outline: none;
+    box-shadow: none;
 }
 
 .img-upload-div {
@@ -609,7 +619,7 @@ box-shadow: none;
     cursor: pointer;
 }
 
-.img-upload-div:hover{
+.img-upload-div:hover {
     border: 5px solid;
     border-color: #00B4D8;
 }
@@ -630,14 +640,14 @@ box-shadow: none;
 }
 
 .custom-file-upload:hover {
-    background-color: #00B4D8; 
+    background-color: #00B4D8;
 }
 
 input[type="file"] {
     display: none;
 }
 
-.uploadImg{
+.uploadImg {
     width: 500px;
     height: 300px;
     border-radius: 6px;
@@ -659,7 +669,7 @@ input[type="file"] {
 .contact-form {
     border: 2px solid rgb(240, 240, 240);
     background-color: rgb(240, 240, 240);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);    
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -708,7 +718,7 @@ input[type="file"] {
     border-radius: 25px;
     padding: 20px;
     cursor: pointer;
-    color:whitesmoke;
+    color: whitesmoke;
     border: none;
     background-color: #0071E3;
     font-family: "Helvetica Neue";
@@ -722,8 +732,8 @@ input[type="file"] {
 
 .options-grid-container {
     display: grid;
-    grid-template-columns: 1fr 1fr; 
-    grid-template-rows: 1fr 1fr; 
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     grid-column-gap: 30px;
     max-width: 750px;
 }
@@ -733,7 +743,7 @@ input[type="file"] {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%; 
+    height: 100%;
     min-width: 280px;
     min-height: 300px;
     padding: 0;
@@ -743,11 +753,11 @@ input[type="file"] {
     border: 1px solid black;
     border-radius: 15px;
     text-align: center;
-    padding: 20px; 
+    padding: 20px;
     max-width: 300px;
 }
 
-  html {
+html {
     visibility: visible;
     opacity: 1;
 }
