@@ -4,6 +4,8 @@
     <%- include('layouts/navbar'); -%>
 </head>
 
+<!-- AI Model from Teachable Machine: https://teachablemachine.withgoogle.com/ -->
+
 <body>
     <div class="fade-in-container">
         <h1 class="title">Get an Estimate for a Detail.</h1>
@@ -86,41 +88,6 @@
 
 
 </body>
-
-<style>
-    .move-image-upload {
-        transform: translateX(-30%);
-        position: absolute;
-        left: 30%;
-    }
-    .hidden-label {
-        opacity: 0;
-        transition: opacity 1s;
-    }
-    .show-label {
-        opacity: 1;
-    }
-    .hidden-option {
-        opacity: 0;
-        filter: blur(5px);
-        transform: translateX(-20%);
-        transition: all 0.4s;
-    }
-    .show-option {
-        opacity: 1;
-        filter: blur(0px);
-        transform: translateX(0);
-    }
-    .options-grid:nth-child(2) {
-        transition-delay: 200ms;
-    }
-    .options-grid:nth-child(3) {
-        transition-delay: 400ms;
-    }
-    .options-grid:nth-child(4) {
-        transition-delay: 600ms;
-    }
-</style>
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
