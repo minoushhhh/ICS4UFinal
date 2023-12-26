@@ -51,7 +51,7 @@
         </div>
 
         <div>
-          <form class = "contact-form" id = "contact-form" action="/contact-form" method="post">
+          <form class = "contact-form" id = "contact-form" action="/contact-form" method="post" onsubmit = "return checkValidEmail()">
             <input class="input-box form-input-box" name="subject" id="subject" placeholder="Subject" required>
             <br><br>
             <input class="input-box form-input-box" name="email" id="email" placeholder="E-mail" required>
@@ -104,9 +104,21 @@
     const email = document.getElementById("email");
     const text = document.getElementById("text");
     function popup() {
-      if (subject.value !== "" && email.value !== "" && text.value !== "") {
+      if (!checkValidEmail()) {
+        alert("Invalid e-mail address provided.");
+      }
+      else if (subject.value !== "" && email.value !== "" && text.value !== "") {
         alert("Form submitted successfully.");
       }
+    }
+    function checkValidEmail() {
+      const email = document.getElementById('email').value;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(email)) {
+            return false;
+        } 
+        return true;
     }
   </script>
   
