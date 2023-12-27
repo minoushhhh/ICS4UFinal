@@ -2,6 +2,7 @@
 
 <head>
     <%- include('layouts/navbar'); -%>
+        <title>Homepage</title>
 </head>
 
 <!-- Image compairason slider from https://github.com/sneas/img-comparison-slider -->
@@ -46,7 +47,7 @@
                 </svg>
             </img-comparison-slider>
 
-            <img-comparison-slider class="slider-focus" value = "52.5">
+            <img-comparison-slider class="slider-focus" value="52.5">
                 <img slot="first" class="slider-image" src="images/wheel-before.png">
                 <img slot="second" class="slider-image" src="images/wheel-after.png">
                 <svg slot="handle" xmlns="http://www.w3.org/2000/svg" width="100" viewBox="-8 -3 16 6">
@@ -64,8 +65,8 @@
 <style>
     @media (max-width: 1294px) {
         .homepage-comparison-slider {
-          flex-direction: column;
-          align-items: center;
+            flex-direction: column;
+            align-items: center;
         }
     }
 </style>

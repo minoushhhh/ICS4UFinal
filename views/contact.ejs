@@ -2,7 +2,7 @@
 
 <head>
   <%- include('layouts/navbar'); -%>
-  <title>Contact Us</title>
+    <title>Contact Us</title>
 </head>
 
 <body>
@@ -50,14 +50,15 @@
         </div>
 
         <div>
-          <form class = "contact-form" id = "contact-form" action="/contact-form" method="post" onsubmit = "return checkValidEmail()">
+          <form class="contact-form" id="contact-form" action="/contact-form" method="post"
+            onsubmit="return checkValidEmail()">
             <input class="input-box form-input-box" name="subject" id="subject" placeholder="Subject" required>
             <br><br>
             <input class="input-box form-input-box" name="email" id="email" placeholder="E-mail" required>
             <br><br>
             <textarea name="message" id="text" class="form-input input-box" placeholder="Message" required></textarea>
             <br><br>
-            <button class="contact-form-submit-button" type="submit" onclick = "popup()">Submit</button>
+            <button class="contact-form-submit-button" type="submit" onclick="popup()">Submit</button>
           </form>
         </div>
 
@@ -114,13 +115,13 @@
       const email = document.getElementById('email').value;
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (!emailRegex.test(email)) {
-            return false;
-        } 
-        return true;
+      if (!emailRegex.test(email)) {
+        return false;
+      }
+      return true;
     }
   </script>
-  
+
   <footer>
     <%- include('layouts/footer'); -%>
   </footer>

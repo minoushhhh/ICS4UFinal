@@ -4,6 +4,7 @@
 
 <head>
     <%- include('layouts/navbar'); -%>
+        <title>Sign Up</title>
 </head>
 
 <body>
@@ -11,23 +12,25 @@
         <h1 class="sign-up-title">Sign-Up</h1>
         <div class="sign-up-form">
             <form id="signupForm" action="/sign-up-form" method="post" onsubmit="return checkFields()">
-                
+
                 <input type="text" id="firstName" name="firstName" class="input-box" placeholder="First name" required>
                 <br><br>
 
                 <input type="text" id="lastName" name="lastName" class="input-box" placeholder="Last name" required>
                 <br><br>
 
-                <input type="text" id="email" name="email" class="input-box" placeholder="E-mail" required> 
+                <input type="text" id="email" name="email" class="input-box" placeholder="E-mail" required>
                 <span id="emailAlert" class="alertText"></span><br><br>
 
-                <input type="text" id="phoneNumber" name="phoneNumber" class="input-box" placeholder="Phone number" required> 
+                <input type="text" id="phoneNumber" name="phoneNumber" class="input-box" placeholder="Phone number"
+                    required>
                 <br><br>
 
-                <input type="text" id="address" name="address" class="input-box" placeholder="Address" required> 
+                <input type="text" id="address" name="address" class="input-box" placeholder="Address" required>
                 <br><br>
 
-                <input type="text" id="postalCode" name="postalCode" class="input-box" placeholder="Postal Code" required>
+                <input type="text" id="postalCode" name="postalCode" class="input-box" placeholder="Postal Code"
+                    required>
                 <br><br>
 
                 <input type="text" id="username" name="username" class="input-box" placeholder="Username" required>
@@ -38,10 +41,10 @@
 
                 <div class="input-container">
                     <input type="text" id="confirmPassword" name="confirmPassword" class="input-box"
-                        placeholder="Confirm password" required> 
-                    <button type="submit" onclick = "checkFields()" class="submit-button"><img
+                        placeholder="Confirm password" required>
+                    <button type="submit" onclick="checkFields()" class="submit-button"><img
                             src="https://i.ibb.co/DDndqQN/Untitled-design-1.png"></button>
-                    
+
                 </div>
                 <span id="confirmPasswordAlert" class="alertText"></span>
 
@@ -50,7 +53,7 @@
 
         <br><br>
 
-        <div class = "form-hyperlink">Already have an account? <a class="hyperlink" href="/login">Log in here ↗</a></div>
+        <div class="form-hyperlink">Already have an account? <a class="hyperlink" href="/login">Log in here ↗</a></div>
 
         <br><br>
 
@@ -73,15 +76,15 @@
             passwordAlert.textContent = "Passwords do not match";
             return false;
         }
-        
+
         const email = document.getElementById('email').value;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!emailRegex.test(email)) {
             emailAlert.textContent = "Invalid e-mail address";
             return false;
-        } 
-        
+        }
+
         return true;
     }
 

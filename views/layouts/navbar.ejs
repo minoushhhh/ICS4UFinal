@@ -1,5 +1,10 @@
-<style>html{visibility: hidden;opacity:0;}</style>
-<div class = "fade-in-container-a">
+<style>
+    html {
+        visibility: hidden;
+        opacity: 0;
+    }
+</style>
+<div class="fade-in-container-a">
     <ul class="navbar">
         <div class="leftAlign">
             <li><a class="navbar-element" href="/index">Home</a></li>
@@ -12,12 +17,11 @@
                 <li><a class="navbar-element" href="/logout">Log out</a></li>
                 <li><a class="important-navbar-element" href="/profile">Profile</a></li>
             </div>
-        <% } else { %>
-            <div class="rightAlign">
-                <li><a class="navbar-element" href="/sign-up">Sign up</a></li>
-                <li><a class="important-navbar-element" href="/login">Log in</a></li>
-            </div>
-        <% } %>
+            <% } else { %>
+                <div class="rightAlign">
+                    <li><a class="navbar-element" href="/sign-up">Sign up</a></li>
+                    <li><a class="important-navbar-element" href="/login">Log in</a></li>
+                </div>
+                <% } %>
     </ul>
 </div>
-

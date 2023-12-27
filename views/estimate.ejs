@@ -2,6 +2,7 @@
 
 <head>
     <%- include('layouts/navbar'); -%>
+        <title>Estimate</title>
 </head>
 
 <!-- AI Model from Teachable Machine: https://teachablemachine.withgoogle.com/ -->
@@ -12,14 +13,15 @@
 
         <div class="estimate-page-grid">
 
-            <div id = "upload-image-container" class="upload-image-container">
+            <div id="upload-image-container" class="upload-image-container">
                 <div id="containerDiv" class="img-upload-div" style="position: relative;">
                     <button id="invisibleButton" onclick="handleButtonClick()" disabled></button>
                     <label id="imgLabel" for="img" class="custom-file-upload">Upload</label>
                     <img id="uploadedImage" class="uploadImg" src="" alt="Uploaded Image"> <br><br><br>
                 </div>
                 <br><br>
-                <div class = "hidden-label" id="label-container">Introducing our advanced custom-trained AI model! Imagine a world where your
+                <div class="hidden-label" id="label-container">Introducing our advanced custom-trained AI model! Imagine
+                    a world where your
                     car gets the attention it deserves effortlessly. Our cutting-edge technology is designed to
                     recognize your vehicle and provide you with a personalized estimate for detailing costs. Powered by
                     state-of-the-art algorithms, our AI ensures accuracy and efficiency, giving you the peace of mind
@@ -37,23 +39,25 @@
 
                     <div class="options-grid hidden-option">
                         <a href="/booking">
-                           <button class="button-option">
-                            <h1>Interior</h1>
-                            <p class="button-option-text">Elevate your ride's interior with our Detailing service. We'll
-                                clean, vacuum, and restore, keeping it straightforward and effective.</p>
-                            <h2 id="p1"></h2>
-                        </button> 
+                            <button class="button-option">
+                                <h1>Interior</h1>
+                                <p class="button-option-text">Elevate your ride's interior with our Detailing service.
+                                    We'll
+                                    clean, vacuum, and restore, keeping it straightforward and effective.</p>
+                                <h2 id="p1"></h2>
+                            </button>
                         </a>
                     </div>
 
                     <div class="options-grid hidden-option">
                         <a href="/booking">
                             <button class="button-option">
-                            <h1>Exterior</h1>
-                            <p class="button-option-text">Boost your car's street appeal with our Exterior Detailing. A
-                                simple wash, wax, and buff to make it shine without unnecessary frills.</p>
-                            <h2 id="p2"></h2>
-                        </button>
+                                <h1>Exterior</h1>
+                                <p class="button-option-text">Boost your car's street appeal with our Exterior
+                                    Detailing. A
+                                    simple wash, wax, and buff to make it shine without unnecessary frills.</p>
+                                <h2 id="p2"></h2>
+                            </button>
                         </a>
                     </div>
 
@@ -71,12 +75,12 @@
                     <div class="options-grid hidden-option">
                         <a href="/booking">
                             <button class="button-option">
-                            <h1>Headlight Polish</h1>
-                            <p class="button-option-text">Enhance your night driving visibility with our Headlight
-                                Polishing. Clearing up headlights without the fuss.</p>
-                            <h2 id="p4"></h2>
-                        </button>
-                        </a>                      
+                                <h1>Headlight Polish</h1>
+                                <p class="button-option-text">Enhance your night driving visibility with our Headlight
+                                    Polishing. Clearing up headlights without the fuss.</p>
+                                <h2 id="p4"></h2>
+                            </button>
+                        </a>
                     </div>
 
                 </div>
@@ -169,7 +173,7 @@
             option.classList.add('show-option');
         });
     }
-    
+
     // Function to predict from the displayed image
     async function predictFromImage() {
         const imageElement = document.getElementById("uploadedImage");
@@ -189,7 +193,7 @@
             labelContainer.style.fontSize = "40px";
             labelContainer.style.fontWeight = "bold";
             labelContainer.innerHTML = "Your vehicle is a " + vtype;
-            
+
         } else {
             alert("Image element not found.");
         }
