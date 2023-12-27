@@ -418,7 +418,7 @@ ul {
     display: flex;
     justify-content: center;
     align-content: center;
-    height: 300px;
+    height: 100%;
 }
 
 .story-grid-title,
@@ -444,7 +444,7 @@ ul {
     align-items: center;
     color: rgb(224, 224, 224);
     text-align: center;
-    font-size: 25px;
+    font-size: 1.5vw;
     max-height: 100%;
     grid-column: 1
 }
@@ -463,6 +463,12 @@ ul {
     padding-left: 9vw;
     padding-right: 9vw;
     padding-bottom: 2vh;
+}
+
+@media (max-width: 1672px) {
+    .grid-container {
+      display: block;/* Set a single column for smaller screens */
+    }
 }
 
 .form-grid {
@@ -596,6 +602,8 @@ img-comparison-slider {
     justify-content: center;
     padding-bottom: 4%;
     padding-top: 0.5%;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .slider-focus:focus {
@@ -692,7 +700,7 @@ input[type="file"] {
 #label-container {
     text-align: center;
     padding-top: 1.5vh;
-    font-size: 17px;
+    font-size: 2vh;
     line-height: 1.5;
 }
 
