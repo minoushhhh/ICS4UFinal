@@ -475,11 +475,11 @@ ul {
     align-items: center;
   }
   .image-grid {
-    max-width: 40%;
+    max-width: 80%;
     align-items: center;
   }
   .story-grid {
-    max-width: 40%;
+    max-width: 80%;
   }
 }
 
