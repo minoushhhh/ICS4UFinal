@@ -372,14 +372,14 @@ async function updateDocument() {
     const update = {
       $set: {
         "Schedule.0": Array.from({ length: 31 }, (_, index) => [
-          [String(index * 3 + 1), true],
-          [String(index * 3 + 2), true],
-          [String(index * 3 + 3), true]
+          [String(index * 3 + 1), true, "none", "none"],
+          [String(index * 3 + 2), true, "none", "none"],
+          [String(index * 3 + 3), true, "none", "none"]
         ]),
         "Schedule.1": Array.from({ length: 31 }, (_, index) => [
-          [String(index * 3 + 1), true],
-          [String(index * 3 + 2), true],
-          [String(index * 3 + 3), true]
+          [String(index * 3 + 1), true, "none", "none"],
+          [String(index * 3 + 2), true, "none", "none"],
+          [String(index * 3 + 3), true, "none", "none"]
         ]),
       }
     };

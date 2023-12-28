@@ -46,14 +46,8 @@
 
         <!-- <p id = "showTime">test</p> -->
 
-        <!-- <button onclick="updateDatabase()"></button> THIS RESETS DATABASE DO NOT TOUCH!!!!-->
+        <button onclick="updateDatabase()"></button> 
         
-
-
-        <button onclick="updateArray()">submit</button>
-        <button onclick="testJSON()">submit after</button>
-
-
         <div>
             <button onclick="updateCalendar(0)">Previous</button>
             <button onclick="updateCalendar(1)">Next</button>
@@ -304,6 +298,12 @@
 
 
     function updateCalendar(currentOrNext) {
+        if (currentOrNext != viewingMonth){
+            document.getElementById("time1").style.display = "none";
+            document.getElementById("time2").style.display = "none";
+            document.getElementById("time3").style.display = "none";
+        }
+        
         clearCalendar();
         if (currentOrNext == 0) {
             let counter = firstDay;
