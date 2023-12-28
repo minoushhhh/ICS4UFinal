@@ -329,3 +329,31 @@ async function checkValidUsername(user) {
     return false;
   }
 }
+
+//Reading admin database
+async function getAdminSchedule() {
+  console.log("Trying to get schedule");
+  try {
+    await client.connect();
+
+    const database = client.db("user-details");
+    const adminScheduleCollection = database.collection("adminSchedule");
+
+    // Use findOne to retrieve a single document from the adminSchedule collection
+    const adminSchedule = await adminScheduleCollection.findOne({});
+
+    return adminSchedule;
+  } finally {
+    await client.close();
+  }
+}
+
+app.get('/admin-schedule', async (req, res) => {
+  try {
+    const adminSchedule = await getAdminSchedule();
+    res.json(adminSchedule);
+  } catch (error) {
+    console.error("Error getting admin schedule:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});

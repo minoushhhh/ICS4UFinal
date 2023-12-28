@@ -39,6 +39,14 @@
         <p id="test2">hello</p>
         <button onclick="updateArray()">submit</button>
         <button onclick="testJSON()">submit after</button>
+        
+        <h1>Admin Schedule Form</h1>
+
+        
+    
+        <div id="adminScheduleResult">
+            <!-- The result will be displayed here -->
+        </div>
 
 
 
@@ -176,15 +184,34 @@
 
     let viewingMonth;
 
+    let adminSchedule;
+
     updateCurrentInfo();
     updateNextInfo();
     updateCalendar(0);
 
-
-
     let schedule = [];
     let month1 = [];
     let month2 = [];
+
+    getAdminSchedule();
+
+    async function getAdminSchedule() {
+        try {
+            // Make a fetch request to the /admin-schedule endpoint
+            const response = await fetch('/admin-schedule');
+            adminSchedule = await response.json();
+
+            // Display the result in the adminScheduleResult div
+            document.getElementById('adminScheduleResult').innerHTML = JSON.stringify(adminSchedule.Schedule[0][1]);
+        } catch (error) {
+            // Handle errors
+            console.error("Error getting admin schedule:", error);
+            document.getElementById('adminScheduleResult').innerHTML = "Error getting admin schedule.";
+        }
+    }
+
+
 
     function updateArray() {
 
@@ -233,9 +260,6 @@
 
     }
 
-    function turnToJSON() {
-
-    }
 
     function testJSON() {
 
