@@ -222,6 +222,7 @@
             document.getElementById("time1").style.display = "none";
             document.getElementById("time2").style.display = "none";
             document.getElementById("time3").style.display = "none";
+            resetSelected();
         }
         
         clearCalendar();
@@ -290,6 +291,7 @@
         var tempMonth = new Date();
 
         selectedDay = document.getElementById(dayInput).innerText;
+        updateSelectedDay(dayInput);
 
         let currentMonthIndex;
         let currentMonthName;
@@ -320,6 +322,25 @@
         document.getElementById("time3").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay-1][2][0]);
 
     }
+
+    function updateSelectedDay(id) {
+        let pressed = document.getElementById(id);
+        if (pressed.innerHTML.trim() !== "") {
+            for (let i = 0; i < 37; i++){
+                document.getElementById(i.toString()).style.backgroundColor = "aliceblue";
+            }
+            pressed.style.backgroundColor = "blue";
+        }
+    
+    }
+
+    function resetSelected() {
+        selectedDay = undefined;
+        for (let i = 0; i < 37; i++){
+                document.getElementById(i.toString()).style.backgroundColor = "aliceblue";
+        }
+    }
+
 
     
 
