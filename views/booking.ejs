@@ -45,6 +45,8 @@
         <button id = "time3" hidden onclick="returnTime(3)">3</button> <br> <br>
 
         <!-- <p id = "showTime">test</p> -->
+
+        <!-- <button onclick="updateDatabase()"></button> THIS RESETS DATABASE DO NOT TOUCH!!!!-->
         
 
 
@@ -202,6 +204,18 @@
         try {
             // Make a fetch request to the /admin-schedule endpoint
             const response = await fetch('/admin-schedule');
+            adminSchedule = await response.json();
+        } catch (error) {
+            // Handle errors
+            console.error("Error getting admin schedule:", error);
+            document.getElementById('adminScheduleResult').innerHTML = "Error getting admin schedule.";
+        }
+    }
+
+    async function updateDatabase(){
+        try {
+            // Make a fetch request to the /admin-schedule endpoint
+            const response = await fetch('/update-admin');
             adminSchedule = await response.json();
         } catch (error) {
             // Handle errors
@@ -382,9 +396,9 @@
         document.getElementById("time2").style.display = "block";
         document.getElementById("time3").style.display = "block";
 
-        document.getElementById("time1").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][tempSelectedDay-1][0]);
-        document.getElementById("time2").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][tempSelectedDay-1][1]);
-        document.getElementById("time3").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][tempSelectedDay-1][2]);
+        document.getElementById("time1").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][tempSelectedDay-1][0][0]);
+        document.getElementById("time2").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][tempSelectedDay-1][1][0]);
+        document.getElementById("time3").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][tempSelectedDay-1][2][0]);
 
     }
 

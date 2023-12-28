@@ -7,6 +7,7 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import nodemailer from 'nodemailer';
 
+
 const uri = "mongodb+srv://Admin:nR18eHCkif6yvno0@cluster0.ak6hid0.mongodb.net/?retryWrites=true&w=majority";
 
 const client = new MongoClient(uri);
@@ -354,6 +355,62 @@ app.get('/admin-schedule', async (req, res) => {
     res.json(adminSchedule);
   } catch (error) {
     console.error("Error getting admin schedule:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+async function updateDocument() {
+  try {
+    await client.connect();
+    console.log('Connected to the database');
+
+    const database = client.db("user-details");
+    const adminScheduleCollection = database.collection("adminSchedule");
+
+    // Update values for the first 31 days with incrementing values
+    const update = {
+      $set: {
+        "Schedule.0": Array.from({ length: 31 }, (_, index) => [
+          [String(index * 3 + 1), true],
+          [String(index * 3 + 2), true],
+          [String(index * 3 + 3), true]
+        ]),
+        "Schedule.1": Array.from({ length: 31 }, (_, index) => [
+          [String(index * 3 + 1), true],
+          [String(index * 3 + 2), true],
+          [String(index * 3 + 3), true]
+        ]),
+      }
+    };
+
+    const result = await adminScheduleCollection.updateMany({}, update);
+
+    if (result.modifiedCount > 0) {
+      console.log('Documents updated successfully');
+    } else {
+      console.log('No documents matched the query');
+    }
+
+  } finally {
+    await client.close();
+    console.log('Connection closed');
+  }
+}
+
+
+
+app.get('/update-admin', async (req, res) => {
+  try {
+    const result = await updateDocument();
+
+    if (result && result.modifiedCount > 0) {
+      res.status(200).json({ message: 'Document updated successfully' });
+    } else {
+      res.status(404).json({ message: 'No documents matched the query' });
+    }
+  } catch (error) {
+    console.error("Error updating admin schedule:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
