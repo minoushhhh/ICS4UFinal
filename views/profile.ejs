@@ -1,76 +1,236 @@
-<html>
+<!DOCTYPE html>
 
 <head>
     <%- include('layouts/navbar'); -%>
+        <title>Profile</title>
 </head>
 
 <body>
 
-    <h1 class = "font">Welcome, <%= name %>!</h1>
+    <h1 class="slide-in-left fade-first title">Welcome, <%= userData.firstName %>!</h1>
 
-    <div class = "font">
-        <h2 class = "personal-information-title">Persoal Information</h2>
-        <label for="firstName">First name: </label><br>
-        <input type="text" id="firstName" name="firstName" value = <%= name %>><br>
-        <label for="lastName">Last name: </label><br>
-        <input type="text" id="lastName" name="lastName" value = <%= userData.lastName %>><br>
-        <label for="email">Email: </label><br>
-        <input type="text" id="email" name="email" value = <%= userData.email %>><br>
-        <label for="phoneNumber">Phone Number: </label><br>
-        <input type="text" id="phoneNumber" name="phoneNumber" value = <%= userData.phoneNum %>><br>
-        <label for="address">Address: </label><br>
-        <input type="text" id="address" name="address" value = <%= userData.adr %>><br>
-        <label for="postalCode">Postal Code: </label><br>
-        <input type="text" id="postalCode" name="postalCode" value = <%= userData.pCode %>><br>
-        <label for="username">Username: </label><br>
-        <input type="text" id="username" name="username" value = <%= userData.userName %>><br>
-        <label for="password">Password: </label><br>
-        <input type="text" id="password" name="password" value = <%= userData.passWord %>><br>
-        <br>
-        <div>
-            <button class = "profile-page-buttons" onclick = "edit()">Edit</button>
-            <button class = "profile-page-buttons" onclick = "save()">Save</button>
+    <div class="profile-container">
+
+        <div class="fade-after">
+            <h2 class="personal-information-title">Personal information</h2>
+
+            <label class="profile-label" for="firstName">First name</label>
+            <div class="first-input-box-row">
+                <input class="input-box" type="text" id="firstName" name="firstName" disabled>
+
+                <div class="dropdown-conatiner">
+                    <button class="dropdown-button">Previous details<span class="right-align-arrow">˅</span></button>
+                    <!--Placeholder contents, will have to be periodically updated from the booking page to user's profile in DB-->
+                    <div class="dropdown-contents">
+                        <option>Nov 26: Full Detail ➜ $200</option>
+                        <option>Dec 02: Headlights ➜ $50</option>
+                        <option>Dec 25: Full Detail ➜ $150</option>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <label class="profile-label" for="lastName">Last name</label><br>
+            <input class="input-box" type="text" id="lastName" name="lastName" disabled><br><br>
+
+            <label class="profile-label" for="email">Email</label><br>
+            <input class="input-box" type="text" id="email" name="email" disabled><br><br>
+
+            <label class="profile-label" for="phoneNumber">Phone number</label><br>
+            <input class="input-box" type="text" id="phoneNumber" name="phoneNumber" disabled><br><br>
+
+            <label class="profile-label" for="address">Address</label><br>
+            <input class="input-box" type="text" id="address" name="address" disabled><br><br>
+
+            <label class="profile-label" for="postalCode">Postal code</label><br>
+            <input class="input-box" type="text" id="postalCode" name="postalCode" disabled><br><br>
+
+            <label class="profile-label" for="username">Username</label><br>
+            <input class="input-box" type="text" id="username" name="username" disabled><br><br>
+
+            <label class="profile-label" for="password">Password</label><br>
+            <div class="password-block">
+                <input class="input-box" type="password" id="password" name="password" disabled><br><br>
+                <button class="password-vis-icon" onclick="togglePass()"><img
+                        src="https://cdn-icons-png.flaticon.com/512/2355/2355322.png"></button>
+            </div>
+            <br>
+            <div class="button-block">
+                <button id="editButton" class="profile-page-buttons" onclick="edit()">Edit</button>
+                <form action="/save-form" method="post">
+                    <button id="saveButton" class="save-button-disabled" onclick="save()" disabled>Save</button>
+                    <input type="text" id="firstNameHidden" name="firstName" hidden><br>
+                    <input type="text" id="lastNameHidden" name="lastName" hidden><br>
+                    <input type="text" id="emailHidden" name="email" hidden><br>
+                    <input type="text" id="phoneNumberHidden" name="phoneNumber" hidden><br>
+                    <input type="text" id="addressHidden" name="address" hidden><br>
+                    <input type="text" id="postalCodeHidden" name="postalCode" hidden><br>
+                    <input type="text" id="usernameHidden" name="username" hidden><br>
+                    <input type="text" id="passwordHidden" name="password" hidden><br>
+                    <input type="text" id="confirmPasswordHidden" name="confirmPassword" hidden><br>
+                </form>
+            </div>
+
         </div>
+
     </div>
-    
+
+
 
 </body>
 
-<style>
-    .profile-page-buttons {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 5px;
-        cursor: pointer;
-        background-color: #3498db;
-        color: #ffffff;
-        border: none;
-    }
+<script>
 
-    .profile-page-buttons:hover {
-        animation: glow 1s ease-in-out infinite;
-      }
+    let editMode;
 
-    .personal-information-title {
-        font-weight: bold;
-    }
-  
-    @keyframes glow {
-        0%, 100% {
-        box-shadow: 0 0 10px #3498db;
-        }
-        50% {
-        box-shadow: 0 0 20px #3498db;
+    document.getElementById("firstName").style.backgroundColor = '#e7e7e7';
+    document.getElementById("lastName").style.backgroundColor = '#e7e7e7';
+    document.getElementById("email").style.backgroundColor = '#e7e7e7';
+    document.getElementById("phoneNumber").style.backgroundColor = '#e7e7e7';
+    document.getElementById("address").style.backgroundColor = '#e7e7e7';
+    document.getElementById("postalCode").style.backgroundColor = '#e7e7e7';
+    document.getElementById("username").style.backgroundColor = '#e7e7e7';
+    document.getElementById("password").style.backgroundColor = '#e7e7e7';
+
+    function togglePass() {
+        const pass = document.getElementById("password");
+        const eyeIcon = document.querySelector(".password-vis-icon img");
+
+        if (pass.type === "password") {
+            pass.type = "text";
+            eyeIcon.src = "https://cdn-icons-png.flaticon.com/512/2874/2874802.png";
+            eyeIcon.style.opacity = 1;
+        } else {
+            pass.type = "password";
+            eyeIcon.src = "https://cdn-icons-png.flaticon.com/512/2355/2355322.png";
+            eyeIcon.style.opacity = 0.7;
         }
     }
-  
-</style>
+
+
+    function edit() {
+        const editButton = document.getElementById("editButton");
+        const saveButton = document.getElementById("saveButton");
+
+        if (document.getElementById("firstName").disabled) {
+            editButton.textContent = "Cancel";
+            enableInputs();
+            saveButton.removeAttribute("disabled");
+            saveButton.classList.add("profile-page-buttons");
+            saveButton.classList.remove("save-button-disabled");
+        } else {
+            editButton.textContent = "Edit";
+            disableInputs();
+            saveButton.setAttribute("disabled", true);
+            saveButton.classList.add("save-button-disabled");
+            saveButton.classList.remove("profile-page-buttons");
+        }
+    }
+
+    function enableInputs() {
+        document.getElementById("firstName").removeAttribute("disabled");
+        document.getElementById("lastName").removeAttribute("disabled");
+        document.getElementById("email").removeAttribute("disabled");
+        document.getElementById("phoneNumber").removeAttribute("disabled");
+        document.getElementById("address").removeAttribute("disabled");
+        document.getElementById("postalCode").removeAttribute("disabled");
+        document.getElementById("username").removeAttribute("disabled");
+        document.getElementById("password").removeAttribute("disabled");
+
+        document.getElementById("firstName").style.backgroundColor = 'white';
+        document.getElementById("lastName").style.backgroundColor = 'white';
+        document.getElementById("email").style.backgroundColor = 'white';
+        document.getElementById("phoneNumber").style.backgroundColor = 'white';
+        document.getElementById("address").style.backgroundColor = 'white';
+        document.getElementById("postalCode").style.backgroundColor = 'white';
+        document.getElementById("username").style.backgroundColor = 'white';
+        document.getElementById("password").style.backgroundColor = 'white';
+    }
+
+    function disableInputs() {
+        document.getElementById("firstName").setAttribute("disabled", true);
+        document.getElementById("lastName").setAttribute("disabled", true);
+        document.getElementById("email").setAttribute("disabled", true);
+        document.getElementById("phoneNumber").setAttribute("disabled", true);
+        document.getElementById("address").setAttribute("disabled", true);
+        document.getElementById("postalCode").setAttribute("disabled", true);
+        document.getElementById("username").setAttribute("disabled", true);
+        document.getElementById("password").setAttribute("disabled", true);
+
+        document.getElementById("firstName").style.backgroundColor = '#e7e7e7';
+        document.getElementById("lastName").style.backgroundColor = '#e7e7e7';
+        document.getElementById("email").style.backgroundColor = '#e7e7e7';
+        document.getElementById("phoneNumber").style.backgroundColor = '#e7e7e7';
+        document.getElementById("address").style.backgroundColor = '#e7e7e7';
+        document.getElementById("postalCode").style.backgroundColor = '#e7e7e7';
+        document.getElementById("username").style.backgroundColor = '#e7e7e7';
+        document.getElementById("password").style.backgroundColor = '#e7e7e7';
+    }
+
+    function save() {
+
+        updateDisplayedInfo();
+
+        document.getElementById("usernameHidden").value = document.getElementById("username").value;
+        document.getElementById("passwordHidden").value = document.getElementById("password").value;
+        document.getElementById("firstNameHidden").value = document.getElementById("firstName").value;
+        document.getElementById("lastNameHidden").value = document.getElementById("lastName").value;
+        document.getElementById("emailHidden").value = document.getElementById("email").value;
+        document.getElementById("phoneNumberHidden").value = document.getElementById("phoneNumber").value;
+        document.getElementById("addressHidden").value = document.getElementById("address").value;
+        document.getElementById("postalCodeHidden").value = document.getElementById("postalCode").value;
+        document.getElementById("confirmPasswordHidden").value = document.getElementById("password").value;
+
+        document.forms.submit();
+
+    }
+
+    function updateDisplayedInfo() {
+        const newName = document.getElementById("firstName").value;
+        const newLastName = document.getElementById("lastName").value;
+        const newEmail = document.getElementById("email").value;
+        const newPhoneNumber = document.getElementById("phoneNumber").value;
+        const newAddress = document.getElementById("address").value;
+        const newPostalCode = document.getElementById("postalCode").value;
+        const newUsername = document.getElementById("username").value;
+        const newPassword = document.getElementById("password").value;
+
+        document.getElementById("firstName").value = newName;
+        document.getElementById("lastName").value = newLastName;
+        document.getElementById("email").value = newEmail;
+        document.getElementById("phoneNumber").value = newPhoneNumber;
+        document.getElementById("address").value = newAddress;
+        document.getElementById("postalCode").value = newPostalCode;
+        document.getElementById("username").value = newUsername;
+        document.getElementById("password").value = newPassword;
+
+        disableInputs();
+    }
+
+    //Public form
+    document.getElementById("firstName").value = "<%= userData.firstName %>";
+    document.getElementById("lastName").value = "<%= userData.lastName %>";
+    document.getElementById("email").value = "<%= userData.email %>";
+    document.getElementById("phoneNumber").value = "<%= userData.phoneNum %>";
+    document.getElementById("address").value = "<%= userData.adr %>";
+    document.getElementById("postalCode").value = "<%= userData.pCode %>";
+    document.getElementById("username").value = "<%= userData.userName %>";
+    document.getElementById("password").value = "<%= userData.passWord %>";
+
+    //Hidden form
+    document.getElementById("usernameHidden").value = document.getElementById("username").value;
+    document.getElementById("passwordHidden").value = document.getElementById("password").value;
+    document.getElementById("firstNameHidden").value = document.getElementById("firstName").value;
+    document.getElementById("lastNameHidden").value = document.getElementById("lastName").value;
+    document.getElementById("emailHidden").value = document.getElementById("email").value;
+    document.getElementById("phoneNumberHidden").value = document.getElementById("phoneNumber").value;
+    document.getElementById("addressHidden").value = document.getElementById("address").value;
+    document.getElementById("postalCodeHidden").value = document.getElementById("postalCode").value;
+    document.getElementById("confirmPasswordHidden").value = document.getElementById("password").value;
+
+</script>
 
 <footer>
-    <br>
     <%- include('layouts/footer'); -%>
 </footer>
 

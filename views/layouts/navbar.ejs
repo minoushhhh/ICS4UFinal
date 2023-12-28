@@ -1,20 +1,27 @@
-<link rel="stylesheet" href="styles.css">
-<ul class="navbar">
-    <li class="leftAlign"><a class="navbar-element" href="/index">HOME</a></li>
-    <li class="leftAlign"><a class="navbar-element" href="/booking">BOOK</a></li>
-    <li class="leftAlign"><a class="navbar-element" href="/estimate">ESTIMATE PRICING</a></li>
-    <li class="leftAlign"><a class="navbar-element" href="/contact">CONTACT</a></li>
-    <% if (isLoggedIn) { %>
-        <div class="rightAlign">
-            <li><a class="navbar-element" href="/profile">PROFILE</a></li>
-            <br>
-            <li><a class="navbar-element" href="/logout">LOG OUT</a></li>
+<style>
+    html {
+        visibility: hidden;
+        opacity: 0;
+    }
+</style>
+<div class="fade-in-container-a">
+    <ul class="navbar">
+        <div class="leftAlign">
+            <li><a class="navbar-element" href="/index">Home</a></li>
+            <li><a class="navbar-element" href="/booking">Book</a></li>
+            <li><a class="navbar-element" href="/estimate">Estimate</a></li>
+            <li><a class="navbar-element" href="/contact">Contact</a></li>
         </div>
-    <% } else { %>
-        <div class="rightAlign">
-            <li><a class="navbar-element" href="/sign-up">SIGN UP</a></li>
-            <br>
-            <li><a class="navbar-element" href="/login">LOGIN</a></li>
-        </div>
-    <% } %>
-</ul>
+        <% if (isLoggedIn) { %>
+            <div class="rightAlign">
+                <li><a class="navbar-element" href="/logout">Log out</a></li>
+                <li><a class="important-navbar-element" href="/profile">Profile</a></li>
+            </div>
+            <% } else { %>
+                <div class="rightAlign">
+                    <li><a class="navbar-element" href="/sign-up">Sign up</a></li>
+                    <li><a class="important-navbar-element" href="/login">Log in</a></li>
+                </div>
+                <% } %>
+    </ul>
+</div>

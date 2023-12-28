@@ -1,26 +1,69 @@
-<html>
+<!DOCTYPE html>
 
 <head>
     <%- include('layouts/navbar'); -%>
+        <title>Log In</title>
 </head>
 
-<h1 class = "title">Login</h1>
+<body>
 
-<body class = "font">
+    <div class="fade-in-container login-container">
+        <h1 class="login-title">Log in to see your information.</h1>
 
-    <form id="loginForm" action="/login-form" method="post">
-        <label for="username">Username </label><br>
-        <input type="text" id="username" name="username"><br>
-        <label for="password">Password </label><br>
-        <input id="password" name="password"><br><br>
+        <h2 class="login-subtitle">Log into your account</h2>
 
-        <button type="sumbit" class = "font">Submit</button>
-        <br><br>
-        <div class = "font">Don't have an account? Sign up <a class = "hyperlink" href="/sign-up">here</a></div>
+        <div class="login-form">
 
-    </form>
+            <form id="loginForm" action="/login-form" method="post">
+
+                <div>
+                    <div class="input-container">
+                        <input class="input-box" type="text" id="username" name="username"
+                            placeholder="Username or email" required autocomplete="username">
+                    </div>
+                </div>
+
+                <br>
+
+                <div>
+                    <div class="input-container">
+                        <input class="input-box" type="password" id="password" name="password" placeholder="Password"
+                            required autocomplete="current-password">
+                        <button type="submit" class="submit-button"><img
+                                src="https://i.ibb.co/DDndqQN/Untitled-design-1.png"></button>
+                    </div>
+                </div>
+
+                <br>
+
+                <label class="error-label" id="errorLabel"></label>
+
+                <br>
+
+                <!--Need to implement a forgot password option-->
+
+                <div class="form-hyperlink">Don't have an account? <a class="hyperlink" href="/sign-up">Sign up here
+                        ↗</a></div>
+
+            </form>
+
+        </div>
+    </div>
 
 </body>
+
+<script>
+    let errorLabel = document.getElementById("errorLabel");
+    let loginInvalid = "<%= loginInvalid %>";
+
+    if (loginInvalid) {
+        errorLabel.textContent = "Invalid Credentials";
+    }
+    if (performance.navigation.type === 1 && loginInvalid) {
+        errorLabel.textContent = "";
+        loginInvalid = false;
+    }
+</script>
 
 <footer>
     <%- include('layouts/footer'); -%>
