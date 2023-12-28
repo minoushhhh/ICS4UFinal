@@ -218,85 +218,6 @@
         }
     }
 
-
-
-    function updateArray() {
-
-        for (let i = 1; i < daysInMonth + 1; i++) {
-            let times = ["time1", "time2", "time3"];
-            month1.push(times);
-        }
-
-        for (let i = 1; i < nextDaysInMonth + 1; i++) {
-            let times2 = ["time1", "time2", "time3"];
-            month2.push(times2);
-        }
-
-        schedule.push(month1);
-        schedule.push(month2);
-
-        //document.getElementById("test1").innerHTML = schedule[1][28][0];
-
-        return schedule;
-
-    }
-
-
-    function createJSONTest() {
-
-        let scheduleArr = updateArray();
-
-        let jsonObjectArrayTest = {};
-        let monthArr = {};
-        let daysArr = {};
-
-        for (let i = 0; i < scheduleArr.length; i++) {
-            for (let j = 0; j < scheduleArr[i].length; j++) {
-
-                for (let k = 0; k < schedule[i][j]; k++) {
-
-                    daysArr.push(scheduleArr[i][j][k])
-
-                }
-            }
-            monthArr.push(scheduleArr[i][j] + daysArr)
-        }
-        jsonObjectArrayTest.push(schedule[i] + monthArr);
-
-        return jsonObjectArrayTest;
-
-    }
-
-
-    function testJSON() {
-
-        let testArr = turnArrJSON();
-
-        document.getElementById("test").innerHTML = testArr[1][0][2];
-
-
-    }
-
-    function turnArrJSON() {
-        let testArray = updateArray();
-        let JSONArray = JSON.parse(JSON.stringify(testArray));
-
-        return JSONArray;
-    }
-
-
-
-    const defaultTimesInstance = new defaultTimes();
-
-    function createDefaultJSON() {
-        for (let i = 0; i < 37; i++) {
-            if (i > firstDay) {
-                new defaultTimes;
-            }
-        }
-    }
-
-
     function updateCalendar(currentOrNext) {
         if (currentOrNext != viewingMonth){
             document.getElementById("time1").style.display = "none";
@@ -387,7 +308,6 @@
 
         currentMonthName = monthNames[currentMonthIndex % 12];
 
-        let testArr = turnArrJSON();
 
         //document.getElementById("test2").innerHTML = currentMonthName + " " + tempSelectedDay + " " + testArr[viewingMonth][tempSelectedDay];
 
