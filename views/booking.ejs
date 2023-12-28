@@ -169,6 +169,10 @@
 
 
 <script>
+    let detailType;
+    let selectedDay;
+    let selectedTimeSlot;
+
     let month;
     let daysInMonth;
     let firstDay;
@@ -187,11 +191,6 @@
     updateCurrentInfo();
     updateNextInfo();
     updateCalendar(0);
-
-    let schedule = [];
-    let month1 = [];
-    let month2 = [];
-
     getAdminSchedule();
 
     async function getAdminSchedule() {
@@ -290,7 +289,7 @@
 
         var tempMonth = new Date();
 
-        let tempSelectedDay = document.getElementById(dayInput).innerText;
+        selectedDay = document.getElementById(dayInput).innerText;
 
         let currentMonthIndex;
         let currentMonthName;
@@ -316,20 +315,13 @@
         document.getElementById("time2").style.display = "block";
         document.getElementById("time3").style.display = "block";
 
-        document.getElementById("time1").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][tempSelectedDay-1][0][0]);
-        document.getElementById("time2").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][tempSelectedDay-1][1][0]);
-        document.getElementById("time3").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][tempSelectedDay-1][2][0]);
+        document.getElementById("time1").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay-1][0][0]);
+        document.getElementById("time2").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay-1][1][0]);
+        document.getElementById("time3").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay-1][2][0]);
 
     }
 
-    function returnTime(timeSlotIndex){
-
-        let timeId = "time"+timeSlotIndex;
-
-        document.getElementById("showTime").innerHTML = document.getElementById(timeId).textContent;
-
-
-    }
+    
 
 
 </script>
