@@ -789,15 +789,6 @@ input[type="file"] {
   background-color: #00b4d8;
 }
 
-.options-grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-column-gap: 30px;
-  max-width: 750px;
-  margin-left: 100%;
-}
-
 .options-grid {
   display: flex;
   flex-direction: column;
