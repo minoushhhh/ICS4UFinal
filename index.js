@@ -43,6 +43,7 @@ app.get('/index', (req, res) => {
 
 app.get('/booking', (req, res) => {
   res.render('booking');
+  
 });
 
 app.get('/estimate', (req, res) => {
@@ -413,7 +414,7 @@ app.get('/update-admin', async (req, res) => {
   }
 });
 
-async function book(month, day, timeslot, detailtype) {
+async function book(month, day, timeslot, detailtype, req) {
   try {
       await client.connect();
       console.log('Connected to the database');
@@ -426,6 +427,7 @@ async function book(month, day, timeslot, detailtype) {
           $set: {
               [`Schedule.${month}.${day}.${timeslot}.1`]: false,
               [`Schedule.${month}.${day}.${timeslot}.2`]: detailtype,
+              [`Schedule.${month}.${day}.${timeslot}.3`]: req.session.username,
           }
       };
 
@@ -446,7 +448,7 @@ async function book(month, day, timeslot, detailtype) {
 app.post('/book', async (req, res) => {
   try {
       const { selectedDay, viewingMonth, selectedTimeSlot, detailType } = req.body;
-      const result = await book(viewingMonth, selectedDay, selectedTimeSlot, detailType);
+      const result = await book(viewingMonth, selectedDay, selectedTimeSlot, detailType, req);
 
       if (result && result.modifiedCount > 0) {
           res.status(200).json({ message: 'Document updated successfully' });
