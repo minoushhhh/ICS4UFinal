@@ -61,7 +61,7 @@
         const user = document.getElementById("username").value;
         const pass = document.getElementById("password").value;
         try {
-            const response = await fetch('http://localhost:3000/check-login', {
+            const response = await fetch('/check-login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
