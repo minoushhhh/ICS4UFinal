@@ -10,48 +10,37 @@
     <div class="fade-in-container">
 
         <div class="options">
-            <div class="colouredBox">
-                <input type="button" onclick="submit" id="option1" value="Select">
-
+            <div class="colouredBox" id="c1">
+                <button type="button" onclick="updateSelectedDetail(1)" id="option1">Select</button>
             </div>
-
-            <div class="colouredBox">
-                <input type="button" onclick="submit" id="option2" value="Select">
-
+            
+            <div class="colouredBox" id="c2">
+                <button type="button" onclick="updateSelectedDetail(2)" id="option2">Select</button>
             </div>
-
-            <div class="colouredBox">
-                <input type="button" onclick="submit" id="option3" value="Select">
-
-
+            
+            <div class="colouredBox" id="c3">
+                <button type="button" onclick="updateSelectedDetail(3)" id="option3">Select</button>
             </div>
-
-            <div class="colouredBox">
-                <input type="button" onclick="submit" id="option4" value="Select">
-
-
+            
+            <div class="colouredBox" id="c4">
+                <button type="button" onclick="updateSelectedDetail(4)" id="option4">Select</button>
             </div>
+            
 
         </div>
         <!-- 
-            <p id="test">hello</p>
-            <p id="test1">hello</p>
-            <p id="test2">hello</p>
+            
          -->
         
 
-        <button id = "time1" hidden onclick="returnTime(1)">1</button>
-        <button id = "time2" hidden onclick="returnTime(2)">2</button>
-        <button id = "time3" hidden onclick="returnTime(3)">3</button> <br> <br>
+        <button id = "time1" hidden onclick="updateSelectedTime(1)">1</button>
+        <button id = "time2" hidden onclick="updateSelectedTime(2)">2</button>
+        <button id = "time3" hidden onclick="updateSelectedTime(3)">3</button> <br> <br>
 
         <!-- <p id = "showTime">test</p> -->
+
+        <!-- <button onclick="updateDatabase()"></button> DO NOT PRESS THIS IS A RESET DATABASE BUTTON OASKJDLAKSJDLKASJDLKJL-->
         
-
-
-        <button onclick="updateArray()">submit</button>
-        <button onclick="testJSON()">submit after</button>
-
-
         <div>
             <button onclick="updateCalendar(0)">Previous</button>
             <button onclick="updateCalendar(1)">Next</button>
@@ -107,6 +96,12 @@
             <button id="36" class="day" onclick="getDay(36)"></button>
 
         </div>
+
+        <button onclick="book()">BOOK</button>
+        <p id="test">hello</p>
+        <p id="test1">hello</p>
+        <p id="test2">hello</p>
+        <p id="test3">hello</p>
 
     </div>
 
@@ -173,6 +168,10 @@
 
 
 <script>
+    let detailType;
+    let selectedDay;
+    let selectedTimeSlot;
+
     let month;
     let daysInMonth;
     let firstDay;
@@ -191,11 +190,6 @@
     updateCurrentInfo();
     updateNextInfo();
     updateCalendar(0);
-
-    let schedule = [];
-    let month1 = [];
-    let month2 = [];
-
     getAdminSchedule();
 
     async function getAdminSchedule() {
@@ -210,86 +204,25 @@
         }
     }
 
-
-
-    function updateArray() {
-
-        for (let i = 1; i < daysInMonth + 1; i++) {
-            let times = ["time1", "time2", "time3"];
-            month1.push(times);
-        }
-
-        for (let i = 1; i < nextDaysInMonth + 1; i++) {
-            let times2 = ["time1", "time2", "time3"];
-            month2.push(times2);
-        }
-
-        schedule.push(month1);
-        schedule.push(month2);
-
-        //document.getElementById("test1").innerHTML = schedule[1][28][0];
-
-        return schedule;
-
-    }
-
-
-    function createJSONTest() {
-
-        let scheduleArr = updateArray();
-
-        let jsonObjectArrayTest = {};
-        let monthArr = {};
-        let daysArr = {};
-
-        for (let i = 0; i < scheduleArr.length; i++) {
-            for (let j = 0; j < scheduleArr[i].length; j++) {
-
-                for (let k = 0; k < schedule[i][j]; k++) {
-
-                    daysArr.push(scheduleArr[i][j][k])
-
-                }
-            }
-            monthArr.push(scheduleArr[i][j] + daysArr)
-        }
-        jsonObjectArrayTest.push(schedule[i] + monthArr);
-
-        return jsonObjectArrayTest;
-
-    }
-
-
-    function testJSON() {
-
-        let testArr = turnArrJSON();
-
-        document.getElementById("test").innerHTML = testArr[1][0][2];
-
-
-    }
-
-    function turnArrJSON() {
-        let testArray = updateArray();
-        let JSONArray = JSON.parse(JSON.stringify(testArray));
-
-        return JSONArray;
-    }
-
-
-
-    const defaultTimesInstance = new defaultTimes();
-
-    function createDefaultJSON() {
-        for (let i = 0; i < 37; i++) {
-            if (i > firstDay) {
-                new defaultTimes;
-            }
+    async function updateDatabase(){
+        try {
+            // Make a fetch request to the /admin-schedule endpoint
+            const response = await fetch('/update-admin');
+        } catch (error) {
+            // Handle errors
+            console.error("Error getting admin schedule:", error);
+            document.getElementById('adminScheduleResult').innerHTML = "Error getting admin schedule.";
         }
     }
-
 
     function updateCalendar(currentOrNext) {
+        if (currentOrNext != viewingMonth){
+            document.getElementById("time1").style.display = "none";
+            document.getElementById("time2").style.display = "none";
+            document.getElementById("time3").style.display = "none";
+            resetSelected();
+        }
+        
         clearCalendar();
         if (currentOrNext == 0) {
             let counter = firstDay;
@@ -355,7 +288,9 @@
 
         var tempMonth = new Date();
 
-        let tempSelectedDay = document.getElementById(dayInput).innerText;
+        selectedDay = document.getElementById(dayInput).innerText;
+        selectedDay--;
+        updateSelectedDay(dayInput);
 
         let currentMonthIndex;
         let currentMonthName;
@@ -373,7 +308,6 @@
 
         currentMonthName = monthNames[currentMonthIndex % 12];
 
-        let testArr = turnArrJSON();
 
         //document.getElementById("test2").innerHTML = currentMonthName + " " + tempSelectedDay + " " + testArr[viewingMonth][tempSelectedDay];
 
@@ -382,20 +316,103 @@
         document.getElementById("time2").style.display = "block";
         document.getElementById("time3").style.display = "block";
 
-        document.getElementById("time1").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][tempSelectedDay-1][0]);
-        document.getElementById("time2").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][tempSelectedDay-1][1]);
-        document.getElementById("time3").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][tempSelectedDay-1][2]);
+        document.getElementById("time1").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
+        document.getElementById("time2").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][1][0]);
+        document.getElementById("time3").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][2][0]);
 
     }
 
-    function returnTime(timeSlotIndex){
-
-        let timeId = "time"+timeSlotIndex;
-
-        document.getElementById("showTime").innerHTML = document.getElementById(timeId).textContent;
-
-
+    function updateSelectedDay(id) {
+        let pressed = document.getElementById(id);
+        resetSelectedTime();
+        if (pressed.innerHTML.trim() !== "") {
+            for (let i = 0; i < 37; i++){
+                document.getElementById(i.toString()).style.backgroundColor = "aliceblue";
+            }
+            pressed.style.backgroundColor = "blue";
+        }
+    
     }
+
+    function resetSelected() {
+        selectedDay = undefined;
+        for (let i = 0; i < 37; i++){
+                document.getElementById(i.toString()).style.backgroundColor = "aliceblue";
+        }
+    }
+
+    function updateSelectedTime(id) {
+        selectedTimeSlot = id - 1;
+        let pressed = document.getElementById("time" + id);
+        document.getElementById("time1").style.backgroundColor = "ButtonFace";
+        document.getElementById("time2").style.backgroundColor = "ButtonFace";
+        document.getElementById("time3").style.backgroundColor = "ButtonFace";
+        pressed.style.backgroundColor = "blue";
+    
+    }
+
+    function resetSelectedTime(){
+        selectedTimeSlot = undefined;
+        document.getElementById("time1").style.backgroundColor = "ButtonFace";
+        document.getElementById("time2").style.backgroundColor = "ButtonFace";
+        document.getElementById("time3").style.backgroundColor = "ButtonFace";
+    }
+
+    function updateSelectedDetail(id) {
+        detailType = id - 1;
+        let pressed = document.getElementById("c" + id);
+        document.getElementById("c1").style.backgroundColor = "#3498db";
+        document.getElementById("c2").style.backgroundColor = "#3498db";
+        document.getElementById("c3").style.backgroundColor = "#3498db";
+        document.getElementById("c4").style.backgroundColor = "#3498db";
+        pressed.style.backgroundColor = "blue";
+    
+    }
+
+    async function book() {
+        document.getElementById("test").innerHTML = "day " + selectedDay;
+        document.getElementById("test1").innerHTML = "month " + viewingMonth;
+        document.getElementById("test2").innerHTML = "detail " + detailType;
+        document.getElementById("test3").innerHTML = "timeslot " + selectedTimeSlot;
+
+        // Call the bookDatabase function with the extracted values
+        await bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType);
+    }
+
+    async function bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType) {
+        try {
+            // Make a fetch request to the /book endpoint with data in the body
+            const response = await fetch('/book', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    selectedDay,
+                    viewingMonth,
+                    selectedTimeSlot,
+                    detailType,
+                }),
+            });
+
+            // Parse the JSON response
+            const result = await response.json();
+
+            // Handle the response from the server
+            if (response.ok) {
+                console.log(result.message); // Success message from the server
+            } else {
+                console.error(result.message); // Error message from the server
+            }
+        } catch (error) {
+            // Handle errors
+            console.error("Error updating admin schedule:", error);
+        }
+    }
+
+
+    
+    
 
 
 </script>

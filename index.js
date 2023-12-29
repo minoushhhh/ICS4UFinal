@@ -493,3 +493,111 @@ app.get("/admin-schedule", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+async function updateDocument() {
+  try {
+    await client.connect();
+    console.log("Connected to the database");
+
+    const database = client.db("user-details");
+    const adminScheduleCollection = database.collection("adminSchedule");
+
+    // Update values for the first 31 days with incrementing values
+    const update = {
+      $set: {
+        "Schedule.0": Array.from({ length: 31 }, (_, index) => [
+          [String(index * 3 + 1), true, "none", "none"],
+          [String(index * 3 + 2), true, "none", "none"],
+          [String(index * 3 + 3), true, "none", "none"],
+        ]),
+        "Schedule.1": Array.from({ length: 31 }, (_, index) => [
+          [String(index * 3 + 1), true, "none", "none"],
+          [String(index * 3 + 2), true, "none", "none"],
+          [String(index * 3 + 3), true, "none", "none"],
+        ]),
+      },
+    };
+
+    const result = await adminScheduleCollection.updateMany({}, update);
+
+    if (result.modifiedCount > 0) {
+      console.log("Documents updated successfully");
+    } else {
+      console.log("No documents matched the query");
+    }
+  } finally {
+    await client.close();
+    console.log("Connection closed");
+  }
+}
+
+app.get("/update-admin", async (req, res) => {
+  try {
+    const result = await updateDocument();
+
+    if (result && result.modifiedCount > 0) {
+      res.status(200).json({ message: "Document updated successfully" });
+    } else {
+      res.status(404).json({ message: "No documents matched the query" });
+    }
+  } catch (error) {
+    console.error("Error updating admin schedule:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+async function book(month, day, timeslot, detailtype, req) {
+  try {
+    await client.connect();
+    console.log("Connected to the database");
+
+    const database = client.db("user-details");
+    const adminScheduleCollection = database.collection("adminSchedule");
+
+    // Update values for the specified index and the first element within that index
+    const update = {
+      $set: {
+        [`Schedule.${month}.${day}.${timeslot}.1`]: false,
+        [`Schedule.${month}.${day}.${timeslot}.2`]: detailtype,
+        [`Schedule.${month}.${day}.${timeslot}.3`]: req.session.username,
+      },
+    };
+
+    const result = await adminScheduleCollection.updateOne(
+      { id1: "hello" },
+      update
+    );
+
+    if (result.modifiedCount > 0) {
+      console.log("Document updated successfully");
+    } else {
+      console.log("No document matched the query");
+    }
+  } finally {
+    await client.close();
+    console.log("Connection closed");
+  }
+}
+
+app.post("/book", async (req, res) => {
+  try {
+    const { selectedDay, viewingMonth, selectedTimeSlot, detailType } =
+      req.body;
+    const result = await book(
+      viewingMonth,
+      selectedDay,
+      selectedTimeSlot,
+      detailType,
+      req
+    );
+
+    if (result && result.modifiedCount > 0) {
+      res.status(200).json({ message: "Document updated successfully" });
+    } else {
+      res.status(404).json({ message: "No documents matched the query" });
+    }
+  } catch (error) {
+    console.error("Error updating admin schedule:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
