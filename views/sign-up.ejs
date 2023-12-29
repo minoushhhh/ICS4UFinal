@@ -11,7 +11,7 @@
     <div class="fade-in-container">
         <h1 class="sign-up-title">Sign-Up</h1>
         <div class="sign-up-form">
-            <form id="signupForm" action="/sign-up-form" method="post" onsubmit="return checkFields()">
+            <form id="signupForm" action="/sign-up-form" method="post" onsubmit="return fieldsCheck()">
 
                 <input type="text" id="firstName" name="firstName" class="input-box" placeholder="First name" required>
                 <br><br>
@@ -37,6 +37,7 @@
                 <span id="usernameAlert" class="alertText"></span><br><br>
 
                 <input type="text" id="password" name="password" class="input-box" placeholder="Password" required>
+
                 <span id="passwordAlert" class="alertText"></span><br><br>
 
                 <div class="input-container">
@@ -62,8 +63,8 @@
 </body>
 
 <script>
-    function checkFields() {
-        let passwordAlert = document.getElementById("confirmPasswordAlert");
+    function fieldsCheck() {
+        let passwordAlert = document.getElementById("passwordAlert");
         let emailAlert = document.getElementById("emailAlert");
 
         passwordAlert.textContent = "";
@@ -72,8 +73,17 @@
         let password = document.getElementById("password").value;
         let confirmPassword = document.getElementById("confirmPassword").value;
 
-        if (password != confirmPassword) {
+        if (password !== confirmPassword) {
+            passwordAlert.style.opacity = 1;
             passwordAlert.textContent = "Passwords do not match";
+            return false;
+        }
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        if (!passwordRegex.test(password)) {
+            passwordAlert.style.opacity = 1;
+            passwordAlert.textContent = "Must have 8 characters, one uppercase, one lowercase, and one special character";
             return false;
         }
 
@@ -81,6 +91,7 @@
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!emailRegex.test(email)) {
+            emailAlert.style.opacity = 1;
             emailAlert.textContent = "Invalid e-mail address";
             return false;
         }
@@ -89,9 +100,10 @@
     }
 
     let usernameAlert = document.getElementById("usernameAlert");
-    var usernameTaken = "<%= usernameTaken %>";
+    let usernameTaken = "<%= usernameTaken %>";
 
     if (usernameTaken) {
+        usernameAlert.style.opacity = 1;
         usernameAlert.textContent = "Username taken";
     }
     if (performance.navigation.type === 1 && usernameTaken) {

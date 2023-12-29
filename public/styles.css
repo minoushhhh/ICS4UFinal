@@ -6,6 +6,10 @@
   color: black;
 }
 
+#signupForm {
+  padding-left: 1vw;
+}
+
 .homepage-title {
   font-family: "Nunito";
   text-align: center;
@@ -19,8 +23,13 @@
 }
 
 .alertText {
-  padding-left: 15px;
+  position: absolute;
+  padding-left: 0.5vw;
+  padding-top: 1.5vh;
   color: red;
+  font-weight: bold;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
 }
 
 .form-hyperlink {
