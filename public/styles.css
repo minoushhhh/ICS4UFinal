@@ -201,9 +201,11 @@
   display: flex;
   padding: 10px;
   padding-bottom: 2vh;
-  color: red;
+  opacity: 0;
   justify-content: center;
   align-items: center;
+  height: 2vh;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .login-subtitle {

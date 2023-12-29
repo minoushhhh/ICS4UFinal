@@ -103,6 +103,7 @@
     const subject = document.getElementById("subject");
     const email = document.getElementById("email");
     const text = document.getElementById("text");
+
     function popup() {
       if (!checkValidEmail()) {
         alert("Invalid e-mail address provided.");
@@ -111,6 +112,7 @@
         alert("Form submitted successfully.");
       }
     }
+
     function checkValidEmail() {
       const email = document.getElementById('email').value;
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

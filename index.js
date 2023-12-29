@@ -228,16 +228,72 @@ app.get("/logout", (req, res) => {
   });
 });
 
-app.post("/login-form", async (req, res) => {
+async function checkUserLogin(user, pass, req, res) {
+  console.log("Checking login info...");
   try {
-    const user = req.body.username + "";
-    const pass = req.body.password + "";
+    await client.connect();
 
-    await checkLogin(user, pass, req, res);
-  } catch (error) {
-    console.error(error);
-    res.send("Login failed, try again.");
-    return;
+    const database = client.db("user-details");
+    const details = database.collection("details");
+
+    let query;
+
+    if (user.includes("@")) {
+      const email = { email: user };
+      query = await details.findOne(email);
+      if (query === null) {
+        console.log("email not found");
+        req.session.loginInvalid = true;
+        return { success: false };
+      }
+    } else {
+      const username = { username: user };
+      query = await details.findOne(username);
+      if (query === null) {
+        console.log("user not found");
+        req.session.loginInvalid = true;
+        return { success: false };
+      }
+    }
+
+    const detailsDoc = await details.findOne(query);
+
+    if (detailsDoc) {
+      const password = detailsDoc.password;
+      if (password == pass) {
+        req.session.loginInvalid = false;
+        return { success: true, userData: detailsDoc };
+      } else {
+        console.log("incorrect password");
+        req.session.loginInvalid = true;
+        return { success: false };
+      }
+    }
+  } finally {
+    await client.close();
+  }
+}
+
+app.post("/check-login", async (req, res) => {
+  const userName = req.body.user;
+  const passWord = req.body.pass;
+  const result = await checkUserLogin(userName, passWord, req, res);
+  if (result.success) {
+    req.session.username = result.userData.username;
+    req.session.userData = {
+      firstName: result.userData.firstName,
+      lastName: result.userData.lastName,
+      email: result.userData.email,
+      phoneNum: result.userData.phoneNumber,
+      adr: result.userData.address,
+      pCode: result.userData.postalCode,
+      userName: result.userData.username,
+      passWord: result.userData.password,
+    };
+
+    res.send("Login successful");
+  } else {
+    res.send("Invalid credentials");
   }
 });
 
@@ -369,68 +425,6 @@ app.post("/sign-up-form", async (req, res) => {
 app.listen(3000, () => {
   console.log("Express server initialized");
 });
-
-//Check login information when logged in
-async function checkLogin(user, pass, req, res) {
-  console.log("Checking login info...");
-  try {
-    await client.connect();
-
-    const database = client.db("user-details");
-    const details = database.collection("details");
-
-    let query;
-
-    if (user.includes("@")) {
-      const email = { email: user };
-      query = await details.findOne(email);
-      if (query === null) {
-        console.log("email not found");
-        req.session.loginInvalid = true;
-        res.redirect("/login");
-        return;
-      }
-    } else {
-      const username = { username: user };
-      query = await details.findOne(username);
-      if (query === null) {
-        console.log("user not found");
-        req.session.loginInvalid = true;
-        res.redirect("/login");
-        return;
-      }
-    }
-
-    const detailsDoc = await details.findOne(query);
-
-    if (detailsDoc) {
-      const password = detailsDoc.password;
-      if (password == pass) {
-        req.session.username = detailsDoc.username;
-        req.session.userData = {
-          firstName: detailsDoc.firstName,
-          lastName: detailsDoc.lastName,
-          email: detailsDoc.email,
-          phoneNum: detailsDoc.phoneNumber,
-          adr: detailsDoc.address,
-          pCode: detailsDoc.postalCode,
-          userName: detailsDoc.username,
-          passWord: detailsDoc.password,
-        };
-        console.log("Correct password");
-        res.redirect("/profile");
-        return;
-      } else {
-        console.log("Incorrect password");
-        req.session.loginInvalid = true;
-        res.redirect("/login");
-        return;
-      }
-    }
-  } finally {
-    await client.close();
-  }
-}
 
 //Saving the user details to the database by connecting to it and inserting the form details.
 async function saveDetails(formData) {
