@@ -10,33 +10,26 @@
     <div class="fade-in-container">
 
         <div class="options">
-            <div class="colouredBox">
-                <input type="button" onclick="submit" id="option1" value="Select">
-
+            <div class="colouredBox" id="c1">
+                <button type="button" onclick="updateSelectedDetail(1)" id="option1">Select</button>
             </div>
-
-            <div class="colouredBox">
-                <input type="button" onclick="submit" id="option2" value="Select">
-
+            
+            <div class="colouredBox" id="c2">
+                <button type="button" onclick="updateSelectedDetail(2)" id="option2">Select</button>
             </div>
-
-            <div class="colouredBox">
-                <input type="button" onclick="submit" id="option3" value="Select">
-
-
+            
+            <div class="colouredBox" id="c3">
+                <button type="button" onclick="updateSelectedDetail(3)" id="option3">Select</button>
             </div>
-
-            <div class="colouredBox">
-                <input type="button" onclick="submit" id="option4" value="Select">
-
-
+            
+            <div class="colouredBox" id="c4">
+                <button type="button" onclick="updateSelectedDetail(4)" id="option4">Select</button>
             </div>
+            
 
         </div>
         <!-- 
-            <p id="test">hello</p>
-            <p id="test1">hello</p>
-            <p id="test2">hello</p>
+            
          -->
         
 
@@ -103,6 +96,12 @@
             <button id="36" class="day" onclick="getDay(36)"></button>
 
         </div>
+
+        <button onclick="book()">BOOK</button>
+        <p id="test">hello</p>
+        <p id="test1">hello</p>
+        <p id="test2">hello</p>
+        <p id="test3">hello</p>
 
     </div>
 
@@ -209,7 +208,6 @@
         try {
             // Make a fetch request to the /admin-schedule endpoint
             const response = await fetch('/update-admin');
-            adminSchedule = await response.json();
         } catch (error) {
             // Handle errors
             console.error("Error getting admin schedule:", error);
@@ -291,6 +289,7 @@
         var tempMonth = new Date();
 
         selectedDay = document.getElementById(dayInput).innerText;
+        selectedDay--;
         updateSelectedDay(dayInput);
 
         let currentMonthIndex;
@@ -317,9 +316,9 @@
         document.getElementById("time2").style.display = "block";
         document.getElementById("time3").style.display = "block";
 
-        document.getElementById("time1").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay-1][0][0]);
-        document.getElementById("time2").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay-1][1][0]);
-        document.getElementById("time3").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay-1][2][0]);
+        document.getElementById("time1").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
+        document.getElementById("time2").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][1][0]);
+        document.getElementById("time3").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][2][0]);
 
     }
 
@@ -358,6 +357,59 @@
         document.getElementById("time2").style.backgroundColor = "ButtonFace";
         document.getElementById("time3").style.backgroundColor = "ButtonFace";
     }
+
+    function updateSelectedDetail(id) {
+        detailType = id - 1;
+        let pressed = document.getElementById("c" + id);
+        document.getElementById("c1").style.backgroundColor = "#3498db";
+        document.getElementById("c2").style.backgroundColor = "#3498db";
+        document.getElementById("c3").style.backgroundColor = "#3498db";
+        document.getElementById("c4").style.backgroundColor = "#3498db";
+        pressed.style.backgroundColor = "blue";
+    
+    }
+
+    async function book() {
+        document.getElementById("test").innerHTML = "day " + selectedDay;
+        document.getElementById("test1").innerHTML = "month " + viewingMonth;
+        document.getElementById("test2").innerHTML = "detail " + detailType;
+        document.getElementById("test3").innerHTML = "timeslot " + selectedTimeSlot;
+
+        // Call the bookDatabase function with the extracted values
+        await bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType);
+    }
+
+    async function bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType) {
+        try {
+            // Make a fetch request to the /book endpoint with data in the body
+            const response = await fetch('/book', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    selectedDay,
+                    viewingMonth,
+                    selectedTimeSlot,
+                    detailType,
+                }),
+            });
+
+            // Parse the JSON response
+            const result = await response.json();
+
+            // Handle the response from the server
+            if (response.ok) {
+                console.log(result.message); // Success message from the server
+            } else {
+                console.error(result.message); // Error message from the server
+            }
+        } catch (error) {
+            // Handle errors
+            console.error("Error updating admin schedule:", error);
+        }
+    }
+
 
     
     
