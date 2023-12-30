@@ -38,49 +38,41 @@
                 <div class="options-grid-container">
 
                     <div class="options-grid hidden-option">
-                        <a href="/booking">
-                            <button class="button-option">
-                                <h1>Interior</h1>
-                                <p class="button-option-text">Elevate your ride's interior with our Detailing service.
-                                    We'll
-                                    clean, vacuum, and restore, keeping it straightforward and effective.</p>
-                                <h2 id="p1"></h2>
-                            </button>
-                        </a>
+                        <button class="button-option" onclick="redirectBooking(1)">
+                            <h1>Interior</h1>
+                            <p class="button-option-text">Elevate your ride's interior with our Detailing service.
+                                We'll
+                                clean, vacuum, and restore, keeping it straightforward and effective.</p>
+                            <h2 id="p1"></h2>
+                        </button>
                     </div>
 
                     <div class="options-grid hidden-option">
-                        <a href="/booking">
-                            <button class="button-option">
-                                <h1>Exterior</h1>
-                                <p class="button-option-text">Boost your car's street appeal with our Exterior
-                                    Detailing. A
-                                    simple wash, wax, and buff to make it shine without unnecessary frills.</p>
-                                <h2 id="p2"></h2>
-                            </button>
-                        </a>
+                        <button class="button-option" onclick="redirectBooking(2)">
+                            <h1>Exterior</h1>
+                            <p class="button-option-text">Boost your car's street appeal with our Exterior
+                                Detailing. A
+                                simple wash, wax, and buff to make it shine without unnecessary frills.</p>
+                            <h2 id="p2"></h2>
+                        </button>
                     </div>
 
                     <div class="options-grid hidden-option">
-                        <a href="/booking">
-                            <button class="button-option">
-                                <h1>Full Package</h1>
-                                <p class="button-option-text">Give your vehicle an all-around refresh with our Full
-                                    Detailing. No fluff, just a thorough inside-out clean for a sleek look.</p>
-                                <h2 id="p3"></h2>
-                            </button>
-                        </a>
+                        <button class="button-option" onclick="redirectBooking(3)">
+                            <h1>Full Package</h1>
+                            <p class="button-option-text">Give your vehicle an all-around refresh with our Full
+                                Detailing. No fluff, just a thorough inside-out clean for a sleek look.</p>
+                            <h2 id="p3"></h2>
+                        </button>
                     </div>
 
                     <div class="options-grid hidden-option">
-                        <a href="/booking">
-                            <button class="button-option">
-                                <h1>Headlight Polish</h1>
-                                <p class="button-option-text">Enhance your night driving visibility with our Headlight
-                                    Polishing. Clearing up headlights without the fuss.</p>
-                                <h2 id="p4"></h2>
-                            </button>
-                        </a>
+                        <button class="button-option" onclick="redirectBooking(4)">
+                            <h1>Headlight Polish</h1>
+                            <p class="button-option-text">Enhance your night driving visibility with our Headlight
+                                Polishing. Clearing up headlights without the fuss.</p>
+                            <h2 id="p4"></h2>
+                        </button>
                     </div>
 
                 </div>
@@ -97,6 +89,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
 <script>
+    function redirectBooking(buttonId) {
+        window.location.href = '/booking?selectedButton=' + buttonId;
+    }
     showLabel();
     function moveUploadImage() {
         const upload = document.getElementById("upload-image-container");

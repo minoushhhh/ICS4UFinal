@@ -9,38 +9,62 @@
 
     <div class="fade-in-container">
 
+        <h1 class="title">Book a detail with us.</h1>
+
         <div class="options">
-            <div class="colouredBox" id="c1">
-                <button type="button" onclick="updateSelectedDetail(1)" id="option1">Select</button>
+            <div>
+                <button class="button-option" onclick="updateSelectedDetail(1)" id="btn1">
+                    <h1>Interior</h1>
+                    <p class="button-option-text">Elevate your ride's interior with our Detailing service.
+                        We'll
+                        clean, vacuum, and restore, keeping it straightforward and effective.</p>
+                    <h2 id="p1"></h2>
+                </button>
             </div>
-            
-            <div class="colouredBox" id="c2">
-                <button type="button" onclick="updateSelectedDetail(2)" id="option2">Select</button>
+
+            <div>
+                <button class="button-option " onclick="updateSelectedDetail(2)" id="btn2">
+                    <h1>Exterior</h1>
+                    <p class="button-option-text">Boost your car's street appeal with our Exterior
+                        Detailing. A
+                        simple wash, wax, and buff to make it shine without unnecessary frills.</p>
+                    <h2 id="p2"></h2>
+                </button>
             </div>
-            
-            <div class="colouredBox" id="c3">
-                <button type="button" onclick="updateSelectedDetail(3)" id="option3">Select</button>
+
+            <div>
+                <button class="button-option" onclick="updateSelectedDetail(3)" id="btn3">
+                    <h1>Full Package</h1>
+                    <p class="button-option-text">Give your vehicle an all-around refresh with our Full
+                        Detailing. No fluff, just a thorough inside-out clean for a sleek look.</p>
+                    <h2 id="p3"></h2>
+                </button>
             </div>
-            
-            <div class="colouredBox" id="c4">
-                <button type="button" onclick="updateSelectedDetail(4)" id="option4">Select</button>
+
+            <div>
+                <button class="button-option" onclick="updateSelectedDetail(4)" id="btn4">
+                    <h1>Headlight Polish</h1>
+                    <p class="button-option-text">Enhance your night driving visibility with our Headlight
+                        Polishing. Clearing up headlights without the fuss.</p>
+                    <h2 id="p4"></h2>
+                </button>
             </div>
-            
+
 
         </div>
         <!-- 
             
          -->
-        
 
-        <button id = "time1" hidden onclick="updateSelectedTime(1)">1</button>
-        <button id = "time2" hidden onclick="updateSelectedTime(2)">2</button>
-        <button id = "time3" hidden onclick="updateSelectedTime(3)">3</button> <br> <br>
+
+        <button id="time1" hidden onclick="updateSelectedTime(1)">1</button>
+        <button id="time2" hidden onclick="updateSelectedTime(2)">2</button>
+        <button id="time3" hidden onclick="updateSelectedTime(3)">3</button> <br> <br>
 
         <!-- <p id = "showTime">test</p> -->
 
         <!-- <button onclick="updateDatabase()"></button> DO NOT PRESS THIS IS A RESET DATABASE BUTTON OASKJDLAKSJDLKASJDLKJL-->
-        
+
         <div>
             <button onclick="updateCalendar(0)">Previous</button>
             <button onclick="updateCalendar(1)">Next</button>
@@ -48,13 +72,13 @@
 
 
         <div class="calendar">
-            <div class="day">Sun</div>
-            <div class="day">Mon</div>
-            <div class="day">Tue</div>
-            <div class="day">Wed</div>
-            <div class="day">Thu</div>
-            <div class="day">Fri</div>
-            <div class="day">Sat</div>
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
 
 
             <button id="0" class="day" onclick="getDay(0)"></button>
@@ -130,10 +154,14 @@
 
     .options {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        height: 100vh;
-        margin: 0;
+        padding-top: 8vh;
+        padding-left: 11vw;
+        padding-right: 11vw;
+        padding-bottom: 8vh;
+        gap: 2vw;
+
     }
 
     .colouredBox {
@@ -168,6 +196,14 @@
 
 
 <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedButton = urlParams.get('selectedButton');
+    if (selectedButton) {
+        const btn = document.getElementById("btn" + selectedButton);
+        btn.style.backgroundColor = "#00b4d8";
+    }
+
+
     let detailType;
     let selectedDay;
     let selectedTimeSlot;
@@ -204,7 +240,7 @@
         }
     }
 
-    async function updateDatabase(){
+    async function updateDatabase() {
         try {
             // Make a fetch request to the /admin-schedule endpoint
             const response = await fetch('/update-admin');
@@ -216,13 +252,13 @@
     }
 
     function updateCalendar(currentOrNext) {
-        if (currentOrNext != viewingMonth){
+        if (currentOrNext != viewingMonth) {
             document.getElementById("time1").style.display = "none";
             document.getElementById("time2").style.display = "none";
             document.getElementById("time3").style.display = "none";
             resetSelected();
         }
-        
+
         clearCalendar();
         if (currentOrNext == 0) {
             let counter = firstDay;
@@ -326,18 +362,18 @@
         let pressed = document.getElementById(id);
         resetSelectedTime();
         if (pressed.innerHTML.trim() !== "") {
-            for (let i = 0; i < 37; i++){
+            for (let i = 0; i < 37; i++) {
                 document.getElementById(i.toString()).style.backgroundColor = "aliceblue";
             }
             pressed.style.backgroundColor = "blue";
         }
-    
+
     }
 
     function resetSelected() {
         selectedDay = undefined;
-        for (let i = 0; i < 37; i++){
-                document.getElementById(i.toString()).style.backgroundColor = "aliceblue";
+        for (let i = 0; i < 37; i++) {
+            document.getElementById(i.toString()).style.backgroundColor = "aliceblue";
         }
     }
 
@@ -348,10 +384,10 @@
         document.getElementById("time2").style.backgroundColor = "ButtonFace";
         document.getElementById("time3").style.backgroundColor = "ButtonFace";
         pressed.style.backgroundColor = "blue";
-    
+
     }
 
-    function resetSelectedTime(){
+    function resetSelectedTime() {
         selectedTimeSlot = undefined;
         document.getElementById("time1").style.backgroundColor = "ButtonFace";
         document.getElementById("time2").style.backgroundColor = "ButtonFace";
@@ -360,13 +396,13 @@
 
     function updateSelectedDetail(id) {
         detailType = id - 1;
-        let pressed = document.getElementById("c" + id);
-        document.getElementById("c1").style.backgroundColor = "#3498db";
-        document.getElementById("c2").style.backgroundColor = "#3498db";
-        document.getElementById("c3").style.backgroundColor = "#3498db";
-        document.getElementById("c4").style.backgroundColor = "#3498db";
-        pressed.style.backgroundColor = "blue";
-    
+        let pressed = document.getElementById("btn" + id);
+        pressed.style.backgroundColor = "#00b4d8";
+        for (let i = 1; i < 5; i++) {
+            if (i != id) {
+                document.getElementById("btn" + i).style.backgroundColor = "#e7e7e7";
+            }
+        }
     }
 
     async function book() {
@@ -411,8 +447,8 @@
     }
 
 
-    
-    
+
+
 
 
 </script>
