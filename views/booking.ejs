@@ -66,12 +66,14 @@
         <!-- <button onclick="updateDatabase()"></button> DO NOT PRESS THIS IS A RESET DATABASE BUTTON OASKJDLAKSJDLKASJDLKJL-->
 
         <div>
-            <button onclick="updateCalendar(0)">Previous</button>
-            <button onclick="updateCalendar(1)">Next</button>
+            <button class="calendarUpdateButton" onclick="updateCalendar(0)">Previous</button>
+            <button class="calendarUpdateButton" onclick="updateCalendar(1)">Next</button>
         </div>
 
+        <br><br>
 
         <div class="calendar">
+
             <div>Sun</div>
             <div>Mon</div>
             <div>Tue</div>
@@ -79,7 +81,6 @@
             <div>Thu</div>
             <div>Fri</div>
             <div>Sat</div>
-
 
             <button id="0" class="day" onclick="getDay(0)"></button>
             <button id="1" class="day" onclick="getDay(1)"></button>
@@ -121,6 +122,8 @@
 
         </div>
 
+        <br><br>
+
         <button onclick="book()">BOOK</button>
         <p id="test">hello</p>
         <p id="test1">hello</p>
@@ -132,24 +135,45 @@
 </body>
 
 <style>
+    .calendarUpdateButton {
+        width: 12.5vw;
+        height: 50px;
+        display: inline-block;
+        font-size: 18px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 12px;
+        cursor: pointer;
+        background-color: #0071e3;
+        color: white;
+        border: none;
+        transition: background-color 0.3s ease;
+        font-family: "Nunito", "Helvetica Neue";
+    }
+
+    .calendarUpdateButton:hover {
+        background-color: #00b4d8;
+    }
+
     body {
         font-family: Arial, sans-serif;
         text-align: center;
         margin: 20px;
     }
 
-    .calendar {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 5px;
+    .day {
+        width: 48px;
+        height: 48px;
+        line-height: 30px;
+        border: none;
+        cursor: pointer;
+        font-family: "Nunito", "Helvetica Neue";
+        font-weight: bold;
     }
 
-    .day {
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-        border: 1px solid #ccc;
-        cursor: pointer;
+    .day:hover {
+        border: 2px solid #0071e3;
+        border-radius: 12px;
     }
 
     .options {
@@ -183,15 +207,12 @@
         grid-template-columns: repeat(7, 50px);
         gap: 5px;
         justify-content: center;
-        padding: 50px;
-    }
-
-    .day {
-        width: 50px;
-        height: 50px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        cursor: pointer;
+        padding-top: 8vh;
+        margin: auto;
+        border: 2px solid rgba(0, 0, 0, 0.39);
+        border-radius: 14px;
+        width: 25vw;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     }
 </style>
 
@@ -203,6 +224,11 @@
     if (selectedButton) {
         const btn = document.getElementById("btn" + selectedButton);
         btn.style.backgroundColor = "#00b4d8";
+        for (let i = 1; i < 5; i++) {
+            if (i != selectedButton) {
+                document.getElementById("btn" + i).style.backgroundColor = "#e7e7e7";
+            }
+        }
     }
 
 
@@ -269,7 +295,6 @@
                 let tempDay = document.getElementById((firstDay + i).toString());
                 tempDay.textContent = day;
                 let timeSlots = {}
-
             }
 
         }
@@ -281,6 +306,13 @@
             }
 
 
+        }
+
+        for (let i = 0; i < 37; i++) {
+            let dayBtn = document.getElementById(i.toString());
+            if (dayBtn.textContent == "") {
+                dayBtn.style.visibility = "hidden";
+            }
         }
 
         viewingMonth = currentOrNext;
@@ -354,27 +386,27 @@
         document.getElementById("time2").style.display = "block";
         document.getElementById("time3").style.display = "block";
 
-        if(JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0])==null){
+        if (JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]) == null) {
             document.getElementById("time1").style.display = 'none';
         }
-        else{
+        else {
             document.getElementById("time1").style.display = 'block'
             document.getElementById("time1").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
         }
 
-        if(JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][1][0])==null){
+        if (JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][1][0]) == null) {
             document.getElementById("time2").style.display = 'none';
         }
-        else{
+        else {
             document.getElementById("time2").style.display = 'block'
             document.getElementById("time2").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
         }
 
 
-        if(JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][2][0])==null){
+        if (JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][2][0]) == null) {
             document.getElementById("time3").style.display = 'none';
         }
-        else{
+        else {
             document.getElementById("time3").style.display = 'block'
             document.getElementById("time3").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
         }
@@ -391,9 +423,10 @@
         resetSelectedTime();
         if (pressed.innerHTML.trim() !== "") {
             for (let i = 0; i < 37; i++) {
-                document.getElementById(i.toString()).style.backgroundColor = "aliceblue";
+                document.getElementById(i.toString()).style.backgroundColor = "transparent";
             }
-            pressed.style.backgroundColor = "blue";
+            pressed.style.backgroundColor = "#0071e3";
+            pressed.style.borderRadius = "12px";
         }
 
     }
@@ -401,7 +434,8 @@
     function resetSelected() {
         selectedDay = undefined;
         for (let i = 0; i < 37; i++) {
-            document.getElementById(i.toString()).style.backgroundColor = "aliceblue";
+            document.getElementById(i.toString()).style.backgroundColor = "transparent";
+            document.getElementById(i.toString()).style.visibility = "visible";
         }
     }
 
@@ -480,24 +514,6 @@
 
 
 </script>
-
-
-
-<style>
-    .day {
-        background-color: aliceblue;
-
-    }
-
-    .day:hover {
-        background-color: beige;
-    }
-
-    .day:active {
-        background-color: bisque;
-    }
-</style>
-
 
 <footer>
     <%- include('layouts/footer'); -%>
