@@ -65,6 +65,8 @@
 
         <!-- <button onclick="updateDatabase()"></button> DO NOT PRESS THIS IS A RESET DATABASE BUTTON OASKJDLAKSJDLKASJDLKJL-->
 
+        <div id="viewingmonth"></div>
+
         <div>
             <button class="calendarUpdateButton" onclick="updateCalendar(0)">Previous</button>
             <button class="calendarUpdateButton" onclick="updateCalendar(1)">Next</button>
@@ -231,6 +233,7 @@
         }
     }
 
+    let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     let detailType;
     let selectedDay;
@@ -280,6 +283,7 @@
     }
 
     function updateCalendar(currentOrNext) {
+        
         if (currentOrNext != viewingMonth) {
             document.getElementById("time1").style.display = "none";
             document.getElementById("time2").style.display = "none";
@@ -289,6 +293,7 @@
 
         clearCalendar();
         if (currentOrNext == 0) {
+            document.getElementById("viewingmonth").innerHTML = monthNames[month];
             let counter = firstDay;
             for (let i = 0; i < daysInMonth; i++) {
                 let day = i + 1;
@@ -299,6 +304,7 @@
 
         }
         else {
+            document.getElementById("viewingmonth").innerHTML = monthNames[nextMonth];
             let counter = nextFirstDay;
             for (let i = 0; i < nextDaysInMonth; i++) {
                 let tempDay = document.getElementById((nextFirstDay + i).toString());
@@ -374,7 +380,6 @@
             currentMonthIndex = tempMonth.getMonth() + 1;
         }
 
-        let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
         currentMonthName = monthNames[currentMonthIndex % 12];
 
