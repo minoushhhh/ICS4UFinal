@@ -52,91 +52,143 @@
 
 
         </div>
-        <!-- 
-            
-         -->
-
-
-        <button id="time1" hidden onclick="updateSelectedTime(1)">1</button>
-        <button id="time2" hidden onclick="updateSelectedTime(2)">2</button>
-        <button id="time3" hidden onclick="updateSelectedTime(3)">3</button> <br> <br>
 
         <!-- <p id = "showTime">test</p> -->
 
         <!-- <button onclick="updateDatabase()"></button> DO NOT PRESS THIS IS A RESET DATABASE BUTTON OASKJDLAKSJDLKASJDLKJL-->
 
-        <div id="viewingmonth"></div>
-
         <div>
-            <button class="calendarUpdateButton" onclick="updateCalendar(0)">Previous</button>
-            <button class="calendarUpdateButton" onclick="updateCalendar(1)">Next</button>
+            <button class="calendarUpdateButton" onclick="updateCalendar(0)">Previous Month</button>
+            <button class="calendarUpdateButton" onclick="updateCalendar(1)">Next Month</button>
+        </div>
+
+        <br>
+
+        <div class="calendar-container">
+
+            <h2 class="viewingmonth" id="viewingmonth"></h2>
+
+            <div class="calendar-grid">
+
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+
+                <button id="0" class="day" onclick="getDay(0)"></button>
+                <button id="1" class="day" onclick="getDay(1)"></button>
+                <button id="2" class="day" onclick="getDay(2)"></button>
+                <button id="3" class="day" onclick="getDay(3)"></button>
+                <button id="4" class="day" onclick="getDay(4)"></button>
+                <button id="5" class="day" onclick="getDay(5)"></button>
+                <button id="6" class="day" onclick="getDay(6)"></button>
+                <button id="7" class="day" onclick="getDay(7)"></button>
+                <button id="8" class="day" onclick="getDay(8)"></button>
+                <button id="9" class="day" onclick="getDay(9)"></button>
+                <button id="10" class="day" onclick="getDay(10)"></button>
+                <button id="11" class="day" onclick="getDay(11)"></button>
+                <button id="12" class="day" onclick="getDay(12)"></button>
+                <button id="13" class="day" onclick="getDay(13)"></button>
+                <button id="14" class="day" onclick="getDay(14)"></button>
+                <button id="15" class="day" onclick="getDay(15)"></button>
+                <button id="16" class="day" onclick="getDay(16)"></button>
+                <button id="17" class="day" onclick="getDay(17)"></button>
+                <button id="18" class="day" onclick="getDay(18)"></button>
+                <button id="19" class="day" onclick="getDay(19)"></button>
+                <button id="20" class="day" onclick="getDay(20)"></button>
+                <button id="21" class="day" onclick="getDay(21)"></button>
+                <button id="22" class="day" onclick="getDay(22)"></button>
+                <button id="23" class="day" onclick="getDay(23)"></button>
+                <button id="24" class="day" onclick="getDay(24)"></button>
+                <button id="25" class="day" onclick="getDay(25)"></button>
+                <button id="26" class="day" onclick="getDay(26)"></button>
+                <button id="27" class="day" onclick="getDay(27)"></button>
+                <button id="28" class="day" onclick="getDay(28)"></button>
+                <button id="29" class="day" onclick="getDay(29)"></button>
+                <button id="30" class="day" onclick="getDay(30)"></button>
+                <button id="31" class="day" onclick="getDay(31)"></button>
+                <button id="32" class="day" onclick="getDay(32)"></button>
+                <button id="33" class="day" onclick="getDay(33)"></button>
+                <button id="34" class="day" onclick="getDay(34)"></button>
+                <button id="35" class="day" onclick="getDay(35)"></button>
+                <button id="36" class="day" onclick="getDay(36)"></button>
+
+            </div>
+
+        </div>
+
+        <br><br><br>
+
+        <h2>Select a time.</h2>
+
+        <div class="time-slot-container">
+            <button class="timeSlotButton" id="time1" onclick="updateSelectedTime(1)">1</button>
+            <button class="timeSlotButton" id="time2" onclick="updateSelectedTime(2)">2</button>
+            <button class="timeSlotButton" id="time3" onclick="updateSelectedTime(3)">3</button>
         </div>
 
         <br><br>
 
-        <div class="calendar">
-
-            <div>Sun</div>
-            <div>Mon</div>
-            <div>Tue</div>
-            <div>Wed</div>
-            <div>Thu</div>
-            <div>Fri</div>
-            <div>Sat</div>
-
-            <button id="0" class="day" onclick="getDay(0)"></button>
-            <button id="1" class="day" onclick="getDay(1)"></button>
-            <button id="2" class="day" onclick="getDay(2)"></button>
-            <button id="3" class="day" onclick="getDay(3)"></button>
-            <button id="4" class="day" onclick="getDay(4)"></button>
-            <button id="5" class="day" onclick="getDay(5)"></button>
-            <button id="6" class="day" onclick="getDay(6)"></button>
-            <button id="7" class="day" onclick="getDay(7)"></button>
-            <button id="8" class="day" onclick="getDay(8)"></button>
-            <button id="9" class="day" onclick="getDay(9)"></button>
-            <button id="10" class="day" onclick="getDay(10)"></button>
-            <button id="11" class="day" onclick="getDay(11)"></button>
-            <button id="12" class="day" onclick="getDay(12)"></button>
-            <button id="13" class="day" onclick="getDay(13)"></button>
-            <button id="14" class="day" onclick="getDay(14)"></button>
-            <button id="15" class="day" onclick="getDay(15)"></button>
-            <button id="16" class="day" onclick="getDay(16)"></button>
-            <button id="17" class="day" onclick="getDay(17)"></button>
-            <button id="18" class="day" onclick="getDay(18)"></button>
-            <button id="19" class="day" onclick="getDay(19)"></button>
-            <button id="20" class="day" onclick="getDay(20)"></button>
-            <button id="21" class="day" onclick="getDay(21)"></button>
-            <button id="22" class="day" onclick="getDay(22)"></button>
-            <button id="23" class="day" onclick="getDay(23)"></button>
-            <button id="24" class="day" onclick="getDay(24)"></button>
-            <button id="25" class="day" onclick="getDay(25)"></button>
-            <button id="26" class="day" onclick="getDay(26)"></button>
-            <button id="27" class="day" onclick="getDay(27)"></button>
-            <button id="28" class="day" onclick="getDay(28)"></button>
-            <button id="29" class="day" onclick="getDay(29)"></button>
-            <button id="30" class="day" onclick="getDay(30)"></button>
-            <button id="31" class="day" onclick="getDay(31)"></button>
-            <button id="32" class="day" onclick="getDay(32)"></button>
-            <button id="33" class="day" onclick="getDay(33)"></button>
-            <button id="34" class="day" onclick="getDay(34)"></button>
-            <button id="35" class="day" onclick="getDay(35)"></button>
-            <button id="36" class="day" onclick="getDay(36)"></button>
-
-        </div>
+        <button class="calendarUpdateButton" onclick="book()">Book</button>
 
         <br><br>
 
-        <button onclick="book()">BOOK</button>
-        <p id="test">hello</p>
-        <p id="test1">hello</p>
-        <p id="test2">hello</p>
-        <p id="test3">hello</p>
+        <p id="test"></p>
+        <p id="test1"></p>
+        <p id="test2"></p>
+        <p id="test3"></p>
+
+        <br>
 
     </div>
 
 </body>
 
 <style>
+    .time-slot-container {
+        display: flex;
+        padding-top: 2vh;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .timeSlotButton {
+        width: 3vw;
+        height: 50px;
+        display: inline-block;
+        font-size: 18px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 12px;
+        cursor: pointer;
+        background-color: #0071e3;
+        color: white;
+        border: none;
+        transition: background-color 0.3s ease;
+        font-family: "Nunito", "Helvetica Neue";
+    }
+
+    .timeSlotButton:hover {
+        background-color: #00b4d8;
+    }
+
+    .viewingmonth {
+        color: #3498db;
+    }
+
+    .calendar-container {
+        border: 2px solid rgba(0, 0, 0, 0);
+        border-radius: 14px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        width: 28vw;
+        padding-top: 3vh;
+        margin: auto;
+        background-color: #fafafa;
+    }
+
     .calendarUpdateButton {
         width: 12.5vw;
         height: 50px;
@@ -167,7 +219,9 @@
         width: 48px;
         height: 48px;
         line-height: 30px;
-        border: none;
+        border: 2px solid #0071e3;
+        border-radius: 12px;
+        border: hidden;
         cursor: pointer;
         font-family: "Nunito", "Helvetica Neue";
         font-weight: bold;
@@ -176,6 +230,8 @@
     .day:hover {
         border: 2px solid #0071e3;
         border-radius: 12px;
+        border: visible;
+        transition: border 0.05s ease-in-out;
     }
 
     .options {
@@ -204,21 +260,15 @@
 
     }
 
-    .calendar {
+    .calendar-grid {
         display: grid;
         grid-template-columns: repeat(7, 50px);
         gap: 5px;
         justify-content: center;
-        padding-top: 8vh;
+        padding-top: 3vh;
         margin: auto;
-        border: 2px solid rgba(0, 0, 0, 0.39);
-        border-radius: 14px;
-        width: 25vw;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     }
 </style>
-
-
 
 <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -261,11 +311,9 @@
 
     async function getAdminSchedule() {
         try {
-            // Make a fetch request to the /admin-schedule endpoint
             const response = await fetch('/admin-schedule');
             adminSchedule = await response.json();
         } catch (error) {
-            // Handle errors
             console.error("Error getting admin schedule:", error);
             document.getElementById('adminScheduleResult').innerHTML = "Error getting admin schedule.";
         }
@@ -273,17 +321,14 @@
 
     async function updateDatabase() {
         try {
-            // Make a fetch request to the /admin-schedule endpoint
             const response = await fetch('/update-admin');
         } catch (error) {
-            // Handle errors
             console.error("Error getting admin schedule:", error);
             document.getElementById('adminScheduleResult').innerHTML = "Error getting admin schedule.";
         }
     }
 
     function updateCalendar(currentOrNext) {
-        
         if (currentOrNext != viewingMonth) {
             document.getElementById("time1").style.display = "none";
             document.getElementById("time2").style.display = "none";
@@ -292,6 +337,7 @@
         }
 
         clearCalendar();
+
         if (currentOrNext == 0) {
             document.getElementById("viewingmonth").innerHTML = monthNames[month];
             let counter = firstDay;
@@ -301,8 +347,8 @@
                 tempDay.textContent = day;
                 let timeSlots = {}
             }
-
         }
+
         else {
             document.getElementById("viewingmonth").innerHTML = monthNames[nextMonth];
             let counter = nextFirstDay;
@@ -310,8 +356,6 @@
                 let tempDay = document.getElementById((nextFirstDay + i).toString());
                 tempDay.textContent = i + 1;
             }
-
-
         }
 
         for (let i = 0; i < 37; i++) {
@@ -322,8 +366,6 @@
         }
 
         viewingMonth = currentOrNext;
-
-
     }
 
     function clearCalendar() {
@@ -358,8 +400,6 @@
         return lastDay;
     }
 
-
-
     function getDay(dayInput) {
 
         var tempMonth = new Date();
@@ -371,7 +411,6 @@
         let currentMonthIndex;
         let currentMonthName;
 
-
         if (viewingMonth == 0) {
             currentMonthIndex = tempMonth.getMonth();
         }
@@ -380,12 +419,9 @@
             currentMonthIndex = tempMonth.getMonth() + 1;
         }
 
-
         currentMonthName = monthNames[currentMonthIndex % 12];
 
-
         //document.getElementById("test2").innerHTML = currentMonthName + " " + tempSelectedDay + " " + testArr[viewingMonth][tempSelectedDay];
-
 
         document.getElementById("time1").style.display = "block";
         document.getElementById("time2").style.display = "block";
@@ -407,7 +443,6 @@
             document.getElementById("time2").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
         }
 
-
         if (JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][2][0]) == null) {
             document.getElementById("time3").style.display = 'none';
         }
@@ -415,7 +450,6 @@
             document.getElementById("time3").style.display = 'block'
             document.getElementById("time3").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
         }
-
 
         document.getElementById("time1").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
         document.getElementById("time2").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][1][0]);
@@ -447,18 +481,19 @@
     function updateSelectedTime(id) {
         selectedTimeSlot = id - 1;
         let pressed = document.getElementById("time" + id);
-        document.getElementById("time1").style.backgroundColor = "ButtonFace";
-        document.getElementById("time2").style.backgroundColor = "ButtonFace";
-        document.getElementById("time3").style.backgroundColor = "ButtonFace";
-        pressed.style.backgroundColor = "blue";
-
+        pressed.style.backgroundColor = "#00b4d8";
+        for (let i = 1; i < 4; i++) {
+            if (i !== id) {
+                document.getElementById("time" + i).style.backgroundColor = "#e7e7e7";
+            }
+        }
     }
 
     function resetSelectedTime() {
         selectedTimeSlot = undefined;
-        document.getElementById("time1").style.backgroundColor = "ButtonFace";
-        document.getElementById("time2").style.backgroundColor = "ButtonFace";
-        document.getElementById("time3").style.backgroundColor = "ButtonFace";
+        document.getElementById("time1").style.backgroundColor = "#0071e3";
+        document.getElementById("time2").style.backgroundColor = "#0071e3";
+        document.getElementById("time3").style.backgroundColor = "#0071e3";
     }
 
     function updateSelectedDetail(id) {
@@ -473,18 +508,17 @@
     }
 
     async function book() {
-        document.getElementById("test").innerHTML = "day " + selectedDay;
-        document.getElementById("test1").innerHTML = "month " + viewingMonth;
-        document.getElementById("test2").innerHTML = "detail " + detailType;
-        document.getElementById("test3").innerHTML = "timeslot " + selectedTimeSlot;
+        //document.getElementById("test").innerHTML = "day " + selectedDay;
+        //document.getElementById("test1").innerHTML = "month " + viewingMonth;
+        //document.getElementById("test2").innerHTML = "detail " + detailType;
+        //document.getElementById("test3").innerHTML = "timeslot " + selectedTimeSlot;
 
-        // Call the bookDatabase function with the extracted values
         await bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType);
+        window.location.href = "/profile"; //Redirect to the profile for now, add a "Sucesfull booking!" message.
     }
 
     async function bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType) {
         try {
-            // Make a fetch request to the /book endpoint with data in the body
             const response = await fetch('/book', {
                 method: 'POST',
                 headers: {
@@ -498,25 +532,17 @@
                 }),
             });
 
-            // Parse the JSON response
             const result = await response.json();
 
-            // Handle the response from the server
             if (response.ok) {
-                console.log(result.message); // Success message from the server
+                console.log(result.message);
             } else {
-                console.error(result.message); // Error message from the server
+                console.error(result.message);
             }
         } catch (error) {
-            // Handle errors
             console.error("Error updating admin schedule:", error);
         }
     }
-
-
-
-
-
 
 </script>
 
