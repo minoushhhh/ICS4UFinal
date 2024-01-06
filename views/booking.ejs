@@ -532,13 +532,8 @@
         //document.getElementById("test3").innerHTML = "timeslot " + selectedTimeSlot;
         if ("<%= username %>" && selectedDay >= 0 && viewingMonth >= 0 && selectedTimeSlot >= 0 && detailType >= 0) {
             const response = await bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType);
-            if (response) {
-                //Add an alert before redirecting.
-                window.location.href = "/profile";
-            }
-            else {
-                alert("Error");
-            }
+            window.location.href = "/profile";
+            
         }
         else if (!"<%= username %>") {
             alert("Must be logged-in first to book a detail.");
