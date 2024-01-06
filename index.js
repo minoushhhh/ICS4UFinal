@@ -37,7 +37,7 @@ app.set("view engine", "ejs");
 const __dirname = path.resolve();
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("home");
 });
 
 function generateVerificationCode() {
@@ -176,8 +176,8 @@ app.get("/forgot-password", (req, res) => {
   }
 });
 
-app.get("/index", (req, res) => {
-  res.render("index");
+app.get("/home", (req, res) => {
+  res.render("home");
 });
 
 app.get("/booking", (req, res) => {
