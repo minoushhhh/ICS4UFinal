@@ -326,14 +326,17 @@
     let adminSchedule;
 
     updateCurrentInfo();
-    updateNextInfo();
-    updateCalendar(0);
+    updateNextInfo();  
     getAdminSchedule();
+   // updateCalendar(0);
+
+    
 
     async function getAdminSchedule() {
         try {
             const response = await fetch('/admin-schedule');
             adminSchedule = await response.json();
+            updateCalendar(0);
         } catch (error) {
             console.error("Error getting admin schedule:", error);
             document.getElementById('adminScheduleResult').innerHTML = "Error getting admin schedule.";
@@ -349,9 +352,14 @@
         }
     }
 
+    function updateCalendarColours(){
+
+    }
+
     function updateCalendar(currentOrNext) {
         if (currentOrNext != viewingMonth) {
             resetSelected();
+            resetSelectedTime()
         }
 
         clearCalendar();
@@ -363,7 +371,12 @@
                 let day = i + 1;
                 let tempDay = document.getElementById((firstDay + i).toString());
                 tempDay.textContent = day;
-                let timeSlots = {}
+                //let timeSlots = {}
+
+                if(adminSchedule.Schedule[0][i][0][1]==false&&adminSchedule.Schedule[0][i][1][1]==false&&adminSchedule.Schedule[0][i][2][1]==false){
+                    document.getElementById(i).disabled = true;
+                    document.getElementById(i).style.backgroundColor = "#e7e7e7";
+                }
             }
         }
 
@@ -441,37 +454,43 @@
 
         //document.getElementById("test2").innerHTML = currentMonthName + " " + tempSelectedDay + " " + testArr[viewingMonth][tempSelectedDay];
 
-        document.getElementById("time1").style.display = "block";
-        document.getElementById("time2").style.display = "block";
-        document.getElementById("time3").style.display = "block";
+        let element1 = document.getElementById("time1");
+        let element2 = document.getElementById("time2");
+        let element3 = document.getElementById("time3");
 
-        if (JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]) == null) {
-            document.getElementById("time1").style.display = 'none';
+        if(adminSchedule.Schedule[viewingMonth][selectedDay][0][1]==false){
+            element1.disabled = true;
+            element1.style.backgroundColor = "#e7e7e7";
         }
-        else {
-            document.getElementById("time1").style.display = 'block'
-            document.getElementById("time1").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
-        }
+        else{
+            element1.disabled = false;
+            element1.style.backgroundColor = "#0071e3";
 
-        if (JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][1][0]) == null) {
-            document.getElementById("time2").style.display = 'none';
-        }
-        else {
-            document.getElementById("time2").style.display = 'block'
-            document.getElementById("time2").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
         }
 
-        if (JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][2][0]) == null) {
-            document.getElementById("time3").style.display = 'none';
+        if(adminSchedule.Schedule[viewingMonth][selectedDay][1][1]==false){
+            element2.disabled = true;
+            element2.style.backgroundColor = "#e7e7e7";
         }
-        else {
-            document.getElementById("time3").style.display = 'block'
-            document.getElementById("time3").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
+        else{
+            element2.disabled = false;
+            element2.style.backgroundColor = "#0071e3";
         }
 
-        document.getElementById("time1").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
-        document.getElementById("time2").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][1][0]);
-        document.getElementById("time3").innerHTML = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][2][0]);
+
+        if(adminSchedule.Schedule[viewingMonth][selectedDay][2][1]==false){
+            element3.disabled = true;
+            element3.style.backgroundColor = "#e7e7e7";
+        }
+        else{
+            element3.disabled = false;
+            element3.style.backgroundColor = "#0071e3";
+        }
+
+        document.getElementById("time1").textContent = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
+        document.getElementById("time2").textContent = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][1][0]);
+        document.getElementById("time3").textContent = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][2][0]);
+
 
     }
 
@@ -570,6 +589,8 @@
             console.error("Error updating admin schedule:", error);
         }
     }
+
+
 </script>
 
 <footer>
