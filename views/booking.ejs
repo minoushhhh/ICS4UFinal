@@ -351,7 +351,6 @@
 
     function updateCalendar(currentOrNext) {
         if (currentOrNext != viewingMonth) {
-            //Implement disabled button when previous thing isn't selected.
             resetSelected();
         }
 
@@ -531,8 +530,23 @@
         //document.getElementById("test1").innerHTML = "month " + viewingMonth;
         //document.getElementById("test2").innerHTML = "detail " + detailType;
         //document.getElementById("test3").innerHTML = "timeslot " + selectedTimeSlot;
-        await bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType);
-        window.location.href = "/profile"; //Redirect to the profile for now, add a "Sucesfull booking!" message.
+        if ("<%= username %>" && selectedDay >= 0 && viewingMonth >= 0 && selectedTimeSlot >= 0 && detailType >= 0) {
+            const response = await bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType);
+            if (response) {
+                //Add an alert before redirecting.
+                window.location.href = "/profile";
+            }
+            else {
+                alert("Error");
+            }
+        }
+        else if (!"<%= username %>") {
+            alert("Must be logged-in first to book a detail.");
+            window.location.href = "/login";
+        }
+        else {
+            alert("Select all fields before proceeding.");
+        }
     }
 
     async function bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType) {

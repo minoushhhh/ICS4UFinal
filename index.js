@@ -181,7 +181,8 @@ app.get("/index", (req, res) => {
 });
 
 app.get("/booking", (req, res) => {
-  res.render("booking");
+  const username = req.session.username;
+  res.render("booking", { username });
 });
 
 app.get("/estimate", (req, res) => {
