@@ -126,9 +126,9 @@
                 <h2>Select a time.</h2>
 
                 <div class="time-slot-container">
-                    <button class="timeSlotButton" id="time1" onclick="updateSelectedTime(1)">1</button>
-                    <button class="timeSlotButton" id="time2" onclick="updateSelectedTime(2)">2</button>
-                    <button class="timeSlotButton" id="time3" onclick="updateSelectedTime(3)">3</button>
+                    <button class="timeSlotButton" id="time1" onclick="updateSelectedTime(1)">*</button>
+                    <button class="timeSlotButton" id="time2" onclick="updateSelectedTime(2)">*</button>
+                    <button class="timeSlotButton" id="time3" onclick="updateSelectedTime(3)">*</button>
                 </div>
 
                 <br><br>
@@ -178,7 +178,7 @@
         width: 3vw;
         height: 50px;
         display: inline-block;
-        font-size: 18px;
+        font-size: 15px;
         text-align: center;
         text-decoration: none;
         border-radius: 12px;
@@ -497,11 +497,13 @@
             element3.style.backgroundColor = "#0071e3";
         }
 
-        document.getElementById("time1").textContent = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
-        document.getElementById("time2").textContent = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][1][0]);
-        document.getElementById("time3").textContent = JSON.stringify(adminSchedule.Schedule[viewingMonth][selectedDay][2][0]);
+        //document.getElementById("time1").textContent = (adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
+        //document.getElementById("time2").textContent = (adminSchedule.Schedule[viewingMonth][selectedDay][1][0]);
+        //document.getElementById("time3").textContent = (adminSchedule.Schedule[viewingMonth][selectedDay][2][0]);
 
-
+        document.getElementById("time1").textContent = "12 PM";
+        document.getElementById("time2").textContent = "3 PM";
+        document.getElementById("time3").textContent = "6 PM";
     }
 
     function updateSelectedDay(id) {
