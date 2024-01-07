@@ -328,7 +328,7 @@
     updateCurrentInfo();
     updateNextInfo();  
     getAdminSchedule();
-   // updateCalendar(0);
+
 
     
 
@@ -356,6 +356,7 @@
 
     }
 
+
     function updateCalendar(currentOrNext) {
         if (currentOrNext != viewingMonth) {
             resetSelected();
@@ -371,14 +372,18 @@
                 let day = i + 1;
                 let tempDay = document.getElementById((firstDay + i).toString());
                 tempDay.textContent = day;
-                //let timeSlots = {}
+                //let timeSlots = {} 
+            }
 
+            for(let i = 0; i<daysInMonth; i++){
                 if(adminSchedule.Schedule[0][i][0][1]==false&&adminSchedule.Schedule[0][i][1][1]==false&&adminSchedule.Schedule[0][i][2][1]==false){
-                    document.getElementById(i).disabled = true;
-                    document.getElementById(i).style.backgroundColor = "#e7e7e7";
+                    document.getElementById(i+1).disabled = true;
+                    document.getElementById(i+1).style.backgroundColor = "#e7e7e7";
                 }
             }
-        }
+
+           
+    }
 
         else {
             document.getElementById("viewingmonth").innerHTML = monthNames[nextMonth];
@@ -386,6 +391,22 @@
             for (let i = 0; i < nextDaysInMonth; i++) {
                 let tempDay = document.getElementById((nextFirstDay + i).toString());
                 tempDay.textContent = i + 1;
+            }
+            for(let i = 0; i< nextDaysInMonth; i++){
+                if(adminSchedule.Schedule[1][i][0][1]==false&&adminSchedule.Schedule[1][i][1][1]==false&&adminSchedule.Schedule[1][i][2][1]==false){
+                    document.getElementById(i+1).disabled = true;
+                    document.getElementById(i+1).style.color = "#e7e7e7";
+                    
+                    document.getElementById(i+1).addEventListener('mouseenter', function() {
+                        document.getElementById(i+1).style.border = 'none';
+                    });
+
+                    document.getElementById(i+1).addEventListener('mouseleave', function() {
+                    // Revert styles when not hovered
+                    document.getElementById(i+1).style.border = 'none';
+                    });
+
+                }
             }
         }
 
