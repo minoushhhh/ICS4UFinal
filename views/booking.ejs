@@ -150,7 +150,7 @@
 
         <!-- <p id = "showTime">test</p> -->
 
-        <button onclick="updateDatabase()"></button> DO NOT PRESS THIS IS A RESET DATABASE BUTTON OASKJDLAKSJDLKASJDLKJL
+        <!-- <button onclick="updateDatabase()"></button> DO NOT PRESS THIS IS A RESET DATABASE BUTTON OASKJDLAKSJDLKASJDLKJL -->
 
     </div>
 
@@ -326,11 +326,11 @@
     let adminSchedule;
 
     updateCurrentInfo();
-    updateNextInfo();  
+    updateNextInfo();
     getAdminSchedule();
 
 
-    
+
 
     async function getAdminSchedule() {
         try {
@@ -352,7 +352,7 @@
         }
     }
 
-    function updateCalendarColours(){
+    function updateCalendarColours() {
 
     }
 
@@ -375,15 +375,15 @@
                 //let timeSlots = {} 
             }
 
-            for(let i = 0; i<daysInMonth; i++){
-                if(adminSchedule.Schedule[0][i][0][1]==false&&adminSchedule.Schedule[0][i][1][1]==false&&adminSchedule.Schedule[0][i][2][1]==false){
-                    document.getElementById(i+1).disabled = true;
-                    document.getElementById(i+1).style.backgroundColor = "#e7e7e7";
+            for (let i = 0; i < daysInMonth; i++) {
+                if (adminSchedule.Schedule[0][i][0][1] == false && adminSchedule.Schedule[0][i][1][1] == false && adminSchedule.Schedule[0][i][2][1] == false) {
+                    document.getElementById(i + 1).disabled = true;
+                    document.getElementById(i + 1).style.backgroundColor = "#e7e7e7";
                 }
             }
 
-           
-    }
+
+        }
 
         else {
             document.getElementById("viewingmonth").innerHTML = monthNames[nextMonth];
@@ -392,10 +392,10 @@
                 let tempDay = document.getElementById((nextFirstDay + i).toString());
                 tempDay.textContent = i + 1;
             }
-            for(let i = 0; i < nextDaysInMonth; i++){
-                if(adminSchedule.Schedule[1][i][0][1]==false&&adminSchedule.Schedule[1][i][1][1]==false&&adminSchedule.Schedule[1][i][2][1]==false){
-                    document.getElementById(i+1).disabled = true;
-                    document.getElementById(i+1).style.backgroundColor = "#e7e7e7";
+            for (let i = 0; i < nextDaysInMonth; i++) {
+                if (adminSchedule.Schedule[1][i][0][1] == false && adminSchedule.Schedule[1][i][1][1] == false && adminSchedule.Schedule[1][i][2][1] == false) {
+                    document.getElementById(i + 1).disabled = true;
+                    document.getElementById(i + 1).style.backgroundColor = "#e7e7e7";
 
                 }
             }
@@ -468,31 +468,31 @@
         let element2 = document.getElementById("time2");
         let element3 = document.getElementById("time3");
 
-        if(adminSchedule.Schedule[viewingMonth][selectedDay][0][1]==false){
+        if (adminSchedule.Schedule[viewingMonth][selectedDay][0][1] == false) {
             element1.disabled = true;
             element1.style.backgroundColor = "#e7e7e7";
         }
-        else{
+        else {
             element1.disabled = false;
             element1.style.backgroundColor = "#0071e3";
 
         }
 
-        if(adminSchedule.Schedule[viewingMonth][selectedDay][1][1]==false){
+        if (adminSchedule.Schedule[viewingMonth][selectedDay][1][1] == false) {
             element2.disabled = true;
             element2.style.backgroundColor = "#e7e7e7";
         }
-        else{
+        else {
             element2.disabled = false;
             element2.style.backgroundColor = "#0071e3";
         }
 
 
-        if(adminSchedule.Schedule[viewingMonth][selectedDay][2][1]==false){
+        if (adminSchedule.Schedule[viewingMonth][selectedDay][2][1] == false) {
             element3.disabled = true;
             element3.style.backgroundColor = "#e7e7e7";
         }
-        else{
+        else {
             element3.disabled = false;
             element3.style.backgroundColor = "#0071e3";
         }
@@ -562,7 +562,7 @@
         if ("<%= username %>" && selectedDay >= 0 && viewingMonth >= 0 && selectedTimeSlot >= 0 && detailType >= 0) {
             const response = await bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType);
             window.location.href = "/profile";
-            
+
         }
         else if (!"<%= username %>") {
             alert("Must be logged-in first to book a detail.");
