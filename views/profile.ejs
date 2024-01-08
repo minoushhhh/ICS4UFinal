@@ -57,7 +57,7 @@
             <br>
             <div class="button-block">
                 <button id="editButton" class="profile-page-buttons" onclick="edit()">Edit</button>
-                <form action="/save-form" method="post">
+                <form action="/save-form" method="post" onsubmit="return checkFields()">
                     <button id="saveButton" class="save-button-disabled" onclick="save()" disabled>Save</button>
                     <input type="text" id="firstNameHidden" name="firstName" hidden><br>
                     <input type="text" id="lastNameHidden" name="lastName" hidden><br>
@@ -91,6 +91,51 @@
     document.getElementById("postalCode").style.backgroundColor = '#e7e7e7';
     document.getElementById("username").style.backgroundColor = '#e7e7e7';
     document.getElementById("password").style.backgroundColor = '#e7e7e7';
+
+    function checkPass(pass) {
+        if (pass.length < 8) {
+            return false;
+        }
+
+        let upper = false;
+        let lower = false;
+        let digit = false;
+        let special = false;
+
+        for (let i = 0; i < pass.length; i++) {
+            if (pass.charAt(i) >= "A" && pass.charAt(i) <= "Z") {
+                upper = true;
+            } else if (pass.charAt(i) >= "a" && pass.charAt(i) <= "z") {
+                lower = true;
+            } else if (pass.charAt(i) >= "0" && pass.charAt(i) <= "9") {
+                digit = true;
+            } else if ("@$!%*?&_".includes(pass.charAt(i))) {
+                special = true;
+            }
+        }
+        return upper && lower && digit && special;
+    }
+
+    function checkFields() {
+        const password = document.getElementById("password").value;
+
+        if (checkPass(password) == false) {
+            alert("Invalid password: must have 8 characters, one uppercase, one lowercase, and one special character");
+            enableInputs();
+            return false;
+        }
+
+        const email = document.getElementById("email").value;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(email)) {
+            alert("Invalid e-mail address");
+            enableInputs();
+            return false;
+        }
+        disableInputs();
+        return true;
+    }
 
     function togglePass() {
         const pass = document.getElementById("password");
@@ -134,7 +179,6 @@
         document.getElementById("phoneNumber").removeAttribute("disabled");
         document.getElementById("address").removeAttribute("disabled");
         document.getElementById("postalCode").removeAttribute("disabled");
-        document.getElementById("username").removeAttribute("disabled");
         document.getElementById("password").removeAttribute("disabled");
 
         document.getElementById("firstName").style.backgroundColor = 'white';
@@ -143,7 +187,6 @@
         document.getElementById("phoneNumber").style.backgroundColor = 'white';
         document.getElementById("address").style.backgroundColor = 'white';
         document.getElementById("postalCode").style.backgroundColor = 'white';
-        document.getElementById("username").style.backgroundColor = 'white';
         document.getElementById("password").style.backgroundColor = 'white';
     }
 
@@ -154,7 +197,6 @@
         document.getElementById("phoneNumber").setAttribute("disabled", true);
         document.getElementById("address").setAttribute("disabled", true);
         document.getElementById("postalCode").setAttribute("disabled", true);
-        document.getElementById("username").setAttribute("disabled", true);
         document.getElementById("password").setAttribute("disabled", true);
 
         document.getElementById("firstName").style.backgroundColor = '#e7e7e7';
@@ -163,7 +205,6 @@
         document.getElementById("phoneNumber").style.backgroundColor = '#e7e7e7';
         document.getElementById("address").style.backgroundColor = '#e7e7e7';
         document.getElementById("postalCode").style.backgroundColor = '#e7e7e7';
-        document.getElementById("username").style.backgroundColor = '#e7e7e7';
         document.getElementById("password").style.backgroundColor = '#e7e7e7';
     }
 

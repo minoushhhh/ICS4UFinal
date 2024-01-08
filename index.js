@@ -302,7 +302,6 @@ app.post("/save-form", async (req, res) => {
   try {
     const updates = req.body;
     const username = req.body.username;
-    console.log(username);
     await updateDetails(updates, username, req);
     res.redirect("/profile");
   } finally {
