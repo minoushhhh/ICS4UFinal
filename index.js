@@ -21,7 +21,7 @@ app.use(
   session({
     secret: "thisisasecretkey",
     saveUninitialized: true,
-    cookie: { maxAge: 86400000 },
+    cookie: { maxAge: 300000 },
     resave: false,
   })
 );
