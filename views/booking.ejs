@@ -137,18 +137,9 @@
 
                 <br><br>
 
-                <p id="test"></p>
-                <p id="test1"></p>
-                <p id="test2"></p>
-                <p id="test3"></p>
-
-                <br>
-
             </div>
 
         </div>
-
-        <!-- <p id = "showTime">test</p> -->
 
         <!-- <button onclick="updateDatabase()"></button> DO NOT PRESS THIS IS A RESET DATABASE BUTTON OASKJDLAKSJDLKASJDLKJL -->
 
@@ -328,9 +319,6 @@
     updateCurrentInfo();
     updateNextInfo();
     getAdminSchedule();
-
-
-
 
     async function getAdminSchedule() {
         try {
@@ -557,10 +545,6 @@
     }
 
     async function book() {
-        //document.getElementById("test").innerHTML = "day " + selectedDay;
-        //document.getElementById("test1").innerHTML = "month " + viewingMonth;
-        //document.getElementById("test2").innerHTML = "detail " + detailType;
-        //document.getElementById("test3").innerHTML = "timeslot " + selectedTimeSlot;
         if ("<%= username %>" && selectedDay >= 0 && viewingMonth >= 0 && selectedTimeSlot >= 0 && detailType >= 0) {
             const response = await bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType);
             window.location.href = "/profile";
