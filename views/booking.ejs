@@ -548,6 +548,7 @@
     async function book() {
         if ("<%= username %>" && selectedDay >= 0 && viewingMonth >= 0 && selectedTimeSlot >= 0 && detailType >= 0) {
             const response = await bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType);
+            alert("Sucesfully booked a " + detailType + " detail for " + selectedDay + " on " + selectedTimeSlot);
             window.location.href = "/profile";
 
         }
