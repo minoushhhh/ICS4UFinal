@@ -549,7 +549,7 @@
         if ("<%= username %>" && selectedDay >= 0 && viewingMonth >= 0 && selectedTimeSlot >= 0 && detailType >= 0) {
             const response = await bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType);
             //Fix alert
-            alert("Sucesfully booked a type " + detailType - 1 + " detail on " + viewingMonth + " " + selectedDay + 1 + " for " + document.getElementById("time" + selectedTimeSlot).textContent);
+            //alert("Sucesfully booked a type " + detailType - 1 + " detail on " + viewingMonth + " " + selectedDay + 1 + " for " + document.getElementById("time" + selectedTimeSlot).textContent);
             window.location.href = "/profile";
 
         }
