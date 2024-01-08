@@ -36,12 +36,12 @@
                 <input type="text" id="username" name="username" class="input-box" placeholder="Username" required>
                 <span id="usernameAlert" class="alertText"></span><br><br>
 
-                <input type="text" id="password" name="password" class="input-box" placeholder="Password" required>
+                <input type="password" id="password" name="password" class="input-box" placeholder="Password" required>
 
                 <span id="passwordAlert" class="alertText"></span><br><br>
 
                 <div class="input-container">
-                    <input type="text" id="confirmPassword" name="confirmPassword" class="input-box"
+                    <input type="password" type="text" id="confirmPassword" name="confirmPassword" class="input-box"
                         placeholder="Confirm password" required>
                     <button type="submit" onclick="checkFields()" class="submit-button"><img
                             src="https://i.ibb.co/DDndqQN/Untitled-design-1.png"></button>
@@ -79,9 +79,9 @@
             return false;
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]$/;
 
-        if (!passwordRegex.test(password)) {
+        if (!passwordRegex.test(password) || password.length < 8) {
             passwordAlert.style.opacity = 1;
             passwordAlert.textContent = "Must have 8 characters, one uppercase, one lowercase, and one special character";
             return false;

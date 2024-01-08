@@ -17,39 +17,35 @@
 
                 <div>
                     <button class="button-option" onclick="updateSelectedDetail(1)" id="btn1">
-                        <h1>Interior</h1>
+                        <h1 id="d1">Interior</h1>
                         <p class="button-option-text">Elevate your ride's interior with our Detailing service.
                             We'll
                             clean, vacuum, and restore, keeping it straightforward and effective.</p>
-                        <h2 id="p1"></h2>
                     </button>
                 </div>
 
                 <div>
                     <button class="button-option " onclick="updateSelectedDetail(2)" id="btn2">
-                        <h1>Exterior</h1>
+                        <h1 id="d2">Exterior</h1>
                         <p class="button-option-text">Boost your car's street appeal with our Exterior
                             Detailing. A
                             simple wash, wax, and buff to make it shine without unnecessary frills.</p>
-                        <h2 id="p2"></h2>
                     </button>
                 </div>
 
                 <div>
                     <button class="button-option" onclick="updateSelectedDetail(3)" id="btn3">
-                        <h1>Full Package</h1>
+                        <h1 id="d3">Full Package</h1>
                         <p class="button-option-text">Give your vehicle an all-around refresh with our Full
                             Detailing. No fluff, just a thorough inside-out clean for a sleek look.</p>
-                        <h2 id="p3"></h2>
                     </button>
                 </div>
 
                 <div>
                     <button class="button-option" onclick="updateSelectedDetail(4)" id="btn4">
-                        <h1>Headlight Polish</h1>
+                        <h1 id="d4">Headlight Polish</h1>
                         <p class="button-option-text">Enhance your night driving visibility with our Headlight
                             Polishing. Clearing up headlights without the fuss.</p>
-                        <h2 id="p4"></h2>
                     </button>
                 </div>
 
@@ -315,6 +311,8 @@
 
     let viewingMonth;
 
+    let globalMonth = "";
+
     let adminSchedule;
 
     updateCurrentInfo();
@@ -356,6 +354,7 @@
 
         if (currentOrNext == 0) {
             document.getElementById("viewingmonth").innerHTML = monthNames[month];
+            globalMonth = monthNames[month];
             let counter = firstDay;
             for (let i = 0; i < daysInMonth; i++) {
                 let day = i + 1;
@@ -376,6 +375,7 @@
 
         else {
             document.getElementById("viewingmonth").innerHTML = monthNames[nextMonth];
+            globalMonth = monthNames[nextMonth];
             let counter = nextFirstDay;
             for (let i = 0; i < nextDaysInMonth; i++) {
                 let tempDay = document.getElementById((nextFirstDay + i).toString());
@@ -546,12 +546,12 @@
     }
 
     async function book() {
+
         if ("<%= username %>" && selectedDay >= 0 && viewingMonth >= 0 && selectedTimeSlot >= 0 && detailType >= 0) {
             const response = await bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType);
-            //Fix alert
-            //alert("Sucesfully booked a type " + detailType - 1 + " detail on " + viewingMonth + " " + selectedDay + 1 + " for " + document.getElementById("time" + selectedTimeSlot).textContent);
+            alert("Sucesfully booked a " + document.getElementById("d" + (detailType + 1)).textContent + " detail on " + globalMonth + " " + (selectedDay + 1) + ", for " + document.getElementById("time" + (selectedTimeSlot + 1)).textContent + ".");
             window.location.href = "/profile";
-
+            //send e-mail to user and owen/liam after confirmation.
         }
         else if (!"<%= username %>") {
             alert("Must be logged-in first to book a detail.");
