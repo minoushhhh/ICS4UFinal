@@ -13,7 +13,7 @@
 .homepage-title {
   font-family: "Nunito";
   text-align: center;
-  color: black;
+  color: rgb(224, 224, 224);
   padding-bottom: 2%;
 }
 
@@ -421,19 +421,21 @@ ul {
 }
 
 .homepage-background-image {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
-    url("https://www.hdcarwallpapers.com/walls/porsche_911_st_2023_4k-HD.jpg");
-  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 1)),
+    url("https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcHgxMTc2NzE4LWltYWdlLWt3dnkyMnJiLmpwZw.jpg");
+  padding-right: 10vw;
+  padding-left: 10vw;
+  padding-top: 5vh;
+  padding-bottom: 15vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  padding-left: 12vw;
-  padding-right: 12vw;
   display: flex;
   justify-content: center;
   align-content: center;
-  height: 100%;
 }
 
 .story-grid-title,
