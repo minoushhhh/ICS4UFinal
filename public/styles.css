@@ -12,6 +12,7 @@
 
 .homepage-title {
   font-family: "Nunito";
+  font-size: 70px;
   text-align: center;
   color: rgb(224, 224, 224);
   padding-bottom: 2%;
@@ -407,7 +408,7 @@ ul {
   width: 400px;
   height: 150px;
   font-size: 55px;
-  border-radius: 980px;
+  border-radius: 25px;
   color: whitesmoke;
   border: none;
   background-color: #0071e3;
