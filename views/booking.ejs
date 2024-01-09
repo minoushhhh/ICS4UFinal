@@ -545,13 +545,33 @@
         }
     }
 
+    async function sendConfirmationEmail(day, month, time, detail) {
+        try {
+            const response = await fetch("/send-confirmation-email", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ day, month, time, detail }),
+            });
+
+            const result = await response.json();
+
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+
+
     async function book() {
 
         if ("<%= username %>" && selectedDay >= 0 && viewingMonth >= 0 && selectedTimeSlot >= 0 && detailType >= 0) {
+            let time = document.getElementById("time" + (selectedTimeSlot + 1)).textContent;
+            let detail = document.getElementById("d" + (detailType + 1)).textContent;
             const response = await bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType);
-            alert("Sucesfully booked a " + document.getElementById("d" + (detailType + 1)).textContent + " detail on " + globalMonth + " " + (selectedDay + 1) + ", for " + document.getElementById("time" + (selectedTimeSlot + 1)).textContent + ".");
+            alert("Sucesfully booked a " + detail + " detail on " + globalMonth + " " + (selectedDay + 1) + ", for " + time + ".");
             window.location.href = "/profile";
-            //send e-mail to user and owen/liam after confirmation.
+            sendConfirmationEmail((selectedDay + 1), globalMonth, time, detail);
         }
         else if (!"<%= username %>") {
             alert("Must be logged-in first to book a detail.");

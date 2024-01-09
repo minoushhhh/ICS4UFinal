@@ -229,6 +229,98 @@ app.get("/logout", (req, res) => {
   });
 });
 
+async function sendConfirmationEmail(
+  email,
+  name,
+  day,
+  month,
+  time,
+  detail,
+  address
+) {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "mapleglowdetailing@gmail.com",
+        pass: "lfcp rjsv xbkn vfan", // App password for mapleglowdetailing@gmail.com account.
+      },
+    });
+
+    const email1 = {
+      from: "mapleglowdetailing@gmail.com",
+      to: [
+        "owenhuang623@gmail.com",
+        "liamzhan2006@gmail.com",
+        "shethmohnish@gmail.com",
+      ],
+      subject: "New Customer Detail Booking",
+      text:
+        "Customer Name: " +
+        name +
+        "\n" +
+        "Customer E-mail: " +
+        email +
+        "\n" +
+        "Address: " +
+        address +
+        "\n" +
+        "Date: " +
+        month +
+        " " +
+        day +
+        "\n" +
+        "Time: " +
+        time +
+        "\n" +
+        "Detail Type: " +
+        detail,
+    };
+
+    const email2 = {
+      from: "mapleglowdetailing@gmail.com",
+      to: email,
+      subject: "Detail Booking Confirmation",
+      text:
+        "Hi " +
+        name +
+        ", \n \n" +
+        "Your " +
+        detail +
+        " detail is booked for " +
+        month +
+        " " +
+        day +
+        " at " +
+        time +
+        ".",
+    };
+
+    await transporter.sendMail(email1);
+    await transporter.sendMail(email2);
+  } catch (error) {
+    console.error("Error", error);
+  }
+}
+
+app.post("/send-confirmation-email", async (req, res) => {
+  try {
+    const email = req.session.userData.email;
+    const name = req.session.userData.firstName;
+    const day = req.body.day;
+    const month = req.body.month;
+    const time = req.body.time;
+    const detail = req.body.detail;
+    const address = req.session.userData.adr;
+
+    await sendConfirmationEmail(email, name, day, month, time, detail, address);
+    res.send("e-mails sent");
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send("Error");
+  }
+});
+
 async function checkUserLogin(user, pass, req, res) {
   console.log("Checking login info...");
   try {
