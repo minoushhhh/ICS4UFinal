@@ -115,12 +115,16 @@
 
     function checkValidEmail() {
       const email = document.getElementById('email').value;
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      if (!emailRegex.test(email)) {
-        return false;
+      if (
+        email.includes("@gmail.com") ||
+        email.includes("@yahoo.com") ||
+        email.includes("@outlook.com") ||
+        email.includes("@icloud.com")
+      ) {
+        return true;
       }
-      return true;
+      return false;
     }
   </script>
 

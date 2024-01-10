@@ -126,15 +126,19 @@
         }
 
         const email = document.getElementById("email").value;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!emailRegex.test(email)) {
-            alert("Invalid e-mail address");
-            enableInputs();
-            return false;
+        if (
+            email.includes("@gmail.com") ||
+            email.includes("@yahoo.com") ||
+            email.includes("@outlook.com") ||
+            email.includes("@icloud.com")
+        ) {
+            disableInputs();
+            return true;
         }
-        disableInputs();
-        return true;
+        alert("Invalid e-mail address");
+        enableInputs();
+        return false;
+
     }
 
     function togglePass() {

@@ -110,15 +110,17 @@
         }
 
         const email = document.getElementById('email').value;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!emailRegex.test(email)) {
-            emailAlert.style.opacity = 1;
-            emailAlert.textContent = "Invalid e-mail address";
-            return false;
+        if (
+            email.includes("@gmail.com") ||
+            email.includes("@yahoo.com") ||
+            email.includes("@outlook.com") ||
+            email.includes("@icloud.com")
+        ) {
+            return true;
         }
-
-        return true;
+        emailAlert.style.opacity = 1;
+        emailAlert.textContent = "Invalid e-mail address";
+        return false;
     }
 
     let usernameAlert = document.getElementById("usernameAlert");

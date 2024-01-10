@@ -341,9 +341,11 @@
 </style>
 
 <script>
+    let detailType;
     const urlParams = new URLSearchParams(window.location.search);
     const selectedButton = urlParams.get('selectedButton');
     if (selectedButton) {
+        detailType = selectedButton - 1;
         const btn = document.getElementById("btn" + selectedButton);
         btn.style.backgroundColor = "#00b4d8";
         for (let i = 1; i < 5; i++) {
@@ -354,8 +356,6 @@
     }
 
     let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-    let detailType;
     let selectedDay;
     let selectedTimeSlot;
 

@@ -39,21 +39,21 @@
 
         <div class="homepage-comparison-slider">
 
-            <img-comparison-slider class="slider-focus" value="72">
+            <img-comparison-slider class="slider-color slider-focus" value="72">
                 <img slot="first" class="slider-image" src="images/headlight_before.png">
                 <img slot="second" class="slider-image" src="images/headlight_after.png">
                 <svg slot="handle" xmlns="http://www.w3.org/2000/svg" width="100" viewBox="-8 -3 16 6">
-                    <path stroke="#fff" d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2"
-                        stroke-width="1" fill="#fff" vector-effect="non-scaling-stroke"></path>
+                    <path stroke="#5aacff" d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2"
+                        stroke-width="1" fill="#5aacff" vector-effect="non-scaling-stroke"></path>
                 </svg>
             </img-comparison-slider>
 
-            <img-comparison-slider class="slider-focus" value="52.5">
+            <img-comparison-slider class="slider-color slider-focus" value="52.5">
                 <img slot="first" class="slider-image" src="images/wheel-before.png">
                 <img slot="second" class="slider-image" src="images/wheel-after.png">
                 <svg slot="handle" xmlns="http://www.w3.org/2000/svg" width="100" viewBox="-8 -3 16 6">
-                    <path stroke="#fff" d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2"
-                        stroke-width="1" fill="#fff" vector-effect="non-scaling-stroke"></path>
+                    <path stroke="#5aacff" d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2"
+                        stroke-width="1" fill="#5aacff" vector-effect="non-scaling-stroke"></path>
                 </svg>
             </img-comparison-slider>
 
@@ -64,6 +64,12 @@
 </body>
 
 <style>
+    .slider-color {
+        --divider-color: #4d9be9;
+        --divider-width: 4px;
+        --default-handle-color: #4d9be9;
+    }
+
     @media (max-width: 1294px) {
         .homepage-comparison-slider {
             flex-direction: column;
