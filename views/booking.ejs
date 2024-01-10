@@ -456,6 +456,8 @@
             for (let i = 0; i < nextDaysInMonth; i++) {
                 let tempDay = document.getElementById((nextFirstDay + i).toString());
                 tempDay.textContent = i + 1;
+                document.getElementById(i + nextFirstDay).disabled = true;
+                document.getElementById(i + nextFirstDay).style.backgroundColor = "#e7e7e7";
             }
             for (let i = 0; i < nextDaysInMonth; i++) {
                 if (adminSchedule.Schedule[1][i][0][1] == false && adminSchedule.Schedule[1][i][1][1] == false && adminSchedule.Schedule[1][i][2][1] == false) {
