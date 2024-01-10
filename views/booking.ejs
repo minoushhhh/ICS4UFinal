@@ -318,11 +318,17 @@
         font-weight: bold;
     }
 
-    .day:hover {
+    .day:not([disabled]):hover {
         border: 2px solid #0071e3;
         border-radius: 12px;
         border: visible;
-        transition: border 0.05s ease-in-out;
+        transition: border 0.1s ease-in-out;
+        transition: background-color 0.1s ease-in-out;
+    }
+
+    .day[disabled] {
+        background-color: #e7e7e7 !important;
+        cursor: not-allowed;
     }
 
     .colouredBox {
@@ -438,11 +444,9 @@
             for (let i = 0; i < daysInMonth; i++) {
                 if (adminSchedule.Schedule[0][i][0][1] == false && adminSchedule.Schedule[0][i][1][1] == false && adminSchedule.Schedule[0][i][2][1] == false) {
                     document.getElementById(i + firstDay).disabled = true;
-                    document.getElementById(i + firstDay).style.backgroundColor = "transparent";
                 }
                 if (document.getElementById(i + firstDay).innerHTML < today.getDate() + 7) {
                     document.getElementById(i + firstDay).disabled = true;
-                    document.getElementById(i + firstDay).style.backgroundColor = "transparent";
                 }
             }
 
@@ -457,13 +461,10 @@
                 let tempDay = document.getElementById((nextFirstDay + i).toString());
                 tempDay.textContent = i + 1;
                 document.getElementById(i + nextFirstDay).disabled = false;
-                document.getElementById(i + nextFirstDay).style.backgroundColor = "transparent";
             }
             for (let i = 0; i < nextDaysInMonth; i++) {
                 if (adminSchedule.Schedule[1][i][0][1] == false && adminSchedule.Schedule[1][i][1][1] == false && adminSchedule.Schedule[1][i][2][1] == false) {
                     document.getElementById(i + nextFirstDay).disabled = true;
-                    document.getElementById(i + nextFirstDay).style.backgroundColor = "transparent";
-
                 }
             }
         }
@@ -578,7 +579,7 @@
         resetSelectedTime();
         if (pressed.innerHTML.trim() !== "") {
             for (let i = 0; i < 37; i++) {
-                document.getElementById(i.toString()).style.backgroundColor = "transparent";
+                document.getElementById(i.toString()).style.backgroundColor = "#FAFAFA";
             }
             pressed.style.backgroundColor = "#0071e3";
             pressed.style.borderRadius = "12px";
