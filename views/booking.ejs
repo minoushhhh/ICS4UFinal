@@ -144,6 +144,10 @@
 </body>
 
 <style>
+    .booking-button-option:hover {
+        background-color: #00b4d8;
+    }
+
     @media (min-width: 1700px) {
         .booking-button-option {
             height: 28vh;
@@ -263,8 +267,13 @@
         font-family: "Nunito", "Helvetica Neue";
     }
 
-    .timeSlotButton:hover {
-        background-color: #00b4d8;
+    .timeSlotButton:not([disabled]):hover {
+        background-color: #00b4d8 !important;
+    }
+
+    .timeSlotButton[disabled] {
+        background-color: #e7e7e7;
+        cursor: not-allowed;
     }
 
     .viewingmonth {
