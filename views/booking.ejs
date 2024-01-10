@@ -435,8 +435,8 @@
 
             for (let i = 0; i < daysInMonth; i++) {
                 if (adminSchedule.Schedule[0][i][0][1] == false && adminSchedule.Schedule[0][i][1][1] == false && adminSchedule.Schedule[0][i][2][1] == false) {
-                    document.getElementById(i + 1).disabled = true;
-                    document.getElementById(i + 1).style.backgroundColor = "#e7e7e7";
+                    document.getElementById(i + firstDay).disabled = true;
+                    document.getElementById(i + firstDay).style.backgroundColor = "#e7e7e7";
                 }
             }
 
@@ -453,8 +453,8 @@
             }
             for (let i = 0; i < nextDaysInMonth; i++) {
                 if (adminSchedule.Schedule[1][i][0][1] == false && adminSchedule.Schedule[1][i][1][1] == false && adminSchedule.Schedule[1][i][2][1] == false) {
-                    document.getElementById(i + 1).disabled = true;
-                    document.getElementById(i + 1).style.backgroundColor = "#e7e7e7";
+                    document.getElementById(i + nextFirstDay).disabled = true;
+                    document.getElementById(i + nextFirstDay).style.backgroundColor = "#e7e7e7";
 
                 }
             }
