@@ -28,7 +28,11 @@
                 </div>
 
                 <div class="home-button-grid-item">
-                    <a href="/booking"><button class="book-button" type="button">Book Now!</button></a>
+                    <% if (username) { %>
+                        <a href="/booking"><button class="book-button" type="button">Book Now!</button></a>
+                        <% } else { %>
+                            <a href="/login"><button class="book-button" type="button">Book Now!</button></a>
+                            <% } %>
                 </div>
 
             </div>

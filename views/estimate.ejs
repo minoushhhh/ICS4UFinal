@@ -26,10 +26,11 @@
                     recognize your vehicle and provide you with a personalized estimate for detailing costs. Powered by
                     state-of-the-art algorithms, our AI ensures accuracy and efficiency, giving you the peace of mind
                     you deserve.</div>
-                    
-                    <br>
 
-                    <p style = "text-align: center;">*Disclamer: prices are subject to change and provide only a rough estimate. Please contact us for more information</p>
+                <br>
+
+                <p style="text-align: center;">*Disclamer: prices are subject to change and provide only a rough
+                    estimate. Please contact us for more information</p>
 
                 <form action="/action_page.php">
                     <input type="file" id="img" name="img" accept="image/*" onchange="loadFile(event)"
@@ -94,7 +95,12 @@
 
 <script>
     function redirectBooking(buttonId) {
-        window.location.href = '/booking?selectedButton=' + buttonId;
+        if ("<%= username %>") {
+            window.location.href = '/booking?selectedButton=' + buttonId;
+        }
+        else {
+            window.location.href = '/login';
+        }
     }
     showLabel();
     function moveUploadImage() {

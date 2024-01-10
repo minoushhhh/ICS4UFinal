@@ -37,7 +37,8 @@ app.set("view engine", "ejs");
 const __dirname = path.resolve();
 
 app.get("/", (req, res) => {
-  res.render("home");
+  const username = req.session.username;
+  res.render("home", { username });
 });
 
 function generateVerificationCode() {
@@ -177,16 +178,22 @@ app.get("/forgot-password", (req, res) => {
 });
 
 app.get("/home", (req, res) => {
-  res.render("home");
+  const username = req.session.username;
+  res.render("home", { username });
 });
 
 app.get("/booking", (req, res) => {
   const username = req.session.username;
-  res.render("booking", { username });
+  if (username) {
+    res.render("booking", { username });
+  } else {
+    res.render("login");
+  }
 });
 
 app.get("/estimate", (req, res) => {
-  res.render("estimate");
+  const username = req.session.username;
+  res.render("estimate", { username });
 });
 
 app.get("/contact", (req, res) => {
