@@ -378,7 +378,7 @@
 
     const currentMonthDate = new Date();
     const nextMonthDate = new Date();
-    
+
     const today = new Date();
 
     let viewingMonth;
@@ -438,11 +438,11 @@
             for (let i = 0; i < daysInMonth; i++) {
                 if (adminSchedule.Schedule[0][i][0][1] == false && adminSchedule.Schedule[0][i][1][1] == false && adminSchedule.Schedule[0][i][2][1] == false) {
                     document.getElementById(i + firstDay).disabled = true;
-                    document.getElementById(i + firstDay).style.backgroundColor = "#e7e7e7";
+                    document.getElementById(i + firstDay).style.backgroundColor = "transparent";
                 }
-                if(document.getElementById(i + firstDay).innerHTML<today.getDate()+7){
+                if (document.getElementById(i + firstDay).innerHTML < today.getDate() + 7) {
                     document.getElementById(i + firstDay).disabled = true;
-                    document.getElementById(i + firstDay).style.backgroundColor = "#e7e7e7";
+                    document.getElementById(i + firstDay).style.backgroundColor = "transparent";
                 }
             }
 
@@ -457,12 +457,12 @@
                 let tempDay = document.getElementById((nextFirstDay + i).toString());
                 tempDay.textContent = i + 1;
                 document.getElementById(i + nextFirstDay).disabled = false;
-                document.getElementById(i + nextFirstDay).style.backgroundColor = "#fff";
+                document.getElementById(i + nextFirstDay).style.backgroundColor = "transparent";
             }
             for (let i = 0; i < nextDaysInMonth; i++) {
                 if (adminSchedule.Schedule[1][i][0][1] == false && adminSchedule.Schedule[1][i][1][1] == false && adminSchedule.Schedule[1][i][2][1] == false) {
                     document.getElementById(i + nextFirstDay).disabled = true;
-                    document.getElementById(i + nextFirstDay).style.backgroundColor = "#e7e7e7";
+                    document.getElementById(i + nextFirstDay).style.backgroundColor = "transparent";
 
                 }
             }
