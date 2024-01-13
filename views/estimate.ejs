@@ -95,12 +95,7 @@
 
 <script>
     function redirectBooking(buttonId) {
-        if ("<%= username %>") {
-            window.location.href = '/booking?selectedButton=' + buttonId;
-        }
-        else {
-            window.location.href = '/login';
-        }
+        window.location.href = '/booking?selectedButton=' + buttonId;
     }
     showLabel();
     function moveUploadImage() {
@@ -125,7 +120,6 @@
         document.getElementById("invisibleButton").style.cursor = "pointer";
 
         if (!image) {
-            // If no existing image, create a new one
             image = document.createElement("img");
             image.id = "uploadedImage";
             image.className = "uploadImg";
@@ -133,9 +127,9 @@
         }
 
         image.src = URL.createObjectURL(event.target.files[0]);
-        image.style.display = "block"; // Show the uploaded image
+        image.style.display = "block";
         document.getElementById("invisibleButton").disabled = false;
-        document.getElementById("imgLabel").style.display = "none"; // Hide the "Choose File" button
+        document.getElementById("imgLabel").style.display = "none";
         init();
     };
 
