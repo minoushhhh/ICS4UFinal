@@ -95,7 +95,12 @@
 
 <script>
     function redirectBooking(buttonId) {
-        window.location.href = '/booking?selectedButton=' + buttonId;
+        if ("<%= username %>") {
+            window.location.href = '/booking?selectedButton=' + buttonId;
+        }
+        else {
+            window.location.href = '/login';
+        }
     }
     showLabel();
     function moveUploadImage() {
