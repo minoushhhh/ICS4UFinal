@@ -213,7 +213,7 @@
   padding-top: 3vh;
   padding-bottom: 6vh;
   text-align: center;
-  color: #494949;
+  color: black;
   margin: 13px 130px 0px;
 }
 
@@ -278,6 +278,7 @@ body {
 }
 
 .fade-after {
+  padding-left: 2.3vw;
   opacity: 0;
   animation: fadeIn 0.4s ease-in-out forwards;
   animation-delay: 0.7s;
