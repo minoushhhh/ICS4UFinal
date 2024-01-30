@@ -145,10 +145,6 @@
 </body>
 
 <style>
-    .booking-button-option:hover {
-        background-color: #00b4d8;
-    }
-
     @media (min-width: 1700px) {
         .booking-button-option {
             height: 28vh;
@@ -243,116 +239,6 @@
             height: 100%;
             padding-left: 0;
         }
-    }
-
-    .time-slot-container {
-        display: flex;
-        padding-top: 2vh;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .timeSlotButton {
-        width: 3vw;
-        height: 50px;
-        display: inline-block;
-        font-size: 15px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 12px;
-        cursor: pointer;
-        background-color: #0071e3;
-        color: white;
-        border: none;
-        transition: background-color 0.3s ease;
-        font-family: "Nunito", "Helvetica Neue";
-    }
-
-    .timeSlotButton:not([disabled]):hover {
-        background-color: #00b4d8 !important;
-    }
-
-    .timeSlotButton[disabled] {
-        background-color: #e7e7e7;
-        cursor: not-allowed;
-    }
-
-    .viewingmonth {
-        color: #3498db;
-    }
-
-    .calendarUpdateButton {
-        width: 12.5vw;
-        height: 50px;
-        display: inline-block;
-        font-size: 18px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 12px;
-        cursor: pointer;
-        background-color: #0071e3;
-        color: white;
-        border: none;
-        transition: background-color 0.3s ease;
-        font-family: "Nunito", "Helvetica Neue";
-    }
-
-    .calendarUpdateButton:hover {
-        background-color: #00b4d8;
-    }
-
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        margin: 20px;
-    }
-
-    .day {
-        width: 48px;
-        height: 48px;
-        line-height: 30px;
-        border: 2px solid #0071e3;
-        border-radius: 12px;
-        border: hidden;
-        cursor: pointer;
-        font-family: "Nunito", "Helvetica Neue";
-        font-weight: bold;
-    }
-
-    .day:not([disabled]):hover {
-        border: 2px solid #0071e3;
-        border-radius: 12px;
-        border: visible;
-        transition: border 0.1s ease-in-out;
-        transition: background-color 0.1s ease-in-out;
-    }
-
-    .day[disabled] {
-        background-color: #e7e7e7 !important;
-        cursor: not-allowed;
-    }
-
-    .colouredBox {
-        width: 200px;
-        height: 300px;
-        background-color: #3498db;
-        border-color: black;
-        border-radius: 1px;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        margin: 20px;
-        padding: 20px;
-
-    }
-
-    .calendar-grid {
-        display: grid;
-        grid-template-columns: repeat(7, 50px);
-        gap: 5px;
-        justify-content: center;
-        padding-top: 3vh;
-        margin: auto;
     }
 </style>
 
