@@ -9,11 +9,11 @@
 
     <div class="fade-in-container">
 
-        <h1 class="title">Book a detail with us.</h1>
+        <h1 class="title">Book a detail with us.</h1> 
 
         <div class="booking-grid">
 
-            <div class="options">
+            <div class="options"> <!-- 4 detailing options. -->
 
                 <div>
                     <button class="booking-button-option" onclick="updateSelectedDetail(1)" id="btn1">
@@ -54,7 +54,7 @@
 
             <div class="calendar-big-container">
 
-                <div>
+                <div> <!-- Month switching buttons. -->
                     <button class="calendarUpdateButton" onclick="updateCalendar(0)">Previous Month</button>
                     <button class="calendarUpdateButton" onclick="updateCalendar(1)">Next Month</button>
                 </div>
@@ -65,7 +65,7 @@
 
                     <h2 class="viewingmonth" id="viewingmonth"></h2>
 
-                    <div class="calendar-grid">
+                    <div class="calendar-grid"> <!-- Calendar Initialization. -->
 
                         <div>Sun</div>
                         <div>Mon</div>
@@ -121,7 +121,7 @@
 
                 <h2>Select a time.</h2>
 
-                <div class="time-slot-container">
+                <div class="time-slot-container"> <!-- Timeslot container.-->
                     <button class="timeSlotButton" id="time1" onclick="updateSelectedTime(1)">*</button>
                     <button class="timeSlotButton" id="time2" onclick="updateSelectedTime(2)">*</button>
                     <button class="timeSlotButton" id="time3" onclick="updateSelectedTime(3)">*</button>
@@ -138,13 +138,15 @@
         </div>
 
         <!-- Reset booked dates in calendar, in case testing was done on it. -->
-        <!-- <button onclick="updateDatabase()"></button> -->
+        <!-- <button onclick="resetDatabase()"></button> -->
 
     </div>
 
 </body>
 
+
 <style>
+    /* "@media" is used to ensure the elements on the page resize properly within the user's screen size. */
     @media (min-width: 1700px) {
         .booking-button-option {
             height: 28vh;
@@ -243,7 +245,13 @@
 </style>
 
 <script>
+    // Store booking information
+    let viewingMonth;
+    let selectedDay;
+    let selectedTimeSlot;
     let detailType;
+
+    // Searches webpage URL to determine if the user selected something from the estimate page.
     const urlParams = new URLSearchParams(window.location.search);
     const selectedButton = urlParams.get('selectedButton');
     if (selectedButton) {
@@ -258,33 +266,30 @@
     }
 
     let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    let selectedDay;
-    let selectedTimeSlot;
-
-    let month;
+    
+    // Initialization of current and next month information.
+    let month; 
     let daysInMonth;
     let firstDay;
-
     let nextMonth;
     let nextDaysInMonth;
     let nextFirstDay;
 
+    // Initalization of dates to setup calendar. 
     const currentMonthDate = new Date();
     const nextMonthDate = new Date();
-
     const today = new Date();
 
-    let viewingMonth;
-
     let globalMonth = "";
-
     let adminSchedule;
 
+    // Initialization of calendar for this month and next month reading from the Database.
     updateCurrentInfo();
     updateNextInfo();
     getAdminSchedule();
 
-    async function getAdminSchedule() {
+    // FUNCTIONS
+    async function getAdminSchedule() { // Fethches database and stores it.
         try {
             const response = await fetch('/admin-schedule');
             adminSchedule = await response.json();
@@ -295,7 +300,7 @@
         }
     }
 
-    async function updateDatabase() {
+    async function resetDatabase() { // Fully resets the database (not viewable to user).
         try {
             const response = await fetch('/update-admin');
         } catch (error) {
@@ -304,7 +309,7 @@
         }
     }
 
-    function updateCalendar(currentOrNext) {
+    function updateCalendar(currentOrNext) { // Updates the calendar visuals and dates of the month of the calendar are being displayed.
         if (currentOrNext != viewingMonth) {
             resetSelected();
             resetSelectedTime()
@@ -312,7 +317,7 @@
 
         clearCalendar();
 
-        if (currentOrNext == 0) {
+        if (currentOrNext == 0) { // Current month
             document.getElementById("viewingmonth").innerHTML = monthNames[month];
             globalMonth = monthNames[month];
             let counter = firstDay;
@@ -332,7 +337,7 @@
             }
         }
 
-        else {
+        else { // Next month
             document.getElementById("viewingmonth").innerHTML = monthNames[nextMonth];
             globalMonth = monthNames[nextMonth];
             let counter = nextFirstDay;
@@ -358,21 +363,21 @@
         viewingMonth = currentOrNext;
     }
 
-    function clearCalendar() {
+    function clearCalendar() { // Resets the calendar fully. 
         for (let i = 0; i < 37; i++) {
             let tempDay = document.getElementById(i.toString());
             tempDay.textContent = "";
         }
     }
 
-    function updateCurrentInfo() {
+    function updateCurrentInfo() { // Initializes correct values for the current month.
         currentMonthDate.setDate(1);
         month = currentMonthDate.getMonth();
         daysInMonth = getDaysInMonth(currentMonthDate.getFullYear(), currentMonthDate.getMonth());
         firstDay = currentMonthDate.getDay();
     }
 
-    function updateNextInfo() {
+    function updateNextInfo() { // Initializes correct values for the next month. 
         nextMonth = (month + 1) % 12;
         nextMonthDate.setMonth(nextMonth);
         if (month == 11) {
@@ -384,12 +389,12 @@
 
     }
 
-    function getDaysInMonth(year, month) {
+    function getDaysInMonth(year, month) { // Calculates the days in the month. 
         const lastDay = new Date(year, month + 1, 0).getDate();
         return lastDay;
     }
 
-    function getDay(dayInput) {
+    function getDay(dayInput) { // Updates the selected day by the user.  
         var tempMonth = new Date();
 
         selectedDay = document.getElementById(dayInput).innerText;
@@ -413,6 +418,7 @@
         let element2 = document.getElementById("time2");
         let element3 = document.getElementById("time3");
 
+        // Disable the buttons on timeslots that are not availible. 
         if (adminSchedule.Schedule[viewingMonth][selectedDay][0][1] == false) {
             element1.disabled = true;
             element1.style.backgroundColor = "#e7e7e7";
@@ -422,7 +428,6 @@
             element1.style.backgroundColor = "#0071e3";
 
         }
-
         if (adminSchedule.Schedule[viewingMonth][selectedDay][1][1] == false) {
             element2.disabled = true;
             element2.style.backgroundColor = "#e7e7e7";
@@ -431,8 +436,6 @@
             element2.disabled = false;
             element2.style.backgroundColor = "#0071e3";
         }
-
-
         if (adminSchedule.Schedule[viewingMonth][selectedDay][2][1] == false) {
             element3.disabled = true;
             element3.style.backgroundColor = "#e7e7e7";
@@ -447,7 +450,7 @@
         document.getElementById("time3").textContent = "6 PM";
     }
 
-    function updateSelectedDay(id) {
+    function updateSelectedDay(id) { // Highlights the date the user selected. 
         let pressed = document.getElementById(id);
         resetSelectedTime();
         if (pressed.innerHTML.trim() !== "") {
@@ -459,7 +462,7 @@
         }
     }
 
-    function resetSelected() {
+    function resetSelected() { // Resets the calendar to the default.
         selectedDay = undefined;
         for (let i = 0; i < 37; i++) {
             document.getElementById(i.toString()).style.backgroundColor = "transparent";
@@ -467,7 +470,7 @@
         }
     }
 
-    function updateSelectedTime(id) {
+    function updateSelectedTime(id) { // Highlights the selected timeslot. 
         selectedTimeSlot = id - 1;
         let pressed = document.getElementById("time" + id);
         pressed.style.backgroundColor = "#00b4d8";
@@ -478,14 +481,14 @@
         }
     }
 
-    function resetSelectedTime() {
+    function resetSelectedTime() { // Resets the timeslots to default colour. 
         selectedTimeSlot = undefined;
         document.getElementById("time1").style.backgroundColor = "#0071e3";
         document.getElementById("time2").style.backgroundColor = "#0071e3";
         document.getElementById("time3").style.backgroundColor = "#0071e3";
     }
 
-    function updateSelectedDetail(id) {
+    function updateSelectedDetail(id) { // Highlights the selected detail. 
         detailType = id - 1;
         let pressed = document.getElementById("btn" + id);
         pressed.style.backgroundColor = "#00b4d8";
@@ -496,7 +499,7 @@
         }
     }
 
-    async function sendConfirmationEmail(day, month, time, detail) {
+    async function sendConfirmationEmail(day, month, time, detail) { // Sends a confirmation email to the user.
         try {
             const response = await fetch("/send-confirmation-email", {
                 method: "POST",
@@ -513,8 +516,9 @@
         }
     }
 
-    async function book() {
-        if ("<%= username %>" && selectedDay >= 0 && viewingMonth >= 0 && selectedTimeSlot >= 0 && detailType >= 0) {
+    async function book() { // Checks if all required inputs are valid for booking.
+
+        if ("<%= username %>" && selectedDay >= 0 && viewingMonth >= 0 && selectedTimeSlot >= 0 && detailType >= 0) { 
             let time = document.getElementById("time" + (selectedTimeSlot + 1)).textContent;
             let detail = document.getElementById("d" + (detailType + 1)).textContent;
             const response = await bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType);
@@ -531,7 +535,7 @@
         }
     }
 
-    async function bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType) {
+    async function bookDatabase(selectedDay, viewingMonth, selectedTimeSlot, detailType) {  // Books a detail and stores the information in the database. 
         try {
             const response = await fetch('/book', {
                 method: 'POST',
