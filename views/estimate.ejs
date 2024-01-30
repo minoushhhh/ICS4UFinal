@@ -90,10 +90,13 @@
 
 </body>
 
+<!-- Script imports for teachable machine. -->
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
 <script>
+
+    //Sends user to booking page.
     function redirectBooking(buttonId) {
         if ("<%= username %>") {
             window.location.href = '/booking?selectedButton=' + buttonId;
@@ -102,25 +105,38 @@
             window.location.href = '/login';
         }
     }
+
+    //Calls showLabel(); function when page is loaded.
     showLabel();
+
     function moveUploadImage() {
         const upload = document.getElementById("upload-image-container");
         upload.classList.add("move-image-upload");
     }
+
+    //Displays introductory text.
     function showLabel() {
         const label = document.getElementById("label-container");
         label.classList.add("show-label");
     }
+
+    //Hides introductory text.
     function hideLabel() {
         const label = document.getElementById("label-container");
         label.classList.remove("show-label");
     }
+
+    //Displays image on screen and allows image to be pressed as button.
+    //When button is pressed, user is prompted to select a file.
     var loadFile = function (event) {
         if (document.getElementById("big-grid").visibily !== 'hidden') {
             moveUploadImage();
             document.getElementById("big-grid").removeAttribute('hidden');
         }
+
+        //Hides introductory text when file is uploaded
         hideLabel();
+        
         var image = document.getElementById("uploadedImage");
         document.getElementById("invisibleButton").style.cursor = "pointer";
 
@@ -135,6 +151,8 @@
         image.style.display = "block";
         document.getElementById("invisibleButton").disabled = false;
         document.getElementById("imgLabel").style.display = "none";
+
+        //Automatically runs image through API model using init(); function.
         init();
     };
 
@@ -144,10 +162,13 @@
         hideLabel();
     };
 
+    //URL for our trained teachable machine model.
     const URLTeachable = "https://teachablemachine.withgoogle.com/models/dy0VvIqtW/";
 
+    //Variables used in init(); function. 
     let model, labelContainer, maxPredictions;
 
+    //Imported function from teachable machine to run model.
     async function init() {
 
         const modelURL = URLTeachable + "model.json";
@@ -160,10 +181,10 @@
         for (let i = 0; i < maxPredictions; i++) {
             labelContainer.appendChild(document.createElement("div"));
         }
-        console.log("function ran");
         predictFromImage();
     }
 
+    //Hides the price selection buttons.
     function hideOptions() {
         const options = document.querySelectorAll(".options-grid");
         options.forEach(option => {
@@ -171,6 +192,7 @@
         });
     }
 
+    //Updates the prices for the price selection buttons.
     function updateOptions() {
         const options = document.querySelectorAll(".options-grid");
         options.forEach(option => {
@@ -178,7 +200,7 @@
         });
     }
 
-    // Function to predict from the displayed image
+    //Function to predict from the displayed image.
     async function predictFromImage() {
         const imageElement = document.getElementById("uploadedImage");
         if (imageElement) {
@@ -203,6 +225,7 @@
         }
     }
 
+    //Displays prices for each type of vehicle.
     function updatePrice(vtype) {
         let factor = 0;
         let p1 = document.getElementById("p1");
@@ -219,6 +242,7 @@
         else if (vtype == "SUV") {
             factor = 1.5;
         }
+        //Case for minivan.
         else {
             factor = 1.75;
         }
@@ -228,9 +252,13 @@
         p3.innerHTML = "$" + factor * 200;
         p4.innerHTML = "$" + factor * 50;
     }
+
 </script>
 
 <style>
+
+/* "@media" is used to ensure the elements on the page resize properly within the user's screen size. */
+
     @media (max-width: 1764px) {
         .options-grid-container {
             display: flex;
@@ -251,6 +279,7 @@
             margin-left: 100%;
         }
     }
+
 </style>
 
 <footer>
