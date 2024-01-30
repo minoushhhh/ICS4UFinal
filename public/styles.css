@@ -188,6 +188,14 @@ body {
   margin: auto;
 }
 
+/* Home Page Styles */
+
+.slider-color {
+  --divider-color: #4d9be9;
+  --divider-width: 4px;
+  --default-handle-color: #4d9be9;
+}
+
 .title {
   font-family: "Nunito";
   text-align: center;
