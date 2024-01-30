@@ -14,6 +14,7 @@
         <div class="fade-after">
             <h2 class="personal-information-title">Personal information</h2>
 
+            <!-- Visible information form. -->
             <label class="profile-label" for="firstName">First name</label>
             <div class="first-input-box-row">
                 <input class="input-box" type="text" id="firstName" name="firstName" disabled>
@@ -48,6 +49,7 @@
             <br>
             <div class="button-block">
                 <button id="editButton" class="profile-page-buttons" onclick="edit()">Edit</button>
+                <!-- Hidden information form with "Save" button. -->
                 <form action="/save-form" method="post" onsubmit="return checkFields()">
                     <button id="saveButton" class="save-button-disabled" onclick="save()" disabled>Save</button>
                     <input type="text" id="firstNameHidden" name="firstName" hidden><br>
@@ -66,13 +68,12 @@
 
     </div>
 
-
-
 </body>
 
 <script>
     //Variable to control whether or not the boxes are editable or not.
     let editMode;
+
     //Variables for the visible input boxes in the profile page.
     let firstName = document.getElementById("firstName");
     let lastName = document.getElementById("lastName");
@@ -83,6 +84,7 @@
     let username = document.getElementById("username");
     let password = document.getElementById("password");
 
+    //Default background color for the input boxes.
     firstName.style.backgroundColor = '#e7e7e7';
     lastName.style.backgroundColor = '#e7e7e7';
     email.style.backgroundColor = '#e7e7e7';
@@ -92,6 +94,7 @@
     username.style.backgroundColor = '#e7e7e7';
     password.style.backgroundColor = '#e7e7e7';
 
+    //Error trapping functions to ensure user updates their information while conforming to certain standards.
     function checkPass(pass) {
         if (pass.length < 8) {
             return false;
@@ -141,6 +144,7 @@
 
     }
 
+    //Toggle the password's visibily, default visibly set to "hidden".
     function togglePass() {
         const pass = password;
         const eyeIcon = document.querySelector(".password-vis-icon img");
