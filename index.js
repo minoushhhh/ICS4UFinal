@@ -23,7 +23,7 @@ app.use(
   session({
     secret: "thisisasecretkey",
     saveUninitialized: true,
-    cookie: { maxAge: 300000 },
+    cookie: { maxAge: 3600000 }, //Sets the "cookie" age to 1 hour, so that the user doesn't have to re-log in for an hour after they first log-in.
     resave: false,
   })
 );
