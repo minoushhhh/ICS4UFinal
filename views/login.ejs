@@ -13,7 +13,7 @@
         <h2 class="login-subtitle">Log into your account</h2>
 
         <div class="login-form">
-
+            <!-- "onsubmit" allows the "checkLogin()" function to be run before the login form is submitted. If the "checkLogin()" returns true, then the form will be submitted, otherwise, it will not. -->
             <form id="loginForm" onsubmit="event.preventDefault(); checkLogin();">
 
                 <div>
@@ -58,6 +58,7 @@
 
 <script>
     let errorLabel = document.getElementById("errorLabel");
+    //Checks user's login info by fetching the "/check-login" method from index.js. The "check-login" retrieves information from the database to see if the user has entered valid login information, and the function returns true or false based on the response.
     async function checkLogin() {
         const user = document.getElementById("username").value;
         const pass = document.getElementById("password").value;
@@ -69,7 +70,7 @@
                 },
                 body: JSON.stringify({ user, pass }),
             });
-
+            //The result from the "check-login" function is used to either redirect the user to the profile page or refresh the page to say that there was an error logging-in.
             const result = await response.text();
 
             if (result == "Login successful") {
@@ -84,7 +85,6 @@
         catch (error) {
             console.log(error);
         }
-
     }
 </script>
 
