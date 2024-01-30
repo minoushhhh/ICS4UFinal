@@ -304,11 +304,6 @@
         }
     }
 
-    function updateCalendarColours() {
-
-    }
-
-
     function updateCalendar(currentOrNext) {
         if (currentOrNext != viewingMonth) {
             resetSelected();
@@ -325,7 +320,6 @@
                 let day = i + 1;
                 let tempDay = document.getElementById((firstDay + i).toString());
                 tempDay.textContent = day;
-                //let timeSlots = {} 
             }
 
             for (let i = 0; i < daysInMonth; i++) {
@@ -336,8 +330,6 @@
                     document.getElementById(i + firstDay).disabled = true;
                 }
             }
-
-
         }
 
         else {
@@ -374,7 +366,6 @@
     }
 
     function updateCurrentInfo() {
-
         currentMonthDate.setDate(1);
         month = currentMonthDate.getMonth();
         daysInMonth = getDaysInMonth(currentMonthDate.getFullYear(), currentMonthDate.getMonth());
@@ -399,7 +390,6 @@
     }
 
     function getDay(dayInput) {
-
         var tempMonth = new Date();
 
         selectedDay = document.getElementById(dayInput).innerText;
@@ -452,10 +442,6 @@
             element3.style.backgroundColor = "#0071e3";
         }
 
-        //document.getElementById("time1").textContent = (adminSchedule.Schedule[viewingMonth][selectedDay][0][0]);
-        //document.getElementById("time2").textContent = (adminSchedule.Schedule[viewingMonth][selectedDay][1][0]);
-        //document.getElementById("time3").textContent = (adminSchedule.Schedule[viewingMonth][selectedDay][2][0]);
-
         document.getElementById("time1").textContent = "12 PM";
         document.getElementById("time2").textContent = "3 PM";
         document.getElementById("time3").textContent = "6 PM";
@@ -471,7 +457,6 @@
             pressed.style.backgroundColor = "#0071e3";
             pressed.style.borderRadius = "12px";
         }
-
     }
 
     function resetSelected() {
@@ -528,9 +513,7 @@
         }
     }
 
-
     async function book() {
-
         if ("<%= username %>" && selectedDay >= 0 && viewingMonth >= 0 && selectedTimeSlot >= 0 && detailType >= 0) {
             let time = document.getElementById("time" + (selectedTimeSlot + 1)).textContent;
             let detail = document.getElementById("d" + (detailType + 1)).textContent;

@@ -7,16 +7,18 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import nodemailer from "nodemailer";
 
+//Connecting to our MongoDB Database before utilization throughout code.
 const uri =
   "mongodb+srv://Admin:nR18eHCkif6yvno0@cluster0.ak6hid0.mongodb.net/?retryWrites=true&w=majority";
-
 const client = new MongoClient(uri);
+
 const app = express();
 
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+//Using "sessions" allows the user to be logged-in throughout multiple pages in the website without re-loggin in (esentially a "cookie").
 app.use(
   session({
     secret: "thisisasecretkey",
@@ -27,7 +29,7 @@ app.use(
 );
 app.use((req, res, next) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate"); //So that user cannot logout and then still be logged in using the back button in their browser.
-  res.locals.isLoggedIn = req.session.username !== undefined;
+  res.locals.isLoggedIn = req.session.username !== undefined; //Setting the "isLoggedIn" variable to either true or false so that user can be authenticated throughout the website.
   next();
 });
 app.use(express.static("public"));
@@ -36,10 +38,81 @@ app.set("view engine", "ejs");
 
 const __dirname = path.resolve();
 
+//Redirects to other pages.
+
 app.get("/", (req, res) => {
   const username = req.session.username;
   res.render("home", { username });
 });
+
+app.get("/forgot-password", (req, res) => {
+  if (req.session.username) {
+    res.redirect("/profile");
+  } else {
+    res.render("forgot-password");
+  }
+});
+
+app.get("/home", (req, res) => {
+  const username = req.session.username;
+  res.render("home", { username });
+});
+
+app.get("/booking", (req, res) => {
+  const username = req.session.username;
+  if (username) {
+    res.render("booking", { username });
+  } else {
+    res.render("login");
+  }
+});
+
+app.get("/estimate", (req, res) => {
+  const username = req.session.username;
+  res.render("estimate", { username });
+});
+
+app.get("/contact", (req, res) => {
+  res.render("contact");
+});
+
+app.get("/sign-up", (req, res) => {
+  const usernameTaken = req.session.usernameTaken;
+  res.render("sign-up", { usernameTaken });
+});
+
+app.get("/login", (req, res) => {
+  let loginInvalid = req.session.loginInvalid;
+  if (req.session.username) {
+    res.redirect("/");
+  } else {
+    console.log("Login invalid", loginInvalid);
+    res.render("login", { loginInvalid });
+  }
+});
+
+app.get("/profile", (req, res) => {
+  console.log("Username in session:", req.session.username);
+  if (req.session.username) {
+    const userData = req.session.userData;
+    res.render("profile", { userData });
+  } else {
+    res.redirect("/login");
+  }
+});
+
+app.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error destroying session:", err);
+    } else {
+      res.locals.isLoggedIn = false;
+      res.redirect("/login");
+    }
+  });
+});
+
+//Code for "Forgot Password" Page.
 
 function generateVerificationCode() {
   const numbers = "0123456789";
@@ -169,72 +242,7 @@ app.post("/login-remotely", async (req, res) => {
   }
 });
 
-app.get("/forgot-password", (req, res) => {
-  if (req.session.username) {
-    res.redirect("/profile");
-  } else {
-    res.render("forgot-password");
-  }
-});
-
-app.get("/home", (req, res) => {
-  const username = req.session.username;
-  res.render("home", { username });
-});
-
-app.get("/booking", (req, res) => {
-  const username = req.session.username;
-  if (username) {
-    res.render("booking", { username });
-  } else {
-    res.render("login");
-  }
-});
-
-app.get("/estimate", (req, res) => {
-  const username = req.session.username;
-  res.render("estimate", { username });
-});
-
-app.get("/contact", (req, res) => {
-  res.render("contact");
-});
-
-app.get("/sign-up", (req, res) => {
-  const usernameTaken = req.session.usernameTaken;
-  res.render("sign-up", { usernameTaken });
-});
-
-app.get("/login", (req, res) => {
-  let loginInvalid = req.session.loginInvalid;
-  if (req.session.username) {
-    res.redirect("/");
-  } else {
-    console.log("Login invalid", loginInvalid);
-    res.render("login", { loginInvalid });
-  }
-});
-
-app.get("/profile", (req, res) => {
-  console.log("Username in session:", req.session.username);
-  if (req.session.username) {
-    const userData = req.session.userData;
-    res.render("profile", { userData });
-  } else {
-    res.redirect("/login");
-  }
-});
-
-app.get("/logout", (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      console.error("Error destroying session:", err);
-    } else {
-      res.locals.isLoggedIn = false;
-      res.redirect("/login");
-    }
-  });
-});
+//Code for "Booking" Page.
 
 async function sendConfirmationEmail(
   email,
