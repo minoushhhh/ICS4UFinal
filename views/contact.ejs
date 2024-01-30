@@ -49,6 +49,7 @@
         </div>
 
         <div>
+          <!-- Creates contact form with all fields -->
           <form class="contact-form" id="contact-form" action="/contact-form" method="post"
             onsubmit="return checkValidEmail()">
             <input class="input-box form-input-box" name="subject" id="subject" placeholder="Subject" required>
@@ -69,6 +70,7 @@
           <h2>Meet the crew</h2>
         </div>
 
+        <!-- Image grid for images of Liam and Owen -->
         <div class="image-grid-content">
           <div class="crew-member">
             <img src="images/wiam.png" class="portrait">
@@ -99,19 +101,27 @@
   </div>
 
   <script>
+
+    //Takes content of fields in form.
     const subject = document.getElementById("subject");
     const email = document.getElementById("email");
     const text = document.getElementById("text");
 
     function popup() {
+
+      //Creates alert if email address is invalid.
       if (!checkValidEmail()) {
         alert("Invalid e-mail address provided.");
       }
+
+      //Sends all contact fields in email.
       else if (subject.value !== "" && email.value !== "" && text.value !== "") {
+        //Sends alert for proper contact form submission. 
         alert("Form submitted successfully.");
       }
     }
 
+    //Checks for proper email ending for validity. 
     function checkValidEmail() {
       const email = document.getElementById('email').value;
       if (
@@ -124,6 +134,7 @@
       }
       return false;
     }
+
   </script>
 
   <footer>
