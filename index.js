@@ -38,7 +38,7 @@ app.set("view engine", "ejs");
 
 const __dirname = path.resolve();
 
-//Redirects to other pages.
+//app.get methods to redirect to other pages.
 
 app.get("/", (req, res) => {
   const username = req.session.username;
@@ -112,8 +112,7 @@ app.get("/logout", (req, res) => {
   });
 });
 
-//Code for "Forgot Password" Page.
-
+//Generates a random five-digit number to use as a verification code.
 function generateVerificationCode() {
   const numbers = "0123456789";
   let code = "";
@@ -128,6 +127,7 @@ function generateVerificationCode() {
 
 const verificationCodes = {};
 
+//Checks if the user's e-mail exists within the database.
 async function checkEmailExists(email) {
   try {
     await client.connect();
@@ -146,6 +146,7 @@ async function checkEmailExists(email) {
   }
 }
 
+//Runs when the user submits their e-mail in the "Forgot password" page, esentially tying together all aspects of the code.
 app.post("/forgot-password-email", async (req, res) => {
   const code = generateVerificationCode();
   const customerEmail = req.body.email;
@@ -187,6 +188,7 @@ app.post("/forgot-password-email", async (req, res) => {
   }
 });
 
+//Runs when the user submits the code they recieve in their e-mail.
 app.post("/verify-code", (req, res) => {
   const code = req.body.codeValue;
   const customerEmail = req.session.customerEmail;
@@ -200,6 +202,7 @@ app.post("/verify-code", (req, res) => {
   }
 });
 
+//Finds the password of the user based on their e-mail if the user submits the correct verification code.
 async function findPassword(email) {
   try {
     await client.connect();
@@ -220,6 +223,7 @@ async function findPassword(email) {
   }
 }
 
+//Runs after the code verification and logs the user in after everything is completed.
 app.post("/login-remotely", async (req, res) => {
   const eMail = req.body.email;
   const result = await findPassword(eMail);
@@ -242,8 +246,7 @@ app.post("/login-remotely", async (req, res) => {
   }
 });
 
-//Code for "Booking" Page.
-
+//A function to send booking confirmation e-mails to the customer as well as Liam and Owen.
 async function sendConfirmationEmail(
   email,
   name,
@@ -336,6 +339,8 @@ app.post("/send-confirmation-email", async (req, res) => {
   }
 });
 
+//Function to check the user's login credentials by connecting to the database and comparing their input values to the information in the database.
+//Full error trapping with the username and password are implemented.
 async function checkUserLogin(user, pass, req, res) {
   console.log("Checking login info...");
   try {
@@ -416,6 +421,7 @@ app.post("/save-form", async (req, res) => {
   }
 });
 
+//Function to send a customer's inquiry to Liam and Owen if one is submitted through the "Contact" page.
 async function sendEmail(customerEmail, subject, text) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -455,6 +461,7 @@ app.post("/contact-form", (req, res) => {
   res.redirect("/contact");
 });
 
+//Function to update user details in the database once they are edited in the "Profile" page.
 async function updateDetails(formData, user, req) {
   try {
     console.log("Connecting to update server...");
@@ -529,10 +536,6 @@ app.post("/sign-up-form", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("Express server initialized");
-});
-
 //Saving the user details to the database by connecting to it and inserting the form details.
 async function saveDetails(formData) {
   try {
@@ -601,7 +604,7 @@ async function updateDocument() {
     const database = client.db("user-details");
     const adminScheduleCollection = database.collection("adminSchedule");
 
-    // Reset the values of the database to defaults. 
+    // Reset the values of the database to defaults.
     const update = {
       $set: {
         "Schedule.0": Array.from({ length: 31 }, (_, index) => [
@@ -699,4 +702,9 @@ app.post("/book", async (req, res) => {
     console.error("Error updating admin schedule:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
+});
+
+//Running the server on PORT 3000.
+app.listen(3000, () => {
+  console.log("Express server initialized");
 });
