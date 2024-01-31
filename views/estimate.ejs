@@ -5,7 +5,7 @@
         <title>Estimate</title>
 </head>
 
-<!-- AI Model from Teachable Machine: https://teachablemachine.withgoogle.com/ -->
+<!-- AI Model implemented from Teachable Machine: https://teachablemachine.withgoogle.com/ -->
 
 <body>
     <div class="fade-in-container">
@@ -27,6 +27,11 @@
                     state-of-the-art algorithms, our AI ensures accuracy and efficiency, giving you the peace of mind
                     you deserve.</div>
 
+                <br>
+
+                <p style="text-align: center;">*Disclamer: prices are subject to change and provide only a rough
+                    estimate. Please contact us for more information</p>
+
                 <form action="/action_page.php">
                     <input type="file" id="img" name="img" accept="image/*" onchange="loadFile(event)"
                         style="display: none;">
@@ -38,49 +43,41 @@
                 <div class="options-grid-container">
 
                     <div class="options-grid hidden-option">
-                        <a href="/booking">
-                            <button class="button-option">
-                                <h1>Interior</h1>
-                                <p class="button-option-text">Elevate your ride's interior with our Detailing service.
-                                    We'll
-                                    clean, vacuum, and restore, keeping it straightforward and effective.</p>
-                                <h2 id="p1"></h2>
-                            </button>
-                        </a>
+                        <button class="button-option" onclick="redirectBooking(1)">
+                            <h1>Interior</h1>
+                            <p class="button-option-text">Elevate your ride's interior with our Detailing service.
+                                We'll
+                                clean, vacuum, and restore, keeping it straightforward and effective.</p>
+                            <h2 id="p1"></h2>
+                        </button>
                     </div>
 
                     <div class="options-grid hidden-option">
-                        <a href="/booking">
-                            <button class="button-option">
-                                <h1>Exterior</h1>
-                                <p class="button-option-text">Boost your car's street appeal with our Exterior
-                                    Detailing. A
-                                    simple wash, wax, and buff to make it shine without unnecessary frills.</p>
-                                <h2 id="p2"></h2>
-                            </button>
-                        </a>
+                        <button class="button-option" onclick="redirectBooking(2)">
+                            <h1>Exterior</h1>
+                            <p class="button-option-text">Boost your car's street appeal with our Exterior
+                                Detailing. A
+                                simple wash, wax, and buff to make it shine without unnecessary frills.</p>
+                            <h2 id="p2"></h2>
+                        </button>
                     </div>
 
                     <div class="options-grid hidden-option">
-                        <a href="/booking">
-                            <button class="button-option">
-                                <h1>Full Package</h1>
-                                <p class="button-option-text">Give your vehicle an all-around refresh with our Full
-                                    Detailing. No fluff, just a thorough inside-out clean for a sleek look.</p>
-                                <h2 id="p3"></h2>
-                            </button>
-                        </a>
+                        <button class="button-option" onclick="redirectBooking(3)">
+                            <h1>Full Package</h1>
+                            <p class="button-option-text">Give your vehicle an all-around refresh with our Full
+                                Detailing. No fluff, just a thorough inside-out clean for a sleek look.</p>
+                            <h2 id="p3"></h2>
+                        </button>
                     </div>
 
                     <div class="options-grid hidden-option">
-                        <a href="/booking">
-                            <button class="button-option">
-                                <h1>Headlight Polish</h1>
-                                <p class="button-option-text">Enhance your night driving visibility with our Headlight
-                                    Polishing. Clearing up headlights without the fuss.</p>
-                                <h2 id="p4"></h2>
-                            </button>
-                        </a>
+                        <button class="button-option" onclick="redirectBooking(4)">
+                            <h1>Headlight Polish</h1>
+                            <p class="button-option-text">Enhance your night driving visibility with our Headlight
+                                Polishing. Clearing up headlights without the fuss.</p>
+                            <h2 id="p4"></h2>
+                        </button>
                     </div>
 
                 </div>
@@ -93,34 +90,56 @@
 
 </body>
 
+<!-- Script imports for teachable machine. -->
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
 <script>
+    //Sends user to booking page.
+    function redirectBooking(buttonId) {
+        if ("<%= username %>") {
+            window.location.href = '/booking?selectedButton=' + buttonId;
+        }
+        else {
+            window.location.href = '/login';
+        }
+    }
+
+    //Calls showLabel(); function when page is loaded.
     showLabel();
+
     function moveUploadImage() {
         const upload = document.getElementById("upload-image-container");
         upload.classList.add("move-image-upload");
     }
+
+    //Displays introductory text.
     function showLabel() {
         const label = document.getElementById("label-container");
         label.classList.add("show-label");
     }
+
+    //Hides introductory text.
     function hideLabel() {
         const label = document.getElementById("label-container");
         label.classList.remove("show-label");
     }
+
+    //Displays image on screen and allows image to be pressed as button.
+    //When button is pressed, user is prompted to select a file.
     var loadFile = function (event) {
         if (document.getElementById("big-grid").visibily !== 'hidden') {
             moveUploadImage();
             document.getElementById("big-grid").removeAttribute('hidden');
         }
+
+        //Hides introductory text when file is uploaded
         hideLabel();
+
         var image = document.getElementById("uploadedImage");
         document.getElementById("invisibleButton").style.cursor = "pointer";
 
         if (!image) {
-            // If no existing image, create a new one
             image = document.createElement("img");
             image.id = "uploadedImage";
             image.className = "uploadImg";
@@ -128,9 +147,11 @@
         }
 
         image.src = URL.createObjectURL(event.target.files[0]);
-        image.style.display = "block"; // Show the uploaded image
+        image.style.display = "block";
         document.getElementById("invisibleButton").disabled = false;
-        document.getElementById("imgLabel").style.display = "none"; // Hide the "Choose File" button
+        document.getElementById("imgLabel").style.display = "none";
+
+        //Automatically runs image through API model using init(); function.
         init();
     };
 
@@ -140,10 +161,13 @@
         hideLabel();
     };
 
+    //URL for our trained teachable machine model.
     const URLTeachable = "https://teachablemachine.withgoogle.com/models/dy0VvIqtW/";
 
+    //Variables used in init(); function. 
     let model, labelContainer, maxPredictions;
 
+    //Imported function from teachable machine to run model.
     async function init() {
 
         const modelURL = URLTeachable + "model.json";
@@ -156,10 +180,10 @@
         for (let i = 0; i < maxPredictions; i++) {
             labelContainer.appendChild(document.createElement("div"));
         }
-        console.log("function ran");
         predictFromImage();
     }
 
+    //Hides the price selection buttons.
     function hideOptions() {
         const options = document.querySelectorAll(".options-grid");
         options.forEach(option => {
@@ -167,6 +191,7 @@
         });
     }
 
+    //Updates the prices for the price selection buttons.
     function updateOptions() {
         const options = document.querySelectorAll(".options-grid");
         options.forEach(option => {
@@ -174,7 +199,7 @@
         });
     }
 
-    // Function to predict from the displayed image
+    //Function to predict from the displayed image.
     async function predictFromImage() {
         const imageElement = document.getElementById("uploadedImage");
         if (imageElement) {
@@ -199,6 +224,7 @@
         }
     }
 
+    //Displays prices for each type of vehicle.
     function updatePrice(vtype) {
         let factor = 0;
         let p1 = document.getElementById("p1");
@@ -215,6 +241,7 @@
         else if (vtype == "SUV") {
             factor = 1.5;
         }
+        //Case for minivan.
         else {
             factor = 1.75;
         }
@@ -225,6 +252,30 @@
         p4.innerHTML = "$" + factor * 50;
     }
 </script>
+
+<style>
+    /* "@media" is used to ensure the elements on the page resize properly within the user's screen size. */
+    @media (max-width: 1764px) {
+        .options-grid-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 90%;
+            padding-right: 5vw;
+        }
+    }
+
+    @media (min-width: 1765px) {
+        .options-grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-column-gap: 30px;
+            max-width: 750px;
+            margin-left: 100%;
+        }
+    }
+</style>
 
 <footer>
     <%- include('layouts/footer'); -%>

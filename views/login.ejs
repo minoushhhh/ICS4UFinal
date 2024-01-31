@@ -13,8 +13,8 @@
         <h2 class="login-subtitle">Log into your account</h2>
 
         <div class="login-form">
-
-            <form id="loginForm" action="/login-form" method="post">
+            <!-- "onsubmit" allows the "checkLogin()" function to be run before the login form is submitted. If the "checkLogin()" returns true, then the form will be submitted, otherwise, it will not. -->
+            <form id="loginForm" onsubmit="event.preventDefault(); checkLogin();">
 
                 <div>
                     <div class="input-container">
@@ -40,10 +40,14 @@
 
                 <br>
 
-                <!--Need to implement a forgot password option-->
-
                 <div class="form-hyperlink">Don't have an account? <a class="hyperlink" href="/sign-up">Sign up here
-                        ↗</a></div>
+                        ↗</a>
+                </div>
+
+                <br>
+
+                <div class="form-hyperlink"><a class="hyperlink" href="/forgot-password">Forgot your password? ↗</a>
+                </div>
 
             </form>
 
@@ -54,14 +58,33 @@
 
 <script>
     let errorLabel = document.getElementById("errorLabel");
-    let loginInvalid = "<%= loginInvalid %>";
+    //Checks the user's login info by fetching the "/check-login" method from index.js. The "check-login" retrieves information from the database to see if the user has entered valid login information, and the function returns true or false based on the response.
+    async function checkLogin() {
+        const user = document.getElementById("username").value;
+        const pass = document.getElementById("password").value;
+        try {
+            const response = await fetch('/check-login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user, pass }),
+            });
+            //The result from the "check-login" function is used to either redirect the user to the profile page or refresh the page to say that there was an error logging-in.
+            const result = await response.text();
 
-    if (loginInvalid) {
-        errorLabel.textContent = "Invalid Credentials";
-    }
-    if (performance.navigation.type === 1 && loginInvalid) {
-        errorLabel.textContent = "";
-        loginInvalid = false;
+            if (result == "Login successful") {
+                window.location.href = "/profile";
+            } else {
+                errorLabel.innerText = result;
+                errorLabel.style.color = "red";
+                errorLabel.style.opacity = 1;
+                console.error(result.message);
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 </script>
 

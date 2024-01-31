@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<head>
+    <%- include('layouts/navbar'); -%>
+        <title>Homepage</title>
+</head>
+
+<!-- Image compairason slider made by "sneas", implemented from https://github.com/sneas/img-comparison-slider. -->
+<script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" />
+
+<body>
+
+    <div class="fade-in-container">
+
+        <div class="homepage-background-image">
+
+            <h1 class="homepage-title">Maple Glow Detailing</h1>
+
+            <div class="homepage-grid">
+
+                <div id="text" class="home-text-grid-item">
+                    Welcome to Maple Glow Car Detailing! Experience unmatched care for your vehicle with our passion for
+                    perfection. From meticulous exterior cleaning to luxurious interior detailing, we offer tailored
+                    services. Discover the Maple Glow difference, where innovation meets determination.
+                </div>
+
+                <!-- Checks if the user is logged in, so that the "Book Now!" button redirects to the proper page. -->
+                <div class="home-button-grid-item">
+                    <% if (username) { %>
+                        <a href="/booking"><button class="book-button" type="button">Book Now!</button></a>
+                        <% } else { %>
+                            <a href="/login"><button class="book-button" type="button">Book Now!</button></a>
+                            <% } %>
+                </div>
+
+            </div>
+
+        </div>
+
+        <h1 class="slider-title">Before and After Pictures</h1>
+
+        <!-- The "img-comparison-slider" element is retrieved from the slider component's GitHub linked above. -->
+
+        <div class="homepage-comparison-slider">
+
+            <img-comparison-slider class="slider-color slider-focus" value="72">
+                <img slot="first" class="slider-image" src="images/headlight_before.png">
+                <img slot="second" class="slider-image" src="images/headlight_after.png">
+                <svg slot="handle" xmlns="http://www.w3.org/2000/svg" width="100" viewBox="-8 -3 16 6">
+                    <path stroke="#5aacff" d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2"
+                        stroke-width="1" fill="#5aacff" vector-effect="non-scaling-stroke"></path>
+                </svg>
+            </img-comparison-slider>
+
+            <img-comparison-slider class="slider-color slider-focus" value="52.5">
+                <img slot="first" class="slider-image" src="images/wheel-before.png">
+                <img slot="second" class="slider-image" src="images/wheel-after.png">
+                <svg slot="handle" xmlns="http://www.w3.org/2000/svg" width="100" viewBox="-8 -3 16 6">
+                    <path stroke="#5aacff" d="M -5 -2 L -7 0 L -5 2 M -5 -2 L -5 2 M 5 -2 L 7 0 L 5 2 M 5 -2 L 5 2"
+                        stroke-width="1" fill="#5aacff" vector-effect="non-scaling-stroke"></path>
+                </svg>
+            </img-comparison-slider>
+
+        </div>
+
+    </div>
+
+</body>
+
+<style>
+    /* "@media" is used to ensure the elements on the page resize properly within the user's screen size. */
+    @media (max-width: 1294px) {
+        .homepage-comparison-slider {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
+
+<footer>
+    <%- include('layouts/footer'); -%>
+</footer>
+
+</html>

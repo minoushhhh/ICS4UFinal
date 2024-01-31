@@ -14,19 +14,10 @@
         <div class="fade-after">
             <h2 class="personal-information-title">Personal information</h2>
 
+            <!-- Visible information form. -->
             <label class="profile-label" for="firstName">First name</label>
             <div class="first-input-box-row">
                 <input class="input-box" type="text" id="firstName" name="firstName" disabled>
-
-                <div class="dropdown-conatiner">
-                    <button class="dropdown-button">Previous details<span class="right-align-arrow">˅</span></button>
-                    <!--Placeholder contents, will have to be periodically updated from the booking page to user's profile in DB-->
-                    <div class="dropdown-contents">
-                        <option>Nov 26: Full Detail ➜ $200</option>
-                        <option>Dec 02: Headlights ➜ $50</option>
-                        <option>Dec 25: Full Detail ➜ $150</option>
-                    </div>
-                </div>
             </div>
             <br>
 
@@ -50,14 +41,16 @@
 
             <label class="profile-label" for="password">Password</label><br>
             <div class="password-block">
-                <input class="input-box" type="password" id="password" name="password" disabled><br><br>
+                <input class="input-box" type="password" id="password" name="password" disabled>
                 <button class="password-vis-icon" onclick="togglePass()"><img
-                        src="https://cdn-icons-png.flaticon.com/512/2355/2355322.png"></button>
+                        src="https://cdn-icons-png.flaticon.com/512/2355/2355322.png">
+                </button>
             </div>
             <br>
             <div class="button-block">
                 <button id="editButton" class="profile-page-buttons" onclick="edit()">Edit</button>
-                <form action="/save-form" method="post">
+                <!-- Hidden information form with "Save" button. -->
+                <form action="/save-form" method="post" onsubmit="return checkFields()">
                     <button id="saveButton" class="save-button-disabled" onclick="save()" disabled>Save</button>
                     <input type="text" id="firstNameHidden" name="firstName" hidden><br>
                     <input type="text" id="lastNameHidden" name="lastName" hidden><br>
@@ -75,25 +68,85 @@
 
     </div>
 
-
-
 </body>
 
 <script>
-
+    //Variable to control whether or not the boxes are editable or not.
     let editMode;
 
-    document.getElementById("firstName").style.backgroundColor = '#e7e7e7';
-    document.getElementById("lastName").style.backgroundColor = '#e7e7e7';
-    document.getElementById("email").style.backgroundColor = '#e7e7e7';
-    document.getElementById("phoneNumber").style.backgroundColor = '#e7e7e7';
-    document.getElementById("address").style.backgroundColor = '#e7e7e7';
-    document.getElementById("postalCode").style.backgroundColor = '#e7e7e7';
-    document.getElementById("username").style.backgroundColor = '#e7e7e7';
-    document.getElementById("password").style.backgroundColor = '#e7e7e7';
+    //Variables for the visible input boxes in the profile page.
+    let firstName = document.getElementById("firstName");
+    let lastName = document.getElementById("lastName");
+    let email = document.getElementById("email");
+    let phoneNumber = document.getElementById("phoneNumber");
+    let address = document.getElementById("address");
+    let postalCode = document.getElementById("postalCode");
+    let username = document.getElementById("username");
+    let password = document.getElementById("password");
 
+    //Default background color for the input boxes.
+    firstName.style.backgroundColor = '#e7e7e7';
+    lastName.style.backgroundColor = '#e7e7e7';
+    email.style.backgroundColor = '#e7e7e7';
+    phoneNumber.style.backgroundColor = '#e7e7e7';
+    address.style.backgroundColor = '#e7e7e7';
+    postalCode.style.backgroundColor = '#e7e7e7';
+    username.style.backgroundColor = '#e7e7e7';
+    password.style.backgroundColor = '#e7e7e7';
+
+    //Error trapping functions to ensure user updates their information while conforming to certain standards.
+    function checkPass(pass) {
+        if (pass.length < 8) {
+            return false;
+        }
+
+        let upper = false;
+        let lower = false;
+        let digit = false;
+        let special = false;
+
+        for (let i = 0; i < pass.length; i++) {
+            if (pass.charAt(i) >= "A" && pass.charAt(i) <= "Z") {
+                upper = true;
+            } else if (pass.charAt(i) >= "a" && pass.charAt(i) <= "z") {
+                lower = true;
+            } else if (pass.charAt(i) >= "0" && pass.charAt(i) <= "9") {
+                digit = true;
+            } else if ("@$!%*?&_".includes(pass.charAt(i))) {
+                special = true;
+            }
+        }
+        return upper && lower && digit && special;
+    }
+
+    function checkFields() {
+        const password = password.value;
+
+        if (!checkPass(password)) {
+            alert("Invalid password: must have 8 characters, one uppercase, one lowercase, and one special character");
+            enableInputs();
+            return false;
+        }
+
+        const email = email.value;
+        if (
+            email.includes("@gmail.com") ||
+            email.includes("@yahoo.com") ||
+            email.includes("@outlook.com") ||
+            email.includes("@icloud.com")
+        ) {
+            disableInputs();
+            return true;
+        }
+        alert("Invalid e-mail address");
+        enableInputs();
+        return false;
+
+    }
+
+    //Toggle the password's visibily, default visibly set to "hidden".
     function togglePass() {
-        const pass = document.getElementById("password");
+        const pass = password;
         const eyeIcon = document.querySelector(".password-vis-icon img");
 
         if (pass.type === "password") {
@@ -107,12 +160,12 @@
         }
     }
 
-
+    //"edit()" function controls whether or not the input boxes are disabled or not. This function is called when the "Edit" button is pressed.
     function edit() {
         const editButton = document.getElementById("editButton");
         const saveButton = document.getElementById("saveButton");
 
-        if (document.getElementById("firstName").disabled) {
+        if (firstName.disabled) {
             editButton.textContent = "Cancel";
             enableInputs();
             saveButton.removeAttribute("disabled");
@@ -127,106 +180,105 @@
         }
     }
 
+    //"enableInputs()" and "disableInputs()" change the styles of the input boxes so that they are either enabled or disabled based on the edit status.
     function enableInputs() {
-        document.getElementById("firstName").removeAttribute("disabled");
-        document.getElementById("lastName").removeAttribute("disabled");
-        document.getElementById("email").removeAttribute("disabled");
-        document.getElementById("phoneNumber").removeAttribute("disabled");
-        document.getElementById("address").removeAttribute("disabled");
-        document.getElementById("postalCode").removeAttribute("disabled");
-        document.getElementById("username").removeAttribute("disabled");
-        document.getElementById("password").removeAttribute("disabled");
+        firstName.removeAttribute("disabled");
+        lastName.removeAttribute("disabled");
+        email.removeAttribute("disabled");
+        phoneNumber.removeAttribute("disabled");
+        address.removeAttribute("disabled");
+        postalCode.removeAttribute("disabled");
+        password.removeAttribute("disabled");
 
-        document.getElementById("firstName").style.backgroundColor = 'white';
-        document.getElementById("lastName").style.backgroundColor = 'white';
-        document.getElementById("email").style.backgroundColor = 'white';
-        document.getElementById("phoneNumber").style.backgroundColor = 'white';
-        document.getElementById("address").style.backgroundColor = 'white';
-        document.getElementById("postalCode").style.backgroundColor = 'white';
-        document.getElementById("username").style.backgroundColor = 'white';
-        document.getElementById("password").style.backgroundColor = 'white';
+        firstName.style.backgroundColor = 'white';
+        lastName.style.backgroundColor = 'white';
+        email.style.backgroundColor = 'white';
+        phoneNumber.style.backgroundColor = 'white';
+        address.style.backgroundColor = 'white';
+        postalCode.style.backgroundColor = 'white';
+        password.style.backgroundColor = 'white';
     }
 
     function disableInputs() {
-        document.getElementById("firstName").setAttribute("disabled", true);
-        document.getElementById("lastName").setAttribute("disabled", true);
-        document.getElementById("email").setAttribute("disabled", true);
-        document.getElementById("phoneNumber").setAttribute("disabled", true);
-        document.getElementById("address").setAttribute("disabled", true);
-        document.getElementById("postalCode").setAttribute("disabled", true);
-        document.getElementById("username").setAttribute("disabled", true);
-        document.getElementById("password").setAttribute("disabled", true);
+        firstName.setAttribute("disabled", true);
+        lastName.setAttribute("disabled", true);
+        email.setAttribute("disabled", true);
+        phoneNumber.setAttribute("disabled", true);
+        address.setAttribute("disabled", true);
+        postalCode.setAttribute("disabled", true);
+        password.setAttribute("disabled", true);
 
-        document.getElementById("firstName").style.backgroundColor = '#e7e7e7';
-        document.getElementById("lastName").style.backgroundColor = '#e7e7e7';
-        document.getElementById("email").style.backgroundColor = '#e7e7e7';
-        document.getElementById("phoneNumber").style.backgroundColor = '#e7e7e7';
-        document.getElementById("address").style.backgroundColor = '#e7e7e7';
-        document.getElementById("postalCode").style.backgroundColor = '#e7e7e7';
-        document.getElementById("username").style.backgroundColor = '#e7e7e7';
-        document.getElementById("password").style.backgroundColor = '#e7e7e7';
+        firstName.style.backgroundColor = '#e7e7e7';
+        lastName.style.backgroundColor = '#e7e7e7';
+        email.style.backgroundColor = '#e7e7e7';
+        phoneNumber.style.backgroundColor = '#e7e7e7';
+        address.style.backgroundColor = '#e7e7e7';
+        postalCode.style.backgroundColor = '#e7e7e7';
+        password.style.backgroundColor = '#e7e7e7';
     }
 
+    //Saves the edits to the database.
     function save() {
 
         updateDisplayedInfo();
 
-        document.getElementById("usernameHidden").value = document.getElementById("username").value;
-        document.getElementById("passwordHidden").value = document.getElementById("password").value;
-        document.getElementById("firstNameHidden").value = document.getElementById("firstName").value;
-        document.getElementById("lastNameHidden").value = document.getElementById("lastName").value;
-        document.getElementById("emailHidden").value = document.getElementById("email").value;
-        document.getElementById("phoneNumberHidden").value = document.getElementById("phoneNumber").value;
-        document.getElementById("addressHidden").value = document.getElementById("address").value;
-        document.getElementById("postalCodeHidden").value = document.getElementById("postalCode").value;
-        document.getElementById("confirmPasswordHidden").value = document.getElementById("password").value;
+        document.getElementById("usernameHidden").value = username.value;
+        document.getElementById("passwordHidden").value = password.value;
+        document.getElementById("firstNameHidden").value = firstName.value;
+        document.getElementById("lastNameHidden").value = lastName.value;
+        document.getElementById("emailHidden").value = email.value;
+        document.getElementById("phoneNumberHidden").value = phoneNumber.value;
+        document.getElementById("addressHidden").value = address.value;
+        document.getElementById("postalCodeHidden").value = postalCode.value;
+        document.getElementById("confirmPasswordHidden").value = password.value;
 
         document.forms.submit();
 
     }
 
+    //Updates the edits on the profile page after they are submitted.
     function updateDisplayedInfo() {
-        const newName = document.getElementById("firstName").value;
-        const newLastName = document.getElementById("lastName").value;
-        const newEmail = document.getElementById("email").value;
-        const newPhoneNumber = document.getElementById("phoneNumber").value;
-        const newAddress = document.getElementById("address").value;
-        const newPostalCode = document.getElementById("postalCode").value;
-        const newUsername = document.getElementById("username").value;
-        const newPassword = document.getElementById("password").value;
+        const newName = firstName.value;
+        const newLastName = lastName.value;
+        const newEmail = email.value;
+        const newPhoneNumber = phoneNumber.value;
+        const newAddress = address.value;
+        const newPostalCode = postalCode.value;
+        const newUsername = username.value;
+        const newPassword = password.value;
 
-        document.getElementById("firstName").value = newName;
-        document.getElementById("lastName").value = newLastName;
-        document.getElementById("email").value = newEmail;
-        document.getElementById("phoneNumber").value = newPhoneNumber;
-        document.getElementById("address").value = newAddress;
-        document.getElementById("postalCode").value = newPostalCode;
-        document.getElementById("username").value = newUsername;
-        document.getElementById("password").value = newPassword;
+        firstName.value = newName;
+        lastName.value = newLastName;
+        email.value = newEmail;
+        phoneNumber.value = newPhoneNumber;
+        address.value = newAddress;
+        postalCode.value = newPostalCode;
+        username.value = newUsername;
+        password.value = newPassword;
 
         disableInputs();
     }
 
-    //Public form
-    document.getElementById("firstName").value = "<%= userData.firstName %>";
-    document.getElementById("lastName").value = "<%= userData.lastName %>";
-    document.getElementById("email").value = "<%= userData.email %>";
-    document.getElementById("phoneNumber").value = "<%= userData.phoneNum %>";
-    document.getElementById("address").value = "<%= userData.adr %>";
-    document.getElementById("postalCode").value = "<%= userData.pCode %>";
-    document.getElementById("username").value = "<%= userData.userName %>";
-    document.getElementById("password").value = "<%= userData.passWord %>";
+    //Visible form on the profile page, pulls information from the session varaible "userData".
+    firstName.value = "<%= userData.firstName %>";
+    lastName.value = "<%= userData.lastName %>";
+    email.value = "<%= userData.email %>";
+    phoneNumber.value = "<%= userData.phoneNum %>";
+    address.value = "<%= userData.adr %>";
+    postalCode.value = "<%= userData.pCode %>";
+    username.value = "<%= userData.userName %>";
+    password.value = "<%= userData.passWord %>";
 
-    //Hidden form
-    document.getElementById("usernameHidden").value = document.getElementById("username").value;
-    document.getElementById("passwordHidden").value = document.getElementById("password").value;
-    document.getElementById("firstNameHidden").value = document.getElementById("firstName").value;
-    document.getElementById("lastNameHidden").value = document.getElementById("lastName").value;
-    document.getElementById("emailHidden").value = document.getElementById("email").value;
-    document.getElementById("phoneNumberHidden").value = document.getElementById("phoneNumber").value;
-    document.getElementById("addressHidden").value = document.getElementById("address").value;
-    document.getElementById("postalCodeHidden").value = document.getElementById("postalCode").value;
-    document.getElementById("confirmPasswordHidden").value = document.getElementById("password").value;
+    //Hidden form on the profile page so that edits can be saved to the database, and then updated on the visible form afterwards.
+    document.getElementById("usernameHidden").value = username.value;
+    document.getElementById("passwordHidden").value = password.value;
+    document.getElementById("firstNameHidden").value = firstName.value;
+    document.getElementById("lastNameHidden").value = lastName.value;
+    document.getElementById("emailHidden").value = email.value;
+    document.getElementById("phoneNumberHidden").value = phoneNumber.value;
+    document.getElementById("addressHidden").value = address.value;
+    document.getElementById("postalCodeHidden").value = postalCode.value;
+    document.getElementById("confirmPasswordHidden").value = password.value;
 
 </script>
 

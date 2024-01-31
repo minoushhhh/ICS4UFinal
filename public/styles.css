@@ -1,4 +1,193 @@
+/* Nunito Font imported from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+
+.forgot-password-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 30vh;
+  padding-bottom: 8vh;
+}
+
+.email-verification {
+  position: absolute;
+  padding-left: 0.5vw;
+  padding-top: 1.5vh;
+  color: rgb(26, 155, 26);
+  font-weight: bold;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.code-verification {
+  position: absolute;
+  padding-left: 0.5vw;
+  padding-top: 1.5vh;
+  color: rgb(26, 155, 26);
+  font-weight: bold;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.forgot-submit-button-disabled {
+  width: 250px;
+  height: 50px;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 12px;
+  cursor: not-allowed;
+  background-color: #d3d3d3;
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+  font-family: "Nunito", "Helvetica Neue";
+}
+
+.forgot-submit-button {
+  width: 250px;
+  height: 50px;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #0071e3;
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+  font-family: "Nunito", "Helvetica Neue";
+}
+
+.forgot-submit-button:hover {
+  background-color: #5aacff;
+}
+
+.forgot-password-button-div {
+  width: 515px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking-button-option:hover {
+  background-color: #00b4d8;
+}
+
+.time-slot-container {
+  display: flex;
+  padding-top: 2vh;
+  justify-content: center;
+  gap: 10px;
+}
+
+.timeSlotButton {
+  width: 3vw;
+  height: 50px;
+  display: inline-block;
+  font-size: 15px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #0071e3;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+  font-family: "Nunito", "Helvetica Neue";
+}
+
+.timeSlotButton:not([disabled]):hover {
+  background-color: #00b4d8 !important;
+}
+
+.timeSlotButton[disabled] {
+  background-color: #e7e7e7;
+  cursor: not-allowed;
+}
+
+.viewingmonth {
+  color: #3498db;
+}
+
+.calendarUpdateButton {
+  width: 12.5vw;
+  height: 50px;
+  display: inline-block;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #0071e3;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+  font-family: "Nunito", "Helvetica Neue";
+}
+
+.calendarUpdateButton:hover {
+  background-color: #00b4d8;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+}
+
+.day {
+  width: 48px;
+  height: 48px;
+  line-height: 30px;
+  border: 2px solid #0071e3;
+  border-radius: 12px;
+  border: hidden;
+  cursor: pointer;
+  font-family: "Nunito", "Helvetica Neue";
+  font-weight: bold;
+}
+
+.day:not([disabled]):hover {
+  border: 2px solid #0071e3;
+  border-radius: 12px;
+  border: visible;
+  transition: border 0.1s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.day[disabled] {
+  background-color: #e7e7e7 !important;
+  cursor: not-allowed;
+}
+
+.colouredBox {
+  width: 200px;
+  height: 300px;
+  background-color: #3498db;
+  border-color: black;
+  border-radius: 1px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 50px);
+  gap: 5px;
+  justify-content: center;
+  padding-top: 3vh;
+  margin: auto;
+}
+
+.slider-color {
+  --divider-color: #4d9be9;
+  --divider-width: 4px;
+  --default-handle-color: #4d9be9;
+}
 
 .title {
   font-family: "Nunito";
@@ -6,10 +195,15 @@
   color: black;
 }
 
+#signupForm {
+  padding-left: 1vw;
+}
+
 .homepage-title {
   font-family: "Nunito";
+  font-size: 70px;
   text-align: center;
-  color: black;
+  color: rgb(224, 224, 224);
   padding-bottom: 2%;
 }
 
@@ -19,8 +213,13 @@
 }
 
 .alertText {
-  padding-left: 15px;
+  position: absolute;
+  padding-left: 0.5vw;
+  padding-top: 1.5vh;
   color: red;
+  font-weight: bold;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
 }
 
 .form-hyperlink {
@@ -55,10 +254,6 @@
   color: #fff;
   text-decoration: none;
   cursor: pointer;
-}
-
-.first-input-box-row {
-  display: flex;
 }
 
 .dropdown-conatiner:hover .dropdown-contents {
@@ -119,7 +314,10 @@
 
 .password-block {
   display: flex;
-  align-items: center;
+}
+
+.password-block .input-box {
+  width: 100%;
 }
 
 .button-block {
@@ -127,8 +325,7 @@
   justify-content: center;
   gap: 10px;
   height: 50px;
-  width: 514px;
-  padding-bottom: 4vh;
+  padding-bottom: 3vh;
 }
 
 .save-button-disabled {
@@ -192,16 +389,18 @@
   display: flex;
   padding: 10px;
   padding-bottom: 2vh;
-  color: red;
+  opacity: 0;
   justify-content: center;
   align-items: center;
+  height: 2vh;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .login-subtitle {
-  padding-top: 40px;
-  padding-bottom: 25px;
+  padding-top: 3vh;
+  padding-bottom: 6vh;
   text-align: center;
-  color: #494949;
+  color: black;
   margin: 13px 130px 0px;
 }
 
@@ -220,6 +419,7 @@
 
 .login-container {
   margin-top: 4vh;
+  margin-bottom: 8vh;
 }
 
 .input-box {
@@ -395,7 +595,7 @@ ul {
   width: 400px;
   height: 150px;
   font-size: 55px;
-  border-radius: 980px;
+  border-radius: 25px;
   color: whitesmoke;
   border: none;
   background-color: #0071e3;
@@ -409,19 +609,22 @@ ul {
 }
 
 .homepage-background-image {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
-    url("https://www.hdcarwallpapers.com/walls/porsche_911_st_2023_4k-HD.jpg");
-  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  /* The background image is a linear gradient so that a "transparency" effect is achieved. */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 1)),
+    url("https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcHgxMTc2NzE4LWltYWdlLWt3dnkyMnJiLmpwZw.jpg");
+  padding-right: 10vw;
+  padding-left: 10vw;
+  padding-top: 5vh;
+  padding-bottom: 15vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  padding-left: 12vw;
-  padding-right: 12vw;
   display: flex;
   justify-content: center;
   align-content: center;
-  height: 100%;
 }
 
 .story-grid-title,
@@ -466,21 +669,6 @@ ul {
   padding-left: 9vw;
   padding-right: 9vw;
   padding-bottom: 2vh;
-}
-
-@media (max-width: 1672px) {
-  .grid-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .image-grid {
-    max-width: 80%;
-    align-items: center;
-  }
-  .story-grid {
-    max-width: 80%;
-  }
 }
 
 .form-grid {
@@ -567,11 +755,6 @@ ul {
   width: 350px;
 }
 
-.password-block {
-  display: flex;
-  align-items: center;
-}
-
 .password-vis-icon img {
   display: flex;
   align-items: center;
@@ -598,6 +781,7 @@ img-comparison-slider {
 
 .slider-image {
   border-radius: 20px;
+  border: 4px #4d9be9 solid;
   max-height: 400px;
   background-color: rgb(236, 236, 236);
 }
@@ -609,7 +793,7 @@ img-comparison-slider {
 
 .homepage-comparison-slider {
   display: flex;
-  gap: 80px;
+  gap: 5%;
   justify-content: center;
   padding-bottom: 4%;
   padding-top: 0.5%;
@@ -764,6 +948,8 @@ input[type="file"] {
   filter: blur(0px);
   transform: translateX(0);
 }
+
+/* Transition delay to achieve a "one after another" effect on the buttons in the estimate page */
 .options-grid:nth-child(2) {
   transition-delay: 200ms;
 }
@@ -776,15 +962,6 @@ input[type="file"] {
 
 .button-option:hover {
   background-color: #00b4d8;
-}
-
-.options-grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-column-gap: 30px;
-  max-width: 750px;
-  margin-left: 100%;
 }
 
 .options-grid {

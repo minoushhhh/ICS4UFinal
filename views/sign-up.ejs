@@ -11,7 +11,7 @@
     <div class="fade-in-container">
         <h1 class="sign-up-title">Sign-Up</h1>
         <div class="sign-up-form">
-            <form id="signupForm" action="/sign-up-form" method="post" onsubmit="return checkFields()">
+            <form id="signupForm" action="/sign-up-form" method="post" onsubmit="return fieldsCheck()">
 
                 <input type="text" id="firstName" name="firstName" class="input-box" placeholder="First name" required>
                 <br><br>
@@ -36,13 +36,15 @@
                 <input type="text" id="username" name="username" class="input-box" placeholder="Username" required>
                 <span id="usernameAlert" class="alertText"></span><br><br>
 
-                <input type="text" id="password" name="password" class="input-box" placeholder="Password" required>
+                <input type="password" id="password" name="password" class="input-box" placeholder="Password" required>
+
                 <span id="passwordAlert" class="alertText"></span><br><br>
 
+                <!-- Calls the "fieldsCheck()" function to ensure that all information entered is valid before the form is submitted. -->
                 <div class="input-container">
-                    <input type="text" id="confirmPassword" name="confirmPassword" class="input-box"
+                    <input type="password" type="text" id="confirmPassword" name="confirmPassword" class="input-box"
                         placeholder="Confirm password" required>
-                    <button type="submit" onclick="checkFields()" class="submit-button"><img
+                    <button type="submit" onclick="fieldsCheck()" class="submit-button"><img
                             src="https://i.ibb.co/DDndqQN/Untitled-design-1.png"></button>
 
                 </div>
@@ -62,8 +64,33 @@
 </body>
 
 <script>
-    function checkFields() {
-        let passwordAlert = document.getElementById("confirmPasswordAlert");
+    //Error trapping functions to ensure user inputs valid information.
+    function checkPass(pass) {
+        if (pass.length < 8) {
+            return false;
+        }
+
+        let upper = false;
+        let lower = false;
+        let digit = false;
+        let special = false;
+
+        for (let i = 0; i < pass.length; i++) {
+            if (pass.charAt(i) >= "A" && pass.charAt(i) <= "Z") {
+                upper = true;
+            } else if (pass.charAt(i) >= "a" && pass.charAt(i) <= "z") {
+                lower = true;
+            } else if (pass.charAt(i) >= "0" && pass.charAt(i) <= "9") {
+                digit = true;
+            } else if ("@$!%*?&_".includes(pass.charAt(i))) {
+                special = true;
+            }
+        }
+        return upper && lower && digit && special;
+    }
+
+    function fieldsCheck() {
+        let passwordAlert = document.getElementById("passwordAlert");
         let emailAlert = document.getElementById("emailAlert");
 
         passwordAlert.textContent = "";
@@ -72,26 +99,37 @@
         let password = document.getElementById("password").value;
         let confirmPassword = document.getElementById("confirmPassword").value;
 
-        if (password != confirmPassword) {
+        if (password !== confirmPassword) {
+            passwordAlert.style.opacity = 1;
             passwordAlert.textContent = "Passwords do not match";
             return false;
         }
 
-        const email = document.getElementById('email').value;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!emailRegex.test(email)) {
-            emailAlert.textContent = "Invalid e-mail address";
+        if (!checkPass(password)) {
+            passwordAlert.style.opacity = 1;
+            passwordAlert.textContent = "Must have 8 characters, one uppercase, one lowercase, and one special character";
             return false;
         }
 
-        return true;
+        const email = document.getElementById('email').value;
+        if (
+            email.includes("@gmail.com") ||
+            email.includes("@yahoo.com") ||
+            email.includes("@outlook.com") ||
+            email.includes("@icloud.com")
+        ) {
+            return true;
+        }
+        emailAlert.style.opacity = 1;
+        emailAlert.textContent = "Invalid e-mail address";
+        return false;
     }
 
     let usernameAlert = document.getElementById("usernameAlert");
-    var usernameTaken = "<%= usernameTaken %>";
+    let usernameTaken = "<%= usernameTaken %>";
 
     if (usernameTaken) {
+        usernameAlert.style.opacity = 1;
         usernameAlert.textContent = "Username taken";
     }
     if (performance.navigation.type === 1 && usernameTaken) {
