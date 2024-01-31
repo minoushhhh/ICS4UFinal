@@ -567,7 +567,7 @@ async function checkValidUsername(user) {
   }
 }
 
-//Reading admin database
+//Reading admin schedule
 async function getAdminSchedule() {
   console.log("Trying to get schedule");
   try {
@@ -575,8 +575,6 @@ async function getAdminSchedule() {
 
     const database = client.db("user-details");
     const adminScheduleCollection = database.collection("adminSchedule");
-
-    // Use findOne to retrieve a single document from the adminSchedule collection
     const adminSchedule = await adminScheduleCollection.findOne({});
 
     return adminSchedule;
@@ -603,7 +601,7 @@ async function updateDocument() {
     const database = client.db("user-details");
     const adminScheduleCollection = database.collection("adminSchedule");
 
-    // Update values for the first 31 days with incrementing values
+    // Reset the values of the database to defaults. 
     const update = {
       $set: {
         "Schedule.0": Array.from({ length: 31 }, (_, index) => [
@@ -655,7 +653,7 @@ async function book(month, day, timeslot, detailtype, req) {
     const database = client.db("user-details");
     const adminScheduleCollection = database.collection("adminSchedule");
 
-    // Update values for the specified index and the first element within that index
+    // Updating the values in the database.
     const update = {
       $set: {
         [`Schedule.${month}.${day}.${timeslot}.1`]: false,
