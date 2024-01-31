@@ -95,7 +95,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
 <script>
-
     //Sends user to booking page.
     function redirectBooking(buttonId) {
         if ("<%= username %>") {
@@ -136,7 +135,7 @@
 
         //Hides introductory text when file is uploaded
         hideLabel();
-        
+
         var image = document.getElementById("uploadedImage");
         document.getElementById("invisibleButton").style.cursor = "pointer";
 
@@ -252,13 +251,10 @@
         p3.innerHTML = "$" + factor * 200;
         p4.innerHTML = "$" + factor * 50;
     }
-
 </script>
 
 <style>
-
-/* "@media" is used to ensure the elements on the page resize properly within the user's screen size. */
-
+    /* "@media" is used to ensure the elements on the page resize properly within the user's screen size. */
     @media (max-width: 1764px) {
         .options-grid-container {
             display: flex;
@@ -279,7 +275,6 @@
             margin-left: 100%;
         }
     }
-
 </style>
 
 <footer>
