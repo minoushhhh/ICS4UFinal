@@ -12,6 +12,7 @@ Full stack website for **Maple Glow Car Detailing Services**.
 
 - Node.js
 - Express.js
+- EJS
 
 ## Database
 
@@ -20,6 +21,7 @@ Full stack website for **Maple Glow Car Detailing Services**.
 ## API
 
 - Teachable Machine
+  - [Teachable Machine Website](https://teachablemachine.withgoogle.com/)
 
 ## Web Content
 
