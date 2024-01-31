@@ -1,8 +1,5 @@
 /* Nunito Font imported from Google Fonts */
-
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
-
-/* Forgot Password Page Styles */
 
 .forgot-password-container {
   display: flex;
@@ -72,8 +69,6 @@
   display: flex;
   justify-content: space-between;
 }
-
-/* Booking Page Styles */
 
 .booking-button-option:hover {
   background-color: #00b4d8;
@@ -187,8 +182,6 @@ body {
   padding-top: 3vh;
   margin: auto;
 }
-
-/* Home Page Styles */
 
 .slider-color {
   --divider-color: #4d9be9;
@@ -618,6 +611,7 @@ ul {
 .homepage-background-image {
   display: flex;
   flex-direction: column;
+  /* The background image is a linear gradient so that a "transparency" effect is achieved. */
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 1)),
     url("https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcHgxMTc2NzE4LWltYWdlLWt3dnkyMnJiLmpwZw.jpg");
   padding-right: 10vw;
@@ -675,21 +669,6 @@ ul {
   padding-left: 9vw;
   padding-right: 9vw;
   padding-bottom: 2vh;
-}
-
-@media (max-width: 1672px) {
-  .grid-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .image-grid {
-    max-width: 80%;
-    align-items: center;
-  }
-  .story-grid {
-    max-width: 80%;
-  }
 }
 
 .form-grid {
@@ -969,6 +948,8 @@ input[type="file"] {
   filter: blur(0px);
   transform: translateX(0);
 }
+
+/* Transition delay to achieve a "one after another" effect on the buttons in the estimate page */
 .options-grid:nth-child(2) {
   transition-delay: 200ms;
 }
