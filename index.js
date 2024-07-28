@@ -267,11 +267,7 @@ async function sendConfirmationEmail(
 
     const email1 = {
       from: "mapleglowdetailing@gmail.com",
-      to: [
-        "owenhuang623@gmail.com",
-        "liamzhan2006@gmail.com",
-        "shethmohnish@gmail.com",
-      ],
+      to: ["shethmohnish@gmail.com"],
       subject: "New Customer Detail Booking",
       text:
         "Customer Name: " +
@@ -433,11 +429,7 @@ async function sendEmail(customerEmail, subject, text) {
 
   const emailLayout = {
     from: "mapleglowdetailing@gmail.com",
-    to: [
-      "owenhuang623@gmail.com",
-      "liamzhan2006@gmail.com",
-      "shethmohnish@gmail.com",
-    ],
+    to: ["shethmohnish@gmail.com"],
     subject: subject,
     text: "Customer Inquiry from " + customerEmail + ": " + text,
   };
