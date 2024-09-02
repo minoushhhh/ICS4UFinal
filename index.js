@@ -14,19 +14,22 @@ const client = new MongoClient(uri);
 
 const app = express();
 
+csrf = require("lusca").csrf;
+var RateLimit = require("express-rate-limit");
+var limiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // max 100 requests per windowMs
+});
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 //Using "sessions" allows the user to be logged-in throughout multiple pages in the website without re-loggin in (esentially a "cookie").
 app.use(
-  session({
-    secret: "thisisasecretkey",
-    saveUninitialized: true,
-    cookie: { maxAge: 3600000 }, //Sets the "cookie" age to 1 hour, so that the user doesn't have to re-log in for an hour after they first log-in.
-    resave: false,
-  })
+  session({ secret: process.env["SECRET"], cookie: { maxAge: 60000 }, secure })
 );
+app.use(csrf());
+app.use(limiter);
 app.use((req, res, next) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate"); //So that user cannot logout and then still be logged in using the back button in their browser.
   res.locals.isLoggedIn = req.session.username !== undefined; //Setting the "isLoggedIn" variable to either true or false so that user can be authenticated throughout the website.
