@@ -7,6 +7,7 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import nodemailer from "nodemailer";
 import lusca from "lusca";
+import RateLimit from "express-rate-limit";
 
 //Connecting to our MongoDB Database before utilization throughout code.
 const uri =
@@ -15,7 +16,6 @@ const client = new MongoClient(uri);
 
 const app = express();
 
-var RateLimit = require("express-rate-limit");
 var limiter = RateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // max 100 requests per windowMs
