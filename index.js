@@ -6,6 +6,7 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import nodemailer from "nodemailer";
+import lusca from "lusca";
 
 //Connecting to our MongoDB Database before utilization throughout code.
 const uri =
@@ -14,7 +15,6 @@ const client = new MongoClient(uri);
 
 const app = express();
 
-csrf = require("lusca").csrf;
 var RateLimit = require("express-rate-limit");
 var limiter = RateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -26,9 +26,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 //Using "sessions" allows the user to be logged-in throughout multiple pages in the website without re-loggin in (esentially a "cookie").
 app.use(
-  session({ secret: process.env["SECRET"], cookie: { maxAge: 60000 }, secure })
+  session({
+    secret: process.env["SECRET"],
+    cookie: { maxAge: 60000, secure: true, httpOnly: true },
+  })
 );
-app.use(csrf());
+app.use(lusca.csrf());
 app.use(limiter);
 app.use((req, res, next) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate"); //So that user cannot logout and then still be logged in using the back button in their browser.
