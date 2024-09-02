@@ -9,7 +9,7 @@ import nodemailer from "nodemailer";
 
 //Connecting to our MongoDB Database before utilization throughout code.
 const uri =
-  "mongodb+srv://Admin:nR18eHCkif6yvno0@cluster0.ak6hid0.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://user:pass@cluster0.ak6hid0.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 
 const app = express();
