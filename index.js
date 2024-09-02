@@ -136,7 +136,7 @@ async function checkEmailExists(email) {
     const details = database.collection("details");
 
     const eMail = { email: email };
-    const query = await details.findOne(eMail);
+    const query = await details.findOne({ $eq: eMail });
 
     return query !== null;
   } catch (error) {
@@ -210,7 +210,7 @@ async function findPassword(email) {
     const details = database.collection("details");
 
     const eMail = { email: email };
-    const query = await details.findOne(eMail);
+    const query = await details.findOne({ $eq: eMail });
     const detailsDoc = await details.findOne(query);
 
     if (detailsDoc) {
@@ -349,7 +349,7 @@ async function checkUserLogin(user, pass, req, res) {
 
     if (user.includes("@")) {
       const email = { email: user };
-      query = await details.findOne(email);
+      query = await details.findOne({ $eq: email });
       if (query === null) {
         console.log("email not found");
         req.session.loginInvalid = true;
@@ -357,7 +357,7 @@ async function checkUserLogin(user, pass, req, res) {
       }
     } else {
       const username = { username: user };
-      query = await details.findOne(username);
+      query = await details.findOne({ $eq: username });
       if (query === null) {
         console.log("user not found");
         req.session.loginInvalid = true;
@@ -466,7 +466,10 @@ async function updateDetails(formData, user, req) {
 
     console.log("Updated details sent to DB:", formData);
 
-    const result = await details.updateOne(query, { $set: formData });
+    const result = await details.updateOne(
+      { $eq: query },
+      { $set: { $eq: formData } }
+    );
 
     if (result.matchedCount === 1 && result.modifiedCount === 0) {
       console.warn("Update did not modify any fields.");
@@ -496,7 +499,7 @@ app.post("/sign-up-form", async (req, res) => {
   try {
     const formData = req.body;
 
-    let usernameTaken = await checkValidUsername(req.body.username);
+    let usernameTaken = await checkValidUsername({ $eq: req.body.username });
 
     if (usernameTaken === false) {
       console.log(formData);
