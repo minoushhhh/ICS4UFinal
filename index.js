@@ -6,12 +6,19 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import nodemailer from "nodemailer";
-import lusca from "lusca";
 import RateLimit from "express-rate-limit";
+import dotenv from "dotenv";
+dotenv.config();
 
 //Connecting to our MongoDB Database before utilization throughout code.
+const user = process.env.MONGODB_USER;
+const pass = process.env.MONGODB_PASS;
 const uri =
-  "mongodb+srv://user:pass@cluster0.ak6hid0.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://" +
+  user +
+  ":" +
+  pass +
+  "@cluster0.ak6hid0.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 
 const app = express();
@@ -20,24 +27,28 @@ var limiter = RateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // max 100 requests per windowMs
 });
-app.use(express.static("public"));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 //Using "sessions" allows the user to be logged-in throughout multiple pages in the website without re-loggin in (esentially a "cookie").
 app.use(
   session({
-    secret: process.env["SECRET"],
-    cookie: { maxAge: 60000, secure: true, httpOnly: true },
+    name: "sessionID",
+    secret: "SECRET",
+    cookie: { maxAge: 86400 },
   })
 );
-app.use(lusca.csrf());
+
 app.use(limiter);
+
 app.use((req, res, next) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate"); //So that user cannot logout and then still be logged in using the back button in their browser.
   res.locals.isLoggedIn = req.session.username !== undefined; //Setting the "isLoggedIn" variable to either true or false so that user can be authenticated throughout the website.
   next();
 });
+
 app.use(express.static("public"));
 
 app.set("view engine", "ejs");
@@ -131,7 +142,7 @@ function generateVerificationCode() {
   return code;
 }
 
-const verificationCodes = {};
+var verificationCode = "";
 
 //Checks if the user's e-mail exists within the database.
 async function checkEmailExists(email) {
@@ -142,7 +153,7 @@ async function checkEmailExists(email) {
     const details = database.collection("details");
 
     const eMail = { email: email };
-    const query = await details.findOne({ $eq: eMail });
+    const query = await details.findOne(eMail);
 
     return query !== null;
   } catch (error) {
@@ -161,13 +172,13 @@ app.post("/forgot-password-email", async (req, res) => {
     const emailExists = await checkEmailExists(customerEmail);
 
     if (emailExists) {
-      verificationCodes[customerEmail] = code;
+      verificationCode = code;
       req.session.customerEmail = customerEmail;
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
           user: "mapleglowdetailing@gmail.com",
-          pass: "lfcp rjsv xbkn vfan", //App password for mapleglowdetailing@gmail.com account.
+          pass: process.env.EMAIL_PASSWORD, //App password for mapleglowdetailing@gmail.com account.
         },
       });
 
@@ -199,7 +210,7 @@ app.post("/verify-code", (req, res) => {
   const code = req.body.codeValue;
   const customerEmail = req.session.customerEmail;
 
-  const storedCode = verificationCodes[customerEmail];
+  const storedCode = verificationCode;
 
   if (code === storedCode) {
     res.send("Code verified successfully");
@@ -216,7 +227,7 @@ async function findPassword(email) {
     const details = database.collection("details");
 
     const eMail = { email: email };
-    const query = await details.findOne({ $eq: eMail });
+    const query = await details.findOne(eMail);
     const detailsDoc = await details.findOne(query);
 
     if (detailsDoc) {
@@ -355,7 +366,7 @@ async function checkUserLogin(user, pass, req, res) {
 
     if (user.includes("@")) {
       const email = { email: user };
-      query = await details.findOne({ $eq: email });
+      query = await details.findOne(email);
       if (query === null) {
         console.log("email not found");
         req.session.loginInvalid = true;
@@ -363,7 +374,7 @@ async function checkUserLogin(user, pass, req, res) {
       }
     } else {
       const username = { username: user };
-      query = await details.findOne({ $eq: username });
+      query = await details.findOne(username);
       if (query === null) {
         console.log("user not found");
         req.session.loginInvalid = true;
@@ -472,10 +483,7 @@ async function updateDetails(formData, user, req) {
 
     console.log("Updated details sent to DB:", formData);
 
-    const result = await details.updateOne(
-      { $eq: query },
-      { $set: { $eq: formData } }
-    );
+    const result = await details.updateOne(query, { $set: formData });
 
     if (result.matchedCount === 1 && result.modifiedCount === 0) {
       console.warn("Update did not modify any fields.");
@@ -504,8 +512,9 @@ async function updateDetails(formData, user, req) {
 app.post("/sign-up-form", async (req, res) => {
   try {
     const formData = req.body;
+    username = req.body.username;
 
-    let usernameTaken = await checkValidUsername({ $eq: req.body.username });
+    let usernameTaken = await checkValidUsername(username);
 
     if (usernameTaken === false) {
       console.log(formData);

@@ -245,7 +245,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
   border: 1px solid #bdbdbd;
   border-radius: 50%;
   height: 30px;
@@ -380,9 +379,8 @@ body {
 }
 
 .submit-button img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
+  width: 175%; /* Adjust to fit the button */
+  padding-right: 0.1vw;
 }
 
 .error-label {
@@ -502,6 +500,17 @@ body {
 
 .leftAlign {
   display: flex;
+}
+
+.centerAlign {
+  display: flex;
+  float: center;
+  margin-left: 17vw;
+}
+
+.centerAlign img {
+  width: 5.5vw;
+  filter: invert(1);
 }
 
 .rightAlign {
